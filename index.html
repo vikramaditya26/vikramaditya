@@ -1,42 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello World</title>
-  </head>
+    <title>The Almanack of a Simple guy </title>
+ <style>
+   body {
+     font-family: Arial, San-serif;
+     background-color: #f4f4f4;
+     margin: 0;
+     padding: 0;
+   }
+   nav {
+     background-color: black;
+     padding: 1 rem;
+     text-align: center;
+   }
+   nav a {
+     color: white;
+     text-decoration: none;
+     margin: 0 15px;
+     font-weight: bold;
+   }
+   nav a: hover {
+     color: yellow;
+   }
 
-  <body>
+  .section-box h2 {
+    margin-top: 0;
+  }
 
-    <!-- Navigation Menu -->
-    <nav>
-      <a href="#general">General</a> |
-      <a href="#blog">Blog</a>
-    </nav>
+   .section-box a {
+     color: yellow;
+     text-decoration: none;
+   }
+ .section-box a: hover {
+     text-decoration: underline;
+   }  
+ </style>
+ <head>
+<body>
+<nav>
+  <a href="#about">About Me</a>
+  <a href="#finance">Finance</a>
+  <a href="#books">Book</a>
+  <a href="#workout">Workout</a>
+ <a href="#vlog">Daily Vlog</a>
+  <a href="#contact">Contact Me</a>
+</nav>
 
-    <hr>
+  <div class="section-box" id="about">
+    <h2>About me</h2>
+    <p>I am Vikram Aditya. I am updating this website.</p>
+  </div>
 
-    <!-- General Section -->
-    <h2 id="general">General</h2>
-    <p>I am Vikram Aditya. I am learning to code.</p>
-    <p>My Habit Tracker:</p>
-    <a href="https://docs.google.com/spreadsheets/d/1OV59cQU1TPM8sndnwRnoumVI_a8robXUOe2qx8TvHDs/edit?usp=sharing" target="_blank">
-      Habit Tracker
-    </a>
-
-    <hr>
-
-    <!-- Blog Section -->
-    <h2 id="blog">Blog</h2>
-
-    <p><strong>06th Aug 2025</strong></p>
-    <p>As time ticks away, I'm going to write my favorite quote: 'What we think, we become.' – Buddha</p>
-
-    <p><strong>07th Aug 2025</strong></p>
-    <p>Still didn't get enough time, posting a link which I created today:</p>
-    <a href="https://docs.google.com/spreadsheets/d/1OV59cQU1TPM8sndnwRnoumVI_a8robXUOe2qx8TvHDs/edit?usp=sharing" target="_blank">
-      Habit Tracker
-    </a>
-       <p><strong>08th Aug 2025</strong></p> 
-        <p>I added section like General & Blogs.</p>
-
-  </body>
-</html>
+  <div class="section-box" id="finance">
+    <h2>Finance</h2>
+    <p>I will be sharing my knowlege on personal finance, Investing etc.</p>
+  </div>
+  <div class="section-box" id="books">
+    <h2>Book</h2>
+    <p>Review, Summaries and thoughs from book i read.</p>
+  </div>
+  <div class="section-box" id="workout">
+    <h2>Workout</h2>
+    <p>Sharing my Workout journey.</p>
+  </div>
+  <div class="section-box" id="vlog">
+    <h2>Daily Vlog</h2>
+    <p>Shoot update and dat to day journey</p>
+  </div>
+   </div>
+  <div class="section-box" id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: Vikram.aditya.connect@gmail.com</p>
+  </div>
+  
+</body>
+ </head>
