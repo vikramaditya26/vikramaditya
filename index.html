@@ -19,11 +19,16 @@
      text-decoration: none;
      margin: 0 15px;
      font-weight: bold;
+     cursor: pointer;
    }
    nav a: hover {
      color: yellow;
    }
 
+   .section-box {
+     display: none;
+     padding: 20 px;
+   }
   .section-box h2 {
     margin-top: 0;
   }
@@ -38,13 +43,15 @@
  </style>
  <head>
 <body>
+
+  
 <nav>
-  <a href="#about">About Me</a>
-  <a href="#finance">Finance</a>
-  <a href="#books">Book</a>
-  <a href="#workout">Workout</a>
- <a href="#vlog">Daily Vlog</a>
-  <a href="#contact">Contact Me</a>
+  <a oneclick="showSection('about')">About Me</a>
+  <a oneclick="showSection('finance')">Finance</a>
+   <a oneclick="showSection('books')">Book</a>
+   <a oneclick="showSection('workout')">Workout</a>
+   <a oneclick="showSection('vlog')">Daily Vlog</a>
+   <a oneclick="showSection('contact')">Contact Me</a>
 </nav>
 
   <div class="section-box" id="about">
@@ -67,13 +74,23 @@
   </div>
   <div class="section-box" id="vlog">
     <h2>Daily Vlog</h2>
-    <p>Shoot update and dat to day journey</p>
+    <p>Shoot update and day to day journey</p>
   </div>
    </div>
   <div class="section-box" id="contact">
     <h2>Contact Me</h2>
     <p>Email: Vikram.aditya.connect@gmail.com</p>
   </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.section-box').forEach(function(section){
+        section.style.display = 'none';
+      });
+      document.getElementById(sectionId).style.display='block';
+    }
+    showSection('about');
+  </script>
   
 </body>
  </head>
