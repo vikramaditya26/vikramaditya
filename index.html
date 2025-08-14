@@ -1,95 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Almanack of a Simple Guy</title>
-  <style>
-    :root{
-      --bg:#f4f4f4;
-      --nav:#000;
-      --accent:#ffd400;
-      --box-bg:#111;
-      --box-color:#fff;
-      --max-width:900px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Almanack of a Simple Guy</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #111111;
+    --accent: #0066cc;
+    --max-width: 800px;
+    --font: "Georgia", serif;
+  }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: var(--bg);
-      color: #111;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  header {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
 
-    /* Navigation */
-    nav {
-      background: var(--nav);
-      width: 100%;
-      padding: 1rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 1px 0 rgba(0,0,0,0.12);
-    }
+  header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    font-weight: normal;
+  }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 12px;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 6px 8px;
-      border-radius: 6px;
-      display: inline-block;
-    }
+  nav {
+    text-align: center;
+    margin-top: 1rem;
+  }
 
-    nav a:hover,
-    nav a.active {
-      color: var(--accent);
-      background: rgba(255,212,0,0.06);
-    }
+  nav a {
+    color: var(--accent);
+    text-decoration: none;
+    margin: 0 0.8rem;
+    font-size: 1rem;
+  }
 
-    main {
-      width: 100%;
-      max-width: var(--max-width);
-      padding: 20px;
-      box-sizing: border-box;
-    }
+  nav a:hover,
+  nav a.active {
+    text-decoration: underline;
+  }
 
-    /* Section boxes (hidden by default) */
-    .section-box {
-      display: none;
-      background: var(--box-bg);
-      color: var(--box-color);
-      padding: 24px;
-      margin: 16px 0;
-      border-radius: 8px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    }
+  main {
+    max-width: var(--max-width);
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
 
-    .section-box h2 { margin-top: 0; }
-    .section-box a { color: var(--accent); text-decoration: none; }
-    .section-box a:hover { text-decoration: underline; }
+  section {
+    display: none;
+  }
 
-    /* small screens */
-    @media (max-width: 520px) {
-      nav a { margin: 6px; display: inline-block; padding: 8px; }
-      .section-box { padding: 18px; }
-    }
-  </style>
+  section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  section p {
+    margin-top: 0;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    margin: 3rem 0 1rem;
+  }
+</style>
 </head>
 <body>
 
-  <nav aria-label="Main">
+<header>
+  <h1>The Almanack of a Simple Guy</h1>
+  <nav>
     <a onclick="showSection('about')" id="link-about">About</a>
     <a onclick="showSection('finance')" id="link-finance">Finance</a>
     <a onclick="showSection('books')" id="link-books">Books</a>
@@ -97,64 +89,60 @@
     <a onclick="showSection('vlog')" id="link-vlog">Daily Vlog</a>
     <a onclick="showSection('contact')" id="link-contact">Contact</a>
   </nav>
+</header>
 
-  <main>
-    <div class="section-box" id="about">
-      <h2>About me</h2>
-      <p>I am Vikram Aditya. I am updating this website.</p>
-    </div>
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I am Vikram Aditya. I am updating this website.</p>
+  </section>
 
-    <div class="section-box" id="finance">
-      <h2>Finance</h2>
-      <p>I will be sharing my knowledge on personal finance, investing, and money management.</p>
-    </div>
+  <section id="finance">
+    <h2>Finance</h2>
+    <p>I will be sharing my knowledge on personal finance, investing, and money management.</p>
+  </section>
 
-    <div class="section-box" id="books">
-      <h2>Books</h2>
-      <p>Reviews, summaries and thoughts from books I read.</p>
-    </div>
+  <section id="books">
+    <h2>Books</h2>
+    <p>Reviews, summaries, and thoughts from books I read.</p>
+  </section>
 
-    <div class="section-box" id="workout">
-      <h2>Workout</h2>
-      <p>Sharing my workout journey.</p>
-    </div>
+  <section id="workout">
+    <h2>Workout</h2>
+    <p>Sharing my workout journey.</p>
+  </section>
 
-    <div class="section-box" id="vlog">
-      <h2>Daily Vlog</h2>
-      <p>Short updates about my day-to-day learning and shoots.</p>
-    </div>
+  <section id="vlog">
+    <h2>Daily Vlog</h2>
+    <p>Short updates about my day-to-day learning and shoots.</p>
+  </section>
 
-    <div class="section-box" id="contact">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:Vikram.aditya.connect@gmail.com">Vikram.aditya.connect@gmail.com</a></p>
-    </div>
-  </main>
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:Vikram.aditya.connect@gmail.com">Vikram.aditya.connect@gmail.com</a></p>
+  </section>
+</main>
 
-  <script>
-    function showSection(id) {
-      // Hide all sections
-      document.querySelectorAll('.section-box').forEach(function(s) {
-        s.style.display = 'none';
-      });
+<footer>
+  &copy; 2025 Vikram Aditya
+</footer>
 
-      // Remove active class on all nav links
-      document.querySelectorAll('nav a').forEach(function(a) {
-        a.classList.remove('active');
-      });
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
 
-      // Show the requested section (if exists)
-      const sec = document.getElementById(id);
-      if (sec) sec.style.display = 'block';
+    const sec = document.getElementById(id);
+    if (sec) sec.style.display = 'block';
 
-      // Mark the clicked nav link as active (expects id="link-<sectionId>")
-      const link = document.getElementById('link-' + id);
-      if (link) link.classList.add('active');
-    }
+    const link = document.getElementById('link-' + id);
+    if (link) link.classList.add('active');
+  }
 
-    // Show "about" on first load
-    document.addEventListener('DOMContentLoaded', function() {
-      showSection('about');
-    });
-  </script>
+  document.addEventListener('DOMContentLoaded', function() {
+    showSection('about');
+  });
+</script>
+
 </body>
 </html>
