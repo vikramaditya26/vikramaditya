@@ -16,27 +16,23 @@
 
     header {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 1rem 1rem;
       border-bottom: 1px solid #eee;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      font-weight: normal;
-    }
-
     nav {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
 
     nav a {
       color: #333;
       text-decoration: none;
       margin: 0 0.6rem;
+      cursor: pointer;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a.active {
       text-decoration: underline;
     }
 
@@ -47,6 +43,7 @@
     }
 
     section {
+      display: none; /* Hide by default */
       margin-bottom: 3rem;
     }
 
@@ -68,14 +65,13 @@
 <body>
 
   <header>
-    <h1>The Almanack of a Simple Guy</h1>
     <nav>
-      <a href="#about">About</a>
-      <a href="#finance">Finance</a>
-      <a href="#books">Books</a>
-      <a href="#workout">Workout</a>
-      <a href="#vlog">Daily Vlog</a>
-      <a href="#contact">Contact</a>
+      <a onclick="showSection('about')" id="link-about">About</a>
+      <a onclick="showSection('finance')" id="link-finance">Finance</a>
+      <a onclick="showSection('books')" id="link-books">Books</a>
+      <a onclick="showSection('workout')" id="link-workout">Workout</a>
+      <a onclick="showSection('vlog')" id="link-vlog">Daily Vlog</a>
+      <a onclick="showSection('contact')" id="link-contact">Contact</a>
     </nav>
   </header>
 
@@ -110,6 +106,33 @@
       <p>Email: <a href="mailto:Vikram.aditya.connect@gmail.com">Vikram.aditya.connect@gmail.com</a></p>
     </section>
   </main>
+
+  <script>
+    function showSection(id) {
+      // Hide all sections
+      document.querySelectorAll('main section').forEach(function(s) {
+        s.style.display = 'none';
+      });
+
+      // Remove active from all nav links
+      document.querySelectorAll('nav a').forEach(function(a) {
+        a.classList.remove('active');
+      });
+
+      // Show clicked section
+      const section = document.getElementById(id);
+      if (section) section.style.display = 'block';
+
+      // Highlight active link
+      const link = document.getElementById('link-' + id);
+      if (link) link.classList.add('active');
+    }
+
+    // Show "about" by default on load
+    document.addEventListener('DOMContentLoaded', function() {
+      showSection('about');
+    });
+  </script>
 
 </body>
 </html>
