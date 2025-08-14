@@ -60,6 +60,43 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* Collapsible styles */
+    .collapsible {
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .collapsible-btn {
+      width: 100%;
+      background: #fff;
+      color: #111;
+      cursor: pointer;
+      padding: 12px;
+      font-size: 1rem;
+      text-align: left;
+      border: none;
+      outline: none;
+      font-weight: bold;
+    }
+
+    .collapsible-btn:hover {
+      background: #f0f0f0;
+    }
+
+    .collapsible-content {
+      display: none;
+      padding: 12px;
+      background: #fafafa;
+    }
+
+    .collapsible-content img {
+      max-width: 150px;
+      margin-top: 10px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -78,32 +115,107 @@
   <main>
     <section id="about">
       <h2>About me</h2>
-      <p>I am Vikram Aditya. I am updating this website.</p>
+      <div class="collapsible">
+        <button class="collapsible-btn">My Journey</button>
+        <div class="collapsible-content">
+          <p>I started this website to share my thoughts, experiments, and learnings from life.</p>
+        </div>
+      </div>
+      <div class="collapsible">
+        <button class="collapsible-btn">Philosophy</button>
+        <div class="collapsible-content">
+          <p>I believe in simplicity, curiosity, and long-term thinking.</p>
+        </div>
+      </div>
     </section>
 
     <section id="finance">
       <h2>Finance</h2>
-      <p>I will be sharing my knowledge on personal finance, investing, and money management.</p>
+      <div class="collapsible">
+        <button class="collapsible-btn">The Psychology of Money</button>
+        <div class="collapsible-content">
+          <p>Lessons on wealth, greed, and happiness from Morgan Housel.</p>
+          <img src="https://m.media-amazon.com/images/I/71aG+xDKSYL.jpg" alt="Psychology of Money">
+          <p><a href="https://www.morganhousel.com/" target="_blank">Learn more</a></p>
+        </div>
+      </div>
+      <div class="collapsible">
+        <button class="collapsible-btn">My Investment Principles</button>
+        <div class="collapsible-content">
+          <ul>
+            <li>Index funds over stock picking</li>
+            <li>Think long-term</li>
+            <li>Emergency fund first</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section id="books">
       <h2>Books</h2>
-      <p>Reviews, summaries and thoughts from books I read.</p>
+      <div class="collapsible">
+        <button class="collapsible-btn">The Almanack of Naval Ravikant</button>
+        <div class="collapsible-content">
+          <p>Wisdom on wealth, happiness, and life philosophy.</p>
+          <img src="https://upload.wikimedia.org/wikipedia/en/1/1c/The_Almanack_of_Naval_Ravikant.jpg" alt="Naval's Almanack">
+          <p><a href="https://navalmanack.com/" target="_blank">Read online</a></p>
+        </div>
+      </div>
+      <div class="collapsible">
+        <button class="collapsible-btn">Sapiens</button>
+        <div class="collapsible-content">
+          <p>A brief history of humankind by Yuval Noah Harari.</p>
+          <img src="https://m.media-amazon.com/images/I/713jIoMO3UL.jpg" alt="Sapiens">
+        </div>
+      </div>
     </section>
 
     <section id="workout">
       <h2>Workout</h2>
-      <p>Sharing my workout journey.</p>
+      <div class="collapsible">
+        <button class="collapsible-btn">My Routine</button>
+        <div class="collapsible-content">
+          <p>4 days a week, simple exercises, consistency over intensity.</p>
+        </div>
+      </div>
+      <div class="collapsible">
+        <button class="collapsible-btn">Diet Basics</button>
+        <div class="collapsible-content">
+          <p>Focus on whole foods, protein intake, and hydration.</p>
+        </div>
+      </div>
     </section>
 
     <section id="vlog">
       <h2>Daily Vlog</h2>
-      <p>Short updates about my day-to-day learning and shoots.</p>
+      <div class="collapsible">
+        <button class="collapsible-btn">Today's Update</button>
+        <div class="collapsible-content">
+          <p>Worked on the website, went for a jog, read a chapter of Sapiens.</p>
+        </div>
+      </div>
+      <div class="collapsible">
+        <button class="collapsible-btn">Random Thoughts</button>
+        <div class="collapsible-content">
+          <p>Less is more. Focused work beats multitasking.</p>
+        </div>
+      </div>
     </section>
 
     <section id="contact">
       <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:Vikram.aditya.connect@gmail.com">Vikram.aditya.connect@gmail.com</a></p>
+      <div class="collapsible">
+        <button class="collapsible-btn">Email</button>
+        <div class="collapsible-content">
+          <p>Email: <a href="mailto:Vikram.aditya.connect@gmail.com">Vikram.aditya.connect@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="collapsible">
+        <button class="collapsible-btn">Social Media</button>
+        <div class="collapsible-content">
+          <p>Twitter: <a href="https://twitter.com" target="_blank">@vikram_aditya</a></p>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -131,6 +243,14 @@
     // Show "about" by default on load
     document.addEventListener('DOMContentLoaded', function() {
       showSection('about');
+    });
+
+    // Collapsible logic
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('collapsible-btn')) {
+        const content = e.target.nextElementSibling;
+        content.style.display = (content.style.display === "block") ? "none" : "block";
+      }
     });
   </script>
 
