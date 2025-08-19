@@ -1,0 +1,64 @@
+/* ===== Base layout & typography ===== */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Georgia, serif;
+  background: #ffffff;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* ===== Header & nav ===== */
+header {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 1rem;
+}
+.site-title {
+  margin: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+nav {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+nav a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 0.6rem;
+}
+nav a:hover,
+nav a[aria-current="page"] {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* ===== Main content ===== */
+main {
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+h1, h2, h3 { font-weight: 500; }
+section { margin-bottom: 2rem; }
+
+/* ===== Simple card pattern (for previews/reviews) ===== */
+.card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fafafa;
+}
+.card img {
+  max-width: 160px;
+  display: block;
+  margin-top: 0.5rem;
+}
+a { color: #0066cc; }
+a:hover { text-decoration: underline; }
+
+/* Small screens */
+@media (max-width: 480px) {
+  .site-title { font-size: 1.25rem; }
+}
