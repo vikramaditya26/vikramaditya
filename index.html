@@ -3,256 +3,52 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Almanack of a Simple Guy</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      background: #ffffff;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      line-height: 1.8;
-    }
-
-    header {
-      text-align: center;
-      padding: 1rem 1rem;
-      border-bottom: 1px solid #eee;
-    }
-
-    nav {
-      margin-top: 0.5rem;
-    }
-
-    nav a {
-      color: #333;
-      text-decoration: none;
-      margin: 0 0.6rem;
-      cursor: pointer;
-    }
-
-    nav a:hover,
-    nav a.active {
-      text-decoration: underline;
-    }
-
-    main {
-      max-width: 700px;
-      margin: auto;
-      padding: 2rem 1rem;
-    }
-
-    section {
-      display: none; /* Hide by default */
-      margin-bottom: 3rem;
-    }
-
-    section h2 {
-      font-size: 1.5rem;
-      font-weight: normal;
-      margin-bottom: 0.5rem;
-    }
-
-    a {
-      color: #0066cc;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Collapsible styles */
-    .collapsible {
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .collapsible-btn {
-      width: 100%;
-      background: #fff;
-      color: #111;
-      cursor: pointer;
-      padding: 12px;
-      font-size: 1rem;
-      text-align: left;
-      border: none;
-      outline: none;
-      font-weight: bold;
-    }
-
-    .collapsible-btn:hover {
-      background: #f0f0f0;
-    }
-
-    .collapsible-content {
-      display: none;
-      padding: 12px;
-      background: #fafafa;
-    }
-
-    .collapsible-content img {
-      max-width: 150px;
-      margin-top: 10px;
-      display: block;
-    }
-  </style>
+  <title>The Simple Guy</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <header>
+    <h1 class="site-title">The Simple Guy</h1>
     <nav>
-      <a onclick="showSection('about')" id="link-about">About</a>
-      <a onclick="showSection('finance')" id="link-finance">Finance</a>
-      <a onclick="showSection('books')" id="link-books">Books</a>
-      <a onclick="showSection('workout')" id="link-workout">Workout</a>
-      <a onclick="showSection('vlog')" id="link-vlog">Daily Vlog</a>
-      <a onclick="showSection('contact')" id="link-contact">Contact</a>
+      <a href="index.html" aria-current="page">About</a>
+      <a href="finance.html">Finance</a>
+      <a href="books.html">Books</a>
+      <a href="workout.html">Workout</a>
+      <a href="vlog.html">Daily Vlog</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
   <main>
     <section id="about">
       <h2>About me</h2>
-      <div class="collapsible">
-        <button class="collapsible-btn">My Journey</button>
-        <div class="collapsible-content">
-          <p>I started this website to share my thoughts, experiments, and learnings from life.</p>
-        </div>
-      </div>
-      <div class="collapsible">
-        <button class="collapsible-btn">Philosophy</button>
-        <div class="collapsible-content">
-          <p>I believe in simplicity, curiosity, and long-term thinking.</p>
-        </div>
-      </div>
-    </section>
+      <p>I share experiments, notes, and lessons from finance, books, workouts, and daily life.</p>
 
-    <section id="finance">
-      <h2>Finance</h2>
-      <div class="collapsible">
-        <button class="collapsible-btn">The Psychology of Money</button>
-        <div class="collapsible-content">
-          <p>Lessons on wealth, greed, and happiness from Morgan Housel.</p>
-          <img src="https://m.media-amazon.com/images/I/71aG+xDKSYL.jpg" alt="Psychology of Money">
-          <p><a href="https://www.morganhousel.com/" target="_blank">Learn more</a></p>
-        </div>
+      <div class="card">
+        <h3>Latest from Books</h3>
+        <p>Short previews live here. Full list is on the Books page.</p>
+        <ul>
+          <li><a href="books.html#psychology-of-money">The Psychology of Money — notes</a></li>
+          <li><a href="books.html#naval-almanack">The Almanack of Naval Ravikant — highlights</a></li>
+        </ul>
+        <p><a href="books.html">See all book reviews →</a></p>
       </div>
-      <div class="collapsible">
-        <button class="collapsible-btn">My Investment Principles</button>
-        <div class="collapsible-content">
-          <ul>
-            <li>Index funds over stock picking</li>
-            <li>Think long-term</li>
-            <li>Emergency fund first</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
-    <section id="books">
-      <h2>Books</h2>
-      <div class="collapsible">
-        <button class="collapsible-btn">The Almanack of Naval Ravikant</button>
-        <div class="collapsible-content">
-          <p>Wisdom on wealth, happiness, and life philosophy.</p>
-          <img src="https://upload.wikimedia.org/wikipedia/en/1/1c/The_Almanack_of_Naval_Ravikant.jpg" alt="Naval's Almanack">
-          <p><a href="https://navalmanack.com/" target="_blank">Read online</a></p>
-        </div>
+      <div class="card">
+        <h3>Latest from Workout</h3>
+        <ul>
+          <li><a href="workout.html#routine">My 4-day routine</a></li>
+          <li><a href="workout.html#diet-basics">Diet basics</a></li>
+        </ul>
+        <p><a href="workout.html">See all workout notes →</a></p>
       </div>
-      <div class="collapsible">
-        <button class="collapsible-btn">Sapiens</button>
-        <div class="collapsible-content">
-          <p>A brief history of humankind by Yuval Noah Harari.</p>
-          <img src="https://m.media-amazon.com/images/I/713jIoMO3UL.jpg" alt="Sapiens">
-        </div>
-      </div>
-    </section>
 
-    <section id="workout">
-      <h2>Workout</h2>
-      <div class="collapsible">
-        <button class="collapsible-btn">My Routine</button>
-        <div class="collapsible-content">
-          <p>4 days a week, simple exercises, consistency over intensity.</p>
-        </div>
-      </div>
-      <div class="collapsible">
-        <button class="collapsible-btn">Diet Basics</button>
-        <div class="collapsible-content">
-          <p>Focus on whole foods, protein intake, and hydration.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="vlog">
-      <h2>Daily Vlog</h2>
-      <div class="collapsible">
-        <button class="collapsible-btn">Today's Update</button>
-        <div class="collapsible-content">
-          <p>Worked on the website, went for a jog, read a chapter of Sapiens.</p>
-        </div>
-      </div>
-      <div class="collapsible">
-        <button class="collapsible-btn">Random Thoughts</button>
-        <div class="collapsible-content">
-          <p>Less is more. Focused work beats multitasking.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <div class="collapsible">
-        <button class="collapsible-btn">Email</button>
-        <div class="collapsible-content">
-          <p>Email: <a href="mailto:Vikram.aditya.connect@gmail.com">Vikram.aditya.connect@gmail.com</a></p>
-        </div>
-      </div>
-      <div class="collapsible">
-        <button class="collapsible-btn">Social Media</button>
-        <div class="collapsible-content">
-          <p>Twitter: <a href="https://twitter.com" target="_blank">@vikram_aditya</a></p>
-        </div>
+      <div class="card">
+        <h3>Daily Vlog</h3>
+        <p>Tiny updates and thoughts.</p>
+        <p><a href="vlog.html">Read the vlog →</a></p>
       </div>
     </section>
   </main>
-
-  <script>
-    function showSection(id) {
-      // Hide all sections
-      document.querySelectorAll('main section').forEach(function(s) {
-        s.style.display = 'none';
-      });
-
-      // Remove active from all nav links
-      document.querySelectorAll('nav a').forEach(function(a) {
-        a.classList.remove('active');
-      });
-
-      // Show clicked section
-      const section = document.getElementById(id);
-      if (section) section.style.display = 'block';
-
-      // Highlight active link
-      const link = document.getElementById('link-' + id);
-      if (link) link.classList.add('active');
-    }
-
-    // Show "about" by default on load
-    document.addEventListener('DOMContentLoaded', function() {
-      showSection('about');
-    });
-
-    // Collapsible logic
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('collapsible-btn')) {
-        const content = e.target.nextElementSibling;
-        content.style.display = (content.style.display === "block") ? "none" : "block";
-      }
-    });
-  </script>
-
 </body>
 </html>
