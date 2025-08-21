@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Books — The Simple Guy</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .book-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .book-card img {
+      width: 160px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .book-info {
+      max-width: 600px;
+    }
+    .book-info h3 {
+      font-size: 1.5em;
+      margin: 0;
+      font-weight: bold;
+    }
+    .book-info h4 {
+      font-size: 1em;
+      font-style: italic;
+      margin: 5px 0 15px 0;
+      color: #555;
+    }
+    .book-info p {
+      line-height: 1.6;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -22,33 +53,86 @@
   <main>
     <h2>Book Reviews</h2>
 
-    <!-- Table of contents for quick jump -->
-    <ul>
-      <li><a href="#psychology-of-money">The Psychology of Money</a></li>
-      <li><a href="#naval-almanack">The Almanack of Naval Ravikant</a></li>
-      <li><a href="#sapiens">Sapiens</a></li>
-    </ul>
-
-    <!-- Review pattern: copy this <article> block for each book -->
-    <article id="psychology-of-money" class="card">
-      <h3>The Psychology of Money — Morgan Housel</h3>
-      <p>Lessons on wealth, greed, and happiness. My key ideas: focus on behavior, long-term thinking, and avoiding ruin.</p>
+    <div class="book-card">
       <img src="https://m.media-amazon.com/images/I/71aG+xDKSYL.jpg" alt="The Psychology of Money cover">
-      <p><a href="https://www.morganhousel.com/" target="_blank" rel="noopener">Author website</a></p>
-    </article>
+      <div class="book-info">
+        <h3>The Psychology of Money</h3>
+        <h4>Morgan Housel</h4>
+        <p>This book explores how people think about money and why behavior often matters more than knowledge. It explains the importance of long-term thinking, the role of luck, and the danger of chasing quick wins. A must-read for building healthy financial habits.</p>
+      </div>
+    </div>
 
-    <article id="naval-almanack" class="card">
-      <h3>The Almanack of Naval Ravikant — Eric Jorgenson</h3>
-      <p>Notes on leverage, judgement, and happiness. Actionables: build specific knowledge, compound relationships.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/en/1/1c/The_Almanack_of_Naval_Ravikant.jpg" alt="Naval's Almanack cover">
-      <p><a href="https://navalmanack.com/" target="_blank" rel="noopener">Read online</a></p>
-    </article>
+    <div class="book-card">
+      <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Siddhartha cover">
+      <div class="book-info">
+        <h3>Siddhartha</h3>
+        <h4>Hermann Hesse</h4>
+        <p>A spiritual journey of self-discovery, this novel follows Siddhartha as he seeks meaning beyond material success. It blends wisdom, philosophy, and simplicity, teaching that true fulfillment comes from within. A timeless classic on life’s deeper questions.</p>
+      </div>
+    </div>
 
-    <article id="sapiens" class="card">
-      <h3>Sapiens — Yuval Noah Harari</h3>
-      <p>A brief history of humankind. Themes: shared myths, agriculture’s tradeoffs, rapid scientific progress.</p>
-      <img src="https://m.media-amazon.com/images/I/713jIoMO3UL.jpg" alt="Sapiens cover">
-    </article>
+    <div class="book-card">
+      <img src="https://m.media-amazon.com/images/I/71C0NLBP7wL.jpg" alt="Tao Te Ching cover">
+      <div class="book-info">
+        <h3>Tao Te Ching</h3>
+        <h4>Lao Tzu</h4>
+        <p>A foundational text of Taoist philosophy, this book emphasizes living in harmony with nature and simplicity. It offers short verses filled with wisdom on humility, balance, and flow. A guide for those seeking calmness and perspective in a noisy world.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="https://m.media-amazon.com/images/I/41Y1H9msK1L.jpg" alt="Principles cover">
+      <div class="book-info">
+        <h3>Principles</h3>
+        <h4>Ray Dalio</h4>
+        <p>Ray Dalio shares the principles that guided his life and business. The book breaks down decision-making, radical transparency, and learning from mistakes. It’s practical wisdom for building strong habits in both work and life.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/1/1c/The_Almanack_of_Naval_Ravikant.jpg" alt="Naval Almanack cover">
+      <div class="book-info">
+        <h3>The Almanack of Naval Ravikant</h3>
+        <h4>Eric Jorgenson</h4>
+        <p>This collection of Naval Ravikant’s ideas covers wealth, happiness, and leverage. It emphasizes building specific knowledge, compounding relationships, and prioritizing freedom. A modern manual for thoughtful living and smart decision-making.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="https://m.media-amazon.com/images/I/81iP2nFfqyL.jpg" alt="Poor Charlie’s Almanack cover">
+      <div class="book-info">
+        <h3>Poor Charlie’s Almanack</h3>
+        <h4>Charlie Munger</h4>
+        <p>This book compiles the speeches and wisdom of Charlie Munger. It highlights mental models, rational thinking, and lifelong learning. A powerful guide for anyone who wants to think clearly and avoid common mistakes in life and investing.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="https://m.media-amazon.com/images/I/81CjWYwz8HL.jpg" alt="Hsin Hsin Ming cover">
+      <div class="book-info">
+        <h3>Hsin Hsin Ming: The Book of Nothing</h3>
+        <h4>Osho</h4>
+        <p>This book explores Zen wisdom, showing how to embrace nothingness and simplicity. It challenges overthinking and emphasizes direct experience of life. A deep yet accessible reflection on peace, silence, and freedom.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="https://m.media-amazon.com/images/I/71gXJZgq8+L.jpg" alt="The Prophet cover">
+      <div class="book-info">
+        <h3>The Prophet</h3>
+        <h4>Kahlil Gibran</h4>
+        <p>A poetic masterpiece, The Prophet reflects on love, work, freedom, and death. Each essay-like poem offers wisdom on living a meaningful life. A short but powerful read that inspires reflection and gratitude.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits cover">
+      <div class="book-info">
+        <h3>Atomic Habits</h3>
+        <h4>James Clear</h4>
+        <p>This book explains how small habits compound into big changes over time. It gives practical strategies for building good habits, breaking bad ones, and designing your environment for success. A go-to guide for self-improvement.</p>
+      </div>
+    </div>
   </main>
 </body>
 </html>
