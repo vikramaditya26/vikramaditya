@@ -1,82 +1,109 @@
-/* Basic Reset */
+/* ===== Base layout & typography ===== */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #f9f9f9;
-  padding: 20px;
+  font-family: Georgia, serif;
+  background: #ffffff;
   color: #333;
+  line-height: 1.8;
 }
 
-/* Header */
+/* ===== Header & nav ===== */
 header {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 1rem;
+}
+
+.site-title {
+  margin: 0;
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+nav {
+  margin-top: 0.5rem;
+  text-align: center;
 }
 
-header .intro {
-  font-size: 1rem;
+nav a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 0.6rem;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* ===== Main content ===== */
+main {
   max-width: 700px;
   margin: auto;
-  color: #555;
+  padding: 2rem 1rem;
 }
 
-/* Collapsible Sections */
-.collapsible {
-  background: #fff;
-  border-radius: 10px;
-  margin: 15px 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  overflow: hidden;
+h1, h2, h3 {
+  font-weight: 500;
 }
 
-.collapse-toggle {
-  background: #4CAF50;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  font-size: 1rem;
-  font-weight: bold;
-  outline: none;
-  transition: background 0.3s ease;
+section {
+  margin-bottom: 2rem;
 }
 
-.collapse-toggle:hover {
-  background: #45a049;
-}
-
-.collapse-content {
-  display: none;
-  padding: 15px;
-}
-
-.collapsible.active .collapse-content {
-  display: block;
-}
-
-/* Blog images */
-.blog-img {
-  display: block;
-  max-width: 100%;
-  margin: 15px auto;
+/* ===== Simple card pattern (for previews/reviews) ===== */
+.card {
+  border: 1px solid #eee;
   border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #fafafa;
 }
 
-/* Exercise headings */
-h3 {
-  margin-top: 15px;
-  color: #4CAF50;
+.card img {
+  max-width: 160px;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+a {
+  color: #0066cc;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* ===== Collapsible details/summary (optional) ===== */
+details.card {
+  margin: 1rem 0;
+}
+
+details.card summary {
+  cursor: pointer;
+  font-weight: bold;
+  list-style: none; /* hides the default arrow */
+}
+
+details.card[open] summary {
+  text-decoration: underline; /* optional highlight when open */
+}
+
+details.card .content {
+  margin-top: 0.5rem;
 }
