@@ -107,3 +107,12 @@ details.card[open] summary {
 details.card .content {
   margin-top: 0.5rem;
 }
+
+
+.workout-page img {
+  display: block;
+  margin: 1rem auto;   /* center the image */
+  max-width: 100%;     /* responsive */
+  width: 400px;        /* fixed size */
+  border-radius: 8px;  /* optional rounded corners */
+}
