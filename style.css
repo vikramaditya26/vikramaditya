@@ -156,3 +156,52 @@ details.card .content {
   font-size: 15px;
   line-height: 1.6;
 }
+
+
+/* ===== Workout page collapsible style ===== */
+.exercise-box {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 12px 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.exercise-box summary {
+  padding: 12px 16px;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none; /* remove default arrow */
+  position: relative;
+}
+
+.exercise-box[open] summary {
+  background: #f0f9ff; /* light blue highlight when opened */
+  border-bottom: 1px solid #ddd;
+}
+
+.exercise-box summary::after {
+  content: "▶";
+  position: absolute;
+  right: 16px;
+  transition: transform 0.3s ease;
+}
+
+.exercise-box[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.exercise-content {
+  padding: 16px;
+  background: #fafafa;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.exercise-content img {
+  display: block;
+  margin: 12px auto;
+  max-width: 100%;
+  border-radius: 6px;
+}
