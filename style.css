@@ -116,3 +116,43 @@ details.card .content {
   width: 400px;        /* fixed size */
   border-radius: 8px;  /* optional rounded corners */
 }
+
+.blog-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin: 12px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.blog-box summary {
+  padding: 12px 16px;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none; /* remove default arrow */
+  position: relative;
+}
+
+.blog-box[open] summary {
+  background: #f8f8f8;
+  border-bottom: 1px solid #eee;
+}
+
+.blog-box summary::after {
+  content: "▶";
+  position: absolute;
+  right: 16px;
+  transition: transform 0.3s ease;
+}
+
+.blog-box[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.blog-content {
+  padding: 16px;
+  background: #fafafa;
+  font-size: 15px;
+  line-height: 1.6;
+}
