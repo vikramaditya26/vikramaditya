@@ -140,15 +140,17 @@ details.card .content {
   border-bottom: 1px solid #eee;
 }
 
-.blog-box summary::after {
-  content: "▶";
+.blog-box summary::after,
+.exercise-box summary::after {
+  content: " ➕";
   position: absolute;
   right: 16px;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
-.blog-box[open] summary::after {
-  transform: rotate(90deg);
+.blog-box[open] summary::after,
+.exercise-box[open] summary::after {
+  content: " ➖";
 }
 
 .blog-content {
@@ -182,15 +184,17 @@ details.card .content {
   border-bottom: 1px solid #ddd;
 }
 
+.blog-box summary::after,
 .exercise-box summary::after {
-  content: "▶";
+  content: " ➕";
   position: absolute;
   right: 16px;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
+.blog-box[open] summary::after,
 .exercise-box[open] summary::after {
-  transform: rotate(90deg);
+  content: " ➖";
 }
 
 .exercise-content {
