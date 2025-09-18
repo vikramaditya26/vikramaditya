@@ -3,176 +3,333 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Simple Guy</title>
-  <!-- Favicons -->
+  <title>The Simple Guy – Finance</title>
+
+  <!-- Favicons (keep your existing images) -->
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png" />
+
+  <!-- Link to your main style; this page also includes local tweaks so it looks complete -->
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Page-specific styles — you can remove if you want to rely fully on your style.css */
+    :root{
+      --bg:#fbfbfb; --card:#fff; --muted:#6b7280; --accent:#0b5bd7; --maxw:960px;
+      --glass: rgba(255,255,255,0.85);
+    }
+    html,body{height:100%}
+    body{margin:0; font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif; background:var(--bg); color:#111; display:flex; justify-content:center; padding:28px;}
+    .container{width:100%; max-width:var(--maxw);}
+    header{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap}
+    .site-title{font-size:18px; margin:0; font-weight:700}
+    nav a{margin-right:12px; text-decoration:none; color:var(--muted)}
+    nav a[aria-current="page"]{color:var(--accent); font-weight:700}
+    main h1{font-size:28px; margin:6px 0 2px}
+    .subtitle{color:var(--muted); margin:0 0 18px}
+    .module{background:var(--card); border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(10,10,10,0.05); margin-bottom:18px}
+    .module h2{margin-top:0}
+    .lead{color:var(--muted); line-height:1.6}
+    .quote{display:block; background:#111;color:#fff; padding:10px 12px; border-radius:8px; margin:12px 0; width:fit-content; font-weight:600}
+    .example{background:#f7fbff;border-left:4px solid var(--accent); padding:10px 12px; border-radius:6px; margin:12px 0}
+    pre{background:#0b1220;color:#e6eef8;padding:10px;border-radius:8px;overflow:auto;font-size:13px}
+    .subtle{color:var(--muted); font-size:14px}
+    img.resp{max-width:100%; border-radius:8px; display:block; margin-top:12px}
+    .calc{margin-top:12px; padding:12px; border-radius:8px; border:1px dashed #e2e8f0; background:linear-gradient(0deg, rgba(255,255,255,0.7), rgba(255,255,255,0.7))}
+    label{display:block; margin-top:8px; font-size:14px}
+    input[type="number"], select{width:100%; padding:8px; border-radius:6px; border:1px solid #ddd; margin-top:6px}
+    button{background:var(--accent); color:white; padding:8px 12px; border-radius:6px; border:none; cursor:pointer; margin-top:10px}
+    footer{margin-top:18px; color:var(--muted); font-size:13px}
+    .two-col{display:flex; gap:12px; flex-wrap:wrap}
+    .col{flex:1; min-width:240px}
+    details{margin-top:10px}
+    summary{font-weight:700; cursor:pointer}
+  </style>
 </head>
+
 <body>
-  <header>
-    <h1 class="site-title">The Simple Guy</h1>
-    <nav>
-      <a href="index.html">About</a>
-      <a href="finance.html" aria-current="page">Finance</a>
-      <a href="books.html">Books</a>
-      <a href="workout.html">Workout</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Personal Finance Guide</h2>
-
-    <details open>
-      <summary>1. Understanding Money and Personal Finance</summary>
-      <div class="card">
-        <p>Personal finance is about managing your money: how you earn, save, spend, and invest it. It's not just about getting rich; it's about planning your financial future so you have financial security and peace of mind.</p>
-        <p>Ask yourself: Do I know where my money goes each month? Do I save before spending? Have I set clear goals (like a home, a trip, or retirement)? These questions start your journey toward financial literacy.</p>
-        <ul>
-          <li><b>Track spending:</b> Note down your income and expenses. Use a notebook or app.</li>
-          <li><b>Set goals:</b> Define short-term goals (like a gadget or holiday) and long-term goals (house, retirement).</li>
-          <li><b>Pay yourself first:</b> Save or invest a part of your income right away, before using money for other things.</li>
-        </ul>
-        <p><i>Golden rule:</i> Spend less than you earn, and invest the rest.</p>
+  <div class="container">
+    <!-- Header + navigation: keep identical to your site skeleton -->
+    <header>
+      <div>
+        <h2 class="site-title">The Simple Guy</h2>
+        <p class="subtle" style="margin-top:6px">Personal notes and lessons — learning aloud.</p>
       </div>
-    </details>
+      <nav>
+        <a href="index.html">About</a>
+        <a href="finance.html" aria-current="page">Finance</a>
+        <a href="books.html">Books</a>
+        <a href="workout.html">Workout</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
 
-    <details>
-      <summary>2. Budgeting and Saving</summary>
-      <div class="card">
-        <p>Budgeting means giving each rupee a job. Think of it as a plan for how you will spend and save. A simple method is the <b>50/30/20 rule</b>: 50% of income goes to needs (rent, food, bills), 30% to wants (shopping, entertainment), and 20% to savings/investment. You can adjust these percentages based on your own situation.</p>
-        <ul>
-          <li><b>Needs (50%):</b> Essential expenses like rent/mortgage, groceries, loan EMIs, utilities.</li>
-          <li><b>Wants (30%):</b> Lifestyle and fun: movies, dining out, hobbies, or any non-essential shopping.</li>
-          <li><b>Savings (20%):</b> Money you save first (in a savings account, PPF, mutual fund, etc.).</li>
-        </ul>
-        <p>Also, build an <b>emergency fund</b> of about 6-12 months of expenses in a liquid place (like a savings account or liquid fund). This fund is your safety net for job loss, medical emergencies, or sudden big expenses.</p>
-        <p>If you can, automate your savings: as soon as you get paid, transfer a fixed amount to savings or investments. This way you pay yourself first before spending on other things.</p>
-      </div>
-    </details>
+    <main>
+      <h1>Personal Finance Guide</h1>
+      <p class="subtitle">Three long essays: <b>1) Understanding Money</b> • <b>2) Budgeting & Saving</b> • <b>3) Basics of Investing</b>. Story-first, then math; beginner → intermediate → advanced.</p>
 
-    <details>
-      <summary>3. Managing Debt and Credit</summary>
-      <div class="card">
-        <p>Debt means borrowing money today and paying back later. Some debt (like a home or education loan) can be useful, but high-interest debt is dangerous. Credit cards and personal loans often charge very high interest, so avoid carrying balances on them.</p>
-        <ul>
-          <li><b>Pay cards in full:</b> Always pay your credit card bill fully every month to avoid interest.</li>
-          <li><b>Borrow wisely:</b> Don’t take loans for short-term wants. Use loans only for things that add value (house, higher education).</li>
-          <li><b>Lower interest:</b> If you have high-interest debt, look for ways to refinance to a cheaper loan.</li>
-          <li><b>Maintain a good credit score (CIBIL):</b> Pay all bills (EMI, credit card, utilities) on time. A good score helps you get loans easily at better rates.</li>
-        </ul>
-        <p>Remember, if debt is overwhelming, list all debts and pay them one by one, starting with the one with the highest interest. Paying off debt frees up money to save and invest.</p>
-      </div>
-    </details>
+      <!-- MODULE 1 -->
+      <section class="module" id="1-understanding-money">
+        <h2>1. Understanding Money and Personal Finance</h2>
+        <p class="lead">A short contrarian story that rewires how you think about money.</p>
 
-    <details>
-      <summary>4. Basics of Investing</summary>
-      <div class="card">
-        <p>Investing means putting money into assets (like stocks or funds) so it can grow over time. The alternative is saving in a bank, which keeps money safe but grows slowly. Investing allows you to beat inflation (the rising cost of things) and grow wealth. Think of investing like planting seeds: with time they can grow into big trees (compounding).</p>
-        <ul>
-          <li><b>Start early:</b> Even small amounts invested regularly add up over years.</li>
-          <li><b>Compounding:</b> Reinvested returns (like interest or dividends) earn more money, accelerating growth.</li>
-          <li><b>Diversify:</b> Don’t put all your money in one place. Spread investments across stocks, bonds, gold, etc., to reduce risk.</li>
-          <li><b>Stay long-term:</b> Markets go up and down. Stay invested through ups and downs; avoid panic selling.</li>
-          <li><b>Understand risk:</b> Higher returns usually come with higher risk. Only invest in things you understand and can hold onto during bad times.</li>
-        </ul>
-        <p>Example: Investing ₹1000 at 8% annual return doubles to about ₹2000 in ~9 years. This shows why time in the market is key. Avoid “get-rich-quick” schemes—genuine wealth building takes time and patience.</p>
-      </div>
-    </details>
+        <div class="content">
+          <p>
+            Once a trader and a monk lived in the same town. The trader bragged of his wealth — clothes, food, status. The monk had a bowl, a roof, and a calm face.
+            A storm came; markets froze; the trader had supply chains blocked and fortunes undone. The monk kept walking, calm, because he had no obligations.
+            The lesson: wealth is not only the amount in your bank; it's the liabilities you carry and the options you have.
+          </p>
 
-    <details>
-      <summary>5. Stock Market and Index Funds</summary>
-      <div class="card">
-        <p>The stock market is a place to buy shares (small ownership pieces) of companies. In India, two major exchanges are NSE (National Stock Exchange) and BSE (Bombay Stock Exchange). Market indexes like the Nifty 50 (50 large NSE stocks) and Sensex (30 large BSE stocks) track overall market performance. Historically, markets trend upward over the long term.</p>
-        <ul>
-          <li><b>Stocks:</b> When you own a stock, you own a part of that company. If the company does well, the stock value may rise (and you can sell it for a profit).</li>
-          <li><b>Index Funds:</b> Instead of picking individual stocks, beginners can buy index funds or ETFs that track Nifty or Sensex. These funds spread risk over many companies. (Warren Buffett says this is a smart choice for most people.)</li>
-          <li><b>Stay patient:</b> The market has ups and downs. Don’t panic during a drop or get greedy in a rise. Think long-term.</li>
-          <li><b>Risks:</b> Invest only money you won’t need soon. The stock market is for building wealth over years, not for quick gains.</li>
-        </ul>
-      </div>
-    </details>
+          <p class="quote">Money is a tool that buys options. The fewer obligations you have, the greater your optionality.</p>
 
-    <details>
-      <summary>6. Mutual Funds and SIP</summary>
-      <div class="card">
-        <p>A mutual fund is a pool of many investors' money, managed by professionals. Funds invest in stocks, bonds, or both, so you get diversification easily. They’re useful for small investors who want exposure to markets without picking stocks themselves.</p>
-        <ul>
-          <li><b>Equity funds:</b> Invest mainly in stocks. Higher growth potential (in the long term), but more ups and downs.</li>
-          <li><b>Debt funds:</b> Invest in bonds/loans. Less risky, lower returns. Useful for short-term goals or parking money.</li>
-          <li><b>Hybrid funds:</b> Mix of equity and debt for balanced risk.</li>
-          <li><b>SIP (Systematic Investment Plan):</b> Invest a fixed amount in a mutual fund every month. This builds discipline and uses rupee-cost averaging (buy more units when prices are low).</li>
-          <li><b>Tax-saving funds:</b> Equity Linked Saving Schemes (ELSS) are equity funds with a 3-year lock-in. They help you save tax under Section 80C (₹1.5 lakh limit).</li>
-        </ul>
-        <p>Tip: Choose funds with good track records and low fees. Investing via SIP in a well-known fund is often safer than trying to time the market.</p>
-      </div>
-    </details>
+          <h3>Beginner — a few practical truths</h3>
+          <ul>
+            <li><b>Record one month of cash flow.</b> Write down your net income and every outgoing rupee. If you don't record, you don't know.</li>
+            <li><b>Pay yourself first.</b> Automate transferring a fixed amount to savings/investments on payday.</li>
+            <li><b>Emergency fund > fancy investments.</b> If you have a medical emergency and no buffer, all clever investments mean nothing.</li>
+          </ul>
 
-    <details>
-      <summary>7. Insurance (Protection)</summary>
-      <div class="card">
-        <p>Insurance protects you and your family from big financial losses. It is not an investment. Important types in India include:</p>
-        <ul>
-          <li><b>Health Insurance:</b> Covers hospital and medical expenses. A must-have. Check the coverage (sum insured) and network hospitals.</li>
-          <li><b>Term Life Insurance:</b> Provides money to your family if you pass away. Buy a term plan (pure life cover) of about 10-15 times your annual income. It's cheaper than whole-life or endowment plans.</li>
-          <li><b>Vehicle Insurance:</b> Covers accidents for your car or bike. Mandatory by law. Always renew on time.</li>
-          <li><b>Other covers:</b> You may consider personal accident cover, home insurance, or critical illness cover based on your needs.</li>
-        </ul>
-        <p>Remember: Insurance is for protection, not investment. Compare policies and read terms carefully. Avoid plans that mix saving/investment with insurance (like ULIPs) unless you fully understand them.</p>
-      </div>
-    </details>
+          <div class="example">
+            <strong>Example:</strong> Sanjay earns ₹45,000/month. Last month he spent ₹47,000 because of festival shopping and a loan EMI. That mismatch leads to borrowing and stress. The fix: cut wants by ₹3,000 and automate ₹5,000 to a savings account each month.
+          </div>
 
-    <details>
-      <summary>8. Retirement and Long-Term Goals</summary>
-      <div class="card">
-        <p>It’s never too early to plan for retirement or big life goals. Decide what you want (children’s education, home, retirement) and estimate how much money you will need.</p>
-        <ul>
-          <li><b>Employee Provident Fund (EPF):</b> If you are salaried, a portion of your salary goes into EPF (with employer’s contribution) each month, saving for retirement.</li>
-          <li><b>Public Provident Fund (PPF):</b> A government-backed 15-year saving scheme. It offers around 7-8% interest (tax-free). Good for long-term goals.</li>
-          <li><b>National Pension System (NPS):</b> A government retirement scheme where you invest in a mix of stocks and bonds. It provides tax benefits.</li>
-          <li><b>Market investments:</b> Keep investing in mutual funds or stocks with a long-term view. Even small monthly SIPs grow significantly over decades because of compounding.</li>
-        </ul>
-        <p>Example goal: Suppose you want ₹1 crore at retirement. Use retirement calculators or simple math to find out how much to invest monthly. Stay consistent; compounding will help grow your savings over time.</p>
-      </div>
-    </details>
+          <h3>Intermediate — the vocabulary of risk</h3>
+          <p>
+            There are three useful classifications of risk for a person:
+            <ol>
+              <li><b>Idiosyncratic risk:</b> related to you — health, career. Can be diversified by insurance and skills.</li>
+              <li><b>Systemic risk:</b> market-wide shakes — recession, currency crisis. Prepare with asset allocation and cash buffer.</li>
+              <li><b>Liquidity risk:</b> inability to convert assets quickly without loss. Keep some truly liquid funds.</li>
+            </ol>
+          </p>
 
-    <details>
-      <summary>9. Protecting Against Scams</summary>
-      <div class="card">
-        <p>Be careful of offers that sound too good to be true. Scams often promise guaranteed high returns with low risk. Remember, there is no easy shortcut to wealth. Protect yourself by following these rules:</p>
-        <ul>
-          <li><b>Verify before investing:</b> Invest only through authorized channels (SEBI-registered brokers, AMFI-registered mutual funds, IRDAI-licensed insurers).</li>
-          <li><b>Avoid Ponzi/Pyramid schemes:</b> Do not join schemes where returns come from recruiting others (like famous scams).</li>
-          <li><b>No sharing confidential info:</b> Never give your bank OTP, passwords, or PINs to anyone. Scammers often steal money this way.</li>
-          <li><b>Be skeptical:</b> If someone guarantees huge returns (like doubling money), it's likely a fraud. Research and double-check before you invest.</li>
-        </ul>
-        <p>When in doubt, pause and research. You can ask a trusted financial advisor or knowledgeable friend. Staying alert protects your money.</p>
-      </div>
-    </details>
+          <h3>Advanced — antifragility & optionality</h3>
+          <p>
+            A fragile person breaks under stress (over-leveraged), a robust person resists stress (insured, diversified), and an antifragile person gains from stress (small optional bets that pay off massively).
+            In personal finance, aim for robustness and small, repeated optionality: keep a safe base, then make many small asymmetric bets (e.g., skill investments, small start-ups, long-term equity bets).
+          </p>
 
-    <details>
-      <summary>10. Resources and Further Learning</summary>
-      <div class="card">
-        <p>Continue learning with these resources:</p>
-        <ul>
-          <li><a href="https://zerodha.com/varsity/" target="_blank">Zerodha Varsity</a>: Free, beginner-friendly modules on personal finance and markets.</li>
-          <li><a href="https://www.investopedia.com/" target="_blank">Investopedia</a>: Clear definitions and articles on finance topics.</li>
-          <li><a href="https://www.moneycontrol.com/" target="_blank">Moneycontrol</a>: Indian finance news portal; learn about markets and funds.</li>
-          <li><a href="https://moneylife.in/" target="_blank">Moneylife</a>: Indian personal finance site with articles on saving, investing, and insurance.</li>
-          <li><i>The Psychology of Money</i> by Morgan Housel (book): Lessons on money mindset.</li>
-          <li><i>Rich Dad Poor Dad</i> by Robert Kiyosaki (book): Introduction to investing and wealth concepts.</li>
-          <li><i>Let’s Talk Money</i> by Monika Halan (book): Indian perspective on personal finance.</li>
-          <li><i>The Richest Man in Babylon</i> by George S. Clason (book): Classic parables on saving and wealth.</li>
-        </ul>
-      </div>
-    </details>
+          <p class="subtle">If you learn only one concept from this section: <b>avoid ruin</b>. If you avoid permanent ruin, you keep the chance to benefit from time and randomness.</p>
 
-  </main>
+          <hr>
+
+          <p class="subtle">Quick Indian resources:</p>
+          <ul>
+            <li><a href="https://rbi.org.in" target="_blank">RBI — official site</a></li>
+            <li><a href="https://www.sebi.gov.in" target="_blank">SEBI — investor protection & rules</a></li>
+            <li><a href="https://zerodha.com/varsity/" target="_blank">Zerodha Varsity — structured learning</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- MODULE 2 -->
+      <section class="module" id="2-budgeting-saving">
+        <h2>2. Budgeting and Saving</h2>
+        <p class="lead">Budgeting is designing a life that can tolerate shocks. This is a field guide — not theory.</p>
+
+        <div class="content">
+          <p>
+            There are two types of people: those who sleep soundly and those who don't. The difference is often a buffer of cash and habits.
+            Budgeting is not "restriction"; it's establishing a margin for error. Margin means freedom.
+          </p>
+
+          <h3>Beginner — the three-jar experiment</h3>
+          <p>
+            Start with three jars (virtual or real): <b>Essentials</b>, <b>Savings</b>, <b>Wants</b>.
+            Put a fixed percent into Savings the moment you receive income. Try a pragmatic rule:
+          </p>
+          <pre>
+50% → Essentials (rent, food, bills)
+30% → Wants (fun, non-essential)
+20% → Savings / Investments
+          </pre>
+
+          <p>Adjust the numbers based on where you live and how much you owe. If you carry debt with high interest, reduce wants and attack the debt.</p>
+
+          <div class="example">
+            <strong>Worked example:</strong> Riya earns ₹60,000. She automates:
+            ₹12,000 → SIP (20%)
+            ₹30,000 → Essentials (50%)
+            ₹18,000 → Wants (30%)
+          </div>
+
+          <h3>The emergency fund (beginner → intermediate)</h3>
+          <p>
+            Build a fund equal to 6 months of essential expenses (12 months if freelance/irregular income). Where to keep it?
+          </p>
+          <ul>
+            <li><b>Savings account:</b> instant access, low return.</li>
+            <li><b>Liquid mutual fund:</b> slightly higher return, fairly liquid (T+1/T+0 depending on fund & AMC).</li>
+            <li><b>Bank sweep-in FD:</b> gives slightly higher interest and liquidity.</li>
+          </ul>
+
+          <h3>Intermediate — mental models to automate saving</h3>
+          <p>Automation is the simplest trick. Use standing instructions, auto-debits for SIPs, or payroll deduction to fund PPF/SIP before you see the money.</p>
+
+          <div class="example">
+            <strong>Commitment device:</strong> Set a "no-spend" day each month or use an app that blocks shopping sites for the first 7 days after salary.
+          </div>
+
+          <h3>Advanced — buckets and allocation</h3>
+          <p>
+            Think in buckets:
+            <ol>
+              <li><b>Buffer bucket:</b> emergency fund — cash/liquid.</li>
+              <li><b>Goal bucket:</b> near-term goals (1–3 years) — FDs, debt funds.</li>
+              <li><b>Growth bucket:</b> long-term goals — equity (SIP / index funds), PPF for tax-efficient, debt-equity mix for stability.</li>
+            </ol>
+          </p>
+
+          <h4>Worked arithmetic — how much to save monthly</h4>
+          <p>Suppose you want ₹10 lakh in 10 years. If you can achieve 8% annual return via SIPs, how much monthly?</p>
+          <p>Use the SIP formula or try the calculator later on this page. Rough back-of-envelope: For moderate returns, ₹5-8k per month often compounds into lakhs over decades. Discipline matters more than exact figure early on.</p>
+
+          <hr>
+
+          <p class="subtle">Tools & Indian tips:</p>
+          <ul>
+            <li>Use UPI standing instructions and bank standing instructions (SIP mandates) — many AMCs allow UPI SIPs now.</li>
+            <li>For goal-tracking, use RBI/SEBI/AMFI resources or apps that only read data (avoid apps asking for login credentials).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- MODULE 3 -->
+      <section class="module" id="3-basics-investing">
+        <h2>3. Basics of Investing</h2>
+        <p class="lead">From the boring arithmetic of compounding to the psychology that makes people buy high and sell low.</p>
+
+        <div class="content">
+          <p>
+            Investing is the opposite of instant gratification. The tree that yields fruit must be planted and watered. Most people plant a bonsai and expect mangoes.
+            Before you invest, ask: what is my time horizon? The answer will determine the correct instrument.
+          </p>
+
+          <h3>Instruments (India-focused primer)</h3>
+          <div class="two-col">
+            <div class="col">
+              <h4>Low-risk / Guaranteed</h4>
+              <ul>
+                <li>Bank Savings Account (liquid, low return)</li>
+                <li>Fixed Deposits (short/medium term, secure)</li>
+                <li>Public Provident Fund (PPF) — long-term, tax benefits</li>
+              </ul>
+            </div>
+            <div class="col">
+              <h4>Market-based / Growth</h4>
+              <ul>
+                <li>Mutual Funds — equity, debt, hybrid</li>
+                <li>Index Funds & ETFs — low-fee, broad market exposure</li>
+                <li>Stocks — higher risk, requires knowledge</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Compound interest — step-by-step calculation</h3>
+          <p>
+            The formula: <code>Future Value = P × (1 + r)^n</code>. Let's walk it with numbers — slowly and carefully, because everyone talks compounding but very few compute it properly.
+          </p>
+
+          <h4>Example A — Lump-sum</h4>
+          <p>Invest ₹100,000 today at 8% annually for 10 years.</p>
+          <ol>
+            <li>r = 0.08 → 1 + r = 1.08</li>
+            <li>1.08^10 = 2.158925 (approx)</li>
+            <li>Future Value = 100,000 × 2.158925 ≈ ₹215,892</li>
+          </ol>
+
+          <h4>Example B — SIP (monthly)</h4>
+          <p>Invest ₹5,000/month for 20 years at an assumed 12% annual return (monthly r = 1%).</p>
+          <ol>
+            <li>Monthly r = 0.12 / 12 = 0.01</li>
+            <li>n = 20 × 12 = 240 months</li>
+            <li>FV = P × [((1 + r)^n − 1)/r] × (1 + r)</li>
+            <li>Compute: (1.01)^240 ≈ 10.957 → ((10.957 − 1)/0.01) = 995.7 → ×1.01 ≈ 1005.657</li>
+            <li>FV ≈ 5,000 × 1005.657 ≈ ₹4,995,739 ≈ ₹50 lakh</li>
+          </ol>
+
+          <div class="example">
+            <strong>Translation:</strong> Discipline + monthly habit + time = big difference. You do not need to pick perfect stocks; you need to keep investing while life goes on.
+          </div>
+
+          <h3>Where people commonly fail (psychology)</h3>
+          <ul>
+            <li><b>Short-termism:</b> checking the portfolio every day is a form of punishment.</li>
+            <li><b>Herding:</b> buying after a run-up because everyone is cheering.</li>
+            <li><b>High fees:</b> paying for "active" where "passive" would do.</li>
+          </ul>
+
+          <h3>Practical starter steps — a sequence</h3>
+          <ol>
+            <li>Build 6–12 months emergency fund.</li>
+            <li>Buy adequate health insurance and term plan if you have dependents.</li>
+            <li>Start a monthly SIP in a low-cost Nifty/Sensex index fund (choose a reliable AMC or ETF).</li>
+            <li>After a year, learn about select individual stocks; keep them as a small portion (10–20%) only.</li>
+          </ol>
+
+          <h3>Interactive SIP calculator (play with numbers)</h3>
+          <div class="calc">
+            <label>Monthly SIP amount (₹): <input type="number" id="sipP" value="5000" min="0"></label>
+            <label>Expected annual return (%): <input type="number" id="sipR" value="12" min="0" step="0.1"></label>
+            <label>Time horizon (years): <input type="number" id="sipY" value="20" min="1"></label>
+            <button id="calcBtn">Calculate SIP</button>
+
+            <div id="calcOut" style="margin-top:12px;color:#111"></div>
+          </div>
+
+          <script>
+            // Simple SIP calculator — local, no external libs
+            function formatINR(x){
+              return Number(x).toLocaleString('en-IN', {maximumFractionDigits:2});
+            }
+            document.getElementById('calcBtn').addEventListener('click', function(){
+              const P = Number(document.getElementById('sipP').value) || 0;
+              const annual = Number(document.getElementById('sipR').value) || 0;
+              const years = Number(document.getElementById('sipY').value) || 0;
+              const r = annual/100/12;
+              const n = years*12;
+              let fv = 0;
+              if(r === 0){
+                fv = P * n;
+              } else {
+                fv = P * ( (Math.pow(1+r, n) - 1) / r ) * (1 + r);
+              }
+              const invested = P * n;
+              const gain = fv - invested;
+              const out = document.getElementById('calcOut');
+              out.innerHTML = '<strong>Results after '+years+' years</strong><br>'
+                + 'Total invested: ₹' + formatINR(invested) + '<br>'
+                + 'Estimated value: ₹' + formatINR(fv) + '<br>'
+                + 'Estimated gain: ₹' + formatINR(gain) + '<br>'
+                + '<small class="subtle">This is a mathematical projection, not a promise. Market returns fluctuate.</small>';
+            });
+          </script>
+
+          <h3>Where to start in India — recommended first vehicles</h3>
+          <ul>
+            <li><b>Index mutual funds / ETFs:</b> Nifty 50 or Sensex tracking funds (low-cost).</li>
+            <li><b>PPF:</b> For tax-efficient long-term, especially if you seek safety + returns.</li>
+            <li><b>SIP in equity funds:</b> For disciplined, long-term investing.</li>
+          </ul>
+
+          <p class="subtle">Recommended: read Zerodha Varsity modules on mutual funds and equities before you dabble in stocks. Use SEBI/AMFI tools to verify funds and AMCs.</p>
+
+          <figure>
+            <img class="resp" alt="Compounding tree" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=60">
+            <figcaption class="subtle">Start small. Time does the rest.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <footer>
+        <p class="subtle">This is part 1 (three modules). When you want the next modules (Mutual Funds deep dive, Insurance, Scams, Retirement, Tax basics, Tools & resources), I’ll write them in the same voice and depth. Tell me to continue and I’ll append them.</p>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
