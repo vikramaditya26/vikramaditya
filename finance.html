@@ -4,332 +4,133 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Simple Guy – Finance</title>
-
-  <!-- Favicons (keep your existing images) -->
+  <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png" />
-
-  <!-- Link to your main style; this page also includes local tweaks so it looks complete -->
   <link rel="stylesheet" href="style.css" />
-
-  <style>
-    /* Page-specific styles — you can remove if you want to rely fully on your style.css */
-    :root{
-      --bg:#fbfbfb; --card:#fff; --muted:#6b7280; --accent:#0b5bd7; --maxw:960px;
-      --glass: rgba(255,255,255,0.85);
-    }
-    html,body{height:100%}
-    body{margin:0; font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif; background:var(--bg); color:#111; display:flex; justify-content:center; padding:28px;}
-    .container{width:100%; max-width:var(--maxw);}
-    header{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap}
-    .site-title{font-size:18px; margin:0; font-weight:700}
-    nav a{margin-right:12px; text-decoration:none; color:var(--muted)}
-    nav a[aria-current="page"]{color:var(--accent); font-weight:700}
-    main h1{font-size:28px; margin:6px 0 2px}
-    .subtitle{color:var(--muted); margin:0 0 18px}
-    .module{background:var(--card); border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(10,10,10,0.05); margin-bottom:18px}
-    .module h2{margin-top:0}
-    .lead{color:var(--muted); line-height:1.6}
-    .quote{display:block; background:#111;color:#fff; padding:10px 12px; border-radius:8px; margin:12px 0; width:fit-content; font-weight:600}
-    .example{background:#f7fbff;border-left:4px solid var(--accent); padding:10px 12px; border-radius:6px; margin:12px 0}
-    pre{background:#0b1220;color:#e6eef8;padding:10px;border-radius:8px;overflow:auto;font-size:13px}
-    .subtle{color:var(--muted); font-size:14px}
-    img.resp{max-width:100%; border-radius:8px; display:block; margin-top:12px}
-    .calc{margin-top:12px; padding:12px; border-radius:8px; border:1px dashed #e2e8f0; background:linear-gradient(0deg, rgba(255,255,255,0.7), rgba(255,255,255,0.7))}
-    label{display:block; margin-top:8px; font-size:14px}
-    input[type="number"], select{width:100%; padding:8px; border-radius:6px; border:1px solid #ddd; margin-top:6px}
-    button{background:var(--accent); color:white; padding:8px 12px; border-radius:6px; border:none; cursor:pointer; margin-top:10px}
-    footer{margin-top:18px; color:var(--muted); font-size:13px}
-    .two-col{display:flex; gap:12px; flex-wrap:wrap}
-    .col{flex:1; min-width:240px}
-    details{margin-top:10px}
-    summary{font-weight:700; cursor:pointer}
-  </style>
 </head>
-
 <body>
-  <div class="container">
-    <!-- Header + navigation: keep identical to your site skeleton -->
-    <header>
-      <div>
-        <h2 class="site-title">The Simple Guy</h2>
-        <p class="subtle" style="margin-top:6px">Personal notes and lessons — learning aloud.</p>
-      </div>
-      <nav>
-        <a href="index.html">About</a>
-        <a href="finance.html" aria-current="page">Finance</a>
-        <a href="books.html">Books</a>
-        <a href="workout.html">Workout</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </header>
+  <header>
+    <h1 class="site-title">The Simple Guy</h1>
+    <nav>
+      <a href="index.html">About</a>
+      <a href="finance.html" aria-current="page">Finance</a>
+      <a href="books.html">Books</a>
+      <a href="workout.html">Workout</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-    <main>
-      <h1>Personal Finance Guide</h1>
-      <p class="subtitle">Three long essays: <b>1) Understanding Money</b> • <b>2) Budgeting & Saving</b> • <b>3) Basics of Investing</b>. Story-first, then math; beginner → intermediate → advanced.</p>
+  <main>
+    <h2>Personal Finance Guide</h2>
 
-      <!-- MODULE 1 -->
-      <section class="module" id="1-understanding-money">
-        <h2>1. Understanding Money and Personal Finance</h2>
-        <p class="lead">A short contrarian story that rewires how you think about money.</p>
+    <!-- Section 1: Understanding Money and Personal Finance -->
+    <article class="card">
+      <h3>1. Understanding Money and Personal Finance</h3>
+      <p>
+        Money is a story we all agree to believe. A thousand-rupee note is just a piece of paper until
+        the entire country accepts it as value. This story is powerful enough to make strangers trust
+        each other, trade, and build empires. But here’s the catch: most of us live our lives 
+        serving this story without ever trying to understand it.
+      </p>
+      <p>
+        Personal finance is the art of not becoming a slave to money’s story. It’s not about 
+        getting rich quickly — that’s how you end up in scams. It’s about creating enough 
+        <b>optionality</b> in life: freedom from monthly panic, from the boss you hate, from the 
+        constant dread of “what if tomorrow something goes wrong.”
+      </p>
+      <p>
+        Ask yourself: If tomorrow you stopped earning, how long could you survive before panic sets in? 
+        The answer is not your salary; it’s your savings, your debts, and your habits. 
+        Finance is the invisible architecture of your freedom.
+      </p>
+      <blockquote>
+        “The goal isn’t to get rich. The goal is to stay rich long enough to live the life you want.” 
+      </blockquote>
+      <img src="https://i.imgur.com/5vDNQxV.png" alt="Money as a story" width="100%">
+      <p>
+        If you can grasp this — that money is both an illusion and the most practical tool — 
+        you’ve already moved ahead of 90% of people who treat it only as a way to buy things.
+      </p>
+    </article>
 
-        <div class="content">
-          <p>
-            Once a trader and a monk lived in the same town. The trader bragged of his wealth — clothes, food, status. The monk had a bowl, a roof, and a calm face.
-            A storm came; markets froze; the trader had supply chains blocked and fortunes undone. The monk kept walking, calm, because he had no obligations.
-            The lesson: wealth is not only the amount in your bank; it's the liabilities you carry and the options you have.
-          </p>
+    <!-- Section 2: Budgeting and Saving -->
+    <article class="card">
+      <h3>2. Budgeting and Saving</h3>
+      <p>
+        Saving money is boring. Which is why most people avoid it. But survival is also boring — 
+        and it’s the prerequisite for everything else. The man who saves looks foolish in the short 
+        term (skipping that iPhone, renting instead of buying), but looks like a genius when crises 
+        come knocking.
+      </p>
+      <p>
+        Think of savings as <b>insurance against randomness</b>. Life will throw dice at you: job loss, 
+        medical bills, weddings, pandemics. The saver can shrug. The spender panics.
+      </p>
+      <p>
+        A simple way to start is the <b>50/30/20 rule</b>:  
+        50% for needs, 30% for wants, 20% for saving/investing. But don’t worship the numbers. 
+        Worship the principle: always spend less than you earn, and protect the gap. 
+        That gap is your freedom fund.
+      </p>
+      <img src="https://www.investopedia.com/thmb/qHokN5hRe7D7rS0E61hVbeSmlAo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/budgeting_methods-01-5bfcfaec46e0fb00260f7d88.png" 
+           alt="Budgeting methods" width="100%">
+      <p>
+        In India, put your emergency savings (6–12 months of expenses) in a 
+        <b>liquid mutual fund</b> or a simple bank savings account. Don’t chase returns here — 
+        this money is not for growth, it’s for survival.
+      </p>
+      <p>
+        Remember: A man with ₹0 in savings is one unlucky break away from slavery. 
+        A man with 12 months of savings is free to walk away from nonsense.
+      </p>
+    </article>
 
-          <p class="quote">Money is a tool that buys options. The fewer obligations you have, the greater your optionality.</p>
-
-          <h3>Beginner — a few practical truths</h3>
-          <ul>
-            <li><b>Record one month of cash flow.</b> Write down your net income and every outgoing rupee. If you don't record, you don't know.</li>
-            <li><b>Pay yourself first.</b> Automate transferring a fixed amount to savings/investments on payday.</li>
-            <li><b>Emergency fund > fancy investments.</b> If you have a medical emergency and no buffer, all clever investments mean nothing.</li>
-          </ul>
-
-          <div class="example">
-            <strong>Example:</strong> Sanjay earns ₹45,000/month. Last month he spent ₹47,000 because of festival shopping and a loan EMI. That mismatch leads to borrowing and stress. The fix: cut wants by ₹3,000 and automate ₹5,000 to a savings account each month.
-          </div>
-
-          <h3>Intermediate — the vocabulary of risk</h3>
-          <p>
-            There are three useful classifications of risk for a person:
-            <ol>
-              <li><b>Idiosyncratic risk:</b> related to you — health, career. Can be diversified by insurance and skills.</li>
-              <li><b>Systemic risk:</b> market-wide shakes — recession, currency crisis. Prepare with asset allocation and cash buffer.</li>
-              <li><b>Liquidity risk:</b> inability to convert assets quickly without loss. Keep some truly liquid funds.</li>
-            </ol>
-          </p>
-
-          <h3>Advanced — antifragility & optionality</h3>
-          <p>
-            A fragile person breaks under stress (over-leveraged), a robust person resists stress (insured, diversified), and an antifragile person gains from stress (small optional bets that pay off massively).
-            In personal finance, aim for robustness and small, repeated optionality: keep a safe base, then make many small asymmetric bets (e.g., skill investments, small start-ups, long-term equity bets).
-          </p>
-
-          <p class="subtle">If you learn only one concept from this section: <b>avoid ruin</b>. If you avoid permanent ruin, you keep the chance to benefit from time and randomness.</p>
-
-          <hr>
-
-          <p class="subtle">Quick Indian resources:</p>
-          <ul>
-            <li><a href="https://rbi.org.in" target="_blank">RBI — official site</a></li>
-            <li><a href="https://www.sebi.gov.in" target="_blank">SEBI — investor protection & rules</a></li>
-            <li><a href="https://zerodha.com/varsity/" target="_blank">Zerodha Varsity — structured learning</a></li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- MODULE 2 -->
-      <section class="module" id="2-budgeting-saving">
-        <h2>2. Budgeting and Saving</h2>
-        <p class="lead">Budgeting is designing a life that can tolerate shocks. This is a field guide — not theory.</p>
-
-        <div class="content">
-          <p>
-            There are two types of people: those who sleep soundly and those who don't. The difference is often a buffer of cash and habits.
-            Budgeting is not "restriction"; it's establishing a margin for error. Margin means freedom.
-          </p>
-
-          <h3>Beginner — the three-jar experiment</h3>
-          <p>
-            Start with three jars (virtual or real): <b>Essentials</b>, <b>Savings</b>, <b>Wants</b>.
-            Put a fixed percent into Savings the moment you receive income. Try a pragmatic rule:
-          </p>
-          <pre>
-50% → Essentials (rent, food, bills)
-30% → Wants (fun, non-essential)
-20% → Savings / Investments
-          </pre>
-
-          <p>Adjust the numbers based on where you live and how much you owe. If you carry debt with high interest, reduce wants and attack the debt.</p>
-
-          <div class="example">
-            <strong>Worked example:</strong> Riya earns ₹60,000. She automates:
-            ₹12,000 → SIP (20%)
-            ₹30,000 → Essentials (50%)
-            ₹18,000 → Wants (30%)
-          </div>
-
-          <h3>The emergency fund (beginner → intermediate)</h3>
-          <p>
-            Build a fund equal to 6 months of essential expenses (12 months if freelance/irregular income). Where to keep it?
-          </p>
-          <ul>
-            <li><b>Savings account:</b> instant access, low return.</li>
-            <li><b>Liquid mutual fund:</b> slightly higher return, fairly liquid (T+1/T+0 depending on fund & AMC).</li>
-            <li><b>Bank sweep-in FD:</b> gives slightly higher interest and liquidity.</li>
-          </ul>
-
-          <h3>Intermediate — mental models to automate saving</h3>
-          <p>Automation is the simplest trick. Use standing instructions, auto-debits for SIPs, or payroll deduction to fund PPF/SIP before you see the money.</p>
-
-          <div class="example">
-            <strong>Commitment device:</strong> Set a "no-spend" day each month or use an app that blocks shopping sites for the first 7 days after salary.
-          </div>
-
-          <h3>Advanced — buckets and allocation</h3>
-          <p>
-            Think in buckets:
-            <ol>
-              <li><b>Buffer bucket:</b> emergency fund — cash/liquid.</li>
-              <li><b>Goal bucket:</b> near-term goals (1–3 years) — FDs, debt funds.</li>
-              <li><b>Growth bucket:</b> long-term goals — equity (SIP / index funds), PPF for tax-efficient, debt-equity mix for stability.</li>
-            </ol>
-          </p>
-
-          <h4>Worked arithmetic — how much to save monthly</h4>
-          <p>Suppose you want ₹10 lakh in 10 years. If you can achieve 8% annual return via SIPs, how much monthly?</p>
-          <p>Use the SIP formula or try the calculator later on this page. Rough back-of-envelope: For moderate returns, ₹5-8k per month often compounds into lakhs over decades. Discipline matters more than exact figure early on.</p>
-
-          <hr>
-
-          <p class="subtle">Tools & Indian tips:</p>
-          <ul>
-            <li>Use UPI standing instructions and bank standing instructions (SIP mandates) — many AMCs allow UPI SIPs now.</li>
-            <li>For goal-tracking, use RBI/SEBI/AMFI resources or apps that only read data (avoid apps asking for login credentials).</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- MODULE 3 -->
-      <section class="module" id="3-basics-investing">
-        <h2>3. Basics of Investing</h2>
-        <p class="lead">From the boring arithmetic of compounding to the psychology that makes people buy high and sell low.</p>
-
-        <div class="content">
-          <p>
-            Investing is the opposite of instant gratification. The tree that yields fruit must be planted and watered. Most people plant a bonsai and expect mangoes.
-            Before you invest, ask: what is my time horizon? The answer will determine the correct instrument.
-          </p>
-
-          <h3>Instruments (India-focused primer)</h3>
-          <div class="two-col">
-            <div class="col">
-              <h4>Low-risk / Guaranteed</h4>
-              <ul>
-                <li>Bank Savings Account (liquid, low return)</li>
-                <li>Fixed Deposits (short/medium term, secure)</li>
-                <li>Public Provident Fund (PPF) — long-term, tax benefits</li>
-              </ul>
-            </div>
-            <div class="col">
-              <h4>Market-based / Growth</h4>
-              <ul>
-                <li>Mutual Funds — equity, debt, hybrid</li>
-                <li>Index Funds & ETFs — low-fee, broad market exposure</li>
-                <li>Stocks — higher risk, requires knowledge</li>
-              </ul>
-            </div>
-          </div>
-
-          <h3>Compound interest — step-by-step calculation</h3>
-          <p>
-            The formula: <code>Future Value = P × (1 + r)^n</code>. Let's walk it with numbers — slowly and carefully, because everyone talks compounding but very few compute it properly.
-          </p>
-
-          <h4>Example A — Lump-sum</h4>
-          <p>Invest ₹100,000 today at 8% annually for 10 years.</p>
-          <ol>
-            <li>r = 0.08 → 1 + r = 1.08</li>
-            <li>1.08^10 = 2.158925 (approx)</li>
-            <li>Future Value = 100,000 × 2.158925 ≈ ₹215,892</li>
-          </ol>
-
-          <h4>Example B — SIP (monthly)</h4>
-          <p>Invest ₹5,000/month for 20 years at an assumed 12% annual return (monthly r = 1%).</p>
-          <ol>
-            <li>Monthly r = 0.12 / 12 = 0.01</li>
-            <li>n = 20 × 12 = 240 months</li>
-            <li>FV = P × [((1 + r)^n − 1)/r] × (1 + r)</li>
-            <li>Compute: (1.01)^240 ≈ 10.957 → ((10.957 − 1)/0.01) = 995.7 → ×1.01 ≈ 1005.657</li>
-            <li>FV ≈ 5,000 × 1005.657 ≈ ₹4,995,739 ≈ ₹50 lakh</li>
-          </ol>
-
-          <div class="example">
-            <strong>Translation:</strong> Discipline + monthly habit + time = big difference. You do not need to pick perfect stocks; you need to keep investing while life goes on.
-          </div>
-
-          <h3>Where people commonly fail (psychology)</h3>
-          <ul>
-            <li><b>Short-termism:</b> checking the portfolio every day is a form of punishment.</li>
-            <li><b>Herding:</b> buying after a run-up because everyone is cheering.</li>
-            <li><b>High fees:</b> paying for "active" where "passive" would do.</li>
-          </ul>
-
-          <h3>Practical starter steps — a sequence</h3>
-          <ol>
-            <li>Build 6–12 months emergency fund.</li>
-            <li>Buy adequate health insurance and term plan if you have dependents.</li>
-            <li>Start a monthly SIP in a low-cost Nifty/Sensex index fund (choose a reliable AMC or ETF).</li>
-            <li>After a year, learn about select individual stocks; keep them as a small portion (10–20%) only.</li>
-          </ol>
-
-          <h3>Interactive SIP calculator (play with numbers)</h3>
-          <div class="calc">
-            <label>Monthly SIP amount (₹): <input type="number" id="sipP" value="5000" min="0"></label>
-            <label>Expected annual return (%): <input type="number" id="sipR" value="12" min="0" step="0.1"></label>
-            <label>Time horizon (years): <input type="number" id="sipY" value="20" min="1"></label>
-            <button id="calcBtn">Calculate SIP</button>
-
-            <div id="calcOut" style="margin-top:12px;color:#111"></div>
-          </div>
-
-          <script>
-            // Simple SIP calculator — local, no external libs
-            function formatINR(x){
-              return Number(x).toLocaleString('en-IN', {maximumFractionDigits:2});
-            }
-            document.getElementById('calcBtn').addEventListener('click', function(){
-              const P = Number(document.getElementById('sipP').value) || 0;
-              const annual = Number(document.getElementById('sipR').value) || 0;
-              const years = Number(document.getElementById('sipY').value) || 0;
-              const r = annual/100/12;
-              const n = years*12;
-              let fv = 0;
-              if(r === 0){
-                fv = P * n;
-              } else {
-                fv = P * ( (Math.pow(1+r, n) - 1) / r ) * (1 + r);
-              }
-              const invested = P * n;
-              const gain = fv - invested;
-              const out = document.getElementById('calcOut');
-              out.innerHTML = '<strong>Results after '+years+' years</strong><br>'
-                + 'Total invested: ₹' + formatINR(invested) + '<br>'
-                + 'Estimated value: ₹' + formatINR(fv) + '<br>'
-                + 'Estimated gain: ₹' + formatINR(gain) + '<br>'
-                + '<small class="subtle">This is a mathematical projection, not a promise. Market returns fluctuate.</small>';
-            });
-          </script>
-
-          <h3>Where to start in India — recommended first vehicles</h3>
-          <ul>
-            <li><b>Index mutual funds / ETFs:</b> Nifty 50 or Sensex tracking funds (low-cost).</li>
-            <li><b>PPF:</b> For tax-efficient long-term, especially if you seek safety + returns.</li>
-            <li><b>SIP in equity funds:</b> For disciplined, long-term investing.</li>
-          </ul>
-
-          <p class="subtle">Recommended: read Zerodha Varsity modules on mutual funds and equities before you dabble in stocks. Use SEBI/AMFI tools to verify funds and AMCs.</p>
-
-          <figure>
-            <img class="resp" alt="Compounding tree" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=60">
-            <figcaption class="subtle">Start small. Time does the rest.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <footer>
-        <p class="subtle">This is part 1 (three modules). When you want the next modules (Mutual Funds deep dive, Insurance, Scams, Retirement, Tax basics, Tools & resources), I’ll write them in the same voice and depth. Tell me to continue and I’ll append them.</p>
-      </footer>
-    </main>
-  </div>
+    <!-- Section 3: Basics of Investing -->
+    <article class="card">
+      <h3>3. Basics of Investing</h3>
+      <p>
+        Saving protects you. Investing grows you. If you stop at savings, inflation — that silent tax — 
+        will eat your wealth slowly. A ₹100 note today will be worth ₹70 or less in a decade. 
+        To beat this, you must invest.
+      </p>
+      <p>
+        But investing isn’t gambling on hot stocks or tips from WhatsApp groups. 
+        It’s owning a slice of human progress. Every time you invest in a company, 
+        you’re betting that people will continue to buy things, innovate, and grow.
+      </p>
+      <p>
+        In India, you’ll hear about the <b>Nifty 50</b> or <b>Sensex</b>. 
+        These are just baskets of the country’s top companies. Over long periods, 
+        they’ve grown because India has grown. Instead of trying to pick the next Infosys or Reliance, 
+        you can simply buy the whole basket through an <b>index fund</b>.
+      </p>
+      <img src="https://www.finology.in/financial-learning/wp-content/uploads/2020/10/Compounding.png" 
+           alt="Power of Compounding" width="100%">
+      <p>
+        Compounding is the closest thing to magic in finance. If you invest ₹10,000 every month in a 
+        Nifty 50 index fund, earning just 12% annually, in 20 years you’ll have ~₹1 crore. 
+        Not because you worked harder, but because time and patience did the heavy lifting.
+      </p>
+      <p>
+        For beginners: start with <b>SIPs in index mutual funds</b>. 
+        Avoid stock tips, intraday trading, or anything promising quick riches. 
+        They are casinos disguised as finance. Wealth is built slowly, invisibly, boringly.
+      </p>
+      <blockquote>
+        “The stock market is a device for transferring money from the impatient to the patient.” — Warren Buffett
+      </blockquote>
+      <p>
+        Learn more:  
+        <a href="https://zerodha.com/varsity/" target="_blank">Zerodha Varsity (Free Course)</a>  
+        <a href="https://www.youtube.com/watch?v=Z3uB8JQ_K2k" target="_blank">Basics of Mutual Funds (YouTube)</a>
+      </p>
+    </article>
+  </main>
 </body>
 </html>
