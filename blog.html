@@ -2,41 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Simple Guy</title>
-
-  <!-- Favicons -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog - The Simple Guy</title>
+  <meta name="description" content="Thoughts, insights, and lessons from books, podcasts, and life experiences by Vikram Aditya." />
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png" />
-  
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="progress-bar"></div>
+
   <header>
-    <h1 class="site-title">The Simple Guy</h1>
-    <nav>
-      <a href="index.html">About</a>
-      <a href="finance.html">Finance</a>
-      <a href="books.html">Books</a>
-      <a href="workout.html">Workout</a>
-      <a href="blog.html" aria-current="page">Blog</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="header-inner">
+      <a href="index.html" class="site-title">The Simple <span>Guy</span></a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav>
+        <a href="index.html">About</a>
+        <a href="finance.html">Finance</a>
+        <a href="books.html">Books</a>
+        <a href="workout.html">Workout</a>
+        <a href="blog.html" aria-current="page">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
   </header>
 
-  <main>
-       
-    <h2>Blog</h2>
-<!-- Tenth Blog -->
-<details class="blog-box">
-  <summary>Best things I read this week - 2</summary>
-  <div class="blog-content">
+  <main id="main">
+    <section class="hero" style="padding: var(--space-xl) 0;">
+      <h1>✍️ Blog</h1>
+      <p class="subtitle">Thoughts, insights, and lessons from books, podcasts, and life</p>
+    </section>
 
-    <h4>Boredom as a Filter</h4>
+    <div class="blog-list">
+      <details class="blog-box fade-in">
+        <summary>Best things I read this week - 2</summary>
+        <div class="blog-content">
+           <h4>Boredom as a Filter</h4>
     <p>Boredom is a filter. Common ideas come before it. Uncommon ideas come after it. Sit with a project long enough to get bored with it, then sit a little more. The most useful insights bubble up after you get bored.</p>
 
     <h4>Learning by Teaching</h4>
@@ -74,16 +82,13 @@
     <p>This is not just a good way to run a startup. It's what a startup is. Venture capitalists know about this and have a phrase for it: barriers to entry. If you go to a VC with a new idea and ask him to invest in it, one of the first things he'll ask is, how hard would this be for someone else to develop? That is, how much difficult ground have you put between yourself and potential pursuers? And you had better have a convincing explanation of why your technology would be hard to duplicate.</p>
 
     <p>Otherwise as soon as some big company becomes aware of it, they'll make their own, and with their brand name, capital, and distribution clout, they'll take away your market overnight.“</p>
+        </div>
+      </details>
 
-  </div>
-</details>
-
-
-    <!-- ninth Blog -->
-<details class="blog-box">
-  <summary>Lessons from Pavel Durov on Freedom, Discipline, and Purpose</summary>
-  <div class="blog-content">
-    <h4>Introduction</h4>
+      <details class="blog-box fade-in">
+        <summary>Lessons from Pavel Durov on Freedom, Discipline, and Purpose</summary>
+        <div class="blog-content">
+           <h4>Introduction</h4>
 
     <p>These insights come from Pavel Durov’s conversation with Lex Fridman. Known as the founder of Telegram, Pavel has spent his life building tools that protect human communication from surveillance and censorship. For this, he has faced immense pressure from some of the most powerful governments in the world. Yet he remains one of the most principled and fearless people of our time.</p>
 
@@ -124,15 +129,16 @@
     <p>Competition, he believes, is one of the best ways to drive progress. At Telegram, coding contests are often used to identify talent. Skills are demonstrated directly, not just listed on a résumé. If the results are unclear, another contest can be held, and more data collected. In this way, the best people naturally rise to the top.</p>
 
     <p>Finally, Pavel warns against the dangers of abundance. Humanity evolved to survive scarcity, and unlimited access to food, entertainment, and inherited wealth often destroys motivation. When young people grow proud of their parents’ success rather than their own, they lose the drive to build skills and contribute. Restrictions and discipline, he argues, are what give life meaning.</p>
-  </div>
-</details>
+        </div>
+      </details>
+
+      <details class="blog-box fade-in">
+        <summary>Best thing I read in this week</summary>
+        <div class="blog-content">
 
 
-<!-- Eight Blog -->
-<details class="blog-box">
-  <summary>Best thing I read in this week</summary>
-  <div class="blog-content">
-    <h4>Naval Ravikant's formulas for Life</h4>
+
+        <h4>Naval Ravikant's formulas for Life</h4>
     <p>Happiness = Health + Wealth + Good Relationships</p>
     <p>Health = Exercise + Diet + Sleep </p>
     <p>Exercise = High Intensity Resistance Training + Sports + Rest</p>
@@ -154,13 +160,16 @@
 
     <h4>Tom Brady Quotes</h4>
     <p>To be successful at anything, the truth is, you don't have to be special. you just have to be what most people aren't: consistent, determined, and willing to work for it. No shortcuts.</p>
-  </div>
-</details>
 
-<!-- Seventh Blog -->
-<details class="blog-box">
-  <summary>The Art of Start</summary>
-  <div class="blog-content">
+
+        </div>
+      </details>
+
+      <details class="blog-box fade-in">
+        <summary>The Art of Start</summary>
+        <div class="blog-content">
+          
+
     <h4>How to Truly Begin</h4>
 
     <p><em>“Beginning is half done.” - Aristotle</em></p>
@@ -190,33 +199,29 @@
     <p>If you are feeling hesitant, embarrassed, or frustrated at the beginning, remember this:</p>
 
     <p><em>"Once again, I am deeply disgusted that I must first be bad at something in order to get good at it."</em></p>
+
+
   </div>
-</details>
+      </details>
 
+      <details class="blog-box fade-in">
+        <summary>Less is More</summary>
+        <div class="blog-content">
 
-
-    
-<!-- Sixth Blog -->
-<details class="blog-box">
-  <summary>Less is More</summary>
-  <div class="blog-content">
-    <h4>The Paradox of Abundance</h4>
-
-    <p>For centuries, human progress has been measured by consumption. More calories, more cosmetics, more content. What was once scarcity has become excess. We now drown in food, clothes, and endless streams of media. Ten-minute delivery brings anything to your door. Reels shrink into seconds. Convenience has collapsed patience, and abundance has destroyed attention. We are teaching our minds to live in fragments.</p>
+          <h4>The Paradox of Abundance</h4>
+          <p>For centuries, human progress has been measured by consumption. More calories, more cosmetics, more content. What was once scarcity has become excess. We now drown in food, clothes, and endless streams of media. Ten-minute delivery brings anything to your door. Reels shrink into seconds. Convenience has collapsed patience, and abundance has destroyed attention. We are teaching our minds to live in fragments.</p>
 
     <p>Yet the paradox is clear: the more we consume, the emptier we feel. Every possession adds fragility, every distraction steals focus. We think happiness comes from gathering more, but meaning comes only from creating, giving, and building. Consumption is a sugar high; creation is nourishment. The fewer desires you carry, the freer you are.</p>
 
     <p>The future will not belong to those who consume the most, but to those who need the least. Resilience comes from subtraction, not addition. Less isn’t deprivation - it’s clarity. The less you cling to, the more space you have to think, to create, to live. In a world addicted to more, the rarest luxury is enough.</p>
-  </div>
-</details>
+        </div>
+      </details>
 
-
-    <!-- Fifth Blog -->
-<details class="blog-box">
-  <summary>Clear Thinking: Escaping the Defaults</summary>
-  <div class="blog-content">
-    <h4>The Antidote to Stupidity Isn’t Intelligence, It’s Strength</h4>
-    <p>Shane Parrish’s <em>Clear Thinking</em> isn’t about becoming smarter. It’s about escaping stupidity. Most mistakes don’t come from ignorance, but from reacting on autopilot.</p>
+      <details class="blog-box fade-in">
+        <summary>Clear Thinking: Escaping the Defaults</summary>
+        <div class="blog-content">
+          <h4>The Antidote to Stupidity Isn't Intelligence, It's Strength</h4>
+             <p>Shane Parrish’s <em>Clear Thinking</em> isn’t about becoming smarter. It’s about escaping stupidity. Most mistakes don’t come from ignorance, but from reacting on autopilot.</p>
     
     <p>We all live under four defaults: emotion, ego, social pressure, and inertia. These instincts once kept us alive, but in modern life they betray us. A single tweet fired off in anger can ruin more than a tiger ever could.</p>
     
@@ -239,14 +244,13 @@
     <p>Parrish’s warning is clear: the extraordinary is just the ordinary, managed wisely. In a world run by defaults, the question is simple.</p>
     
     <p><em>Are you living by choice, or by default?</em></p>
-  </div>
-</details>
-    
-    <!-- Fourth Blog -->
-<details class="blog-box">
-  <summary>Is Social Media the New Religion?</summary>
-  <div class="blog-content">
-    <h4>Algorithms as Gods, Influencers as Priests, Likes as Prayers</h4>
+        </div>
+      </details>
+
+      <details class="blog-box fade-in">
+        <summary>Is Social Media the New Religion?</summary>
+        <div class="blog-content">
+          <h4>Algorithms as Gods, Influencers as Priests, Likes as Prayers</h4>
     <p>“Man is a religious animal.” Pascal wrote that centuries ago. The form has changed, but the instinct remains.</p>
     
     <p>Religion once offered meaning, community, and ritual. Social media offers the same, only faster and cheaper. The church has been replaced by the platform. The priest by the influencer. The scripture by the feed.</p>
@@ -266,15 +270,14 @@
     <p>The future will not be about choosing between God and no God. It will be about choosing between algorithmic faith and human freedom.</p>
     
     <p><em>So here is the question: if social media is the new religion, do you want to live as a believer, a priest, or an apostate?</em></p>
-  </div>
-</details>
+        </div>
+      </details>
 
-    <!-- Third Blog -->
-<details class="blog-box">
-  <summary>Are Humans Getting Stupider?</summary>
-  <div class="blog-content">
-    <h4>The Global Circus: Are We Being Governed by Fools?</h4>
-    <p>How can we truly measure whether humanity is progressing in wisdom or regressing? While IQ scores might fluctuate and access to information is at an all-time high, one of the most revealing metrics may be the leaders we choose and the environments they create.</p>
+      <details class="blog-box fade-in">
+        <summary>Are Humans Getting Stupider?</summary>
+        <div class="blog-content">
+          <h4>The Global Circus: Are We Being Governed by Fools?</h4>
+          <p>How can we truly measure whether humanity is progressing in wisdom or regressing? While IQ scores might fluctuate and access to information is at an all-time high, one of the most revealing metrics may be the leaders we choose and the environments they create.</p>
     <p>We live in an age where information is infinite, intelligence is automated, and machines can answer questions in seconds. By all logic, we should be smarter than ever. Instead, many have traded deep thinking for endless scrolling, consuming reels, memes, and bite-sized outrage, outsourcing judgment to algorithms and AI. The result: a public less curious, less informed, and more vulnerable to emotional manipulation.
 That vulnerability shows up at the ballot box.</p>
     
@@ -285,16 +288,13 @@ This isn’t just about bad politicians. </p>
     
 <p>It’s about a distracted, dopamine-chasing society that no longer demands competence. When people stop questioning, stop learning, and let algorithms do their thinking, they become easy prey for strongmen, populists, and con artists.
 We’re not just electing worse leaders, we’re creating the conditions for them to thrive. In the age of AI, the real danger isn’t that machines will outsmart us. It’s that we’ll stop trying to be smart at all.</p>
-    
-  </div>
-</details>
+        </div>
+      </details>
 
-
-    <!-- Second Blog -->
-<details class="blog-box">
-  <summary>Science Mental Models for Life & Decisions </summary>
-  <div class="blog-content">
-    <p>Charlie Munger said we need a latticework of mental models. The beauty of science is that it gives us patterns that don’t just stay in textbooks. They spill over into daily life, career, and relationships. Here are a few science-based models you can lean on in real decision making.</p>
+      <details class="blog-box fade-in">
+        <summary>Science Mental Models for Life & Decisions</summary>
+        <div class="blog-content">
+          <p>Charlie Munger said we need a latticework of mental models. The beauty of science is that it gives us patterns that don’t just stay in textbooks. They spill over into daily life, career, and relationships. Here are a few science-based models you can lean on in real decision making.</p>
 
     <h4>1. Entropy</h4>
     <p>Left on its own, everything drifts toward disorder. Your room, your body, your projects—they don’t maintain themselves. Entropy is why maintenance is not optional. If you don’t actively put in energy, decay takes over. This explains why gym habits slip, codebases rot, and relationships fade. The lesson is simple: if something matters, schedule the upkeep. Don’t wait for collapse to remind you that order isn’t free.</p>
@@ -313,17 +313,13 @@ We’re not just electing worse leaders, we’re creating the conditions for the
 
     <h4>6. Natural Selection</h4>
     <p>Biology reminds us that only what works survives. Nature discards the inefficient, and so does the world. Careers, businesses, and even personal habits face the same filter. The ideas that adapt stick around, the rest fade. Instead of resisting change, evolve with it. Test small variations, keep what works, and let the rest die quietly. Survival, whether in ecosystems or economies, belongs to those who can learn and adjust fastest.</p>
-  </div>
-</details>
+        </div>
+      </details>
 
- 
-    
-
-     <!-- First Blog -->
-    <details class="blog-box">
-      <summary>Math Mental Models for Life & Decisions </summary>
-      <div class="blog-content">
-        <p>If you’ve ever heard Charlie Munger talk about decision-making, you’ll know he insists on building a “latticework of mental models.” One of the richest sources of these models is math—not the abstract equations you struggled with in school, but the patterns of growth, risk, and reality checks that quietly shape everything in daily life. In this post, we’ll look at a handful of math models you can actually use—and how they show up in real-world choices.</p>
+      <details class="blog-box fade-in">
+        <summary>Math Mental Models for Life & Decisions</summary>
+        <div class="blog-content">
+          <p>If you’ve ever heard Charlie Munger talk about decision-making, you’ll know he insists on building a “latticework of mental models.” One of the richest sources of these models is math—not the abstract equations you struggled with in school, but the patterns of growth, risk, and reality checks that quietly shape everything in daily life. In this post, we’ll look at a handful of math models you can actually use—and how they show up in real-world choices.</p>
 
         <h4>1. Compounding — The Quiet Superpower</h4>
         <p>Compounding is exponential growth in action. Money, habits, and even knowledge all compound. If you invest ₹10,000 at 12%, it doubles in about six years (rule of 72). If you learn one new coding skill every week, in a year you’re not just 52 steps ahead—you’re connecting skills, multiplying your options.</p>
@@ -348,9 +344,19 @@ We’re not just electing worse leaders, we’re creating the conditions for the
         <h4>6. Sensitivity Analysis — What Really Moves the Needle?</h4>
         <p>Change one variable at a time and see how the outcome shifts. In financial models, it’s interest rates or customer growth. In coding, it’s usually one performance bottleneck.</p>
         <p><strong>Real-life use:</strong> Don’t tweak everything at once. When debugging, change one input, test, then note the effect. Same with habits—if you want to sleep better, change caffeine first before overhauling your whole routine.</p>
-      </div>
-    </details>
-
+        </div>
+      </details>
+    </div>
   </main>
+
+  <footer>
+    <p>© 2024-2025 Vikram Aditya. Building and learning, one day at a time.</p>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script src="script.js"></script>
 </body>
 </html>
