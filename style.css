@@ -186,7 +186,7 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--space-xs) var(--space-sm);
   padding: var(--space-lg) 0 var(--space-md);
   border-top: 1px solid var(--color-border);
   margin-top: var(--space-md);
@@ -194,15 +194,16 @@ nav {
 
 nav a {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--color-text-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: var(--space-xs) var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
   border-radius: 6px;
   transition: all var(--transition-base);
   position: relative;
+  white-space: nowrap;
 }
 
 nav a::after {
