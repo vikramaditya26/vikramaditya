@@ -1,277 +1,494 @@
+/* ===================================
+   The Simple Guy - Modern Minimalist Design
+   =================================== */
 
-/* ===== Base layout & typography ===== */
+/* === CSS Variables for Consistency === */
+:root {
+  /* Colors - Warm Minimalist Palette */
+  --color-bg: #fafaf9;
+  --color-text: #1a1a1a;
+  --color-text-light: #525252;
+  --color-accent: #dc2626;
+  --color-accent-hover: #b91c1c;
+  --color-border: #e5e5e5;
+  --color-card-bg: #ffffff;
+  --color-shadow: rgba(0, 0, 0, 0.08);
+  
+  /* Typography */
+  --font-body: 'Georgia', 'Times New Roman', serif;
+  --font-heading: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  
+  /* Layout */
+  --max-width: 720px;
+  --border-radius: 12px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === Base Styles === */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: Georgia, serif;
-  background: #ffffff;
-  color: #333;
-  line-height: 1.8;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  padding: var(--space-md);
+  animation: fadeIn 0.6s ease-out;
 }
 
-/* ===== Header & nav ===== */
-header {
-  border-bottom: 1px solid #eee;
-  padding: 1rem 1rem;
-}
-
-.site-title {
-  margin: 0;
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-nav {
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-nav a {
-  color: #333;
-  text-decoration: none;
-  margin: 0 0.6rem;
-}
-
-nav a:hover,
-nav a[aria-current="page"] {
-  text-decoration: underline;
-  font-weight: 600;
-}
-
-/* ===== Main content ===== */
-main {
-  max-width: 700px;
-  margin: auto;
-  padding: 2rem 1rem;
-}
-
-h1, h2, h3 {
-  font-weight: 500;
-}
-
-section {
-  margin-bottom: 2rem;
-}
-
-/* ===== Simple card pattern (for previews/reviews) ===== */
-.card {
-  border: 1px solid #eee;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
-  background: #fafafa;
-}
-
-.card img {
-  max-width: 160px;
-  display: block;
-  margin-top: 0.5rem;
-}
-
-a {
-  color: #0066cc;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Small screens */
-@media (max-width: 480px) {
-  .site-title {
-    font-size: 1.25rem;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* ===== Collapsible details/summary (optional) ===== */
-details.card {
-  margin: 1rem 0;
-}
-
-details.card summary {
-  cursor: pointer;
-  font-weight: bold;
-  list-style: none; /* hides the default arrow */
-}
-
-details.card[open] summary {
-  text-decoration: underline; /* optional highlight when open */
-}
-
-details.card .content {
-  margin-top: 0.5rem;
-}
-
-
-.workout-page img {
-  display: block;
-  margin: 1rem auto;   /* center the image */
-  max-width: 100%;     /* responsive */
-  width: 400px;        /* fixed size */
-  border-radius: 8px;  /* optional rounded corners */
-}
-
-.blog-box {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin: 12px 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  overflow: hidden;
-}
-
-.blog-box summary {
-  padding: 12px 16px;
-  background: #fff;
+/* === Typography === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
   font-weight: 600;
-  cursor: pointer;
-  list-style: none; /* remove default arrow */
+  line-height: 1.3;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-md);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { 
+  font-size: 1.875rem; 
+  margin-top: var(--space-xl);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-border);
+}
+h3 { 
+  font-size: 1.5rem; 
+  margin-top: var(--space-lg);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  max-width: 65ch;
+}
+
+em {
+  font-style: italic;
+  color: var(--color-text-light);
+}
+
+strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* === Links === */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+a:not(nav a)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transition: width var(--transition-base);
+}
+
+a:not(nav a):hover::after {
+  width: 100%;
+}
+
+/* === Header === */
+header {
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-2xl);
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.03em;
+  position: relative;
+  display: inline-block;
+}
+
+.site-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  border-radius: 2px;
+}
+
+/* === Navigation === */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+nav a {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 6px;
+  transition: all var(--transition-base);
   position: relative;
 }
 
-.blog-box[open] summary {
-  background: #f8f8f8;
-  border-bottom: 1px solid #eee;
+nav a::after {
+  display: none; /* Remove underline animation from nav links */
 }
 
-.blog-box summary::after,
-.exercise-box summary::after {
-  content: " ➕";
-  position: absolute;
-  right: 16px;
-  transition: transform 0.2s ease;
+nav a:hover {
+  color: var(--color-accent);
+  background-color: rgba(220, 38, 38, 0.05);
+  transform: translateY(-2px);
 }
 
-.blog-box[open] summary::after,
-.exercise-box[open] summary::after {
-  content: " ➖";
-}
-
-.blog-content {
-  padding: 16px;
-  background: #fafafa;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-
-/* ===== Workout page collapsible style ===== */
-.exercise-box {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin: 12px 0;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  overflow: hidden;
-}
-
-.exercise-box summary {
-  padding: 12px 16px;
-  background: #fff;
+nav a[aria-current="page"] {
+  color: var(--color-accent);
+  background-color: rgba(220, 38, 38, 0.1);
   font-weight: 600;
-  cursor: pointer;
-  list-style: none; /* remove default arrow */
-  position: relative;
 }
 
-.exercise-box[open] summary {
-  background: #f0f9ff; /* light blue highlight when opened */
-  border-bottom: 1px solid #ddd;
+/* === Main Content === */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  animation: fadeInUp 0.6s ease-out 0.1s both;
 }
 
-.blog-box summary::after,
-.exercise-box summary::after {
-  content: " ➕";
-  position: absolute;
-  right: 16px;
-  transition: transform 0.2s ease;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.blog-box[open] summary::after,
-.exercise-box[open] summary::after {
-  content: " ➖";
+section {
+  margin-bottom: var(--space-2xl);
 }
 
-.exercise-content {
-  padding: 16px;
-  background: #fafafa;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.exercise-content img {
-  display: block;
-  margin: 12px auto;
-  max-width: 100%;
-  border-radius: 6px;
-}
-
-
+/* === Core Values - Details/Summary === */
 .core-box {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 10px 0;
-  padding: 8px 12px;
-  background: #fdfdfd;
-  transition: 0.3s ease;
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-card-bg);
+  overflow: hidden;
+  transition: all var(--transition-base);
 }
 
-.core-box[open] {
-  background: #f9f9f9;
-  border-color: #bbb;
+.core-box:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 12px var(--color-shadow);
+  transform: translateY(-2px);
 }
 
 .core-box summary {
+  padding: var(--space-md);
   cursor: pointer;
-  font-size: 1.1em;
   list-style: none;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .core-box summary::-webkit-details-marker {
-  display: none; /* removes default arrow */
+  display: none;
 }
 
 .core-box summary::after {
-  content: " ➕";
-  float: right;
-  transition: transform 0.2s ease;
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-accent);
+  transition: transform var(--transition-base);
 }
 
 .core-box[open] summary::after {
-  content: " ➖";
+  transform: rotate(45deg);
 }
 
-
-
-details {
-  margin: 1em 0;
+.core-box summary:hover {
+  background-color: rgba(220, 38, 38, 0.02);
 }
-details summary {
-  cursor: pointer;
-  font-size: 1.1em;
-  font-weight: bold;
-  padding: 0.5em;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+
+.core-box[open] summary {
+  border-bottom: 1px solid var(--color-border);
+  background-color: rgba(220, 38, 38, 0.03);
+}
+
+.core-box p {
+  padding: var(--space-md);
+  color: var(--color-text-light);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Cards === */
+.card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px var(--color-shadow);
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+.card p {
+  margin-bottom: var(--space-sm);
+}
+
+.card ul {
+  margin-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.card li {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-light);
+}
+
+.card a {
+  display: inline-block;
+  margin-top: var(--space-xs);
+}
+
+/* === Lists === */
+ul, ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+  line-height: 1.6;
+}
+
+/* === Footer === */
+footer {
+  max-width: var(--max-width);
+  margin: var(--space-2xl) auto 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  font-family: var(--font-heading);
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  
+  body {
+    padding: var(--space-sm);
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  .site-title {
+    font-size: 1.5rem;
+  }
+  
+  nav {
+    gap: var(--space-sm);
+  }
+  
+  nav a {
+    font-size: 0.85rem;
+    padding: var(--space-xs);
+  }
+  
+  .card {
+    padding: var(--space-md);
+  }
+  
+  :root {
+    --space-xl: 2rem;
+    --space-2xl: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  
+  nav a {
+    display: block;
+    text-align: center;
+  }
+}
+
+/* === Print Styles === */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+    font-size: 12pt;
+  }
+  
+  header, footer {
+    display: none;
+  }
+  
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+}
+
+/* === Accessibility === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* === Selection === */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* === Scrollbar Styling (Webkit) === */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
   border-radius: 5px;
 }
-details summary:hover {
-  background-color: #e0e0e0;
-}
-details[open] summary {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-details .card {
-  border-top: none;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  background-color: #fff;
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-light);
 }
