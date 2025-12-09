@@ -2,363 +2,299 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Simple Guy</title>
-  <!-- Favicons -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workout Guide - The Simple Guy</title>
+  <meta name="description" content="Complete workout routines for Push, Pull, and Leg days with exercise guides - by Vikram Aditya." />
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="workout-page">
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="progress-bar"></div>
+
   <header>
-    <h1 class="site-title">The Simple Guy</h1>
-    <nav>
-      <a href="index.html">About</a>
-      <a href="finance.html">Finance</a>
-      <a href="books.html">Books</a>
-      <a href="workout.html" aria-current="page">Workout</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="header-inner">
+      <a href="index.html" class="site-title">The Simple <span>Guy</span></a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav>
+        <a href="index.html">About</a>
+        <a href="finance.html">Finance</a>
+        <a href="books.html">Books</a>
+        <a href="workout.html" aria-current="page">Workout</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <h2>Workout</h2>
-   <!-- Push Day -->
-<article id="push" class="card">
-  <h3>Push Day (Chest, Shoulders, Triceps)</h3>
+  <main id="main">
+    <section class="hero" style="padding: var(--space-xl) 0;">
+      <h1>💪 Workout Guide</h1>
+      <p class="subtitle">Push-Pull-Legs split for building strength and muscle</p>
+    </section>
 
-  <!-- Exercise 1 -->
-  <details class="exercise-box">
-    <summary><b>Incline Dumbbell Press</b></summary>
-     <div class="exercise-content">
-     <p> The incline dumbbell press is a powerful exercise for building the upper chest and shoulders. Set your bench at a 30–45° angle, sit down with dumbbells on your quads, and kick them into position as you lie back. Keep your chest up, shoulder blades pulled down, feet planted firmly, and core braced as if preparing for a punch. Press the dumbbells upward to full lockout, then lower them under control, letting your shoulder blades move naturally while staying stable. Done with proper form, this lift adds both size and strength to your upper body</p>
-       <img src="https://cdn.shopify.com/s/files/1/1497/9682/files/2_2ede191f-4aa5-4b2e-81e7-e16850e948a4.jpg?v=1648826784" alt="Incline press example 1">
-       <iframe width="100%" height="315" 
-src="https://www.youtube.com/embed/ou6s32mJgjU" 
-title="Incline Dumbbell Press" 
-frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
-     </div>
-  </details>
+    <div class="workout-grid">
 
- <!-- Exercise 2 -->
-<details class="exercise-box">
-  <summary><b>Flat Dumbbell Fly</b></summary>
-  <div class="exercise-content">
-    <p>The flat dumbbell fly is a chest isolation exercise that emphasizes stretch and contraction. Lie flat on a bench with a dumbbell in each hand, arms extended above your chest with a slight bend in the elbows. Slowly open your arms in a wide arc until you feel a deep stretch across your chest, then squeeze the weights back together under control. Keep the movement smooth, avoid locking your elbows, and focus on engaging the chest rather than the shoulders for maximum benefit.</p>
-    <iframe width="100%" height="315" 
-      src="https://www.youtube.com/embed/rk8YayRoTRQ" 
-      title="Flat Dumbbell Fly" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</details>
+      <!-- PUSH DAY -->
+      <article class="workout-day fade-in" id="push">
+        <div class="workout-day-header">
+          <h3><span class="emoji">🔥</span> Push Day</h3>
+          <p>Chest, Shoulders, Triceps — 7 Exercises</p>
+        </div>
+        
+        <div class="exercise-list">
+          <details class="exercise-box">
+            <summary><b>Incline Dumbbell Press</b></summary>
+            <div class="exercise-content">
+              <p>Builds upper chest and shoulders. Set bench at 30–45°, kick dumbbells into position, keep chest up, shoulder blades pulled down, feet planted. Press to full lockout, lower under control.</p>
+              <p><strong>Sets/Reps:</strong> 4 × 8-12</p>
+              <iframe src="https://www.youtube.com/embed/ou6s32mJgjU" title="Incline Dumbbell Press" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </details>
 
-  <!-- Exercise 3 -->
-<details class="exercise-box">
-  <summary><b>Weighted Dips</b></summary>
-  <div class="exercise-content">
-    <p>Weighted dips are a powerful compound movement for building the chest, triceps, and shoulders. Using parallel bars, lean slightly forward to emphasize the chest or stay more upright to target the triceps. Lower your body until your arms are about parallel to the ground, then press back up with control. Keep your core tight, chest lifted, and shoulders stable throughout to avoid unnecessary strain while maximizing strength and muscle growth.</p>
-    <iframe width="100%" height="315" 
-      src="https://www.youtube.com/embed/ci5tcFgIntI" 
-      title="Weighted Dips" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</details>
+          <details class="exercise-box">
+            <summary><b>Flat Dumbbell Fly</b></summary>
+            <div class="exercise-content">
+              <p>Chest isolation emphasizing stretch. Lie flat with dumbbells above chest, slight elbow bend. Open arms in wide arc until deep stretch, then squeeze back together.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 10-12</p>
+              <iframe src="https://www.youtube.com/embed/rk8YayRoTRQ" title="Flat Dumbbell Fly" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </details>
 
-<!-- Exercise 4 -->
-<details class="exercise-box">
-  <summary><b>Seated Dumbbell Shoulder Press</b></summary>
-  <div class="exercise-content">
-    <p>The seated dumbbell shoulder press is one of the best exercises for building strong, defined shoulders while also engaging the triceps. Sit upright with your back supported, dumbbells at shoulder level, and core braced. Press the weights overhead in a controlled motion, keeping your ribcage down and avoiding excessive arch in your lower back. Lower the dumbbells slowly back to starting position and repeat for a powerful upper body builder.</p>
-    <iframe width="100%" height="315" 
-      src="https://www.youtube.com/embed/OLePvpxQEGk" 
-      title="Seated Dumbbell Shoulder Press" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</details>
+          <details class="exercise-box">
+            <summary><b>Weighted Dips</b></summary>
+            <div class="exercise-content">
+              <p>Powerful compound for chest, triceps, shoulders. Lean forward for chest, stay upright for triceps. Lower until arms parallel, press back with control.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 8-10</p>
+              <iframe src="https://www.youtube.com/embed/ci5tcFgIntI" title="Weighted Dips" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </details>
 
-<!-- Exercise 5 -->
-<details class="exercise-box">
-  <summary><b>Dumbbell Lateral Raises</b></summary>
-  <div class="exercise-content">
-    <p>The dumbbell lateral raise is a staple for isolating and building the side delts, giving your shoulders a wider and more defined look. Stand tall with dumbbells at your sides, keep a slight bend in the elbows, and raise your arms to shoulder height in a controlled motion. Focus on leading with your elbows rather than your hands, avoid swinging through the torso, and control both the lift and the lowering phase. This simple yet effective movement creates well-rounded shoulder development when performed consistently with good form.</p>
-    <iframe width="100%" height="315" 
-      src="https://www.youtube.com/embed/JIhbYYA1Q90" 
-      title="Dumbbell Lateral Raises" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</details>
- 
-<!-- Exercise 6 -->
-<details class="exercise-box">
-  <summary><b>Overhead Triceps Extension</b></summary>
-  <div class="exercise-content">
-    <p>The overhead triceps extension targets the long head of the triceps, helping build stronger and fuller arms. Hold a dumbbell securely overhead, lower it slowly behind your head for a full stretch, then extend your arms back to lockout with control. Keep your elbows close to your head, avoid flaring, and focus on squeezing the triceps through each rep. Done correctly, this isolation move delivers both strength and definition to the upper arms.</p>
-    <iframe width="100%" height="315" 
-      src="https://www.youtube.com/embed/rgwnJbONdZo" 
-      title="Overhead Triceps Extension" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</details>
+          <details class="exercise-box">
+            <summary><b>Seated Dumbbell Shoulder Press</b></summary>
+            <div class="exercise-content">
+              <p>Best for building defined shoulders. Sit upright with back supported, dumbbells at shoulder level. Press overhead in controlled motion.</p>
+              <p><strong>Sets/Reps:</strong> 4 × 8-10</p>
+              <iframe src="https://www.youtube.com/embed/OLePvpxQEGk" title="Seated Shoulder Press" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </details>
 
+          <details class="exercise-box">
+            <summary><b>Dumbbell Lateral Raises</b></summary>
+            <div class="exercise-content">
+              <p>Isolates side delts for shoulder width. Stand tall, slight elbow bend, raise arms to shoulder height. Lead with elbows, not hands.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 12-15</p>
+              <iframe src="https://www.youtube.com/embed/JIhbYYA1Q90" title="Lateral Raises" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </details>
 
-  <!-- Exercise 7 -->
-<details class="exercise-box">
-  <summary><b>V-Crunches</b></summary>
-  <div class="exercise-content">
-    <p>V-crunches are a powerful core finisher that target the entire abdominal wall. Start lying flat with arms and legs extended, then contract your abs to lift both into a “V” shape, reaching your hands toward your toes. Lower slowly under control, keeping tension on the core throughout. Avoid pulling on the neck or swinging the legs—focus on leading with the chest and compressing the abs for maximum benefit.</p>
-    <iframe width="100%" height="315" 
-      src="https://www.youtube.com/embed/Vnep1dTa_IQ" 
-      title="V-Crunches" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</details>
+          <details class="exercise-box">
+            <summary><b>Overhead Triceps Extension</b></summary>
+            <div class="exercise-content">
+              <p>Targets long head of triceps. Hold dumbbell overhead, lower behind head for full stretch, extend back to lockout. Keep elbows close to head.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 10-12</p>
+              <iframe src="https://www.youtube.com/embed/rgwnJbONdZo" title="Overhead Triceps Extension" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </details>
 
+          <details class="exercise-box">
+            <summary><b>V-Crunches</b></summary>
+            <div class="exercise-content">
+              <p>Core finisher. Start flat, contract abs to lift arms and legs into "V" shape. Lower slowly, maintain tension. Don't pull on neck.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 15-20</p>
+              <iframe src="https://www.youtube.com/embed/Vnep1dTa_IQ" title="V-Crunches" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </details>
+        </div>
 
-  <h4>Program Notes</h4>
-  <ul>
-    <li>Order: compound → accessory → isolation → core.</li>
-    <li>Progressive overload: track reps/weight weekly.</li>
-    <li>Recovery: 48–72 hrs before repeating push muscles.</li>
-    <li>Increase load if you hit top reps with perfect form twice in a row.</li>
-  </ul>
+        <div class="workout-notes">
+          <h4>📝 Push Day Notes</h4>
+          <ul>
+            <li>Order: Compound → Accessory → Isolation → Core</li>
+            <li>Progressive overload: Track weights/reps weekly</li>
+            <li>Recovery: 48-72 hrs before repeating push muscles</li>
+          </ul>
+        </div>
+      </article>
 
+      <!-- PULL DAY -->
+      <article class="workout-day fade-in" id="pull">
+        <div class="workout-day-header">
+          <h3><span class="emoji">💪</span> Pull Day</h3>
+          <p>Back, Biceps, Rear Delts — 7 Exercises</p>
+        </div>
+        
+        <div class="exercise-list">
+          <details class="exercise-box">
+            <summary><b>Pull-Ups (or Lat Pulldown)</b></summary>
+            <div class="exercise-content">
+              <p>King of back exercises. Hang from bar, pull chest toward bar, lower slow. Use assisted machine if needed. Drive elbows down, no half reps.</p>
+              <p><strong>Sets/Reps:</strong> 4 × 6-12</p>
+            </div>
+          </details>
 
+          <details class="exercise-box">
+            <summary><b>Barbell Rows</b></summary>
+            <div class="exercise-content">
+              <p>Builds mid-back thickness. Hinge at hips, flat back, pull barbell to lower ribs, lower slow. Brace core, squeeze shoulder blades.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 8-10</p>
+            </div>
+          </details>
 
-  </article>
+          <details class="exercise-box">
+            <summary><b>Seated Cable Row</b></summary>
+            <div class="exercise-content">
+              <p>Great for back thickness. Sit tall, neutral spine, pull handle to midsection, control back. Chest up, pull with elbows.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 10-12</p>
+            </div>
+          </details>
 
-<!-- Pull Day -->
-<article id="pull" class="card">
-  <h3>Pull Day (Back, Biceps, Rear Delts)</h3>
+          <details class="exercise-box">
+            <summary><b>Face Pulls</b></summary>
+            <div class="exercise-content">
+              <p>Essential for rear delts and rotator cuff. Use rope at cable station, pull toward forehead, elbows high. External rotate shoulders. Never skip this.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 12-15</p>
+            </div>
+          </details>
 
-  <p><b>Purpose:</b> Focus on pull muscles — back, biceps, rear delts — with a mix of compound and isolation moves for strength, size, and posture improvement.</p>
-  <p><b>Warm-up:</b> 5–10 min cardio + band pull-aparts, face pulls, light sets of first exercise.</p>
+          <details class="exercise-box">
+            <summary><b>Dumbbell Bicep Curls</b></summary>
+            <div class="exercise-content">
+              <p>Classic bicep builder. Hold dumbbells, curl up, rotate palms forward, lower slow. Keep elbows tucked and stationary.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 10-12</p>
+            </div>
+          </details>
 
-  <h4>Workout Overview (7 Exercises — follow the order)</h4>
+          <details class="exercise-box">
+            <summary><b>Hammer Curls</b></summary>
+            <div class="exercise-content">
+              <p>Targets brachialis for arm thickness. Neutral grip, curl up, squeeze, lower under control. Keep wrists straight, elbows close.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 8-12</p>
+            </div>
+          </details>
 
-  <!-- Exercise 1 -->
-  <details>
-    <summary><b>Pull-Ups (or Lat Pulldown)</b> — Lats, biceps, upper back</summary>
-    <p><b>How to:</b> Hang from bar, pull chest toward bar, lower slow. If not ready, use an assisted machine or bands.</p>
-    <p><b>Cues:</b> Drive elbows down, avoid shrugging shoulders.</p>
-    <p><b>Common mistakes:</b> Half reps, swinging, neck straining.</p>
-    <p><b>Sets/Reps:</b> 3–4 × 6–12</p>
-    <p><b>Progression:</b> Add weight, slow eccentric, pause at top.</p>
-    <img src="images/latzug.webp" alt="Pull-up example 1">
- </details>
-    
-  <!-- Exercise 2 -->
-  <details>
-    <summary><b>Barbell Rows</b> — Mid-back, lats, biceps</summary>
-    <p><b>How to:</b> Hinge at hips, flat back, pull barbell to lower ribs, lower slow.</p>
-    <p><b>Cues:</b> Brace core, squeeze shoulder blades.</p>
-    <p><b>Common mistakes:</b> Rounding back, jerking weight, standing too upright.</p>
-    <p><b>Sets/Reps:</b> 3 × 8–10</p>
-    <p><b>Progression:</b> Increase weight, slower reps, try underhand grip.</p>
-    <img src="images/rudern-langhantel-800x448.webp" alt="Barbell row example 1">
-  </details>
+          <details class="exercise-box">
+            <summary><b>Reverse Fly</b></summary>
+            <div class="exercise-content">
+              <p>Finishes rear delts and upper back. Hinge forward, raise dumbbells to shoulder level. Lead with elbows, slow control.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 12-15</p>
+            </div>
+          </details>
+        </div>
 
-  <!-- Exercise 3 -->
-  <details>
-    <summary><b>Seated Cable Row</b> — Back thickness</summary>
-    <p><b>How to:</b> Sit tall, neutral spine, pull handle to midsection, control back.</p>
-    <p><b>Cues:</b> Chest up, pull with elbows, not hands.</p>
-    <p><b>Common mistakes:</b> Leaning back too much, using momentum.</p>
-    <p><b>Sets/Reps:</b> 3 × 10–12</p>
-    <p><b>Progression:</b> Slower tempo, heavier load, single-arm rows.</p>
-    <img src="images/seated cable.jpg" alt="Cable row example 1">
-  </details>
+        <div class="workout-notes">
+          <h4>📝 Pull Day Notes</h4>
+          <ul>
+            <li>Order: Compound → Accessory → Isolation → Rear Delts</li>
+            <li>Joint health: Never skip face pulls or rotator cuff work</li>
+            <li>Increase load when hitting top reps with perfect form</li>
+          </ul>
+        </div>
+      </article>
 
-  <!-- Exercise 4 -->
-  <details>
-    <summary><b>Face Pulls</b> — Rear delts, traps, rotator cuff</summary>
-    <p><b>How to:</b> Use rope at cable station. Pull toward forehead, elbows high.</p>
-    <p><b>Cues:</b> External rotate shoulders, squeeze rear delts.</p>
-    <p><b>Common mistakes:</b> Elbows dropping, shrugging traps, rushing reps.</p>
-    <p><b>Sets/Reps:</b> 3 × 12–15</p>
-    <p><b>Progression:</b> Add weight, pause at contraction, slower reps.</p>
-    <img src="images/Face_Pull.webp" alt="Face pull example 1">
-  </details>
+      <!-- LEG DAY -->
+      <article class="workout-day fade-in" id="legs">
+        <div class="workout-day-header">
+          <h3><span class="emoji">🦵</span> Leg Day</h3>
+          <p>Quads, Hamstrings, Glutes, Calves — 5 Exercises</p>
+        </div>
+        
+        <div class="exercise-list">
+          <details class="exercise-box">
+            <summary><b>Barbell Squats</b></summary>
+            <div class="exercise-content">
+              <p>King of all exercises. Bar on upper back, brace core, squat deep with control, drive up through heels. Back straight, chest up, knees in line with toes.</p>
+              <p><strong>Sets/Reps:</strong> 4 × 8-12</p>
+            </div>
+          </details>
 
-  <!-- Exercise 5 -->
-  <details>
-    <summary><b>Dumbbell Bicep Curls</b> — Biceps isolation</summary>
-    <p><b>How to:</b> Hold dumbbells, curl up, rotate palms forward, lower slow.</p>
-    <p><b>Cues:</b> Elbows tucked, control lowering.</p>
-    <p><b>Common mistakes:</b> Swinging arms, flaring elbows.</p>
-    <p><b>Sets/Reps:</b> 3 × 10–15</p>
-    <p><b>Progression:</b> Heavier dumbbells, tempo work, hammer curls.</p>
-    <img src="images/bizeps-hammercurls.webp" alt="Bicep curl example 1">
-  </details>
+          <details class="exercise-box">
+            <summary><b>Bulgarian Split Squats</b></summary>
+            <div class="exercise-content">
+              <p>Unilateral quad and glute builder. Rear foot elevated, lunge down until thigh parallel, push through front heel. Keep torso upright.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 10-12 per leg</p>
+            </div>
+          </details>
 
-  <!-- Exercise 6 -->
-  <details>
-    <summary><b>Hammer Curls</b> — Biceps brachialis, forearms</summary>
-    <p><b>How to:</b> Hold dumbbells neutral grip, curl up, squeeze, lower under control.</p>
-    <p><b>Cues:</b> Keep wrists straight, elbows close.</p>
-    <p><b>Common mistakes:</b> Rotating wrists, swinging weight.</p>
-    <p><b>Sets/Reps:</b> 3 × 8–12</p>
-    <p><b>Progression:</b> Alternate arms, add pause at top.</p>
-    <img src="images/Dumbbell-Alternate-Biceps-Curl-resized.webp" alt="Hammer curl example 1">
-  </details>
+          <details class="exercise-box">
+            <summary><b>Leg Extensions</b></summary>
+            <div class="exercise-content">
+              <p>Quad isolation. Extend legs fully, squeeze quads at top, lower under control. Keep hips tight against seat.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 12-15</p>
+            </div>
+          </details>
 
-  <!-- Exercise 7 -->
-  <details>
-    <summary><b>Reverse Fly</b> — Rear delts, upper back</summary>
-    <p><b>How to:</b> Sit or hinge forward, arms hang down, raise dumbbells out to sides until shoulder level.</p>
-    <p><b>Cues:</b> Lead with elbows, slow control.</p>
-    <p><b>Common mistakes:</b> Shrugging traps, swinging weights.</p>
-    <p><b>Sets/Reps:</b> 3 × 12–15</p>
-    <p><b>Progression:</b> Increase weight slowly, tempo work, cables/bands for variety.</p>
-    <img src="images/Reverse Fly.jpg" alt="Reverse fly example 1">
-  </details>
+          <details class="exercise-box">
+            <summary><b>Lying Leg Curls</b></summary>
+            <div class="exercise-content">
+              <p>Hamstring isolation. Curl pad toward glutes, control back down. Keep hips pressed down, squeeze hard at top.</p>
+              <p><strong>Sets/Reps:</strong> 3 × 12-15</p>
+            </div>
+          </details>
 
-  <h4>Program Notes</h4>
-  <ul>
-    <li>Order: compound → accessory → isolation → rear delts.</li>
-    <li>Progressive overload: track reps/weight weekly.</li>
-    <li>Recovery: 48–72 hrs before repeating pull muscles.</li>
-    <li>Joint health: don’t skip face pulls or rotator cuff work.</li>
-    <li>Increase load if you hit top reps with perfect form twice in a row.</li>
-  </ul>
+          <details class="exercise-box">
+            <summary><b>Standing Calf Raises</b></summary>
+            <div class="exercise-content">
+              <p>Builds calves and ankle stability. Raise heels as high as possible, lower slow with full stretch. Pause at top.</p>
+              <p><strong>Sets/Reps:</strong> 4 × 15-20</p>
+            </div>
+          </details>
+        </div>
 
+        <div class="workout-notes">
+          <h4>📝 Leg Day Notes</h4>
+          <ul>
+            <li>Form always comes before weight — don't ego lift</li>
+            <li>Warm up well to protect knees and hips</li>
+            <li>Stretch quads, hamstrings, and calves after training</li>
+          </ul>
+        </div>
+      </article>
 
+      <!-- DIET SECTION -->
+      <article class="workout-day diet-card fade-in" id="diet">
+        <div class="workout-day-header">
+          <h3><span class="emoji">🍎</span> Nutrition for Muscle Gain</h3>
+          <p>Diet principles for building muscle</p>
+        </div>
+        
+        <div class="exercise-list" style="padding: var(--space-lg);">
+          <p>If you're naturally skinny, gaining muscle requires eating <strong>more than you burn</strong> while keeping food quality high.</p>
+          
+          <p><strong>Key Principles:</strong></p>
+          <ul>
+            <li><b>Calorie Surplus:</b> Track meals, add 400-500 extra calories daily</li>
+            <li><b>Protein is King:</b> 1.6-2g per kg bodyweight. Paneer, dal, eggs, chicken, whey</li>
+            <li><b>Carbs for Energy:</b> Rice, roti, oats, potatoes — don't fear carbs</li>
+            <li><b>Healthy Fats:</b> Nuts, peanut butter, ghee, olive oil</li>
+            <li><b>Eat Frequently:</b> 5-6 smaller meals beat 2 huge ones</li>
+            <li><b>Train & Rest:</b> Muscles grow during sleep, not just in the gym</li>
+          </ul>
+          
+          <div class="tip-box">
+            <p><strong>💡 Remember:</strong> Don't bulk with junk food — you'll only gain fat. Stick to whole foods, train hard, sleep well.</p>
+          </div>
+        </div>
+      </article>
 
- </article>
-
-<!-- Leg Day -->
-<article id="legs" class="card">
-  <h3>Leg Workout Guide: Build Strength and Size</h3>
-
-  <p><b>Purpose:</b> When it comes to fitness, one of the biggest mistakes people make is skipping leg day. But your legs aren’t just another muscle group — they are the foundation of your strength, balance, and overall physique. Training legs doesn’t only make you look balanced, it also boosts natural hormones like testosterone and growth hormone, which support full-body muscle development. </p>
-  <p><b>Warm-up:</b> 5–10 min cardio + bodyweight squats or mobility drills before loading weight.</p>
-
-  <h4>Workout Overview (5 Exercises — follow the order)</h4>
-
-  <!-- Exercise 1 -->
-  <details>
-    <summary><b>Barbell Squats</b> — Quads, glutes, hamstrings</summary>
-    <p><b>How to:</b> Bar on upper back, brace core, squat deep with controlled motion, drive up through heels.</p>
-    <p><b>Cues:</b> Back straight, chest up, knees in line with toes.</p>
-    <p><b>Common mistakes:</b> Shallow depth, collapsing knees, excessive forward lean.</p>
-    <p><b>Sets/Reps:</b> 3–4 × 8–12</p>
-    <p><b>Progression:</b> Add weight weekly, pause at bottom, slower lowering.</p>
-    <img src="images/gym.gif" alt="Barbell squat">
-  </details>
-
-  <!-- Exercise 2 -->
-  <details>
-    <summary><b>Bulgarian Split Squats</b> — Quads, glutes, stability</summary>
-    <p><b>How to:</b> Rear foot elevated on bench, lunge down with front leg until thigh is parallel, push through heel to rise.</p>
-    <p><b>Cues:</b> Keep torso upright, control movement, focus on front leg tension.</p>
-    <p><b>Common mistakes:</b> Bouncing reps, leaning too far forward, rushing.</p>
-    <p><b>Sets/Reps:</b> 3 × 10–12 per leg</p>
-    <p><b>Progression:</b> Hold dumbbells, slow tempo, add pause at bottom.</p>
-    <img src="images/Dumbbell-Bulgarian-Split-Squat.gif" alt="Bulgarian split">
-  </details>
-
-  <!-- Exercise 3 -->
-  <details>
-    <summary><b>Leg Extensions</b> — Quad isolation</summary>
-    <p><b>How to:</b> Sit on machine, extend legs fully, squeeze quads at top, lower under control.</p>
-    <p><b>Cues:</b> Keep hips tight against seat, focus on controlled range.</p>
-    <p><b>Common mistakes:</b> Swinging weight, going too heavy, incomplete range.</p>
-    <p><b>Sets/Reps:</b> 3 × 12–15</p>
-    <p><b>Progression:</b> Slower lowering, drop sets, single-leg variations.</p>
-    <img src="images/LEG-EXTENSION.gif" alt="Leg extension">
-  </details>
-
-  <!-- Exercise 4 -->
-  <details>
-    <summary><b>Lying Leg Curls</b> — Hamstrings</summary>
-    <p><b>How to:</b> Lie on machine, curl pad toward glutes, control back down.</p>
-    <p><b>Cues:</b> Keep hips pressed down, squeeze hamstrings hard at top.</p>
-    <p><b>Common mistakes:</b> Lifting hips, jerking weight, incomplete reps.</p>
-    <p><b>Sets/Reps:</b> 3 × 12–15</p>
-    <p><b>Progression:</b> Add weight, slower tempo, use single-leg curls.</p>
-    <img src="images/Lying-Dumbbell-Leg-Curl.gif" alt="Leg curl">
-  </details>
-
-  <!-- Exercise 5 -->
-  <details>
-    <summary><b>Standing Calf Raises</b> — Calves, ankle stability</summary>
-    <p><b>How to:</b> Stand on calf raise machine/platform, raise heels as high as possible, lower slow with full stretch.</p>
-    <p><b>Cues:</b> Pause at top, stretch at bottom, controlled motion.</p>
-    <p><b>Common mistakes:</b> Bouncing, rushing, incomplete range.</p>
-    <p><b>Sets/Reps:</b> 4 × 15–20</p>
-    <p><b>Progression:</b> Heavier load, single-leg variations, extended holds.</p>
-    <img src="images/Dumbbell-Calf-Raise.gif" alt="Standing calf raise">
-  </details>
-
-  <h4>Program Notes</h4>
-  <ul>
-    <li>Form always comes before weight — don’t ego lift.</li>
-    <li>Warm-up well to protect knees and hips.</li>
-    <li>Stretch quads, hamstrings, and calves after training for better recovery.</li>
-    <li>Train legs 1–2× per week depending on recovery.</li>
-  </ul>
-
-  <p>Leg training is tough, but it’s also the most rewarding. The strength, balance, and growth you get from consistent leg workouts reflect in your entire body. So next time you think of skipping leg day — don’t. Train hard, stay consistent, and your legs will thank you.</p>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-    <!-- Diet Basics -->
-    <article id="diet-basics" class="card">
-      <h3>Diet for Skinny People (Gaining Weight the Right Way)</h3>
-      <p>
-        If you’re naturally skinny, gaining muscle is about eating <b>more than 
-        you burn</b> while keeping the food quality high. Here are simple rules:
-      </p>
-      <ul>
-        <li><b>Eat in a Calorie Surplus</b> – Track your meals. Add an extra 400–500 calories daily.</li>
-        <li><b>Protein is King</b> – Paneer, lentils, whey protein shakes.</li>
-        <li><b>Carbs for Energy</b> – Rice, roti, oats, potatoes, bananas – don’t fear carbs.</li>
-        <li><b>Healthy Fats</b> – Nuts, peanut butter, ghee, avocados keep hormones strong.</li>
-        <li><b>Eat Frequently</b> – 5–6 smaller meals work better than 2 huge meals.</li>
-        <li><b>Train & Rest</b> – Muscles grow when you sleep, not just in the gym.</li>
-      </ul>
-      <p>
-        Bonus tip: <i>Don’t try to bulk up with just junk food. You’ll only gain fat, 
-        not muscle.</i> Stick to whole foods, train hard, and watch yourself grow stronger.
-      </p>
-    </article>
-
+    </div>
   </main>
+
+  <footer>
+    <p>© 2024-2025 Vikram Aditya. Building and learning, one day at a time.</p>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script src="script.js"></script>
 </body>
 </html>
