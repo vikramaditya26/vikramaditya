@@ -2,266 +2,218 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Simple Guy</title>
-  <!-- Favicons -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Books - The Simple Guy</title>
+  <meta name="description" content="Book reviews and lessons from timeless reads that shaped my thinking - by Vikram Aditya." />
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .book-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    .book-card img {
-      width: 200px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    .book-info {
-      max-width: 600px;
-    }
-    .book-info h3 {
-      font-size: 1.5em;
-      margin: 0;
-      font-weight: bold;
-    }
-    .book-info h4 {
-      font-size: 1em;
-      font-style: italic;
-      margin: 5px 0 15px 0;
-      color: #555;
-    }
-    .book-info p {
-      line-height: 1.6;
-      margin: 0;
-    }
-  </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="progress-bar"></div>
+
   <header>
-    <h1 class="site-title">The Simple Guy</h1>
-    <nav>
-      <a href="index.html">About</a>
-      <a href="finance.html">Finance</a>
-      <a href="books.html" aria-current="page">Books</a>
-      <a href="workout.html">Workout</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="header-inner">
+      <a href="index.html" class="site-title">The Simple <span>Guy</span></a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav>
+        <a href="index.html">About</a>
+        <a href="finance.html">Finance</a>
+        <a href="books.html" aria-current="page">Books</a>
+        <a href="workout.html">Workout</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <h2>Book Reviews</h2>
+  <main id="main">
+    <section class="hero" style="padding: var(--space-xl) 0;">
+      <h1>📚 Book Reviews</h1>
+      <p class="subtitle">Curated lessons from timeless reads that shaped my thinking</p>
+    </section>
 
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/61urry+xagL._UF1000,1000_QL80_.jpg">
-      <div class="book-info">
-        <h3>Siddhartha</h3>
-        <h4>Hermann Hesse</h4>
-        <p><i>Siddhartha by Hermann Hesse Is one of those rare books that doesn’t just speak to you, it changes something within.</i></p>
-<p>It follows a spiritual journey beyond wealth, rituals, and teachings, showing that truth isn’t given, it’s lived.
-What stayed with me is its quiet wisdom: real peace comes not from the outside, but from deeply listening to your own soul.
-Beautifully simple yet full of layers, it made me reflect on what truly matters.</p>
-<p><i>A timeless classic for anyone who has ever paused and asked, What is the purpose of my life?</i></p>
-      </div>
-    </div>
+    <div class="book-grid">
 
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/61urry+xagL._UF1000,1000_QL80_.jpg" alt="Siddhartha book cover" loading="lazy">
+        <div class="book-info">
+          <h3>Siddhartha</h3>
+          <h4>Hermann Hesse</h4>
+          <p><i>Siddhartha by Hermann Hesse Is one of those rare books that doesn't just speak to you, it changes something within.</i></p>
+          <p>It follows a spiritual journey beyond wealth, rituals, and teachings, showing that truth isn't given, it's lived. What stayed with me is its quiet wisdom: real peace comes not from the outside, but from deeply listening to your own soul. Beautifully simple yet full of layers, it made me reflect on what truly matters.</p>
+          <p><i>A timeless classic for anyone who has ever paused and asked, What is the purpose of my life?</i></p>
+        </div>
+      </article>
 
-<div class="book-card">
-  <img src="https://m.media-amazon.com/images/I/81G-H+DLRvL._SL1500_.jpg" alt="The Book of Five Rings cover">
-  <div class="book-info">
-    <h3>The Book of Five Rings</h3>
-    <h4>Miyamoto Musashi</h4>
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/81G-H+DLRvL._SL1500_.jpg" alt="The Book of Five Rings cover" loading="lazy">
+        <div class="book-info">
+          <h3>The Book of Five Rings</h3>
+          <h4>Miyamoto Musashi</h4>
+          <p><i>Every battle is first won in the mind — Musashi's wisdom begins where the sword ends. Extreme discipline makes you unrecognizable.</i></p>
+          <p><strong>1. Earth Ring – Brutal Self-Honesty:</strong> See things as they are, not as you wish they were.</p>
+          <p><strong>2. Water Ring – Flow with Reality:</strong> Be like water, adapt, don't break.</p>
+          <p><strong>3. Fire Ring – Turn Anger into Fuel:</strong> Anger is energy, the question is where you aim it.</p>
+          <p><strong>4. Wind Ring – Stay Humble, Keep Learning:</strong> Stay a student forever.</p>
+          <p><strong>5. Void Ring – Become Discipline Itself:</strong> There is no end. The way is the practice.</p>
+        </div>
+      </article>
 
-    <p><i>Every battle is first won in the mind — Musashi’s wisdom begins where the sword ends. Extreme discipline makes you unrecognizable.</i></p> 
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/81uWX5+A1rL.jpg" alt="Jonathan Livingston Seagull cover" loading="lazy">
+        <div class="book-info">
+          <h3>Jonathan Livingston Seagull</h3>
+          <h4>Richard Bach</h4>
+          <p><i>Most of us live within limits we never question — but Jonathan Livingston Seagull dares to ask, what if life could be more?</i></p>
+          <p>Richard Bach's timeless novella follows a seagull who refuses to accept the ordinary, choosing instead to master flight as an expression of freedom and purpose. It's not really about a bird; it's about all of us, our fears, our courage, and our hunger to go beyond what we're told is possible. Reading it felt like a mirror, asking me where in my own life I've settled for less than I could be.</p>
+          <p><i>A short yet powerful story, it inspires you to break boundaries and live as if the sky was never the limit.</i></p>
+        </div>
+      </article>
 
-    <p><b>1. Earth Ring – Brutal Self-Honesty</b>  See things as they are, not as you wish they were. Track everything, know your truth, and accept reality before trying to change it.</p>
+      <article class="book-card fade-in">
+        <img src="https://champaca.in/cdn/shop/files/716bWXH83CL._SL1500_1024x1024@2x.jpg?v=1719910537" alt="Animal Farm cover" loading="lazy">
+        <div class="book-info">
+          <h3>Animal Farm</h3>
+          <h4>George Orwell</h4>
+          <p><i>Every revolution begins with purity and ends with politics. Every ideal turns to control the moment it becomes organized. Animal Farm is the story not of animals or governments, but of us.</i></p>
+          <p>The animals start with a dream: equality, dignity, and freedom from exploitation. They overthrow their master believing they are creating justice. But slowly, the same forces they fought against — greed, control, fear — reappear in new forms. The pigs who once spoke of unity become rulers, rewriting laws and reshaping truth.</p>
+          <p>The commandments shift quietly — "All animals are equal" becomes "All animals are equal, but some are more equal than others."</p>
+          <p><i>It's a mirror for our world, how idealism without awareness turns into control, how obedience replaces thought, and how those who stop questioning slowly become what they once opposed.</i></p>
+        </div>
+      </article>
 
-    <p><b>2. Water Ring – Flow with Reality</b>  Be like water, adapt, don’t break. Once you see your flaws, don’t attack them with impossible plans. Small consistent effort beats perfect intentions, flow around obstacles and keep moving.</p>
+      <article class="book-card fade-in">
+        <img src="https://fs.blog/wp-content/uploads/2024/07/CTNYT.jpg" alt="Clear Thinking cover" loading="lazy">
+        <div class="book-info">
+          <h3>Clear Thinking</h3>
+          <h4>Shane Parrish</h4>
+          <p><i>Clarity is not about brilliance, it is about avoiding avoidable mistakes.</i></p>
+          <p>Clear Thinking is a reminder that most failures in life come from rushing decisions, reacting emotionally, or getting lost in noise. Parrish shows that slowing down and choosing clarity gives you an edge in work, money, and relationships.</p>
+          <p>The book teaches that success is not about being smarter than others, but about making fewer unforced errors. Shape your environment so the right choices are the easiest, avoid situations where bad outcomes are inevitable, and recognize that small decisions compound into the life you build.</p>
+          <p><i>For me, the key learning is simple: protect your ability to think clearly, and you will protect your ability to live well.</i></p>
+        </div>
+      </article>
 
-    <p><b>3. Fire Ring – Turn Anger into Fuel</b>  Anger is energy, the question is where you aim it. Don’t fight your emotions, direct them. Use anger as fuel to destroy laziness, not yourself.</p>
+      <article class="book-card fade-in">
+        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRHrAvToVY795lanScyJOkX5rq5OTMHhWCeTuqtv4I0KHsywnAp" alt="The Great CEO Within cover" loading="lazy">
+        <div class="book-info">
+          <h3>The Great CEO Within</h3>
+          <h4>Alex MacCaw, Matt Mochary, and Misha Talavera</h4>
+          <p><i>Leadership is not charisma, it is clarity and process.</i></p>
+          <p>The Great CEO Within is a manual for building companies and leaders. It cuts through myths about founders and focuses on what really matters: systems, habits, and culture. The real job of a CEO is creating clarity, building trust, and ensuring that the team works on what matters most.</p>
+          <p>What I found most valuable is how tactical it gets: writing agendas, giving feedback, building routines of reflection, and learning to coach instead of command.</p>
+          <p><i>The key lesson is that leadership is not about having all the answers, but about creating an environment where the best answers can emerge.</i></p>
+        </div>
+      </article>
 
-    <p><b>4. Wind Ring – Stay Humble, Keep Learning</b> Stay a student forever. Every level of mastery demands new awareness and new humility.</p>
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/71D+fc7mGLL.jpg" alt="Zorba the Buddha cover" loading="lazy">
+        <div class="book-info">
+          <h3>Zorba the Buddha</h3>
+          <h4>Osho</h4>
+          <p><i>We live divided - chasing pleasure like Zorba or seeking silence like Buddha - but rarely whole.</i></p>
+          <p>What I love most is how it shows the divided life of man - either as Zorba, lost in pleasure, or as Buddha, lost in silence. Zorba dances, sings, celebrates, but has no depth. Buddha meditates, transcends, but has no song. Both are half, both incomplete.</p>
+          <p>Osho's vision of a new man - Zorba the Buddha - touched me deeply: rooted in the earth, yet open to the sky. A being who can love and laugh, yet remain aware and silent.</p>
+          <p><i>For me, this book is not just philosophy, it's a glimpse into the future of humanity, the meeting of matter and consciousness, body and soul.</i></p>
+        </div>
+      </article>
 
-    <p><b>5. Void Ring – Become Discipline Itself</b>  There is no end. The way is the practice. The fight is the path, and the path itself is the reward.</p>
+      <article class="book-card fade-in">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQigooO-qii4yzQ8k8ngwan3FAQW6IieYVBQ&s" alt="Tao Te Ching cover" loading="lazy">
+        <div class="book-info">
+          <h3>Tao Te Ching</h3>
+          <h4>Lao Tzu</h4>
+          <p><i>Tao Te Ching by Lao Tzu is a book that feels like a breath of fresh air in the middle of life's noise.</i></p>
+          <p>It's not just philosophy - it's a way of being, a reminder to flow with nature instead of fighting against it. Through its short verses, it teaches humility, balance, and the beauty of simplicity. For me, it's like holding a mirror to life, showing that peace is not something to chase but something to align with.</p>
+          <p><i>A timeless guide for anyone seeking calmness, clarity, and harmony.</i></p>
+        </div>
+      </article>
 
-  </div>
-</div>
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/61LKD6scbfL.jpg" alt="Principles cover" loading="lazy">
+        <div class="book-info">
+          <h3>Principles</h3>
+          <h4>Ray Dalio</h4>
+          <p><i>Principles by Ray Dalio is a book full of practical wisdom that bridges life and business.</i></p>
+          <p>Ray Dalio shares the principles that guided his journey — from decision-making to radical transparency, and the art of learning from mistakes. What I love most is how it turns complex ideas into simple, actionable habits that anyone can apply. It's not just about success in work, but about building a framework to live with clarity and purpose.</p>
+          <p><i>A powerful guide for anyone who wants to make better choices and grow stronger every day.</i></p>
+        </div>
+      </article>
 
+      <article class="book-card fade-in" id="naval-almanack">
+        <img src="https://m.media-amazon.com/images/I/51lUeX6L2BL.jpg" alt="Naval Almanack cover" loading="lazy">
+        <div class="book-info">
+          <h3>The Almanack of Naval Ravikant</h3>
+          <h4>Eric Jorgenson</h4>
+          <p><i>The Almanack of Naval Ravikant by Eric Jorgenson is like sitting with a wise friend who talks about life, wealth, and happiness in the simplest way possible.</i></p>
+          <p>Instead of chasing shortcuts, Naval shows the value of building specific knowledge, nurturing relationships that compound, and designing a life around freedom. What I love is how practical it feels — not heavy theory, but clear insights that make you pause and rethink how you live and work. It's a reminder that true wealth is not just money, but peace of mind, time, and choice.</p>
+          <p><i>A modern guide for anyone who wants to live smarter, lighter, and more freely.</i></p>
+        </div>
+      </article>
 
-   <div class="book-card">
-  <img src="https://m.media-amazon.com/images/I/81uWX5+A1rL.jpg" alt="Jonathan Livingston Seagull cover">
-  <div class="book-info">
-    <h3>Jonathan Livingston Seagull </h3>
-    <h4>Richard Bach</h4>
-    <p><i>Most of us live within limits we never question — but Jonathan Livingston Seagull dares to ask, what if life could be more?</i></p> 
-<p>Richard Bach’s timeless novella follows a seagull who refuses to accept the ordinary, choosing instead to master flight as an expression of freedom and purpose. 
-It’s not really about a bird; it’s about all of us, our fears, our courage, and our hunger to go beyond what we’re told is possible. 
-Reading it felt like a mirror, asking me where in my own life I’ve settled for less than I could be.</p>
-<p><i>A short yet powerful story, it inspires you to break boundaries and live as if the sky was never the limit.</i></p>
- </div>
-</div>
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/61d4xAjbRQL._UF1000,1000_QL80_.jpg" alt="Poor Charlie's Almanack cover" loading="lazy">
+        <div class="book-info">
+          <h3>Poor Charlie's Almanack</h3>
+          <h4>Charlie Munger</h4>
+          <p><i>Poor Charlie's Almanack by Charlie Munger is a treasure chest of wisdom from one of the sharpest minds in investing and life.</i></p>
+          <p>Through his speeches and timeless lessons, Munger shows the power of mental models, clear thinking, and the habit of constant learning. What stands out is his humor and practicality — it's not just about money, but about avoiding foolish mistakes and building a life of rational decisions. Reading it feels like getting decades of experience distilled into simple, memorable truths.</p>
+          <p><i>A brilliant guide for anyone who values clarity, curiosity, and lifelong wisdom.</i></p>
+        </div>
+      </article>
 
-    <div class="book-card">
-  <img src="https://champaca.in/cdn/shop/files/716bWXH83CL._SL1500_1024x1024@2x.jpg?v=1719910537" alt="Animal Farm cover">
-  <div class="book-info">
-    <h3>Animal Farm</h3>
-    <h4>George Orwell</h4>
-    <p><i>Every revolution begins with purity and ends with politics. Every ideal turns to control the moment it becomes organized. Animal Farm is the story not of animals or governments, but of us.</i></p> 
-    <p>The animals start with a dream: equality, dignity, and freedom from exploitation. They overthrow their master believing they are creating justice. But slowly, the same forces they fought against  greed, control, fear reappear in new forms. The pigs who once spoke of unity become rulers, rewriting laws and reshaping truth.</p> 
-    <p>The commandments shift quietly  “All animals are equal” becomes “All animals are equal, but some are more equal than others.” There’s Boxer, the worker who believes effort alone will fix everything  like people who keep grinding, hoping the system will someday reward them. Then the sheep, who repeat what they hear without ever asking why  the crowd that follows noise over truth. And in the end, the pigs stand with the humans they once condemned, both drunk on the same power they promised to destroy.</p> 
-    <p><i>It’s a mirror for our world, how idealism without awareness turns into control, how obedience replaces thought, and how those who stop questioning slowly become what they once opposed.</i></p> 
-  </div>
-</div>
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/31eXnQuv+IL._UF1000,1000_QL80_.jpg" alt="Hsin Hsin Ming cover" loading="lazy">
+        <div class="book-info">
+          <h3>Hsin Hsin Ming: The Book of Nothing</h3>
+          <h4>Osho</h4>
+          <p><i>Hsin Hsin Ming: The Book of Nothing by Osho is one of those rare books that feels less like reading and more like sitting in silence with a master.</i></p>
+          <p>It takes Zen wisdom and makes it alive — pointing again and again to simplicity, to dropping the constant need to analyze, to just being. For me, it was a reminder that peace doesn't come from solving everything, but from letting go of the need to solve at all. Each page feels like a gentle nudge away from overthinking and towards direct experience of life.</p>
+          <p><i>A beautiful companion for anyone seeking freedom in silence and the joy of nothingness.</i></p>
+        </div>
+      </article>
 
-    
-    <div class="book-card">
-  <img src="https://fs.blog/wp-content/uploads/2024/07/CTNYT.jpg" alt="Clear Thinking cover">
-  <div class="book-info">
-    <h3>Clear Thinking </h3>
-    <h4>Shane Parrish</h4>
-    <p><i>Clarity is not about brilliance, it is about avoiding avoidable mistakes.</i></p>
-    <p>Clear Thinking is a reminder that most failures in life come from rushing decisions, reacting emotionally, or getting lost in noise. Parrish shows that slowing down and choosing clarity gives you an edge in work, money, and relationships.</p>
-    <p>The book teaches that success is not about being smarter than others, but about making fewer unforced errors. Shape your environment so the right choices are the easiest, avoid situations where bad outcomes are inevitable, and recognize that small decisions compound into the life you build.</p>
-    <p><i>For me, the key learning is simple: protect your ability to think clearly, and you will protect your ability to live well.</i></p>
-  </div>
-</div>
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/91Aea0C6V3S._UF894,1000_QL80_.jpg" alt="The Prophet cover" loading="lazy">
+        <div class="book-info">
+          <h3>The Prophet</h3>
+          <h4>Kahlil Gibran</h4>
+          <p><i>The Prophet by Kahlil Gibran is a book I return to whenever I need gentle wisdom and poetic truth.</i></p>
+          <p>Each chapter feels like a conversation with the soul — touching on love, work, freedom, and even death with words that are simple yet deeply moving. For me, reading it is like drinking from a quiet spring: refreshing, timeless, and full of grace. It doesn't just speak to the mind, it seeps into the heart and lingers there.</p>
+          <p><i>A short but eternal masterpiece that inspires reflection, gratitude, and a deeper love for life.</i></p>
+        </div>
+      </article>
 
-<div class="book-card">
-  <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRHrAvToVY795lanScyJOkX5rq5OTMHhWCeTuqtv4I0KHsywnAp" alt="The Great CEO Within cover">
-  <div class="book-info">
-    <h3>The Great CEO Within: The Tactical Guide to Company Building</h3>
-    <h4>Alex MacCaw, Matt Mochary, and Misha Talavera</h4>
-    <p><i>Leadership is not charisma, it is clarity and process.</i></p>
-    <p>The Great CEO Within is a manual for building companies and leaders. It cuts through myths about founders and focuses on what really matters: systems, habits, and culture. The real job of a CEO is creating clarity, building trust, and ensuring that the team works on what matters most.</p>
-    <p>What I found most valuable is how tactical it gets: writing agendas, giving feedback, building routines of reflection, and learning to coach instead of command. These are small practices that create powerful organizations.</p>
-    <p><i>The key lesson is that leadership is not about having all the answers, but about creating an environment where the best answers can emerge. Even outside business, these ideas work for anyone who wants to live with systems, clarity, and growth.</i></p>
-  </div>
-</div>
+      <article class="book-card fade-in">
+        <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits cover" loading="lazy">
+        <div class="book-info">
+          <h3>Atomic Habits</h3>
+          <h4>James Clear</h4>
+          <p><i>Atomic Habits by James Clear is one of the most practical books I've read on personal growth.</i></p>
+          <p>What I loved most is how it makes change feel possible — not through giant leaps, but through tiny steps that compound into something powerful over time. The strategies are simple yet effective: build good habits, break the bad ones, and shape your environment so it naturally pulls you towards success. While reading, I kept finding myself nodding and thinking, "Yes, I can actually do this."</p>
+          <p><i>A clear and actionable guide for anyone who wants lasting change without feeling overwhelmed.</i></p>
+        </div>
+      </article>
 
-    
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/71D+fc7mGLL.jpg" alt="Zorba the buddha cover">
-      <div class="book-info">
-        <h3>Zorba the Buddha</h3>
-        <h4>Osho</h4>
-        <p><i>We live divided - chasing pleasure like Zorba or seeking silence like Buddha- but rarely whole.</i></p>
-<p>What I love most is how it shows the divided life of man - either as Zorba, lost in pleasure, or as Buddha, lost in silence.
-Zorba dances, sings, celebrates, but has no depth.
-Buddha meditates, transcends, but has no song.
-Both are half, both incomplete.</p>
-        <p>Osho’s vision of a new man - Zorba the Buddha - touched me deeply: rooted in the earth, yet open to the sky.
-A being who can love and laugh, yet remain aware and silent.</p>
-<p><i>For me, this book is not just philosophy, it’s a glimpse into the future of humanity, the meeting of matter and consciousness, body and soul.</i></p>
-      </div>
-    </div>
-    
-    
-    
-    
-    <div class="book-card">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQigooO-qii4yzQ8k8ngwan3FAQW6IieYVBQ&s" alt="Tao Te Ching cover">
-      <div class="book-info">
-        <h3>Tao Te Ching</h3>
-        <h4>Lao Tzu</h4>
-       <p><i>Tao Te Ching by Lao Tzu is a book that feels like a breath of fresh air in the middle of life’s noise.</i></p> 
-<p>It’s not just philosophy - it’s a way of being, a reminder to flow with nature instead of fighting against it.
-Through its short verses, it teaches humility, balance, and the beauty of simplicity.
-For me, it’s like holding a mirror to life, showing that peace is not something to chase but something to align with.</p>
-<p><i>A timeless guide for anyone seeking calmness, clarity, and harmony.</i></p>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/61LKD6scbfL.jpg" alt="Principles cover">
-      <div class="book-info">
-        <h3>Principles</h3>
-        <h4>Ray Dalio</h4>
-       <p><i>Principles by Ray Dalio is a book full of practical wisdom that bridges life and business.</i></p>
-<p>Ray Dalio shares the principles that guided his journey — from decision-making to radical transparency, and the art of learning from mistakes. 
-What I love most is how it turns complex ideas into simple, actionable habits that anyone can apply. 
-It’s not just about success in work, but about building a framework to live with clarity and purpose.</p>
-<p><i>A powerful guide for anyone who wants to make better choices and grow stronger every day.</i></p>
-
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/51lUeX6L2BL.jpg" alt="Naval Almanack cover">
-      <div class="book-info">
-        <h3>The Almanack of Naval Ravikant</h3>
-        <h4>Eric Jorgenson</h4>
-      <p><i>The Almanack of Naval Ravikant by Eric Jorgenson is like sitting with a wise friend who talks about life, wealth, and happiness in the simplest way possible.</i></p> 
-<p>Instead of chasing shortcuts, Naval shows the value of building specific knowledge, nurturing relationships that compound, and designing a life around freedom. 
-What I love is how practical it feels — not heavy theory, but clear insights that make you pause and rethink how you live and work. 
-It’s a reminder that true wealth is not just money, but peace of mind, time, and choice.</p>
-<p><i>A modern guide for anyone who wants to live smarter, lighter, and more freely.</i></p>
-
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/61d4xAjbRQL._UF1000,1000_QL80_.jpg" alt="Poor Charlie’s Almanack cover">
-      <div class="book-info">
-        <h3>Poor Charlie’s Almanack</h3>
-        <h4>Charlie Munger</h4>
-      <p><i>Poor Charlie’s Almanack by Charlie Munger is a treasure chest of wisdom from one of the sharpest minds in investing and life.</i></p> 
-<p>Through his speeches and timeless lessons, Munger shows the power of mental models, clear thinking, and the habit of constant learning. 
-What stands out is his humor and practicality — it’s not just about money, but about avoiding foolish mistakes and building a life of rational decisions. 
-Reading it feels like getting decades of experience distilled into simple, memorable truths.</p>
-<p><i>A brilliant guide for anyone who values clarity, curiosity, and lifelong wisdom.</i></p>
-
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/31eXnQuv+IL._UF1000,1000_QL80_.jpg" alt="Hsin Hsin Ming cover">
-      <div class="book-info">
-        <h3>Hsin Hsin Ming: The Book of Nothing</h3>
-        <h4>Osho</h4>
-      <p><i>Hsin Hsin Ming: The Book of Nothing by Osho is one of those rare books that feels less like reading and more like sitting in silence with a master.</i></p> 
-<p>It takes Zen wisdom and makes it alive — pointing again and again to simplicity, to dropping the constant need to analyze, to just being. 
-For me, it was a reminder that peace doesn’t come from solving everything, but from letting go of the need to solve at all. 
-Each page feels like a gentle nudge away from overthinking and towards direct experience of life.</p>
-<p><i>A beautiful companion for anyone seeking freedom in silence and the joy of nothingness.</i></p>
- 
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/91Aea0C6V3S._UF894,1000_QL80_.jpg" alt="The Prophet cover">
-      <div class="book-info">
-        <h3>The Prophet</h3>
-        <h4>Kahlil Gibran</h4>
-      <p><i>The Prophet by Kahlil Gibran is a book I return to whenever I need gentle wisdom and poetic truth.</i></p> 
-<p>Each chapter feels like a conversation with the soul — touching on love, work, freedom, and even death with words that are simple yet deeply moving. 
-For me, reading it is like drinking from a quiet spring: refreshing, timeless, and full of grace. 
-It doesn’t just speak to the mind, it seeps into the heart and lingers there.</p>
-<p><i>A short but eternal masterpiece that inspires reflection, gratitude, and a deeper love for life.</i></p>
- 
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits cover">
-      <div class="book-info">
-        <h3>Atomic Habits</h3>
-        <h4>James Clear</h4>
-       <p><i>Atomic Habits by James Clear is one of the most practical books I’ve read on personal growth.</i></p> 
-<p>What I loved most is how it makes change feel possible — not through giant leaps, but through tiny steps that compound into something powerful over time. 
-The strategies are simple yet effective: build good habits, break the bad ones, and shape your environment so it naturally pulls you towards success. 
-While reading, I kept finding myself nodding and thinking, “Yes, I can actually do this.”</p>
-<p><i>A clear and actionable guide for anyone who wants lasting change without feeling overwhelmed.</i></p>
-
-      </div>
     </div>
   </main>
+
+  <footer>
+    <p>© 2024-2025 Vikram Aditya. Building and learning, one day at a time.</p>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script src="script.js"></script>
 </body>
 </html>
