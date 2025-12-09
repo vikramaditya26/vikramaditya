@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Aditya - The Simple Guy</title>
-  <meta name="description" content="Aditya - IIT Bombay graduate working in Founder's Office at Teachmint. Exploring startups, learning, and growing 1% better every day." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vikram Aditya - The Simple Guy</title>
+  <meta name="description" content="Vikram Aditya - IIT Bombay graduate working in Founder's Office at Teachmint. Exploring startups, learning, and growing 1% better every day." />
+  <meta name="author" content="Vikram Aditya" />
   <meta name="google-site-verification" content="0NHZXSmJXrJ_qAptEL68zXfPZNz2XLeAXk8xwwKQzpY" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vikram Aditya - The Simple Guy" />
+  <meta property="og:description" content="IIT Bombay graduate exploring startups and growing 1% better every day." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
@@ -18,30 +25,72 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <!-- Reading Progress Bar -->
+  <div class="progress-bar"></div>
+
   <header>
-    <h1 class="site-title">The Simple Guy</h1>
-    <nav>
-      <a href="index.html" aria-current="page">About</a>
-      <a href="finance.html">Finance</a>
-      <a href="books.html">Books</a>
-      <a href="workout.html">Workout</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="header-inner">
+      <a href="index.html" class="site-title">The Simple <span>Guy</span></a>
+      
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <nav>
+        <a href="index.html" aria-current="page">About</a>
+        <a href="finance.html">Finance</a>
+        <a href="books.html">Books</a>
+        <a href="workout.html">Workout</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <section id="about">
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Hello, I'm Vikram Aditya 👋</h1>
+      <p class="subtitle">IIT Bombay '24 | Founder's Office @ Teachmint | Building & Learning</p>
+      <p class="tagline">"What we think, we become." — Buddha</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
       <h2>About Me</h2>
       
       <p>
-        Hello World! 👋<br><br>
-        I am <strong>Vikram Aditya</strong> (also known as <a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener">Aditya Kumar</a> and 王阳明 - Wang Yangming). 
-        I'm a Civil Engineering graduate from <strong>IIT Bombay</strong> (Class of 2024), currently working in the <strong>Founder's Office at Teachmint</strong> in Bengaluru.
+        I'm <strong>Vikram Aditya</strong> (also known as <a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener">Aditya Kumar</a> and 王阳明 - Wang Yangming). 
+        A Civil Engineering graduate from <strong>IIT Bombay</strong> (Class of 2024), currently working in the <strong>Founder's Office at Teachmint</strong> in Bengaluru.
       </p>
+    </section>
 
-
-      <h3>My Journey So Far</h3>
+    <!-- Journey Section -->
+    <section class="fade-in">
+      <h2>My Journey</h2>
+      
       <p>
         After graduating from IIT Bombay, I've been exploring the startup ecosystem through various Founder's Office roles. 
         I spent time at <strong>Urban Farm</strong> in Udaipur learning about organic farming and soil health, 
@@ -50,13 +99,17 @@
       </p>
 
       <p>
-        At IIT Bombay, I wasn't just studying civil engineering - I was exploring everything from entrepreneurship to law, meditation to chess. 
+        At IIT Bombay, I wasn't just studying civil engineering — I was exploring everything from entrepreneurship to law, meditation to chess. 
         I held multiple leadership positions including <strong>Department General Secretary</strong> of the Civil Engineering Association, 
         where I led a team of 32 and managed a budget of ₹0.85M. I also explored research at <strong>Cambridge Judge Business School</strong> 
         and <strong>Tsinghua University</strong> in China, and even filed a patent for a biomedical waste bin at IIT Gandhinagar's Invention Factory.
       </p>
+    </section>
 
-      <h3>My Philosophy</h3>
+    <!-- Philosophy Section -->
+    <section class="fade-in">
+      <h2>My Philosophy</h2>
+      
       <p>
         My life is guided by a single core value inspired by the Buddha's wisdom: 
         <em>"What we think, we become."</em>
@@ -64,32 +117,48 @@
 
       <p>Building upon this wisdom, I have defined five core values that guide my actions and decisions:</p>
 
-      <details class="core-box">
-        <summary><b>1. Ethics is Fundamental</b></summary>
-        <p>Integrity is non-negotiable in how we live and work. This is practiced by respecting everything equally — treating people, work, and nature with the same level of respect.</p>
-      </details>
+      <div class="core-values">
+        <details class="core-box">
+          <summary><b>1. Ethics is Fundamental</b></summary>
+          <div class="content">
+            <p>Integrity is non-negotiable in how we live and work. This is practiced by respecting everything equally — treating people, work, and nature with the same level of respect.</p>
+          </div>
+        </details>
 
-      <details class="core-box">
-        <summary><b>2. Be Present</b></summary>
-        <p>This means focusing on one thing at a time and giving it full attention. It helps value each moment, avoid wasting time, and turn small actions into big accomplishments.</p>
-      </details>
+        <details class="core-box">
+          <summary><b>2. Be Present</b></summary>
+          <div class="content">
+            <p>This means focusing on one thing at a time and giving it full attention. It helps value each moment, avoid wasting time, and turn small actions into big accomplishments.</p>
+          </div>
+        </details>
 
-      <details class="core-box">
-        <summary><b>3. Love and Respect Yourself</b></summary>
-        <p>Self-care and self-respect form the foundation for everything else. Avoid complaints, accept circumstances, and take action. Stay humble, hungry for knowledge, and grounded.</p>
-      </details>
+        <details class="core-box">
+          <summary><b>3. Love and Respect Yourself</b></summary>
+          <div class="content">
+            <p>Self-care and self-respect form the foundation for everything else. Avoid complaints, accept circumstances, and take action. Stay humble, hungry for knowledge, and grounded.</p>
+          </div>
+        </details>
 
-      <details class="core-box">
-        <summary><b>4. Contribute Proactively</b></summary>
-        <p>Focus on what can be given rather than received. Create value, commit to continuous learning, take bold action, and pursue simple ideas with deep focus.</p>
-      </details>
+        <details class="core-box">
+          <summary><b>4. Contribute Proactively</b></summary>
+          <div class="content">
+            <p>Focus on what can be given rather than received. Create value, commit to continuous learning, take bold action, and pursue simple ideas with deep focus.</p>
+          </div>
+        </details>
 
-      <details class="core-box">
-        <summary><b>5. Courage, Discipline, and Consistency</b></summary>
-        <p>Begin with courage to start and discipline to continue. Small daily actions accumulate into significant results. Focus on process, not perfection — progress matters most.</p>
-      </details>
+        <details class="core-box">
+          <summary><b>5. Courage, Discipline, and Consistency</b></summary>
+          <div class="content">
+            <p>Begin with courage to start and discipline to continue. Small daily actions accumulate into significant results. Focus on process, not perfection — progress matters most.</p>
+          </div>
+        </details>
+      </div>
+    </section>
 
-      <h3>Why This Website?</h3>
+    <!-- Why This Website -->
+    <section class="fade-in">
+      <h2>Why This Website?</h2>
+      
       <p>
         This website is part of my <strong>100-day challenge</strong> — a small experiment where I aim to get <em>1% better every day</em>. 
         Here, I share my personal experiences, thoughts, and learnings across finance, books, workouts, and life in general.
@@ -97,39 +166,80 @@
 
       <p>
         If you notice some sections incomplete, that simply means I'm still building and improving. As Leonardo da Vinci said: 
-        <em>"Learning never exhausts the mind. No field is foreign - just unexplored."</em>
+        <em>"Learning never exhausts the mind. No field is foreign — just unexplored."</em>
       </p>
+    </section>
 
-      <h3>Connect With Me</h3>
-      <p>
-        Find me on <a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener">LinkedIn</a> 
-        or <a href="https://instagram.com/the.simple.guyyy" target="_blank" rel="noopener">Instagram</a> (@the.simple.guyyy).
-      </p>
+    <!-- Quick Links Section -->
+    <section class="fade-in">
+      <h2>Explore</h2>
+      
+      <div class="grid-2">
+        <div class="card">
+          <h3><span class="icon">📚</span> Books</h3>
+          <p>Curated book reviews and lessons from timeless reads that shaped my thinking.</p>
+          <a href="books.html" class="card-link">See all book reviews</a>
+        </div>
 
-      <div class="card">
-        <h3>Latest from Books</h3>
-        <p>Full list is on the Books page.</p>
-        <ul>
-          <li><a href="books.html#naval-almanack">The Almanack of Naval Ravikant — highlights</a></li>
-        </ul>
-        <p><a href="books.html">See all book reviews →</a></p>
+        <div class="card">
+          <h3><span class="icon">💪</span> Workout</h3>
+          <p>My fitness journey, workout routines, and exercise guides with videos.</p>
+          <a href="workout.html" class="card-link">View workout notes</a>
+        </div>
+
+        <div class="card">
+          <h3><span class="icon">💰</span> Finance</h3>
+          <p>Personal finance basics — budgeting, investing, and building wealth.</p>
+          <a href="finance.html" class="card-link">Learn finance basics</a>
+        </div>
+
+        <div class="card">
+          <h3><span class="icon">✍️</span> Blog</h3>
+          <p>Thoughts, insights, and lessons from books, podcasts, and life experiences.</p>
+          <a href="blog.html" class="card-link">Read the blog</a>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Latest from Workout</h3>
-        <p><a href="workout.html">Workout notes →</a></p>
-      </div>
-
-      <div class="card">
-        <h3>Blog</h3>
-        <p>Tiny updates and thoughts.</p>
-        <p><a href="blog.html">Read the Blog →</a></p>
+    <!-- Connect Section -->
+    <section class="fade-in">
+      <h2>Connect With Me</h2>
+      
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://instagram.com/the.simple.guyyy" target="_blank" rel="noopener" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          Instagram
+        </a>
+        <a href="contact.html" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          Contact
+        </a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2024-2025 Aditya Kumar. Building and learning, one day at a time.</p>
+    <p>© 2024-2025 Vikram Aditya. Building and learning, one day at a time.</p>
   </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
 </body>
 </html>
