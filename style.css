@@ -1366,61 +1366,17 @@ li {
 .skip-link:focus {
   top: var(--space-sm);
 }
+
+
 /* ================================================
-   ADDITIONAL CSS FOR PROFILE PAGE - VERSION 2
+   ADDITIONAL CSS FOR PROFILE PAGE - VERSION 3
    Add this code to the END of your style.css file
    (After line 1369)
+   
+   CONSISTENT FORMATTING THROUGHOUT
    ================================================ */
 
-/* === Section Subtitle === */
-.section-subtitle {
-  color: var(--color-text-muted);
-  font-size: 1rem;
-  margin-top: -0.5rem;
-  margin-bottom: var(--space-lg);
-}
-
-/* === Info Card (Quick Bio) === */
-.info-card {
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  padding: var(--space-lg);
-  margin: var(--space-xl) 0;
-  box-shadow: 0 4px 20px var(--color-shadow);
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
-}
-
-.info-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.info-label {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
-}
-
-.info-value {
-  font-size: 1rem;
-  color: var(--color-text);
-  font-weight: 600;
-}
-
-@media (max-width: 600px) {
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* === Profile List (Collapsible Boxes) === */
+/* === Profile List (Used for ALL sections) === */
 .profile-list {
   display: flex;
   flex-direction: column;
@@ -1446,6 +1402,9 @@ li {
   list-style: none;
   transition: all var(--transition-base);
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .profile-box summary::-webkit-details-marker { 
@@ -1466,7 +1425,7 @@ li {
   justify-content: center;
   border-radius: 50%;
   background: var(--color-accent-light);
-  margin-left: auto;
+  margin-left: var(--space-md);
 }
 
 .profile-box[open] summary::after {
@@ -1482,39 +1441,61 @@ li {
   background: var(--color-accent-light);
 }
 
-/* Profile Summary Layout */
+/* === Profile Summary (Logo + Info) === */
 .profile-summary {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  width: 100%;
-}
-
-.profile-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-bg);
-  border-radius: var(--border-radius-sm);
-  border: 1px solid var(--color-border);
-}
-
-.profile-brief {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
   flex: 1;
   min-width: 0;
 }
 
-.profile-brief strong {
-  font-size: 1.05rem;
+/* Logo Container - Supports both images and placeholder text */
+.profile-logo {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+.profile-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.logo-placeholder {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+/* Profile Info */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-info strong {
+  font-size: 1rem;
   color: var(--color-text);
   line-height: 1.3;
+}
+
+.profile-company {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  font-weight: 500;
 }
 
 .profile-meta {
@@ -1523,11 +1504,22 @@ li {
   font-weight: 400;
 }
 
-/* Profile Content */
+/* === Profile Content (Expanded) === */
 .profile-content {
   padding: var(--space-lg);
   color: var(--color-text-secondary);
   animation: expandIn 0.3s ease;
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .profile-content p {
@@ -1538,202 +1530,131 @@ li {
   margin-bottom: 0;
 }
 
+.profile-content h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin: var(--space-md) 0 var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-content h4:first-child {
+  margin-top: 0;
+}
+
 .profile-content ul {
-  margin: var(--space-sm) 0 var(--space-md);
+  margin: 0 0 var(--space-md);
   padding-left: var(--space-lg);
 }
 
 .profile-content li {
   margin-bottom: var(--space-xs);
   color: var(--color-text-secondary);
+  line-height: 1.6;
 }
 
-.profile-content blockquote {
-  border-left: 3px solid var(--color-accent);
-  padding-left: var(--space-md);
-  margin: var(--space-md) 0;
-  font-style: italic;
+.profile-content ul:last-child {
+  margin-bottom: 0;
+}
+
+/* === Skills Section === */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+}
+
+.skill-category {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+}
+
+.skill-category h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Profile Tags */
-.profile-tags {
+.skill-tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--color-border);
 }
 
-.tag {
+.skill-tag {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 6px 14px;
   background: var(--color-accent-light);
   color: var(--color-accent);
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 500;
-}
-
-/* Highlight Box */
-.highlight-box {
-  background: linear-gradient(135deg, var(--color-accent-light) 0%, transparent 100%);
-  border-left: 3px solid var(--color-accent);
-  padding: var(--space-md);
-  margin: var(--space-md) 0;
-  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-}
-
-.highlight-box strong {
-  color: var(--color-accent);
-}
-
-/* === Certifications Grid === */
-.cert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-md);
-}
-
-.cert-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  padding: var(--space-md);
   transition: all var(--transition-base);
 }
 
-.cert-item:hover {
+.skill-tag:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* === Interests Section === */
+.interests-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+.interest-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 8px 16px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 25px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  transition: all var(--transition-base);
+}
+
+.interest-tag:hover {
   border-color: var(--color-accent);
   background: var(--color-accent-light);
   transform: translateY(-2px);
 }
 
-.cert-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-bg);
-  border-radius: var(--border-radius-sm);
-}
-
-.cert-details {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.cert-name {
-  font-size: 0.95rem;
-  color: var(--color-text);
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.cert-issuer {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-}
-
-/* === Awards Grid === */
-.awards-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.award-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  padding: var(--space-lg);
-  transition: all var(--transition-base);
-}
-
-.award-item:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 30px var(--color-shadow);
-}
-
-.award-icon {
-  font-size: 2rem;
-  flex-shrink: 0;
-}
-
-.award-details {
-  flex: 1;
-}
-
-.award-details strong {
-  display: block;
-  font-size: 1.1rem;
-  color: var(--color-text);
-  margin-bottom: var(--space-xs);
-}
-
-.award-details p {
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-xs);
-  font-size: 0.95rem;
-}
-
-.award-date {
-  font-size: 0.85rem;
-  color: var(--color-accent);
-  font-weight: 500;
-}
-
-/* === Skills List Enhancement === */
-.skill-list {
-  list-style: none;
-  padding: 0;
-  margin: var(--space-sm) 0 0;
-}
-
-.skill-list li {
-  position: relative;
-  padding-left: var(--space-lg);
-  margin-bottom: var(--space-sm);
-  color: var(--color-text-secondary);
-}
-
-.skill-list li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--color-accent);
-  font-weight: bold;
-}
-
 /* === Mobile Responsive === */
 @media (max-width: 768px) {
-  .profile-summary {
-    flex-wrap: wrap;
+  .profile-box summary {
+    padding: var(--space-sm) var(--space-md);
   }
   
-  .profile-icon {
+  .profile-logo {
     width: 40px;
     height: 40px;
-    font-size: 1.4rem;
   }
   
-  .profile-brief strong {
+  .logo-placeholder {
+    font-size: 1rem;
+  }
+  
+  .profile-info strong {
     font-size: 0.95rem;
   }
   
-  .profile-box summary {
-    padding: var(--space-sm) var(--space-md);
+  .profile-company {
+    font-size: 0.85rem;
+  }
+  
+  .profile-meta {
+    font-size: 0.8rem;
   }
   
   .profile-box summary::after {
@@ -1746,28 +1667,27 @@ li {
     padding: var(--space-md);
   }
   
-  .cert-grid {
+  .skills-container {
     grid-template-columns: 1fr;
-  }
-  
-  .award-item {
-    flex-direction: column;
-    text-align: center;
   }
 }
 
 @media (max-width: 480px) {
-  .profile-icon {
-    display: none;
+  .profile-summary {
+    flex-wrap: wrap;
   }
   
-  .info-grid {
-    gap: var(--space-sm);
+  .profile-logo {
+    width: 36px;
+    height: 36px;
   }
   
-  .info-item {
-    padding: var(--space-sm);
-    background: var(--color-bg);
-    border-radius: var(--border-radius-sm);
+  .interests-container {
+    gap: var(--space-xs);
+  }
+  
+  .interest-tag {
+    padding: 6px 12px;
+    font-size: 0.85rem;
   }
 }
