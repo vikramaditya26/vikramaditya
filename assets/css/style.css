@@ -742,7 +742,7 @@ section {
 .buy-links {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 10px;
   margin-top: var(--space-md);
   flex-wrap: wrap;
 }
@@ -751,39 +751,66 @@ section {
   font-size: 0.85rem;
   color: var(--color-text-muted);
   margin: 0;
+  width: 100%;
+  margin-bottom: 2px;
 }
 
 .buy-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
-  padding: 0.45em 1em;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
   border: 1px solid transparent;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.buy-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .buy-btn.amazon {
-  background: #ff9900;
-  color: #0f0f0f;
+  background: #232f3e;
+  color: #ff9900;
+  border-color: #ff9900;
 }
 
 .buy-btn.amazon:hover {
-  background: #e68a00;
-  transform: translateY(-1px);
+  background: #ff9900;
+  color: #232f3e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
 }
 
 .buy-btn.flipkart {
-  background: #2874f0;
-  color: #fff;
+  background: #fff;
+  color: #2874f0;
+  border-color: #2874f0;
 }
 
 .buy-btn.flipkart:hover {
-  background: #1a5dc8;
-  transform: translateY(-1px);
+  background: #2874f0;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 116, 240, 0.3);
+}
+
+[data-theme="dark"] .buy-btn.flipkart {
+  background: #1a1a2e;
+  color: #5b9bf5;
+  border-color: #2874f0;
+}
+
+[data-theme="dark"] .buy-btn.flipkart:hover {
+  background: #2874f0;
+  color: #fff;
 }
 
 /* === Affiliate Disclosure === */
