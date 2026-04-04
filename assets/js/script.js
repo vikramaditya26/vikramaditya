@@ -98,18 +98,60 @@ function injectComponents() {
 // Inject components immediately
 injectComponents();
 
-// ===== Buy Button Brand Logos (runs immediately) =====
-(function injectBuyButtonLogos() {
-  const amazonSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595.394-.15.763-.3 1.108-.444.158-.066.295-.127.41-.18.227-.1.414-.063.56.11.146.174.13.363-.048.567-.535.612-1.464 1.147-2.785 1.606a18.872 18.872 0 01-3.558.89c-.836.126-1.598.19-2.284.19-3.463 0-6.594-.876-9.394-2.628-.09-.06-.345-.244-.766-.554-.096-.07-.158-.13-.186-.18zM6.394 14.736c0-.752.164-1.397.493-1.936a3.237 3.237 0 011.378-1.272c.597-.31 1.336-.533 2.216-.67.456-.073 1.062-.14 1.818-.2V9.858c0-.665-.073-1.13-.22-1.393-.3-.46-.827-.69-1.582-.69h-.164c-.397.04-.725.177-.984.412-.26.236-.4.543-.425.922-.028.21-.127.33-.3.36l-1.72-.194c-.18-.04-.27-.137-.27-.29 0-.02.003-.038.012-.054.164-.924.564-1.593 1.2-2.01.636-.416 1.434-.655 2.394-.715h.518c1.17 0 2.084.343 2.743 1.03.108.12.2.24.278.36.14.217.234.45.283.695.048.246.072.616.072 1.11v4.084c0 .398.058.71.174.936.116.226.354.51.714.852.09.08.134.168.134.266 0 .08-.044.16-.132.24l-1.134.986c-.11.08-.232.088-.367.022-.36-.334-.612-.574-.756-.72-.504.56-1.058.89-1.662.988-.306.06-.64.088-1.004.088-.817 0-1.47-.248-1.96-.744-.49-.496-.735-1.134-.735-1.916zm3.282.24c.36 0 .705-.1 1.034-.303.33-.2.544-.48.644-.836V11.1c-.837.04-1.476.17-1.918.392-.7.352-1.05.876-1.05 1.572 0 .47.12.846.36 1.13.24.284.555.426.943.426zM20.52 18.2c.15.12.184.274.1.46-.527 1.2-1.264 2.1-2.21 2.7-.144.092-.262.058-.352-.1-.09-.16-.04-.3.148-.42.743-.485 1.34-1.2 1.79-2.143.068-.14.14-.227.216-.264.075-.036.16-.022.252.04l.054.03z"/></svg>';
-  const flipkartSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.833 1.333H20.167c1.38 0 2.5 1.12 2.5 2.5v16.334c0 1.38-1.12 2.5-2.5 2.5H3.833c-1.38 0-2.5-1.12-2.5-2.5V3.833c0-1.38 1.12-2.5 2.5-2.5zm3.87 5.2v1.567h2.806L8.07 18.467h2.222l2.438-10.367h2.806V6.533H7.703z"/></svg>';
-  document.querySelectorAll('.buy-btn').forEach(function(btn) {
-    if (btn.classList.contains('amazon')) {
-      btn.innerHTML = amazonSvg + '<span>Buy on Amazon</span>';
-    } else if (btn.classList.contains('flipkart')) {
-      btn.innerHTML = flipkartSvg + '<span>Buy on Flipkart</span>';
-    }
+// ===== Microsoft Clarity Analytics =====
+// To activate: replace 'CLARITY_PROJECT_ID' with your actual Clarity project ID
+// Get one free at https://clarity.microsoft.com
+(function(c,l,a,r,i,t,y){
+  if (i === 'CLARITY_PROJECT_ID') return; // Skip if not configured
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window,document,"clarity","script","CLARITY_PROJECT_ID");
+
+// ===== JSON-LD Structured Data =====
+(function injectStructuredData() {
+  var page = document.body.getAttribute('data-page') || '';
+  var schemas = [];
+
+  // WebSite schema (every page)
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "The Simple Guy",
+    "url": "https://vikramaditya.me",
+    "author": { "@type": "Person", "name": "Vikram Aditya" }
+  });
+
+  // Person schema (about/home page)
+  if (page === 'about') {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Vikram Aditya",
+      "url": "https://vikramaditya.me",
+      "sameAs": [
+        "https://www.instagram.com/the.simple.guyyy/",
+        "https://www.instagram.com/itz_vkaditya/",
+        "https://www.linkedin.com/in/adityakumar2608/"
+      ],
+      "jobTitle": "Content Creator & Software Engineer",
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "IIT Bombay" }
+    });
+  }
+
+  schemas.forEach(function(schema) {
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
   });
 })();
+
+// ===== Buy Button Labels (runs immediately) =====
+document.querySelectorAll('.buy-btn').forEach(function(btn) {
+  if (btn.classList.contains('amazon')) btn.textContent = 'Buy on Amazon';
+  else if (btn.classList.contains('flipkart')) btn.textContent = 'Buy on Flipkart';
+});
 
 // ===== Main Initialization =====
 document.addEventListener('DOMContentLoaded', function() {

@@ -644,7 +644,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 
 **Revenue impact:** Once Vikram gets Amazon Associates tag (this week), update affiliate-links.json ONCE and all 15+ book links go live immediately.
 
-### PHASE 2: Analytics & SEO Basics (Day 3)
+### PHASE 2: Analytics & SEO Basics (Day 3) ✅ COMPLETED
 **Goal:** Start measuring everything. You can't improve what you don't measure.
 
 | # | Task | Why it matters |
@@ -886,6 +886,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-04 | AGENT.md v2 created — comprehensive architecture, 12-phase roadmap, data strategy | Phase 0 |
 | 2026-04-04 | **Phase 0 complete** — Restructured flat HTML to folder-based URLs (`/books/`, `/finance/`, etc.). Moved all assets under `assets/` (css, js, images, data). Built shared header/footer injection via `script.js` (`renderHeader()`, `renderFooter()`, `injectComponents()`). Created `getBasePath()` for relative path resolution across folder depths. Added `.nojekyll`, `404.html`, `robots.txt`, `sitemap.xml`. Created `assets/data/books.json` (15 books) and `assets/data/affiliate-links.json` (centralized link registry). Removed old flat files. All 6 pages tested in both themes. Committed as `a5b912b`. | Phase 0 |
 | 2026-04-05 | **Phase 1 complete** — Monetization foundation. Built affiliate link loader in `script.js` (reads `affiliate-links.json`, auto-populates `[data-affiliate]` elements with URLs, adds `rel="nofollow sponsored"` and `target="_blank"`). Designed `.buy-btn` CSS component (Amazon orange, Flipkart blue). Added buy buttons (Amazon + Flipkart) to all 15 book cards. Added `.affiliate-disclosure` component. Added "Supplements I Use" section to workout page (Whey Protein, Creatine, Multivitamin cards with buy links). Added "Books That Changed How I Think About Money" cross-sell section to finance page (4 recommended books with covers and buy links). All changes tested in both themes. | Phase 1 |
+| 2026-04-05 | **Phase 2 complete** — Analytics & SEO. Added Microsoft Clarity snippet in `script.js` (placeholder ID — replace `CLARITY_PROJECT_ID` with real ID from clarity.microsoft.com). Added JSON-LD structured data injection: WebSite schema on all pages, Person schema on homepage. Added OG meta tags (title, description, type, url) to all 6 pages. Added `<link rel="canonical">` to all 6 pages. Updated `sitemap.xml` lastmod dates. | Phase 2 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -894,7 +895,14 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 4. **CSS components:** `.buy-btn.amazon` (orange), `.buy-btn.flipkart` (blue), `.buy-links` (flex container), `.affiliate-disclosure` (left-bordered aside).
 5. **Adding new affiliate links:** Add entry to JSON → Add `data-affiliate` attribute to HTML link → Done. No JS changes needed.
 
+### How analytics & SEO works (for future agents):
+1. **Microsoft Clarity:** Snippet in `script.js` — replace `CLARITY_PROJECT_ID` with real ID. Free heatmaps + session recordings.
+2. **JSON-LD:** Injected via `script.js` `injectStructuredData()`. WebSite schema on all pages, Person schema on homepage. Add more schemas per section as needed.
+3. **OG tags:** In each page's `<head>`. Each page has unique `og:title`, `og:description`, `og:url`. No og:image yet — add when we have section-specific images.
+4. **Canonical URLs:** `<link rel="canonical">` in each page's `<head>`. Points to `https://vikramaditya.me/{section}/`.
+5. **Sitemap:** `sitemap.xml` in root. Update `lastmod` and add new URLs when pages are created.
+
 ---
 
 *Last updated: 2026-04-05*
-*Next priority: Phase 2 — Analytics & SEO Basics*
+*Next priority: Phase 3 — Books Enhancement*
