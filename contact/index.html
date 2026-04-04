@@ -5,33 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact - The Simple Guy</title>
   <meta name="description" content="Get in touch with Vikram Aditya - connect via LinkedIn, Instagram, or send a message." />
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
-  <link rel="icon" href="images/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
-<body>
-  <a href="#main" class="skip-link">Skip to main content</a>
-
-  <header>
-    <div class="header-inner">
-      <a href="index.html" class="site-title">The Simple <span>Guy</span></a>
-      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-      <nav>
-        <a href="index.html">About</a>
-        <a href="finance.html">Finance</a>
-        <a href="books.html">Books</a>
-        <a href="workout.html">Workout</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html" aria-current="page">Contact</a>
-      </nav>
-      <button class="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      </button>
-    </div>
-  </header>
+<body data-page="contact">
+  <div id="site-header"></div>
 
   <main id="main">
     <section class="hero" style="padding: var(--space-xl) 0;">
@@ -43,7 +24,7 @@
       <div class="card" style="text-align: center; margin-bottom: var(--space-xl);">
         <h3>Let's Connect</h3>
         <p>Whether you want to discuss startups, share book recommendations, talk about fitness, or just say hello — I'm always happy to connect with like-minded people.</p>
-        
+
         <div class="social-links" style="margin-top: var(--space-lg);">
           <a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener" class="social-link">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -69,28 +50,24 @@
 
       <div class="contact-form fade-in">
         <h3 style="margin-bottom: var(--space-lg); text-align: center;">Send a Message</h3>
-        
+
         <form action="https://formspree.io/f/xovgkkjy" method="POST">
           <div class="form-group">
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" required placeholder="Vikram">
           </div>
-          
           <div class="form-group">
             <label for="email">Your Email</label>
             <input type="email" id="email" name="email" required placeholder="Vikram@example.com">
           </div>
-          
           <div class="form-group">
             <label for="subject">Subject</label>
             <input type="text" id="subject" name="subject" placeholder="What's this about?">
           </div>
-          
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
           </div>
-          
           <button type="submit" class="btn" style="width: 100%;">
             Send Message
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;">
@@ -99,7 +76,7 @@
             </svg>
           </button>
         </form>
-        
+
         <p style="text-align: center; margin-top: var(--space-lg); color: var(--color-text-muted); font-size: 0.9rem;">
           💡 <strong>Tip:</strong> For faster response, connect with me on LinkedIn!
         </p>
@@ -113,14 +90,7 @@
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Vikram Aditya — Made with ❤️ </p>
-  </footer>
-
-  <button class="back-to-top" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
-  </button>
-
-  <script src="script.js"></script>
+  <div id="site-footer"></div>
+  <script src="../assets/js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,167 @@
+[
+  {
+    "id": "siddhartha",
+    "title": "Siddhartha",
+    "author": "Hermann Hesse",
+    "cover": "/assets/images/books/siddhartha.jpg",
+    "category": ["philosophy", "spirituality"],
+    "rating": 5,
+    "oneLineHook": "A book that doesn't just speak to you — it changes something within.",
+    "affiliateKey": "siddhartha",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "the-alchemist",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "cover": "/assets/images/books/the-alchemist.jpg",
+    "category": ["philosophy", "fiction"],
+    "rating": 5,
+    "oneLineHook": "When you want something, the universe aligns to help you.",
+    "affiliateKey": "the-alchemist",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "book-of-five-rings",
+    "title": "The Book of Five Rings",
+    "author": "Miyamoto Musashi",
+    "cover": "/assets/images/books/book-of-five-rings.jpg",
+    "category": ["philosophy", "self-help"],
+    "rating": 5,
+    "oneLineHook": "Every battle is first won in the mind.",
+    "affiliateKey": "book-of-five-rings",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "jonathan-livingston-seagull",
+    "title": "Jonathan Livingston Seagull",
+    "author": "Richard Bach",
+    "cover": "/assets/images/books/jonathan-livingston-seagull.jpg",
+    "category": ["philosophy", "fiction"],
+    "rating": 5,
+    "oneLineHook": "What if life could be more?",
+    "affiliateKey": "jonathan-livingston-seagull",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "animal-farm",
+    "title": "Animal Farm",
+    "author": "George Orwell",
+    "cover": "/assets/images/books/animal-farm.jpg",
+    "category": ["fiction", "philosophy"],
+    "rating": 5,
+    "oneLineHook": "Every revolution begins with purity and ends with politics.",
+    "affiliateKey": "animal-farm",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "clear-thinking",
+    "title": "Clear Thinking",
+    "author": "Shane Parrish",
+    "cover": "/assets/images/books/clear-thinking.jpg",
+    "category": ["self-help", "business"],
+    "rating": 5,
+    "oneLineHook": "Clarity is not about brilliance, it is about avoiding avoidable mistakes.",
+    "affiliateKey": "clear-thinking",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "the-great-ceo-within",
+    "title": "The Great CEO Within",
+    "author": "Alex MacCaw, Matt Mochary, and Misha Talavera",
+    "cover": "/assets/images/books/the-great-ceo-within.jpg",
+    "category": ["business", "leadership"],
+    "rating": 4,
+    "oneLineHook": "Leadership is not charisma, it is clarity and process.",
+    "affiliateKey": "the-great-ceo-within",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "zorba-the-buddha",
+    "title": "Zorba the Buddha",
+    "author": "Osho",
+    "cover": "/assets/images/books/zorba-the-buddha.jpg",
+    "category": ["spirituality", "philosophy"],
+    "rating": 5,
+    "oneLineHook": "We live divided — chasing pleasure like Zorba or seeking silence like Buddha — but rarely whole.",
+    "affiliateKey": "zorba-the-buddha",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "tao-te-ching",
+    "title": "Tao Te Ching",
+    "author": "Lao Tzu",
+    "cover": "/assets/images/books/tao-te-ching.jpg",
+    "category": ["spirituality", "philosophy"],
+    "rating": 5,
+    "oneLineHook": "A breath of fresh air in the middle of life's noise.",
+    "affiliateKey": "tao-te-ching",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "principles",
+    "title": "Principles",
+    "author": "Ray Dalio",
+    "cover": "/assets/images/books/principles.jpg",
+    "category": ["business", "self-help"],
+    "rating": 4,
+    "oneLineHook": "Practical wisdom that bridges life and business.",
+    "affiliateKey": "principles",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "almanack-of-naval-ravikant",
+    "title": "The Almanack of Naval Ravikant",
+    "author": "Eric Jorgenson",
+    "cover": "/assets/images/books/almanack-of-naval-ravikant.jpg",
+    "category": ["business", "self-help", "philosophy"],
+    "rating": 5,
+    "oneLineHook": "Like sitting with a wise friend who talks about life, wealth, and happiness simply.",
+    "affiliateKey": "almanack-of-naval-ravikant",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "poor-charlies-almanack",
+    "title": "Poor Charlie's Almanack",
+    "author": "Charlie Munger",
+    "cover": "/assets/images/books/poor-charlies-almanack.jpg",
+    "category": ["business", "investing"],
+    "rating": 5,
+    "oneLineHook": "A treasure chest of wisdom from one of the sharpest minds in investing and life.",
+    "affiliateKey": "poor-charlies-almanack",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "hsin-hsin-ming",
+    "title": "Hsin Hsin Ming: The Book of Nothing",
+    "author": "Osho",
+    "cover": "/assets/images/books/hsin-hsin-ming.jpg",
+    "category": ["spirituality", "philosophy"],
+    "rating": 4,
+    "oneLineHook": "Feels less like reading and more like sitting in silence with a master.",
+    "affiliateKey": "hsin-hsin-ming",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "the-prophet",
+    "title": "The Prophet",
+    "author": "Kahlil Gibran",
+    "cover": "/assets/images/books/the-prophet.jpg",
+    "category": ["philosophy", "spirituality"],
+    "rating": 5,
+    "oneLineHook": "A book I return to whenever I need gentle wisdom and poetic truth.",
+    "affiliateKey": "the-prophet",
+    "dateAdded": "2025-07-05"
+  },
+  {
+    "id": "atomic-habits",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "cover": "/assets/images/books/atomic-habits.jpg",
+    "category": ["self-help"],
+    "rating": 5,
+    "oneLineHook": "One of the most practical books I've read on personal growth.",
+    "affiliateKey": "atomic-habits",
+    "dateAdded": "2025-07-05"
+  }
+]

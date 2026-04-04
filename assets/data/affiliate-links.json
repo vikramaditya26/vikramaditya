@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "amazon_associate_tag": "PENDING",
+    "flipkart_affiliate_id": "PENDING",
+    "nykaa_affiliate_id": "PENDING",
+    "last_updated": "2026-04-04",
+    "notes": "Replace PENDING tags once affiliate accounts are set up. All pages read from this file."
+  },
+  "books": {
+    "siddhartha": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "the-alchemist": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "book-of-five-rings": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "jonathan-livingston-seagull": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "animal-farm": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "clear-thinking": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "the-great-ceo-within": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "zorba-the-buddha": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "tao-te-ching": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "principles": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "almanack-of-naval-ravikant": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "poor-charlies-almanack": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "hsin-hsin-ming": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "the-prophet": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "atomic-habits": {
+      "amazon": "#",
+      "flipkart": "#"
+    }
+  },
+  "supplements": {
+    "whey-protein": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "creatine": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "multivitamin": {
+      "amazon": "#",
+      "flipkart": "#"
+    }
+  },
+  "tools": {
+    "zerodha": {
+      "referral": "#"
+    },
+    "groww": {
+      "referral": "#"
+    }
+  }
+}

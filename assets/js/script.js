@@ -1,31 +1,123 @@
 /**
  * The Simple Guy - Interactive JavaScript
- * Features: Dark Mode, Scroll Animations, Mobile Menu, Reading Progress
+ * Features: Shared Components, Dark Mode, Scroll Animations, Mobile Menu, Reading Progress
  */
 
+// ===== Shared Header & Footer Components =====
+
+function getBasePath() {
+  const path = window.location.pathname;
+  // Root: / or /index.html
+  if (path === '/' || path === '/index.html') {
+    return '';
+  }
+  // One level deep: /books/, /books/index.html, /finance/, etc.
+  const segments = path.replace(/\/index\.html$/, '/').split('/').filter(Boolean);
+  if (segments.length <= 1) {
+    return '../';
+  }
+  // Two levels deep: /100-skills/day-001/, /blog/art-of-start/, /tools/sip-calculator/
+  if (segments.length <= 2) {
+    return '../../';
+  }
+  // Three levels deep (rare)
+  return '../../../';
+}
+
+function renderHeader(currentPage) {
+  const base = getBasePath();
+  const navItems = [
+    { href: 'index.html', label: 'About', key: 'about' },
+    { href: 'finance/', label: 'Finance', key: 'finance' },
+    { href: 'books/', label: 'Books', key: 'books' },
+    { href: 'workout/', label: 'Workout', key: 'workout' },
+    { href: 'blog/', label: 'Blog', key: 'blog' },
+    { href: 'contact/', label: 'Contact', key: 'contact' }
+  ];
+
+  const navLinks = navItems.map(item => {
+    const aria = item.key === currentPage ? ' aria-current="page"' : '';
+    return `<a href="${base}${item.href}"${aria}>${item.label}</a>`;
+  }).join('\n        ');
+
+  return `
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="progress-bar"></div>
+  <header>
+    <div class="header-inner">
+      <a href="${base}index.html" class="site-title">The Simple <span>Guy</span></a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav>
+        ${navLinks}
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>`;
+}
+
+function renderFooter() {
+  return `
+  <footer>
+    <p>&copy; 2025 Vikram Aditya — Made with ❤️</p>
+  </footer>
+  <button class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>`;
+}
+
+function injectComponents() {
+  const headerEl = document.getElementById('site-header');
+  const footerEl = document.getElementById('site-footer');
+  const currentPage = document.body.getAttribute('data-page') || '';
+
+  if (headerEl) {
+    headerEl.outerHTML = renderHeader(currentPage);
+  }
+  if (footerEl) {
+    footerEl.outerHTML = renderFooter();
+  }
+}
+
+// Inject components immediately
+injectComponents();
+
+// ===== Main Initialization =====
 document.addEventListener('DOMContentLoaded', function() {
-  
+
   // ===== Theme Toggle (Dark/Light Mode) =====
   const themeToggle = document.querySelector('.theme-toggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  
-  // Get saved theme or use system preference
+
   function getThemePreference() {
     const saved = localStorage.getItem('theme');
     if (saved) return saved;
     return prefersDark.matches ? 'dark' : 'light';
   }
-  
-  // Apply theme
+
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }
-  
-  // Initialize theme
+
   setTheme(getThemePreference());
-  
-  // Toggle theme on button click
+
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme');
@@ -33,8 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTheme(next);
     });
   }
-  
-  // Listen for system theme changes
+
   prefersDark.addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
       setTheme(e.matches ? 'dark' : 'light');
@@ -44,17 +135,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // ===== Mobile Menu Toggle =====
   const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('nav');
-  
+
   if (menuToggle && nav) {
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('active');
       nav.classList.toggle('open');
-      
-      // Prevent body scroll when menu is open
       document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
     });
-    
-    // Close menu when clicking nav links
+
     nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         menuToggle.classList.remove('active');
@@ -62,11 +150,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
       });
     });
-    
-    // Close menu when clicking outside
+
     document.addEventListener('click', (e) => {
-      if (nav.classList.contains('open') && 
-          !nav.contains(e.target) && 
+      if (nav.classList.contains('open') &&
+          !nav.contains(e.target) &&
           !menuToggle.contains(e.target)) {
         menuToggle.classList.remove('active');
         nav.classList.remove('open');
@@ -77,41 +164,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Header Scroll Effect =====
   const header = document.querySelector('header');
-  let lastScroll = 0;
-  
+
   function handleScroll() {
     const currentScroll = window.scrollY;
-    
-    // Add scrolled class for background change
     if (currentScroll > 50) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-    
-    lastScroll = currentScroll;
   }
-  
+
   window.addEventListener('scroll', handleScroll, { passive: true });
 
   // ===== Reading Progress Bar =====
   const progressBar = document.querySelector('.progress-bar');
-  
+
   if (progressBar) {
     function updateProgress() {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       progressBar.style.width = progress + '%';
     }
-    
+
     window.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
   }
 
   // ===== Back to Top Button =====
   const backToTop = document.querySelector('.back-to-top');
-  
+
   if (backToTop) {
     function toggleBackToTop() {
       if (window.scrollY > 400) {
@@ -120,9 +202,9 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTop.classList.remove('visible');
       }
     }
-    
+
     window.addEventListener('scroll', toggleBackToTop, { passive: true });
-    
+
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -130,14 +212,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Scroll Reveal Animation =====
   const fadeElements = document.querySelectorAll('.fade-in');
-  
+
   if (fadeElements.length > 0) {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -145,31 +221,28 @@ document.addEventListener('DOMContentLoaded', function() {
           observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
-    
+    }, { root: null, rootMargin: '0px', threshold: 0.1 });
+
     fadeElements.forEach(el => observer.observe(el));
   }
 
   // ===== Finance Cards Toggle =====
   const financeCards = document.querySelectorAll('.finance-card');
-  
+
   financeCards.forEach(card => {
-    const header = card.querySelector('.finance-card-header');
-    if (header) {
-      header.addEventListener('click', () => {
-        // Close other cards (accordion behavior)
+    const cardHeader = card.querySelector('.finance-card-header');
+    if (cardHeader) {
+      cardHeader.addEventListener('click', () => {
         financeCards.forEach(otherCard => {
           if (otherCard !== card && otherCard.classList.contains('open')) {
             otherCard.classList.remove('open');
           }
         });
-        
         card.classList.toggle('open');
       });
     }
   });
-  
-  // Open first finance card by default
+
   if (financeCards.length > 0) {
     financeCards[0].classList.add('open');
   }
@@ -179,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function() {
     anchor.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
       if (href === '#') return;
-      
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
@@ -190,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Lazy Load Images =====
   const lazyImages = document.querySelectorAll('img[data-src]');
-  
+
   if (lazyImages.length > 0) {
     const imageObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -202,13 +274,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
-    
     lazyImages.forEach(img => imageObserver.observe(img));
   }
 
-  // ===== Keyboard Navigation Improvements =====
+  // ===== Keyboard Navigation =====
   document.addEventListener('keydown', (e) => {
-    // Close mobile menu with Escape
     if (e.key === 'Escape' && nav && nav.classList.contains('open')) {
       menuToggle.classList.remove('active');
       nav.classList.remove('open');
@@ -216,16 +286,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // ===== Add loading="lazy" to images without it =====
+  // ===== Auto lazy-load images =====
   document.querySelectorAll('img:not([loading])').forEach(img => {
     img.setAttribute('loading', 'lazy');
   });
 
   // ===== Contact Form Enhancement =====
-  const contactForm = document.querySelector('.contact-form');
-  
+  const contactForm = document.querySelector('.contact-form form');
+
   if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function() {
       const btn = this.querySelector('.btn');
       if (btn) {
         btn.innerHTML = 'Sending...';
@@ -234,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ===== Copy Code Blocks (if any) =====
+  // ===== Copy Code Blocks =====
   document.querySelectorAll('pre code').forEach(block => {
     const copyBtn = document.createElement('button');
     copyBtn.className = 'copy-btn';
@@ -255,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-// ===== Performance: Debounce scroll events =====
+// ===== Performance: Debounce =====
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
