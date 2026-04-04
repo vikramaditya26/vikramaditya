@@ -738,6 +738,169 @@ section {
   color: var(--color-accent);
 }
 
+/* === Buy Buttons === */
+.buy-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.buy-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.buy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.45em 1em;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.buy-btn.amazon {
+  background: #ff9900;
+  color: #0f0f0f;
+}
+
+.buy-btn.amazon:hover {
+  background: #e68a00;
+  transform: translateY(-1px);
+}
+
+.buy-btn.flipkart {
+  background: #2874f0;
+  color: #fff;
+}
+
+.buy-btn.flipkart:hover {
+  background: #1a5dc8;
+  transform: translateY(-1px);
+}
+
+/* === Affiliate Disclosure === */
+.affiliate-disclosure {
+  background: var(--color-card-bg);
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-xl) auto;
+  max-width: 900px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.affiliate-disclosure p {
+  margin: 0;
+}
+
+/* === Recommendation Section (Cross-sell) === */
+.recommendation-section {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.recommendation-section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  margin-bottom: var(--space-lg);
+}
+
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-lg);
+}
+
+.recommendation-card {
+  display: flex;
+  gap: var(--space-md);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.recommendation-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.recommendation-card img {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+  flex-shrink: 0;
+}
+
+.recommendation-card .rec-info h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.recommendation-card .rec-info p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* === Supplement Cards === */
+.supplement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.supplement-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  transition: all var(--transition-base);
+}
+
+.supplement-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.supplement-card h4 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.supplement-card .supplement-type {
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.supplement-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
 /* === Finance Section === */
 .finance-grid {
   display: flex;

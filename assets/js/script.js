@@ -325,6 +325,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// ===== Affiliate Link Loader =====
+(function loadAffiliateLinks() {
+  const base = getBasePath();
+  const affiliateEls = document.querySelectorAll('[data-affiliate]');
+  if (affiliateEls.length === 0) return;
+
+  fetch(base + 'assets/data/affiliate-links.json')
+    .then(r => r.json())
+    .then(data => {
+      affiliateEls.forEach(el => {
+        // data-affiliate="books.siddhartha.amazon"
+        const keys = el.getAttribute('data-affiliate').split('.');
+        let url = data;
+        for (const key of keys) {
+          if (url && url[key]) url = url[key];
+          else { url = '#'; break; }
+        }
+        if (el.tagName === 'A') {
+          el.href = url;
+          el.setAttribute('rel', 'nofollow sponsored noopener');
+          el.setAttribute('target', '_blank');
+        }
+      });
+    })
+    .catch(() => {}); // Silently fail — links stay as "#"
+})();
+
 // ===== Performance: Debounce =====
 function debounce(func, wait) {
   let timeout;
