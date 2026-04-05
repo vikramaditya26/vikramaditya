@@ -3,7 +3,7 @@
     "amazon_associate_tag": "PENDING",
     "flipkart_affiliate_id": "PENDING",
     "nykaa_affiliate_id": "PENDING",
-    "last_updated": "2026-04-04",
+    "last_updated": "2026-04-05",
     "notes": "Replace PENDING tags once affiliate accounts are set up. All pages read from this file."
   },
   "books": {
@@ -78,6 +78,28 @@
       "flipkart": "#"
     },
     "multivitamin": {
+      "amazon": "#",
+      "flipkart": "#"
+    }
+  },
+  "skills": {
+    "origami-paper": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "rubiks-cube": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "brush-pen-set": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "harmonica": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "speed-rope": {
       "amazon": "#",
       "flipkart": "#"
     }

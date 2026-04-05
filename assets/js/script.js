@@ -31,6 +31,7 @@ function renderHeader(currentPage) {
     { href: 'finance/', label: 'Finance', key: 'finance' },
     { href: 'books/', label: 'Books', key: 'books' },
     { href: 'workout/', label: 'Workout', key: 'workout' },
+    { href: '100-skills/', label: '100 Skills', key: 'skills' },
     { href: 'blog/', label: 'Blog', key: 'blog' },
     { href: 'contact/', label: 'Contact', key: 'contact' }
   ];
@@ -172,6 +173,133 @@ injectComponents();
       }
     });
   });
+})();
+
+// ===== 100 Skills Hub =====
+(function initSkillsHub() {
+  var skillsGrid = document.getElementById('skills-grid');
+  if (!skillsGrid) return;
+
+  var base = getBasePath();
+  var filterButtons = document.querySelectorAll('.skills-filter-btn');
+  var progressFill = document.getElementById('skills-progress-fill');
+  var progressLabel = document.getElementById('skills-progress-label');
+  var totalCount = document.getElementById('skills-total-count');
+  var scaffoldedCount = document.getElementById('skills-scaffolded-count');
+  var plannedCount = document.getElementById('skills-planned-count');
+
+  function padDay(day) {
+    return String(day).padStart(3, '0');
+  }
+
+  function titleCase(value) {
+    return value.split('-').map(function(part) {
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    }).join(' ');
+  }
+
+  function formatSkillDate(dateString) {
+    if (!dateString) return 'Date TBD';
+    return new Date(dateString + 'T00:00:00').toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+  }
+
+  function getCategoryIcon(category) {
+    var iconMap = {
+      creative: '✍️',
+      physical: '💪',
+      mental: '🧠',
+      cooking: '🍳',
+      music: '🎵',
+      life: '🧰'
+    };
+
+    return iconMap[category] || '✨';
+  }
+
+  function renderCard(skill) {
+    var categoryLabel = titleCase(skill.category);
+    var difficultyLabel = titleCase(skill.difficulty);
+    var dateLabel = formatSkillDate(skill.date);
+    var statusLabel = skill.status === 'scaffolded' ? 'Ready' : 'Planned';
+    var cardInner = `
+      <div class="skill-card-thumb">
+        <span>${getCategoryIcon(skill.category)}</span>
+        <small>Day ${padDay(skill.day)}</small>
+      </div>
+      <div class="skill-card-body">
+        <div class="skill-card-top">
+          <p class="skill-day-label">Day ${padDay(skill.day)}</p>
+          <span class="skill-status">${statusLabel}</span>
+        </div>
+        <h3>${skill.title}</h3>
+        <p class="skill-card-date">${dateLabel}</p>
+        <p class="skill-summary">${skill.summary}</p>
+        <div class="skill-card-meta">
+          <span class="skill-meta-pill">${categoryLabel}</span>
+          <span class="skill-meta-pill ${skill.difficulty}">${difficultyLabel}</span>
+        </div>
+        <span class="skill-card-cta">${skill.status === 'scaffolded' ? 'Open scaffold' : 'Coming soon'}</span>
+      </div>
+    `;
+
+    if (skill.status === 'scaffolded') {
+      return `<a class="skill-card" href="${skill.path}" data-category="${skill.category}" data-difficulty="${skill.difficulty}" data-status="${skill.status}">${cardInner}</a>`;
+    }
+
+    return `<article class="skill-card is-planned" data-category="${skill.category}" data-difficulty="${skill.difficulty}" data-status="${skill.status}">${cardInner}</article>`;
+  }
+
+  function renderSkills(skills, activeFilter) {
+    var filtered = skills.filter(function(skill) {
+      return activeFilter === 'all' || skill.category === activeFilter;
+    });
+
+    if (filtered.length === 0) {
+      skillsGrid.innerHTML = '<p class="skills-empty">No skills match this category yet.</p>';
+      return;
+    }
+
+    skillsGrid.innerHTML = filtered.map(renderCard).join('');
+  }
+
+  fetch(base + 'assets/data/skills.json')
+    .then(function(response) { return response.json(); })
+    .then(function(payload) {
+      var skills = Array.isArray(payload.skills) ? payload.skills : [];
+      var scaffolded = skills.filter(function(skill) { return skill.status === 'scaffolded'; }).length;
+      var planned = Math.max(skills.length - scaffolded, 0);
+      var percent = skills.length > 0 ? (scaffolded / skills.length) * 100 : 0;
+      var activeFilter = 'all';
+
+      if (totalCount) totalCount.textContent = String(skills.length);
+      if (scaffoldedCount) scaffoldedCount.textContent = String(scaffolded);
+      if (plannedCount) plannedCount.textContent = String(planned);
+      if (progressFill) progressFill.style.width = percent + '%';
+      if (progressLabel) progressLabel.textContent = scaffolded + ' of ' + skills.length + ' pages scaffolded for launch.';
+
+      renderSkills(skills, activeFilter);
+
+      filterButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          activeFilter = button.getAttribute('data-skill-filter') || 'all';
+
+          filterButtons.forEach(function(otherButton) {
+            otherButton.classList.remove('active');
+          });
+
+          button.classList.add('active');
+          renderSkills(skills, activeFilter);
+        });
+      });
+    })
+    .catch(function() {
+      skillsGrid.innerHTML = '<p class="skills-empty">The skills grid could not be loaded right now.</p>';
+      if (progressLabel) progressLabel.textContent = 'Skills data is unavailable right now.';
+    });
 })();
 
 // ===== Buy Button Labels (runs immediately) =====

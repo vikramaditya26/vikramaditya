@@ -197,9 +197,9 @@ The current flat structure (`books.html`, `finance.html` in root) will NOT work 
 │
 ├── 100-skills/
 │   ├── index.html                # Challenge overview + progress grid
-│   ├── day-001-origami/
+│   ├── day-001/
 │   │   └── index.html            # Individual skill page
-│   ├── day-002-rubiks-cube/
+│   ├── day-002/
 │   │   └── index.html
 │   └── ... (100 skill sub-pages)
 │
@@ -441,7 +441,7 @@ This is Vikram's UNIQUE differentiator. Nobody else has a personal website docum
 - **Return visits** (people come back daily to see the new skill)
 - **SEO long-tail goldmine** ("how to solve rubik's cube beginner India", "calligraphy set for beginners Amazon India")
 
-**Structure per skill page (`/100-skills/day-XXX-skill-name/index.html`):**
+**Structure per skill page (`/100-skills/day-XXX/index.html`):**
 ```
 Hero: Day number + skill name + difficulty badge (Easy/Medium/Hard)
 Section 1: "Why I Tried This" — personal story (2-3 paragraphs)
@@ -864,7 +864,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 
 ### Adding a New Skill (100 Days)
 1. Add entry to `assets/data/skills.json`
-2. Create folder: `100-skills/day-XXX-skill-name/index.html`
+2. Create folder: `100-skills/day-XXX/index.html`
 3. Follow the skill page template (hero, supplies, how-to, attempt, verdict)
 4. Save images to `assets/images/skills/`
 5. Add supply links to `assets/data/affiliate-links.json`
@@ -888,6 +888,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-05 | **Phase 1 complete** — Monetization foundation. Built affiliate link loader in `script.js` (reads `affiliate-links.json`, auto-populates `[data-affiliate]` elements with URLs, adds `rel="nofollow sponsored"` and `target="_blank"`). Designed `.buy-btn` CSS component (Amazon orange, Flipkart blue). Added buy buttons (Amazon + Flipkart) to all 15 book cards. Added `.affiliate-disclosure` component. Added "Supplements I Use" section to workout page (Whey Protein, Creatine, Multivitamin cards with buy links). Added "Books That Changed How I Think About Money" cross-sell section to finance page (4 recommended books with covers and buy links). All changes tested in both themes. | Phase 1 |
 | 2026-04-05 | **Phase 2 complete** — Analytics & SEO. Added Microsoft Clarity snippet in `script.js` (placeholder ID — replace `CLARITY_PROJECT_ID` with real ID from clarity.microsoft.com). Added JSON-LD structured data injection: WebSite schema on all pages, Person schema on homepage. Added OG meta tags (title, description, type, url) to all 6 pages. Added `<link rel="canonical">` to all 6 pages. Updated `sitemap.xml` lastmod dates. | Phase 2 |
 | 2026-04-05 | **Phase 3 complete** — Books Enhancement. Added category filter bar to `books/index.html` (7 buttons: All, Philosophy, Spirituality, Fiction, Self-Help, Business, Investing). Added `data-categories` attribute to all 15 book cards for JS filtering. Added color-coded category badges (`.badge-philosophy` purple, `.badge-spirituality` pink, `.badge-fiction` blue, `.badge-self-help` green, `.badge-business` amber, `.badge-leadership` red, `.badge-investing` cyan). Added star ratings to all 15 books (★★★★★ or ★★★★☆ based on `books.json` ratings). Built filter logic in `script.js` `initBookFilter()` IIFE. All CSS added to `style.css` (filter bar, badges, ratings). | Phase 3 |
+| 2026-04-05 | **Phase 4 complete** — 100 Skills scaffold. Added `assets/data/skills.json` with 100 planned skill days and 5 scaffolded launch pages. Built `/100-skills/index.html` as a JSON-driven hub with progress stats, category filter, and difficulty-colored cards rendered by `script.js` `initSkillsHub()`. Created `/100-skills/day-001/` through `/100-skills/day-005/` with a shared structure: hero, supplies, what I learned placeholder, resources, verdict, affiliate disclosure, and prev/next navigation. Added `100 Skills` to the shared nav in `renderHeader()`, added a homepage explore card, extended `affiliate-links.json` with starter supply placeholders for the first 5 skill pages, and updated `sitemap.xml` with the hub plus the first 5 day URLs. | Phase 4 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -911,7 +912,15 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. **Ratings:** `.book-rating` span with ★/☆ characters. Ratings sourced from `books.json`.
 6. **Adding a new book:** Add card HTML with `data-categories`, badges, rating, and `data-affiliate` buy links. No JS changes needed.
 
+### How the 100 Skills scaffold works (for future agents):
+1. **Master data:** `assets/data/skills.json` contains the 100-day roadmap. Each entry stores `day`, `title`, `category`, `difficulty`, `status`, `date`, `path`, and a short `summary`.
+2. **Hub rendering:** `/100-skills/index.html` contains the shell only. In `script.js`, `initSkillsHub()` fetches `skills.json`, renders the cards into `#skills-grid`, updates the scaffold counts, and filters cards via `.skills-filter-btn`.
+3. **Route pattern:** Individual pages currently use numeric folders (`/100-skills/day-001/`, `/100-skills/day-002/`, etc.) to keep the URLs stable and predictable during the scaffold stage.
+4. **Launch pages:** Day 1-5 are scaffolded with static HTML so they already have real URLs, OG tags, canonical tags, affiliate disclosure, and prev/next navigation. Future days can reuse the same structure.
+5. **Supplies + affiliate links:** The first 5 pages use `data-affiliate="skills.{key}.{platform}"` attributes. Add or update URLs in `assets/data/affiliate-links.json` and the buttons will populate automatically.
+6. **Progress meaning:** The progress bar on the hub currently reflects scaffolded pages, not completed challenge days. When Vikram starts publishing real attempts, update `status` values and the copy if needed.
+
 ---
 
 *Last updated: 2026-04-05*
-*Next priority: Phase 4 — 100 Days 100 Skills Scaffold*
+*Next priority: Phase 5 — Movies & Series Section*

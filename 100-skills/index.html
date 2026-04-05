@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>100 Skills - The Simple Guy</title>
+  <meta name="description" content="The 100 Days, 100 Skills hub. Follow the planned challenge, browse skill categories, and open scaffolded day pages." />
+  <meta property="og:title" content="100 Skills - The Simple Guy" />
+  <meta property="og:description" content="A living challenge hub for 100 planned skills across creative, physical, mental, cooking, music, and life." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/100-skills/" />
+  <link rel="canonical" href="https://vikramaditya.me/100-skills/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-page="skills">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero skill-hub-hero">
+      <p class="skill-eyebrow">Phase 4 Scaffold</p>
+      <h1>100 Days, 100 Skills</h1>
+      <p class="subtitle">A challenge hub for the things I want to try, document, and learn one day at a time.</p>
+    </section>
+
+    <section class="skills-overview fade-in">
+      <div class="skills-summary-card">
+        <p class="skills-kicker">Challenge Snapshot</p>
+        <h2>100 planned days, starting with 5 scaffolded pages</h2>
+        <p>The goal is simple: keep the challenge visible, make it easy to navigate, and give every future day a clean page structure before the challenge gets busy.</p>
+
+        <div class="skills-progress" aria-hidden="true">
+          <span class="skills-progress-fill" id="skills-progress-fill"></span>
+        </div>
+        <p class="skills-progress-label" id="skills-progress-label">Loading progress...</p>
+
+        <div class="skills-stats">
+          <div class="skills-stat">
+            <strong id="skills-total-count">100</strong>
+            <span>Total Days</span>
+          </div>
+          <div class="skills-stat">
+            <strong id="skills-scaffolded-count">5</strong>
+            <span>Scaffolded</span>
+          </div>
+          <div class="skills-stat">
+            <strong id="skills-planned-count">95</strong>
+            <span>Planned</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <div class="skills-toolbar">
+        <div>
+          <h2>Browse the Challenge</h2>
+          <p class="skills-toolbar-copy">Filter by category, open the first scaffolded pages, and use the grid as the roadmap for what comes next.</p>
+        </div>
+
+        <div class="skills-filter" role="group" aria-label="Filter skills by category">
+          <button type="button" class="skills-filter-btn active" data-skill-filter="all">All</button>
+          <button type="button" class="skills-filter-btn" data-skill-filter="creative">Creative</button>
+          <button type="button" class="skills-filter-btn" data-skill-filter="physical">Physical</button>
+          <button type="button" class="skills-filter-btn" data-skill-filter="mental">Mental</button>
+          <button type="button" class="skills-filter-btn" data-skill-filter="cooking">Cooking</button>
+          <button type="button" class="skills-filter-btn" data-skill-filter="music">Music</button>
+          <button type="button" class="skills-filter-btn" data-skill-filter="life">Life</button>
+        </div>
+      </div>
+
+      <div id="skills-grid" class="skill-grid" aria-live="polite"></div>
+
+      <noscript>
+        <p class="skills-empty">JavaScript is required to render the 100-day grid on this page.</p>
+      </noscript>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>
