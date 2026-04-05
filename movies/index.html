@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movies & Series - The Simple Guy</title>
+  <meta name="description" content="My recommended movies and series — filtered by genre and platform, with mood tags, ratings, and a curated top 10." />
+  <meta property="og:title" content="Movies & Series - The Simple Guy" />
+  <meta property="og:description" content="A curated watchlist with mood tags, platform badges, and my top 10 films and series worth your time." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/movies/" />
+  <link rel="canonical" href="https://vikramaditya.me/movies/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-page="movies">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero movies-hero">
+      <p class="movie-eyebrow">Phase 5 Launch</p>
+      <h1>Movies & Series</h1>
+      <p class="subtitle">Not just what to watch, but what to watch when you need perspective, comfort, ambition, or a sharp reset.</p>
+    </section>
+
+    <section class="movies-intro fade-in">
+      <div class="movies-intro-card">
+        <p class="movies-kicker">Why this section exists</p>
+        <h2>A watchlist built around mood, taste, and rewatch value</h2>
+        <p>I already recommend movies and series to friends all the time. This page turns those scattered recommendations into one clean library with filters, platform badges, and a top 10 I would comfortably send anyone.</p>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <div class="movies-section-head">
+        <div>
+          <p class="movies-kicker">Featured</p>
+          <h2>Vikram's Top 10</h2>
+        </div>
+        <p class="movies-section-copy">These are the titles I would recommend first if you asked me what is actually worth your evening.</p>
+      </div>
+      <div id="featured-movies-grid" class="movie-featured-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="fade-in">
+      <div class="movies-section-head">
+        <div>
+          <p class="movies-kicker">Browse</p>
+          <h2>Filter the Full Library</h2>
+        </div>
+        <p class="movies-section-copy">Use genre and platform together. The goal is to make choice easier, not noisier.</p>
+      </div>
+
+      <div class="movies-toolbar">
+        <div class="movie-filter-group">
+          <p class="movie-filter-label">Genre</p>
+          <div id="movie-genre-filters" class="movie-filter-bar" aria-label="Filter movies by genre"></div>
+        </div>
+        <div class="movie-filter-group">
+          <p class="movie-filter-label">Platform</p>
+          <div id="movie-platform-filters" class="movie-filter-bar" aria-label="Filter movies by platform"></div>
+        </div>
+      </div>
+
+      <div id="movies-grid" class="movie-grid" aria-live="polite"></div>
+
+      <noscript>
+        <p class="movies-empty">JavaScript is required to render and filter the movie cards on this page.</p>
+      </noscript>
+
+      <aside class="affiliate-disclosure">
+        <p><strong>Disclosure:</strong> Some links on this page are affiliate links. If you purchase or rent through them, I may earn a small commission at no extra cost to you. I only want to recommend films and shows I genuinely rate highly.</p>
+      </aside>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

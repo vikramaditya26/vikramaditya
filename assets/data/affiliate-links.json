@@ -3,7 +3,7 @@
     "amazon_associate_tag": "PENDING",
     "flipkart_affiliate_id": "PENDING",
     "nykaa_affiliate_id": "PENDING",
-    "last_updated": "2026-04-05",
+    "last_updated": "2026-04-06",
     "notes": "Replace PENDING tags once affiliate accounts are set up. All pages read from this file."
   },
   "books": {
@@ -102,6 +102,29 @@
     "speed-rope": {
       "amazon": "#",
       "flipkart": "#"
+    }
+  },
+  "movies": {
+    "the-pursuit-of-happyness": {
+      "amazon": "#"
+    },
+    "whiplash": {
+      "amazon": "#"
+    },
+    "the-social-network": {
+      "amazon": "#"
+    },
+    "3-idiots": {
+      "amazon": "#"
+    },
+    "interstellar": {
+      "amazon": "#"
+    },
+    "good-will-hunting": {
+      "amazon": "#"
+    },
+    "panchayat": {
+      "amazon": "#"
     }
   },
   "tools": {

@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "section_name": "Movies & Series",
+    "total_entries": 12,
+    "featured_entries": 10,
+    "last_updated": "2026-04-06",
+    "notes": "Streaming platform badges reflect current India availability checked during the Phase 5 build. Vikram ratings are editorial, not third-party ratings."
+  },
+  "items": [
+    {
+      "id": "the-pursuit-of-happyness",
+      "title": "The Pursuit of Happyness",
+      "type": "movie",
+      "year": 2006,
+      "vikramRating": 5,
+      "featuredRank": 1,
+      "posterTone": "amber",
+      "genres": ["Drama", "Biopic"],
+      "platforms": [
+        { "slug": "sony-amazon-channel", "label": "Sony Pictures Amazon Channel" },
+        { "slug": "mx-player", "label": "MX Player" }
+      ],
+      "moodTags": ["when life feels heavy", "for a hope reset"],
+      "whyRecommend": "This one hits me because it shows grit without turning pain into a motivational speech. It is about dignity, fatherhood, and staying soft even when life keeps asking you to harden.",
+      "affiliateKey": "the-pursuit-of-happyness",
+      "affiliateLabel": "Rent on Amazon"
+    },
+    {
+      "id": "whiplash",
+      "title": "Whiplash",
+      "type": "movie",
+      "year": 2014,
+      "vikramRating": 5,
+      "featuredRank": 2,
+      "posterTone": "crimson",
+      "genres": ["Drama", "Music"],
+      "platforms": [
+        { "slug": "prime-video", "label": "Prime Video" }
+      ],
+      "moodTags": ["when you need intensity", "for disciplined ambition"],
+      "whyRecommend": "I love this because it is not really about music. It is about obsession, standards, ego, and the dangerous edge between greatness and self-destruction.",
+      "affiliateKey": "whiplash",
+      "affiliateLabel": "Watch on Prime"
+    },
+    {
+      "id": "the-social-network",
+      "title": "The Social Network",
+      "type": "movie",
+      "year": 2010,
+      "vikramRating": 5,
+      "featuredRank": 3,
+      "posterTone": "slate",
+      "genres": ["Drama", "Startup"],
+      "platforms": [
+        { "slug": "sony-amazon-channel", "label": "Sony Pictures Amazon Channel" },
+        { "slug": "apple-tv", "label": "Apple TV Store" }
+      ],
+      "moodTags": ["for founder mode", "when you want sharp dialogue"],
+      "whyRecommend": "Few films capture ambition, speed, betrayal, and product obsession this cleanly. It reminds me that building something big can magnify both brilliance and blind spots.",
+      "affiliateKey": "the-social-network",
+      "affiliateLabel": "Rent on Amazon"
+    },
+    {
+      "id": "3-idiots",
+      "title": "3 Idiots",
+      "type": "movie",
+      "year": 2009,
+      "vikramRating": 5,
+      "featuredRank": 4,
+      "posterTone": "forest",
+      "genres": ["Comedy", "Drama", "Bollywood"],
+      "platforms": [
+        { "slug": "prime-video", "label": "Prime Video" },
+        { "slug": "apple-tv", "label": "Apple TV Store" }
+      ],
+      "moodTags": ["for Indian student life", "when you need heart"],
+      "whyRecommend": "This is still one of the most honest mainstream films about pressure, comparison, and choosing a life that actually fits you. It is funny, warm, and more relevant than ever.",
+      "affiliateKey": "3-idiots",
+      "affiliateLabel": "Watch on Prime"
+    },
+    {
+      "id": "interstellar",
+      "title": "Interstellar",
+      "type": "movie",
+      "year": 2014,
+      "vikramRating": 5,
+      "featuredRank": 5,
+      "posterTone": "blue",
+      "genres": ["Sci-Fi", "Drama"],
+      "platforms": [
+        { "slug": "prime-video", "label": "Prime Video" },
+        { "slug": "jiohotstar", "label": "JioHotstar" }
+      ],
+      "moodTags": ["for wonder", "late-night existential mood"],
+      "whyRecommend": "This is the kind of film that makes you feel small in a good way. It mixes science, love, time, sacrifice, and awe without losing emotional weight.",
+      "affiliateKey": "interstellar",
+      "affiliateLabel": "Watch on Prime"
+    },
+    {
+      "id": "good-will-hunting",
+      "title": "Good Will Hunting",
+      "type": "movie",
+      "year": 1997,
+      "vikramRating": 5,
+      "featuredRank": 6,
+      "posterTone": "plum",
+      "genres": ["Drama"],
+      "platforms": [
+        { "slug": "prime-video", "label": "Prime Video" },
+        { "slug": "amazon-video", "label": "Amazon Video" }
+      ],
+      "moodTags": ["when healing matters", "for quiet wisdom"],
+      "whyRecommend": "I return to this for the emotional honesty more than the genius story. It is about how talent means very little if you never let yourself be loved, challenged, or seen.",
+      "affiliateKey": "good-will-hunting",
+      "affiliateLabel": "Rent on Amazon"
+    },
+    {
+      "id": "dead-poets-society",
+      "title": "Dead Poets Society",
+      "type": "movie",
+      "year": 1989,
+      "vikramRating": 5,
+      "featuredRank": 7,
+      "posterTone": "amber",
+      "genres": ["Drama", "Coming-of-Age"],
+      "platforms": [
+        { "slug": "jiohotstar", "label": "JioHotstar" },
+        { "slug": "vi-movies-tv", "label": "VI Movies & TV" }
+      ],
+      "moodTags": ["for perspective", "when you need courage"],
+      "whyRecommend": "This film makes me want to live more honestly. It speaks to youth, fear, conformity, and that painful moment when you realize borrowed dreams can cost you your own life.",
+      "affiliateKey": null,
+      "affiliateLabel": ""
+    },
+    {
+      "id": "fight-club",
+      "title": "Fight Club",
+      "type": "movie",
+      "year": 1999,
+      "vikramRating": 4,
+      "featuredRank": 8,
+      "posterTone": "crimson",
+      "genres": ["Drama", "Thriller"],
+      "platforms": [
+        { "slug": "jiohotstar", "label": "JioHotstar" }
+      ],
+      "moodTags": ["when you want chaos", "for identity questions"],
+      "whyRecommend": "Beneath the shock, this is a film about male emptiness, consumer numbness, and the mess people create when they do not know who they are. It is provocative for a reason.",
+      "affiliateKey": null,
+      "affiliateLabel": ""
+    },
+    {
+      "id": "panchayat",
+      "title": "Panchayat",
+      "type": "series",
+      "year": 2020,
+      "vikramRating": 5,
+      "featuredRank": 9,
+      "posterTone": "forest",
+      "genres": ["Comedy", "Drama", "Indian"],
+      "platforms": [
+        { "slug": "prime-video", "label": "Prime Video" }
+      ],
+      "moodTags": ["for comfort watching", "when you miss simple people"],
+      "whyRecommend": "This show feels deeply Indian without trying too hard. It is warm, funny, observant, and full of the kind of small human moments that stay with you longer than plot twists.",
+      "affiliateKey": "panchayat",
+      "affiliateLabel": "Watch on Prime"
+    },
+    {
+      "id": "kota-factory",
+      "title": "Kota Factory",
+      "type": "series",
+      "year": 2019,
+      "vikramRating": 5,
+      "featuredRank": 10,
+      "posterTone": "slate",
+      "genres": ["Drama", "Indian", "Student Life"],
+      "platforms": [
+        { "slug": "netflix", "label": "Netflix" }
+      ],
+      "moodTags": ["for student nostalgia", "when pressure needs language"],
+      "whyRecommend": "If you have ever lived inside expectation, this series understands you. It captures the coaching ecosystem, loneliness, friendship, and ambition with unusual tenderness.",
+      "affiliateKey": null,
+      "affiliateLabel": ""
+    },
+    {
+      "id": "succession",
+      "title": "Succession",
+      "type": "series",
+      "year": 2018,
+      "vikramRating": 5,
+      "featuredRank": null,
+      "posterTone": "blue",
+      "genres": ["Drama", "Dark Comedy"],
+      "platforms": [
+        { "slug": "jiohotstar", "label": "JioHotstar" }
+      ],
+      "moodTags": ["for power games", "when dialogue is the thrill"],
+      "whyRecommend": "This is one of the sharpest studies of power, ego, family, and money I have seen. Everyone is broken in a different way, and that is exactly why it works.",
+      "affiliateKey": null,
+      "affiliateLabel": ""
+    },
+    {
+      "id": "the-bear",
+      "title": "The Bear",
+      "type": "series",
+      "year": 2022,
+      "vikramRating": 5,
+      "featuredRank": null,
+      "posterTone": "plum",
+      "genres": ["Drama", "Comedy", "Food"],
+      "platforms": [
+        { "slug": "jiohotstar", "label": "JioHotstar" },
+        { "slug": "vi-movies-tv", "label": "VI Movies & TV" }
+      ],
+      "moodTags": ["for kitchen intensity", "when you want messy growth"],
+      "whyRecommend": "I love how alive this show feels. It is loud, anxious, tender, and full of people trying to build discipline and meaning in the middle of emotional chaos.",
+      "affiliateKey": null,
+      "affiliateLabel": ""
+    }
+  ]
+}

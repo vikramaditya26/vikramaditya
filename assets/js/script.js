@@ -32,6 +32,7 @@ function renderHeader(currentPage) {
     { href: 'books/', label: 'Books', key: 'books' },
     { href: 'workout/', label: 'Workout', key: 'workout' },
     { href: '100-skills/', label: '100 Skills', key: 'skills' },
+    { href: 'movies/', label: 'Movies', key: 'movies' },
     { href: 'blog/', label: 'Blog', key: 'blog' },
     { href: 'contact/', label: 'Contact', key: 'contact' }
   ];
@@ -302,11 +303,228 @@ injectComponents();
     });
 })();
 
+// ===== Movies & Series =====
+(function initMoviesPage() {
+  var moviesGrid = document.getElementById('movies-grid');
+  if (!moviesGrid) return;
+
+  var featuredGrid = document.getElementById('featured-movies-grid');
+  var genreFilterBar = document.getElementById('movie-genre-filters');
+  var platformFilterBar = document.getElementById('movie-platform-filters');
+  var base = getBasePath();
+  var activeGenre = 'all';
+  var activePlatform = 'all';
+  var genreFilterItems = [];
+  var platformFilterItems = [];
+
+  function slugToTitle(slug) {
+    return slug.split('-').map(function(part) {
+      if (part === 'tv') return 'TV';
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    }).join(' ');
+  }
+
+  function renderStars(rating) {
+    var full = '★'.repeat(rating);
+    var empty = '☆'.repeat(Math.max(5 - rating, 0));
+    return full + empty;
+  }
+
+  function renderPlatforms(platforms) {
+    return platforms.map(function(platform) {
+      return '<span class="movie-platform-badge">' + platform.label + '</span>';
+    }).join('');
+  }
+
+  function renderTags(tags) {
+    return tags.map(function(tag) {
+      return '<span class="movie-vibe-tag">' + tag + '</span>';
+    }).join('');
+  }
+
+  function renderMovieCard(item) {
+    var affiliate = item.affiliateKey ? `
+      <div class="buy-links">
+        <span class="buy-label">Watch options:</span>
+        <a href="#" class="buy-btn amazon" data-affiliate="movies.${item.affiliateKey}.amazon">${item.affiliateLabel || 'Watch on Prime'}</a>
+      </div>
+    ` : '';
+
+    return `
+      <article class="movie-card">
+        <div class="movie-poster movie-poster--${item.posterTone}">
+          <span class="movie-type-label">${item.type === 'series' ? 'Series' : 'Movie'}</span>
+          <strong>${item.title}</strong>
+          <small>${item.year}</small>
+        </div>
+        <div class="movie-card-content">
+          <div class="movie-card-top">
+            <div>
+              <h3>${item.title}</h3>
+              <p class="movie-year">${item.year} • ${item.type === 'series' ? 'Series' : 'Movie'}</p>
+            </div>
+            <span class="movie-rating" aria-label="Vikram rating ${item.vikramRating} out of 5">${renderStars(item.vikramRating)}</span>
+          </div>
+
+          <div class="movie-badge-row">
+            ${item.genres.map(function(genre) {
+              return '<span class="movie-genre-badge">' + genre + '</span>';
+            }).join('')}
+          </div>
+
+          <div class="movie-platform-row">
+            ${renderPlatforms(item.platforms)}
+          </div>
+
+          <p class="movie-review">${item.whyRecommend}</p>
+
+          <div class="movie-vibes">
+            ${renderTags(item.moodTags)}
+          </div>
+
+          ${affiliate}
+        </div>
+      </article>
+    `;
+  }
+
+  function renderFeaturedCard(item) {
+    return `
+      <article class="movie-featured-card movie-featured-card--${item.posterTone}">
+        <div class="movie-featured-rank">Top ${item.featuredRank}</div>
+        <h3>${item.title}</h3>
+        <p class="movie-featured-meta">${item.year} • ${item.type === 'series' ? 'Series' : 'Movie'}</p>
+        <p>${item.whyRecommend}</p>
+      </article>
+    `;
+  }
+
+  function renderFilterButtons(container, items, activeValue, onClick) {
+    if (!container) return;
+    container.innerHTML = items.map(function(item) {
+      var activeClass = item.value === activeValue ? ' active' : '';
+      return '<button type="button" class="movie-filter-btn' + activeClass + '" data-value="' + item.value + '">' + item.label + '</button>';
+    }).join('');
+
+    container.querySelectorAll('.movie-filter-btn').forEach(function(button) {
+      button.addEventListener('click', function() {
+        onClick(button.getAttribute('data-value') || 'all');
+      });
+    });
+  }
+
+  function renderMovies(items) {
+    var filtered = items.filter(function(item) {
+      var genreMatch = activeGenre === 'all' || item.genres.some(function(genre) {
+        return genre.toLowerCase().replace(/[^a-z0-9]+/g, '-') === activeGenre;
+      });
+      var platformMatch = activePlatform === 'all' || item.platforms.some(function(platform) {
+        return platform.slug === activePlatform;
+      });
+      return genreMatch && platformMatch;
+    });
+
+    if (filtered.length === 0) {
+      moviesGrid.innerHTML = '<p class="movies-empty">No titles match this combination yet. Try another genre or platform.</p>';
+      return;
+    }
+
+    moviesGrid.innerHTML = filtered.map(renderMovieCard).join('');
+    setDefaultBuyButtonLabels(moviesGrid);
+    loadAffiliateLinks(moviesGrid);
+  }
+
+  function handleGenreChange(items, nextGenre) {
+    activeGenre = nextGenre;
+    renderFilterButtons(genreFilterBar, genreFilterItems, activeGenre, function(value) {
+      handleGenreChange(items, value);
+    });
+    renderMovies(items);
+  }
+
+  function handlePlatformChange(items, nextPlatform) {
+    activePlatform = nextPlatform;
+    renderFilterButtons(platformFilterBar, platformFilterItems, activePlatform, function(value) {
+      handlePlatformChange(items, value);
+    });
+    renderMovies(items);
+  }
+
+  fetch(base + 'assets/data/movies.json')
+    .then(function(response) { return response.json(); })
+    .then(function(payload) {
+      var items = Array.isArray(payload.items) ? payload.items : [];
+      var featured = items
+        .filter(function(item) { return typeof item.featuredRank === 'number'; })
+        .sort(function(a, b) { return a.featuredRank - b.featuredRank; })
+        .slice(0, 10);
+
+      var genreMap = {};
+      var platformMap = {};
+
+      items.forEach(function(item) {
+        item.genres.forEach(function(genre) {
+          var slug = genre.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+          genreMap[slug] = genre;
+        });
+
+        item.platforms.forEach(function(platform) {
+          platformMap[platform.slug] = platform.label;
+        });
+      });
+
+      if (featuredGrid) {
+        featuredGrid.innerHTML = featured.map(renderFeaturedCard).join('');
+      }
+
+      genreFilterItems = [{ value: 'all', label: 'All genres' }].concat(
+        Object.keys(genreMap).sort().map(function(slug) {
+          return { value: slug, label: genreMap[slug] };
+        })
+      );
+
+      platformFilterItems = [{ value: 'all', label: 'All platforms' }].concat(
+        Object.keys(platformMap).sort().map(function(slug) {
+          return { value: slug, label: platformMap[slug] || slugToTitle(slug) };
+        })
+      );
+
+      renderFilterButtons(
+        genreFilterBar,
+        genreFilterItems,
+        activeGenre,
+        function(nextGenre) {
+          handleGenreChange(items, nextGenre);
+        }
+      );
+
+      renderFilterButtons(
+        platformFilterBar,
+        platformFilterItems,
+        activePlatform,
+        function(nextPlatform) {
+          handlePlatformChange(items, nextPlatform);
+        }
+      );
+
+      renderMovies(items);
+    })
+    .catch(function() {
+      moviesGrid.innerHTML = '<p class="movies-empty">The movie library could not be loaded right now.</p>';
+    });
+})();
+
 // ===== Buy Button Labels (runs immediately) =====
-document.querySelectorAll('.buy-btn').forEach(function(btn) {
-  if (btn.classList.contains('amazon')) btn.textContent = 'Buy on Amazon';
-  else if (btn.classList.contains('flipkart')) btn.textContent = 'Buy on Flipkart';
-});
+function setDefaultBuyButtonLabels(scope) {
+  var root = scope || document;
+  root.querySelectorAll('.buy-btn').forEach(function(btn) {
+    if ((btn.textContent || '').trim()) return;
+    if (btn.classList.contains('amazon')) btn.textContent = 'Buy on Amazon';
+    else if (btn.classList.contains('flipkart')) btn.textContent = 'Buy on Flipkart';
+  });
+}
+
+setDefaultBuyButtonLabels();
 
 // ===== Main Initialization =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -536,31 +754,48 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===== Affiliate Link Loader =====
-(function loadAffiliateLinks() {
-  const base = getBasePath();
-  const affiliateEls = document.querySelectorAll('[data-affiliate]');
+let affiliateLinksCache = null;
+
+function applyAffiliateLinks(data, scope) {
+  const root = scope || document;
+  const affiliateEls = root.querySelectorAll('[data-affiliate]');
   if (affiliateEls.length === 0) return;
 
-  fetch(base + 'assets/data/affiliate-links.json')
+  affiliateEls.forEach(el => {
+    const keys = el.getAttribute('data-affiliate').split('.');
+    let url = data;
+    for (const key of keys) {
+      if (url && url[key]) url = url[key];
+      else { url = '#'; break; }
+    }
+    if (el.tagName === 'A') {
+      el.href = url;
+      el.setAttribute('rel', 'nofollow sponsored noopener');
+      el.setAttribute('target', '_blank');
+    }
+  });
+}
+
+function loadAffiliateLinks(scope) {
+  const root = scope || document;
+  const affiliateEls = root.querySelectorAll('[data-affiliate]');
+  if (affiliateEls.length === 0) return Promise.resolve();
+
+  if (affiliateLinksCache) {
+    applyAffiliateLinks(affiliateLinksCache, root);
+    return Promise.resolve();
+  }
+
+  return fetch(getBasePath() + 'assets/data/affiliate-links.json')
     .then(r => r.json())
     .then(data => {
-      affiliateEls.forEach(el => {
-        // data-affiliate="books.siddhartha.amazon"
-        const keys = el.getAttribute('data-affiliate').split('.');
-        let url = data;
-        for (const key of keys) {
-          if (url && url[key]) url = url[key];
-          else { url = '#'; break; }
-        }
-        if (el.tagName === 'A') {
-          el.href = url;
-          el.setAttribute('rel', 'nofollow sponsored noopener');
-          el.setAttribute('target', '_blank');
-        }
-      });
+      affiliateLinksCache = data;
+      applyAffiliateLinks(data, root);
     })
-    .catch(() => {}); // Silently fail — links stay as "#"
-})();
+    .catch(() => {});
+}
+
+loadAffiliateLinks();
 
 // ===== Performance: Debounce =====
 function debounce(func, wait) {

@@ -889,6 +889,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-05 | **Phase 2 complete** — Analytics & SEO. Added Microsoft Clarity snippet in `script.js` (placeholder ID — replace `CLARITY_PROJECT_ID` with real ID from clarity.microsoft.com). Added JSON-LD structured data injection: WebSite schema on all pages, Person schema on homepage. Added OG meta tags (title, description, type, url) to all 6 pages. Added `<link rel="canonical">` to all 6 pages. Updated `sitemap.xml` lastmod dates. | Phase 2 |
 | 2026-04-05 | **Phase 3 complete** — Books Enhancement. Added category filter bar to `books/index.html` (7 buttons: All, Philosophy, Spirituality, Fiction, Self-Help, Business, Investing). Added `data-categories` attribute to all 15 book cards for JS filtering. Added color-coded category badges (`.badge-philosophy` purple, `.badge-spirituality` pink, `.badge-fiction` blue, `.badge-self-help` green, `.badge-business` amber, `.badge-leadership` red, `.badge-investing` cyan). Added star ratings to all 15 books (★★★★★ or ★★★★☆ based on `books.json` ratings). Built filter logic in `script.js` `initBookFilter()` IIFE. All CSS added to `style.css` (filter bar, badges, ratings). | Phase 3 |
 | 2026-04-05 | **Phase 4 complete** — 100 Skills scaffold. Added `assets/data/skills.json` with 100 planned skill days and 5 scaffolded launch pages. Built `/100-skills/index.html` as a JSON-driven hub with progress stats, category filter, and difficulty-colored cards rendered by `script.js` `initSkillsHub()`. Created `/100-skills/day-001/` through `/100-skills/day-005/` with a shared structure: hero, supplies, what I learned placeholder, resources, verdict, affiliate disclosure, and prev/next navigation. Added `100 Skills` to the shared nav in `renderHeader()`, added a homepage explore card, extended `affiliate-links.json` with starter supply placeholders for the first 5 skill pages, and updated `sitemap.xml` with the hub plus the first 5 day URLs. | Phase 4 |
+| 2026-04-06 | **Phase 5 complete** — Movies & Series section launch. Added `assets/data/movies.json` with 12 initial entries (movies + series), platform badges, genre tags, mood tags, Vikram ratings, featured ranks, and affiliate metadata. Built `/movies/index.html` as a JSON-driven page with `Vikram's Top 10`, genre + platform filters, poster-style cards, and affiliate disclosure. Extended `script.js` with `initMoviesPage()` to render the section, added `Movies` to the shared nav, updated the affiliate loader so dynamically rendered cards also receive URLs, added a homepage explore card, seeded `affiliate-links.json` with movie placeholders, and added `/movies/` to `sitemap.xml`. | Phase 5 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -920,7 +921,15 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. **Supplies + affiliate links:** The first 5 pages use `data-affiliate="skills.{key}.{platform}"` attributes. Add or update URLs in `assets/data/affiliate-links.json` and the buttons will populate automatically.
 6. **Progress meaning:** The progress bar on the hub currently reflects scaffolded pages, not completed challenge days. When Vikram starts publishing real attempts, update `status` values and the copy if needed.
 
+### How the movies section works (for future agents):
+1. **Master data:** `assets/data/movies.json` is the single source of truth. Each entry stores `title`, `type`, `year`, `vikramRating`, `featuredRank`, `genres`, `platforms`, `moodTags`, `whyRecommend`, and optional Amazon affiliate metadata.
+2. **Page rendering:** `/movies/index.html` is mostly a shell. In `script.js`, `initMoviesPage()` fetches `movies.json`, renders the featured top 10 into `#featured-movies-grid`, builds filter buttons dynamically, and renders cards into `#movies-grid`.
+3. **Filters:** Genre and platform filters are both data-driven. Adding a new platform or genre in the JSON automatically creates a new filter button.
+4. **Poster treatment:** Movie cards currently use stylized CSS poster panels rather than real poster images. This keeps the section visually strong without introducing an image asset pipeline yet.
+5. **Affiliate links:** Cards with `affiliateKey` render an Amazon CTA button that resolves through `assets/data/affiliate-links.json` under `movies.{key}.amazon`. Titles without `affiliateKey` simply render without a CTA.
+6. **Dynamic affiliate hydration:** The affiliate loader in `script.js` now supports dynamically rendered DOM sections, so future JSON-driven pages can call `loadAffiliateLinks(scope)` after rendering.
+
 ---
 
-*Last updated: 2026-04-05*
-*Next priority: Phase 5 — Movies & Series Section*
+*Last updated: 2026-04-06*
+*Next priority: Phase 6 — Kitchen & Diet Section*
