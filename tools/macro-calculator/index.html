@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Macro Calculator - The Simple Guy</title>
+  <meta name="description" content="Calculate calories, protein, carbs, and fats using your stats and goal with a simple Indian fitness-friendly macro calculator." />
+  <meta property="og:title" content="Macro Calculator - The Simple Guy" />
+  <meta property="og:description" content="A quick calorie and macro calculator using Mifflin-St Jeor and practical fitness targets." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/tools/macro-calculator/" />
+  <link rel="canonical" href="https://vikramaditya.me/tools/macro-calculator/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body data-page="kitchen">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 6 Tool</p>
+      <h1>Macro Calculator</h1>
+      <p class="subtitle">Use your stats and goal to calculate calorie targets and a clean protein-carb-fat split.</p>
+    </section>
+
+    <section class="tool-layout fade-in">
+      <div class="tool-panel">
+        <h2>Calculate My Macros</h2>
+        <form id="macro-calculator-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Age</span>
+              <input type="number" name="age" min="15" max="80" value="24" required />
+            </label>
+            <label class="tool-field">
+              <span>Gender</span>
+              <select name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Height (cm)</span>
+              <input type="number" name="height" min="120" max="220" value="175" required />
+            </label>
+            <label class="tool-field">
+              <span>Weight (kg)</span>
+              <input type="number" name="weight" min="35" max="200" step="0.1" value="70" required />
+            </label>
+            <label class="tool-field">
+              <span>Activity Level</span>
+              <select name="activity" required>
+                <option value="1.2">Sedentary</option>
+                <option value="1.375">Lightly Active</option>
+                <option value="1.55" selected>Moderately Active</option>
+                <option value="1.725">Very Active</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Goal</span>
+              <select name="goal" required>
+                <option value="lose">Lose Fat</option>
+                <option value="maintain" selected>Maintain</option>
+                <option value="gain">Gain Muscle</option>
+              </select>
+            </label>
+          </div>
+
+          <button type="submit" class="btn">Calculate</button>
+        </form>
+      </div>
+
+      <div id="macro-calculator-result" class="tool-panel tool-result-panel">
+        <h2>Your Targets</h2>
+        <p class="tool-placeholder">Enter your stats to get calorie targets, macro grams, and a simple meal split.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../../assets/js/script.js"></script>
+</body>
+</html>

@@ -2593,6 +2593,289 @@ li {
   color: var(--color-text-secondary);
 }
 
+/* === Kitchen & Diet Tools === */
+.kitchen-hero,
+.tool-hero {
+  padding: var(--space-xl) 0;
+}
+
+.kitchen-eyebrow,
+.kitchen-kicker,
+.tool-eyebrow,
+.tool-meal-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.kitchen-intro-card,
+.equipment-card,
+.recipe-card,
+.tool-panel,
+.tool-summary-card,
+.tool-meal-card,
+.tool-macro-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.kitchen-intro-card,
+.tool-panel {
+  padding: var(--space-xl);
+}
+
+.kitchen-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.kitchen-section-copy {
+  color: var(--color-text-secondary);
+  max-width: 52ch;
+  margin-bottom: 0;
+}
+
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+}
+
+.equipment-card {
+  padding: var(--space-lg);
+}
+
+.equipment-card h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.kitchen-filter-bar {
+  justify-content: flex-start;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+}
+
+.recipe-card {
+  padding: var(--space-lg);
+}
+
+.recipe-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.recipe-badge,
+.recipe-meta {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.recipe-badge {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.recipe-meta {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.tool-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.tool-result-panel {
+  min-height: 360px;
+}
+
+.tool-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.tool-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.tool-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tool-field span {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.tool-field input,
+.tool-field select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all var(--transition-base);
+}
+
+.tool-field input:focus,
+.tool-field select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+.tool-placeholder {
+  color: var(--color-text-secondary);
+}
+
+.tool-summary-grid,
+.tool-macro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.tool-summary-card,
+.tool-macro-card {
+  padding: var(--space-md);
+}
+
+.tool-summary-card span,
+.tool-summary-card small {
+  display: block;
+}
+
+.tool-summary-card span {
+  color: var(--color-text-secondary);
+  font-size: 0.86rem;
+  margin-bottom: 6px;
+}
+
+.tool-summary-card strong,
+.tool-macro-card strong {
+  display: block;
+  font-size: 1.7rem;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.tool-summary-card small,
+.tool-macro-card p {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.tool-plan-note,
+.tool-addon-list {
+  background: var(--color-accent-light);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.tool-plan-note p,
+.tool-addon-list p {
+  margin-bottom: var(--space-sm);
+}
+
+.tool-plan-note p:last-child,
+.tool-addon-list p:last-child {
+  margin-bottom: 0;
+}
+
+.tool-meal-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.tool-meal-card {
+  padding: var(--space-md);
+}
+
+.tool-meal-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.tool-meal-top h3 {
+  margin-bottom: 4px;
+}
+
+.tool-meal-cost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.tool-meal-foods,
+.tool-meal-macros {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.tool-meal-foods {
+  margin-bottom: var(--space-xs);
+}
+
+.tool-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.tool-recommendation-block {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
 /* === Mobile Responsive === */
 @media (max-width: 768px) {
   .profile-box summary {
@@ -2672,6 +2955,20 @@ li {
   .movie-poster {
     min-height: 260px;
   }
+
+  .kitchen-section-head {
+    align-items: stretch;
+  }
+
+  .kitchen-intro-card,
+  .tool-panel {
+    padding: var(--space-lg);
+  }
+
+  .tool-layout,
+  .tool-field-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2725,5 +3022,19 @@ li {
   .movie-platform-badge,
   .movie-vibe-tag {
     font-size: 0.74rem;
+  }
+
+  .recipe-card,
+  .equipment-card,
+  .tool-summary-card,
+  .tool-meal-card,
+  .tool-macro-card {
+    padding: var(--space-md);
+  }
+
+  .recipe-top,
+  .tool-meal-top {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

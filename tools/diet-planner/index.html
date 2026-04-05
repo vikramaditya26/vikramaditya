@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diet Planner - The Simple Guy</title>
+  <meta name="description" content="Generate a practical Indian meal plan using your stats, goal, diet preference, kitchen setup, and budget." />
+  <meta property="og:title" content="Diet Planner - The Simple Guy" />
+  <meta property="og:description" content="A simple Indian diet planner for muscle gain, maintenance, or fat loss using real foods and realistic budgets." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/tools/diet-planner/" />
+  <link rel="canonical" href="https://vikramaditya.me/tools/diet-planner/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body data-page="kitchen">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 6 Tool</p>
+      <h1>Diet Planner</h1>
+      <p class="subtitle">A practical Indian meal plan based on your stats, goal, diet preference, budget, and kitchen reality.</p>
+    </section>
+
+    <section class="tool-layout fade-in">
+      <div class="tool-panel">
+        <h2>Build My Plan</h2>
+        <form id="diet-planner-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Age</span>
+              <input type="number" name="age" min="15" max="80" value="24" required />
+            </label>
+            <label class="tool-field">
+              <span>Gender</span>
+              <select name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Height (cm)</span>
+              <input type="number" name="height" min="120" max="220" value="175" required />
+            </label>
+            <label class="tool-field">
+              <span>Weight (kg)</span>
+              <input type="number" name="weight" min="35" max="200" step="0.1" value="70" required />
+            </label>
+            <label class="tool-field">
+              <span>Activity Level</span>
+              <select name="activity" required>
+                <option value="1.2">Sedentary</option>
+                <option value="1.375">Lightly Active</option>
+                <option value="1.55" selected>Moderately Active</option>
+                <option value="1.725">Very Active</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Goal</span>
+              <select name="goal" required>
+                <option value="lose">Lose Fat</option>
+                <option value="maintain" selected>Maintain</option>
+                <option value="gain">Gain Muscle</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Diet Type</span>
+              <select name="dietType" required>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="egg-vegetarian">Egg-itarian</option>
+                <option value="non-vegetarian" selected>Non-Vegetarian</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Daily Budget</span>
+              <select name="budget" required>
+                <option value="low">Under ₹180</option>
+                <option value="medium" selected>₹180-₹280</option>
+                <option value="high">₹280+</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Kitchen Setup</span>
+              <select name="equipment" required>
+                <option value="kettle">Kettle</option>
+                <option value="hot-plate">Hot Plate</option>
+                <option value="full-kitchen" selected>Full Kitchen</option>
+              </select>
+            </label>
+          </div>
+
+          <button type="submit" class="btn">Generate My Plan</button>
+        </form>
+
+        <div class="tip-box">
+          <p><strong>Note:</strong> This planner gives approximate targets and practical meal ideas. It is not medical advice and should not replace a doctor or dietitian.</p>
+        </div>
+      </div>
+
+      <div id="diet-plan-result" class="tool-panel tool-result-panel">
+        <h2>Your Plan</h2>
+        <p class="tool-placeholder">Fill the form to generate calories, macros, meals, daily cost, and suggested add-ons.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../../assets/js/script.js"></script>
+</body>
+</html>

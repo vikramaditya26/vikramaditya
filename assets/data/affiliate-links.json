@@ -127,6 +127,20 @@
       "amazon": "#"
     }
   },
+  "kitchen": {
+    "electric-kettle": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "induction-cooktop": {
+      "amazon": "#",
+      "flipkart": "#"
+    },
+    "nonstick-pan": {
+      "amazon": "#",
+      "flipkart": "#"
+    }
+  },
   "tools": {
     "zerodha": {
       "referral": "#"
