@@ -306,6 +306,247 @@ injectComponents();
     });
 })();
 
+// ===== Blog Data Loader =====
+let blogDataCache = null;
+
+function loadBlogData() {
+  if (blogDataCache) {
+    return Promise.resolve(blogDataCache);
+  }
+
+  return fetch(getBasePath() + 'assets/data/blog.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      blogDataCache = data;
+      return data;
+    });
+}
+
+function formatBlogDate(dateString) {
+  if (!dateString) return 'Date TBD';
+  return new Date(dateString + 'T00:00:00').toLocaleDateString('en-IN', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
+  });
+}
+
+function formatBlogCategory(category) {
+  return String(category || '').split('-').map(function(part) {
+    return part.charAt(0).toUpperCase() + part.slice(1);
+  }).join(' ');
+}
+
+function buildBlogPath(slug) {
+  return getBasePath() + 'blog/' + slug + '/';
+}
+
+function escapeHtml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderBlogCard(post) {
+  return `
+    <a class="blog-preview-card" href="${buildBlogPath(post.slug)}">
+      <div class="blog-preview-meta">
+        <span class="blog-tag">${escapeHtml(formatBlogCategory(post.category))}</span>
+        <span>${post.readingMinutes} min read</span>
+      </div>
+      <h2>${escapeHtml(post.title)}</h2>
+      <p class="blog-preview-date">${formatBlogDate(post.date)}</p>
+      <p class="blog-preview-excerpt">${escapeHtml(post.excerpt)}</p>
+      <span class="blog-preview-cta">Read post</span>
+    </a>
+  `;
+}
+
+// ===== Blog Listing =====
+(function initBlogIndex() {
+  var blogGrid = document.getElementById('blog-post-grid');
+  if (!blogGrid) return;
+
+  var filterBar = document.getElementById('blog-category-filters');
+  var totalCountEl = document.getElementById('blog-total-count');
+  var categoryCountEl = document.getElementById('blog-category-count');
+  var lastUpdatedEl = document.getElementById('blog-last-updated');
+  var activeCategory = 'all';
+  var allPosts = [];
+
+  function renderFilters(categories) {
+    if (!filterBar) return;
+
+    filterBar.innerHTML = ['all'].concat(categories).map(function(category) {
+      var isAll = category === 'all';
+      var label = isAll ? 'All posts' : formatBlogCategory(category);
+      var activeClass = category === activeCategory ? ' active' : '';
+      return '<button type="button" class="filter-btn' + activeClass + '" data-blog-category="' + category + '">' + label + '</button>';
+    }).join('');
+
+    filterBar.querySelectorAll('[data-blog-category]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        activeCategory = button.getAttribute('data-blog-category') || 'all';
+        renderPosts(allPosts);
+        renderFilters(categories);
+      });
+    });
+  }
+
+  function renderPosts(posts) {
+    var filteredPosts = posts.filter(function(post) {
+      return activeCategory === 'all' || post.category === activeCategory;
+    });
+
+    if (!filteredPosts.length) {
+      blogGrid.innerHTML = '<p class="movies-empty">No blog posts match this category yet.</p>';
+      return;
+    }
+
+    blogGrid.innerHTML = filteredPosts.map(renderBlogCard).join('');
+  }
+
+  loadBlogData()
+    .then(function(payload) {
+      var posts = Array.isArray(payload.posts) ? payload.posts.slice() : [];
+      var categories = [];
+
+      posts.sort(function(a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
+
+      posts.forEach(function(post) {
+        if (categories.indexOf(post.category) === -1) {
+          categories.push(post.category);
+        }
+      });
+
+      allPosts = posts;
+
+      if (totalCountEl) totalCountEl.textContent = String(posts.length);
+      if (categoryCountEl) categoryCountEl.textContent = String(categories.length);
+      if (lastUpdatedEl) lastUpdatedEl.textContent = formatBlogDate(payload.updatedAt);
+
+      renderFilters(categories);
+      renderPosts(posts);
+    })
+    .catch(function() {
+      blogGrid.innerHTML = '<p class="movies-empty">The blog index could not be loaded right now.</p>';
+    });
+})();
+
+// ===== Blog Post Pages =====
+(function initBlogPostPages() {
+  var article = document.querySelector('[data-blog-slug]');
+  if (!article) return;
+
+  var slug = article.getAttribute('data-blog-slug');
+  var relatedGrid = document.getElementById('related-posts-grid');
+  var shareButtons = article.querySelectorAll('[data-share]');
+
+  function setupShareButtons(post) {
+    var shareUrl = window.location.href;
+    var shareText = post.title + ' - The Simple Guy';
+
+    shareButtons.forEach(function(button) {
+      var action = button.getAttribute('data-share');
+
+      if (action === 'whatsapp') {
+        button.href = 'https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + shareUrl);
+        button.setAttribute('target', '_blank');
+        button.setAttribute('rel', 'noopener');
+        return;
+      }
+
+      if (action === 'twitter') {
+        button.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(shareUrl);
+        button.setAttribute('target', '_blank');
+        button.setAttribute('rel', 'noopener');
+        return;
+      }
+
+      if (action === 'linkedin') {
+        button.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(shareUrl);
+        button.setAttribute('target', '_blank');
+        button.setAttribute('rel', 'noopener');
+        return;
+      }
+
+      if (action === 'copy') {
+        button.addEventListener('click', function() {
+          if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+          navigator.clipboard.writeText(shareUrl).then(function() {
+            button.textContent = 'Copied';
+            setTimeout(function() {
+              button.textContent = 'Copy link';
+            }, 1800);
+          }).catch(function() {});
+        });
+      }
+    });
+  }
+
+  function injectBlogSchema(post) {
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      dateModified: post.date,
+      author: {
+        '@type': 'Person',
+        name: 'Vikram Aditya'
+      },
+      mainEntityOfPage: window.location.href,
+      publisher: {
+        '@type': 'Person',
+        name: 'Vikram Aditya'
+      }
+    });
+    document.head.appendChild(script);
+  }
+
+  loadBlogData()
+    .then(function(payload) {
+      var posts = Array.isArray(payload.posts) ? payload.posts : [];
+      var currentPost = posts.find(function(post) {
+        return post.slug === slug;
+      });
+
+      if (!currentPost) return;
+
+      setupShareButtons(currentPost);
+      injectBlogSchema(currentPost);
+
+      if (!relatedGrid) return;
+
+      var relatedPosts = (currentPost.related || []).map(function(relatedSlug) {
+        return posts.find(function(post) {
+          return post.slug === relatedSlug;
+        });
+      }).filter(Boolean);
+
+      if (!relatedPosts.length) {
+        relatedPosts = posts.filter(function(post) {
+          return post.slug !== currentPost.slug && post.category === currentPost.category;
+        }).slice(0, 3);
+      }
+
+      relatedGrid.innerHTML = relatedPosts.map(renderBlogCard).join('');
+    })
+    .catch(function() {
+      if (relatedGrid) {
+        relatedGrid.innerHTML = '<p class="movies-empty">Related posts could not be loaded right now.</p>';
+      }
+    });
+})();
+
 // ===== Movies & Series =====
 (function initMoviesPage() {
   var moviesGrid = document.getElementById('movies-grid');

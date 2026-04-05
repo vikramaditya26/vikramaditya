@@ -1,0 +1,145 @@
+{
+  "updatedAt": "2026-04-06",
+  "posts": [
+    {
+      "slug": "best-things-i-read-this-week-2",
+      "title": "Best Things I Read This Week - 2",
+      "description": "A weekly roundup on boredom, teaching, courage, compounding, and why hard problems are worth choosing.",
+      "excerpt": "Notes on boredom as a filter, learning by teaching, courage in decisions, and why difficult work creates real advantage.",
+      "category": "wisdom",
+      "date": "2026-03-31",
+      "readingMinutes": 7,
+      "related": [
+        "best-thing-i-read-this-week",
+        "art-of-start",
+        "clear-thinking-escaping-the-defaults"
+      ]
+    },
+    {
+      "slug": "lessons-from-pavel-durov",
+      "title": "Lessons from Pavel Durov on Freedom, Discipline, and Purpose",
+      "description": "Reflections on freedom, self-control, physical discipline, and building a principled life from Pavel Durov's worldview.",
+      "excerpt": "A deep reflection on freedom, fear, discipline, physical training, and protecting attention in a world built to distract you.",
+      "category": "life",
+      "date": "2026-03-24",
+      "readingMinutes": 8,
+      "related": [
+        "art-of-start",
+        "less-is-more",
+        "clear-thinking-escaping-the-defaults"
+      ]
+    },
+    {
+      "slug": "best-thing-i-read-this-week",
+      "title": "Best Thing I Read This Week",
+      "description": "Quick notes on Naval's formulas for life, Sam Altman on luck, Munger on learning, and Brady on consistency.",
+      "excerpt": "A shorter weekly note covering Naval's formulas, Sam Altman on luck, Charlie Munger on learning, and Tom Brady on consistency.",
+      "category": "wisdom",
+      "date": "2026-03-17",
+      "readingMinutes": 3,
+      "related": [
+        "best-things-i-read-this-week-2",
+        "clear-thinking-escaping-the-defaults",
+        "math-mental-models-for-life-decisions"
+      ]
+    },
+    {
+      "slug": "art-of-start",
+      "title": "The Art of Start",
+      "description": "A first-principles guide to beginning hard things with clear goals, smart work, and patient repetition.",
+      "excerpt": "A practical essay on first-principles thinking, defining goals well, and using systems instead of waiting for perfect confidence.",
+      "category": "startups",
+      "date": "2026-03-10",
+      "readingMinutes": 7,
+      "related": [
+        "lessons-from-pavel-durov",
+        "clear-thinking-escaping-the-defaults",
+        "science-mental-models-for-life-decisions"
+      ]
+    },
+    {
+      "slug": "less-is-more",
+      "title": "Less is More",
+      "description": "Why abundance can destroy attention, and why a life built on fewer wants often feels more free.",
+      "excerpt": "A short reflection on excess, distraction, and why subtraction often creates more freedom than accumulation.",
+      "category": "life",
+      "date": "2026-03-03",
+      "readingMinutes": 2,
+      "related": [
+        "is-social-media-the-new-religion",
+        "are-humans-getting-stupider",
+        "lessons-from-pavel-durov"
+      ]
+    },
+    {
+      "slug": "clear-thinking-escaping-the-defaults",
+      "title": "Clear Thinking: Escaping the Defaults",
+      "description": "A practical summary of Shane Parrish's core idea: the antidote to reactive stupidity is cultivated strength.",
+      "excerpt": "A summary of the four defaults that trap judgment and the habits that help us think more clearly under pressure.",
+      "category": "psychology",
+      "date": "2026-02-24",
+      "readingMinutes": 4,
+      "related": [
+        "science-mental-models-for-life-decisions",
+        "math-mental-models-for-life-decisions",
+        "art-of-start"
+      ]
+    },
+    {
+      "slug": "is-social-media-the-new-religion",
+      "title": "Is Social Media the New Religion?",
+      "description": "A meditation on algorithms, influence, belonging, and the spiritual power social platforms now hold over attention.",
+      "excerpt": "An essay on how platforms mimic religion through ritual, belonging, incentives, and the economics of attention.",
+      "category": "psychology",
+      "date": "2026-02-17",
+      "readingMinutes": 4,
+      "related": [
+        "less-is-more",
+        "are-humans-getting-stupider",
+        "clear-thinking-escaping-the-defaults"
+      ]
+    },
+    {
+      "slug": "are-humans-getting-stupider",
+      "title": "Are Humans Getting Stupider?",
+      "description": "A political and cultural reflection on attention, algorithms, leadership quality, and declining public judgment.",
+      "excerpt": "A reflection on distraction, poor leadership, and the social conditions that make manipulation easier at scale.",
+      "category": "life",
+      "date": "2026-02-10",
+      "readingMinutes": 3,
+      "related": [
+        "is-social-media-the-new-religion",
+        "science-mental-models-for-life-decisions",
+        "math-mental-models-for-life-decisions"
+      ]
+    },
+    {
+      "slug": "science-mental-models-for-life-decisions",
+      "title": "Science Mental Models for Life & Decisions",
+      "description": "Six science-based mental models, from entropy to natural selection, that help with everyday decisions.",
+      "excerpt": "A guide to entropy, feedback loops, limiting factors, inertia, and other science patterns that show up in life and work.",
+      "category": "science",
+      "date": "2026-02-03",
+      "readingMinutes": 4,
+      "related": [
+        "math-mental-models-for-life-decisions",
+        "clear-thinking-escaping-the-defaults",
+        "art-of-start"
+      ]
+    },
+    {
+      "slug": "math-mental-models-for-life-decisions",
+      "title": "Math Mental Models for Life & Decisions",
+      "description": "Compounding, power laws, base rates, expected value, and other math ideas that improve real-world judgment.",
+      "excerpt": "A practical tour of compounding, power laws, base rates, expected value, and sensitivity analysis for better choices.",
+      "category": "science",
+      "date": "2026-01-27",
+      "readingMinutes": 5,
+      "related": [
+        "science-mental-models-for-life-decisions",
+        "clear-thinking-escaping-the-defaults",
+        "best-thing-i-read-this-week"
+      ]
+    }
+  ]
+}

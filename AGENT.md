@@ -422,7 +422,9 @@ Push (7 exercises, YouTube embeds), Pull (7 exercises), Legs (5 exercises), Nutr
 ### Blog — 10 articles
 Topics: Sam Altman on success, Pavel Durov interview, Naval's formulas, mental models (math + science), social media critique, political commentary, first principles, clear thinking
 
-**Missing:** No dates, no categories, no individual post URLs, no sharing buttons, no comments.
+**Current state:** All 10 posts now have individual URLs under `/blog/post-slug/`, dates, categories, estimated reading time, social share buttons, related-post blocks, and a newsletter CTA. The listing page is now card-based and driven by `assets/data/blog.json`.
+
+**Still missing:** Comments and a live public Substack subscribe URL (CTA currently points people to contact while the newsletter link is finalized).
 
 ### Contact — functional
 Formspree form, LinkedIn + Instagram + Email links. Working fine.
@@ -870,6 +872,13 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. Add supply links to `assets/data/affiliate-links.json`
 6. Update progress tracker on 100-skills/index.html
 
+### Adding a New Blog Post
+1. Add the post metadata to `assets/data/blog.json` (`slug`, `title`, `description`, `excerpt`, `category`, `date`, `readingMinutes`, `related`)
+2. Create folder: `blog/post-slug/index.html`
+3. Follow the Phase 8 article template (hero meta, share buttons, static article body, newsletter CTA, related posts placeholder)
+4. Add the new URL to `sitemap.xml`
+5. The blog listing and related posts will pick it up automatically through `script.js`
+
 ### Adding a New Tool/Calculator
 1. Create folder: `tools/tool-name/index.html`
 2. Self-contained JS within the page (or shared via script.js if reusable)
@@ -892,6 +901,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-06 | **Phase 5 complete** — Movies & Series section launch. Added `assets/data/movies.json` with 12 initial entries (movies + series), platform badges, genre tags, mood tags, Vikram ratings, featured ranks, and affiliate metadata. Built `/movies/index.html` as a JSON-driven page with `Vikram's Top 10`, genre + platform filters, poster-style cards, and affiliate disclosure. Extended `script.js` with `initMoviesPage()` to render the section, added `Movies` to the shared nav, updated the affiliate loader so dynamically rendered cards also receive URLs, added a homepage explore card, seeded `affiliate-links.json` with movie placeholders, and added `/movies/` to `sitemap.xml`. | Phase 5 |
 | 2026-04-06 | **Phase 6 launched** — Kitchen & Diet tools. Added `assets/data/foods.json` with an initial 54-food seed database (approximate Indian serving macros, meal types, equipment support, and costs). Built `/kitchen/index.html` with equipment-aware recipe cards and starter gear placeholders. Built `/tools/diet-planner/` and `/tools/macro-calculator/`, both powered by new nutrition helpers in `script.js` (Mifflin-St Jeor BMR/TDEE, goal-based macro targets, and a meal-plan generator using foods.json + meal templates). Added `Kitchen` to the shared nav, added a homepage explore card, seeded `affiliate-links.json` with kitchen gear placeholders, and updated `sitemap.xml` with the new section + tools. | Phase 6 |
 | 2026-04-06 | **Phase 7 launched** — Skincare & Style sections. Added `assets/data/products.json` as a shared product dataset for both sections. Built `/skincare/index.html` with a current routine block, CTM basics, a simple skin-type guide form, data-driven product recommendations by category/tier, seasonal tips, and grooming basics. Built `/style/index.html` with a data-driven capsule wardrobe grid, outfit formulas, fit/color guidance, budget wardrobe notes, and seasonal style advice. Extended `script.js` to load `products.json`, render skincare/style product cards, and handle the skin-type guide interaction. Added `Skincare` and `Style` to the shared nav, added homepage explore cards, seeded `affiliate-links.json` with skincare/style placeholders, and updated `sitemap.xml` with both section URLs. | Phase 7 |
+| 2026-04-06 | **Phase 8 launched** — Blog enhancement. Added `assets/data/blog.json` as the metadata source for all 10 current posts. Rebuilt `/blog/index.html` into a card-based, filterable listing with dates, categories, and reading time rendered by `script.js` `initBlogIndex()`. Created 10 individual static post pages under `/blog/post-slug/` with unique OG/canonical metadata, social sharing buttons, Substack CTA copy, and related-post placeholders. Extended `script.js` with `loadBlogData()`, related-post rendering, share-link generation, and `BlogPosting` schema injection for article pages. Added blog listing/post styles to `style.css` and updated `sitemap.xml` with every post URL. | Phase 8 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -947,7 +957,15 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. **Affiliate links:** Skincare product cards use `data-affiliate="skincare.{key}.{platform}"`; style essentials use `data-affiliate="style.{key}.{platform}"`. The shared affiliate loader hydrates them after rendering.
 6. **Expansion path:** If Phase 7 grows, the next clean step is likely adding a proper skin-type decision tree and a richer wardrobe dataset (more categories, occasion tags, and maybe filters), not hardcoding more blocks into the HTML.
 
+### How the blog system works (for future agents):
+1. **Master data:** `assets/data/blog.json` stores listing metadata for every post: `slug`, `title`, `description`, `excerpt`, `category`, `date`, `readingMinutes`, and `related`.
+2. **Listing page:** `/blog/index.html` is now a shell. In `script.js`, `initBlogIndex()` fetches `blog.json`, sorts posts newest-first, renders the card grid into `#blog-post-grid`, and builds category filters into `#blog-category-filters`.
+3. **Individual pages:** Each post still has a real static HTML page under `/blog/post-slug/` for clean URLs, unique SEO metadata, and crawlable article content. The page only delegates the share buttons, related posts, and schema enhancement to `script.js`.
+4. **Share buttons:** `initBlogPostPages()` generates WhatsApp, Twitter/X, and LinkedIn share links from `window.location.href`. The copy button uses `navigator.clipboard` when available.
+5. **Related posts:** `initBlogPostPages()` reads the current page's `data-blog-slug`, resolves the `related` slugs from `blog.json`, and renders those cards into `#related-posts-grid`. If `related` is ever empty, the fallback is same-category posts.
+6. **Newsletter CTA honesty:** The current CTA copy intentionally says Substack is coming next, but links to `/contact/` for now because the public subscribe URL is not yet committed in the repo. Replace that CTA target once the Substack URL is finalized.
+
 ---
 
 *Last updated: 2026-04-06*
-*Next priority: Phase 8 — Blog Enhancement, while continuing to enrich foods.json and products.json over time*
+*Next priority: Phase 9 — Interactive Tools Suite, while continuing to enrich foods.json, products.json, and blog metadata over time*
