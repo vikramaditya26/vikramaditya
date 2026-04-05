@@ -141,6 +141,37 @@
       "flipkart": "#"
     }
   },
+  "skincare": {
+    "simple-facewash": { "amazon": "#", "flipkart": "#" },
+    "cetaphil-cleanser": { "amazon": "#", "flipkart": "#" },
+    "bioderma-sebium": { "amazon": "#", "flipkart": "#" },
+    "ponds-light-gel": { "amazon": "#", "flipkart": "#" },
+    "cetaphil-dam": { "amazon": "#", "flipkart": "#" },
+    "cerave-moisturizing-cream": { "amazon": "#", "flipkart": "#" },
+    "aqualogica-sunscreen": { "amazon": "#", "flipkart": "#" },
+    "minimalist-sunscreen": { "amazon": "#", "flipkart": "#" },
+    "anthelios-sunscreen": { "amazon": "#", "flipkart": "#" },
+    "minimalist-niacinamide": { "amazon": "#", "flipkart": "#" },
+    "deconstruct-vitamin-c": { "amazon": "#", "flipkart": "#" },
+    "klairs-vitamin-c": { "amazon": "#", "flipkart": "#" },
+    "beardo-oil": { "amazon": "#", "flipkart": "#" },
+    "loreal-shampoo": { "amazon": "#", "flipkart": "#" },
+    "titan-skinn-raw": { "amazon": "#", "flipkart": "#" }
+  },
+  "style": {
+    "white-oxford-shirt": { "amazon": "#", "flipkart": "#" },
+    "light-blue-shirt": { "amazon": "#", "flipkart": "#" },
+    "black-tshirt": { "amazon": "#", "flipkart": "#" },
+    "white-tshirt": { "amazon": "#", "flipkart": "#" },
+    "dark-jeans": { "amazon": "#", "flipkart": "#" },
+    "beige-chinos": { "amazon": "#", "flipkart": "#" },
+    "olive-overshirt": { "amazon": "#", "flipkart": "#" },
+    "navy-polo": { "amazon": "#", "flipkart": "#" },
+    "white-sneakers": { "amazon": "#", "flipkart": "#" },
+    "brown-loafers": { "amazon": "#", "flipkart": "#" },
+    "minimal-watch": { "amazon": "#", "flipkart": "#" },
+    "brown-belt": { "amazon": "#", "flipkart": "#" }
+  },
   "tools": {
     "zerodha": {
       "referral": "#"

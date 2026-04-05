@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skincare & Grooming - The Simple Guy</title>
+  <meta name="description" content="Simple skincare and grooming basics for Indian men, with a routine guide, product picks, and a skin-type quiz." />
+  <meta property="og:title" content="Skincare & Grooming - The Simple Guy" />
+  <meta property="og:description" content="A practical skincare guide for Indian men with CTM basics, seasonal tips, and no-nonsense product recommendations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/skincare/" />
+  <link rel="canonical" href="https://vikramaditya.me/skincare/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-page="skincare">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero skincare-hero">
+      <p class="beauty-eyebrow">Phase 7 Launch</p>
+      <h1>Skincare & Grooming</h1>
+      <p class="subtitle">Simple skincare for Indian men who want to look fresher, feel cleaner, and stop buying random products because a reel said so.</p>
+    </section>
+
+    <section class="fade-in">
+      <div class="beauty-intro-card">
+        <p class="beauty-kicker">Start simple</p>
+        <h2>Clear skin usually needs consistency more than complexity</h2>
+        <p>Most guys do not need a 10-step routine. They need a cleanser that is not harsh, a moisturizer they will actually use, sunscreen they will not skip, and the patience to stop changing products every five days.</p>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <div class="beauty-section-head">
+        <div>
+          <p class="beauty-kicker">Routine</p>
+          <h2>My current routine</h2>
+        </div>
+        <p class="beauty-section-copy">Morning should feel clean and light. Night should feel calm and restorative. That is enough for most people to begin well.</p>
+      </div>
+
+      <div class="routine-grid">
+        <div class="routine-card">
+          <h3>Morning</h3>
+          <div id="skincare-routine-morning" class="beauty-product-list"></div>
+        </div>
+        <div class="routine-card">
+          <h3>Night</h3>
+          <div id="skincare-routine-night" class="beauty-product-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <div class="beauty-section-head">
+        <div>
+          <p class="beauty-kicker">CTM Basics</p>
+          <h2>Cleanse, treat, moisturize, protect</h2>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3><span class="icon">🫧</span> Cleanse</h3>
+          <p>Use a face wash that removes sweat, sunscreen, and dirt without making your skin feel squeaky or tight. That tight feeling is not “extra clean,” it is usually barrier damage starting.</p>
+        </article>
+        <article class="card">
+          <h3><span class="icon">💧</span> Treat + Moisturize</h3>
+          <p>If you add a serum, keep the reason clear: oil control, brightness, or marks. Then lock things down with a moisturizer that matches your skin type and climate.</p>
+        </article>
+        <article class="card">
+          <h3><span class="icon">☀️</span> Protect</h3>
+          <p>If you do one thing consistently, make it sunscreen. Indian sun is not gentle, and sunscreen does more for long-term skin health than most “miracle” products.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <div class="beauty-section-head">
+        <div>
+          <p class="beauty-kicker">Skin Type Guide</p>
+          <h2>Find your likely skin type</h2>
+        </div>
+        <p class="beauty-section-copy">This is not medical diagnosis. It is a simple practical guide so you stop buying products built for someone else’s skin.</p>
+      </div>
+
+      <div class="tool-panel skin-quiz-panel">
+        <form id="skin-type-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>By afternoon, your face usually feels...</span>
+              <select name="oiliness" required>
+                <option value="oily">Shiny all over</option>
+                <option value="combination">Shiny on T-zone, normal elsewhere</option>
+                <option value="dry">Tight or flaky</option>
+                <option value="normal">Mostly balanced</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>After washing, your skin feels...</span>
+              <select name="afterWash" required>
+                <option value="dry">Tight quickly</option>
+                <option value="normal">Comfortable</option>
+                <option value="oily">Greasy again fast</option>
+                <option value="combination">Mixed</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Your biggest issue is usually...</span>
+              <select name="mainConcern" required>
+                <option value="oily">Acne or excess oil</option>
+                <option value="dry">Flaking or dullness</option>
+                <option value="combination">Both oil and dry patches</option>
+                <option value="normal">Minor sensitivity, not much else</option>
+              </select>
+            </label>
+          </div>
+          <button type="submit" class="btn">Check My Skin Type</button>
+        </form>
+
+        <div id="skin-type-result" class="skin-type-result">
+          <p class="tool-placeholder">Answer the three questions to get a simple recommendation path.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <div class="beauty-section-head">
+        <div>
+          <p class="beauty-kicker">Recommendations</p>
+          <h2>Product picks by category</h2>
+        </div>
+        <p class="beauty-section-copy">Budget if you are starting. Mid if you want reliable. Premium only if the basics are already consistent.</p>
+      </div>
+
+      <div id="skincare-product-groups" class="beauty-category-stack"></div>
+
+      <aside class="affiliate-disclosure">
+        <p><strong>Disclosure:</strong> Some links on this page are affiliate links. If you purchase through them, I may earn a small commission at no extra cost to you. I only want to recommend products that feel practical for beginners.</p>
+      </aside>
+    </section>
+
+    <section class="fade-in">
+      <div class="beauty-section-head">
+        <div>
+          <p class="beauty-kicker">Weather + Grooming</p>
+          <h2>Indian climate tips and grooming basics</h2>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Summer, Monsoon, Winter</h3>
+          <p><strong>Summer:</strong> lighter moisturizers, consistent sunscreen, wash sweat off gently, not aggressively.</p>
+          <p><strong>Monsoon:</strong> do not confuse humidity with hydration. Fungal issues and clogged pores can both rise.</p>
+          <p><strong>Winter:</strong> this is where barrier support matters more, especially if your skin suddenly feels rough or itchy.</p>
+        </article>
+        <article class="card">
+          <h3>Beard, Hair, Fragrance</h3>
+          <p>Keep beard lines clean, do not over-oil the skin underneath, wash hair based on scalp behavior not trends, and let fragrance stay close instead of overwhelming the room.</p>
+        </article>
+      </div>
+
+      <div class="tip-box">
+        <p><strong>Common mistakes:</strong> skipping sunscreen, scrubbing acne hard, changing products too fast, and assuming “men’s skincare” needs to be aggressive to work.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

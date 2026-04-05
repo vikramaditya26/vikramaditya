@@ -1,0 +1,265 @@
+{
+  "meta": {
+    "section_name": "Products",
+    "last_updated": "2026-04-06",
+    "notes": "Seed product data for skincare and style. Prices are approximate street or online prices in India."
+  },
+  "skincare": {
+    "routine": {
+      "morning": ["facewash-budget", "moisturizer-mid", "sunscreen-mid"],
+      "night": ["facewash-budget", "serum-mid", "moisturizer-mid"]
+    },
+    "products": [
+      {
+        "id": "facewash-budget",
+        "name": "Simple Refreshing Face Wash",
+        "category": "face-wash",
+        "tier": "budget",
+        "priceApprox": 349,
+        "skinTypes": ["oily", "combination", "normal"],
+        "bestFor": "A gentle daily cleanser when you want clean skin without the tight, stripped feeling.",
+        "affiliateKey": "simple-facewash"
+      },
+      {
+        "id": "facewash-mid",
+        "name": "Cetaphil Oily Skin Cleanser",
+        "category": "face-wash",
+        "tier": "mid",
+        "priceApprox": 599,
+        "skinTypes": ["oily", "combination"],
+        "bestFor": "Useful when your face gets greasy fast and harsh face washes keep making things worse.",
+        "affiliateKey": "cetaphil-cleanser"
+      },
+      {
+        "id": "facewash-premium",
+        "name": "Bioderma Sebium Gel Moussant",
+        "category": "face-wash",
+        "tier": "premium",
+        "priceApprox": 1199,
+        "skinTypes": ["oily", "combination"],
+        "bestFor": "A cleaner, more expensive upgrade if oil control and comfort both matter to you.",
+        "affiliateKey": "bioderma-sebium"
+      },
+      {
+        "id": "moisturizer-budget",
+        "name": "Pond's Super Light Gel",
+        "category": "moisturizer",
+        "tier": "budget",
+        "priceApprox": 299,
+        "skinTypes": ["oily", "combination", "normal"],
+        "bestFor": "A lightweight moisturizer for hot Indian weather and people who hate sticky cream textures.",
+        "affiliateKey": "ponds-light-gel"
+      },
+      {
+        "id": "moisturizer-mid",
+        "name": "Cetaphil DAM Daily Advance Ultra Hydrating Lotion",
+        "category": "moisturizer",
+        "tier": "mid",
+        "priceApprox": 699,
+        "skinTypes": ["dry", "normal", "combination"],
+        "bestFor": "A safe default when your skin needs actual repair and not just a little surface hydration.",
+        "affiliateKey": "cetaphil-dam"
+      },
+      {
+        "id": "moisturizer-premium",
+        "name": "CeraVe Moisturizing Cream",
+        "category": "moisturizer",
+        "tier": "premium",
+        "priceApprox": 1599,
+        "skinTypes": ["dry", "normal"],
+        "bestFor": "For dry or compromised skin when barrier support matters more than fancy claims.",
+        "affiliateKey": "cerave-moisturizing-cream"
+      },
+      {
+        "id": "sunscreen-budget",
+        "name": "Aqualogica Glow+ Dewy Sunscreen",
+        "category": "sunscreen",
+        "tier": "budget",
+        "priceApprox": 399,
+        "skinTypes": ["normal", "dry", "combination"],
+        "bestFor": "An easier starter sunscreen if you are just trying to build the habit daily.",
+        "affiliateKey": "aqualogica-sunscreen"
+      },
+      {
+        "id": "sunscreen-mid",
+        "name": "Minimalist SPF 50 Sunscreen",
+        "category": "sunscreen",
+        "tier": "mid",
+        "priceApprox": 499,
+        "skinTypes": ["oily", "combination", "normal"],
+        "bestFor": "A practical all-round sunscreen that works for a lot of people in Indian weather.",
+        "affiliateKey": "minimalist-sunscreen"
+      },
+      {
+        "id": "sunscreen-premium",
+        "name": "La Roche-Posay Anthelios UVMune",
+        "category": "sunscreen",
+        "tier": "premium",
+        "priceApprox": 1850,
+        "skinTypes": ["all"],
+        "bestFor": "A premium pick if you want strong protection and a finish that still feels elegant.",
+        "affiliateKey": "anthelios-sunscreen"
+      },
+      {
+        "id": "serum-budget",
+        "name": "Minimalist Niacinamide 5%",
+        "category": "serum",
+        "tier": "budget",
+        "priceApprox": 549,
+        "skinTypes": ["oily", "combination", "normal"],
+        "bestFor": "A good early serum if your concerns are oil balance, texture, and post-acne marks.",
+        "affiliateKey": "minimalist-niacinamide"
+      },
+      {
+        "id": "serum-mid",
+        "name": "Deconstruct Vitamin C + Ferulic Serum",
+        "category": "serum",
+        "tier": "mid",
+        "priceApprox": 699,
+        "skinTypes": ["normal", "combination", "dry"],
+        "bestFor": "Useful if you want brightness and a little antioxidant support without a very aggressive formula.",
+        "affiliateKey": "deconstruct-vitamin-c"
+      },
+      {
+        "id": "serum-premium",
+        "name": "Klairs Freshly Juiced Vitamin Drop",
+        "category": "serum",
+        "tier": "premium",
+        "priceApprox": 1570,
+        "skinTypes": ["normal", "dry", "combination"],
+        "bestFor": "A slower, gentler premium vitamin C route if you want brightness without rushing the process.",
+        "affiliateKey": "klairs-vitamin-c"
+      },
+      {
+        "id": "beard-oil",
+        "name": "Beardo Beard and Hair Growth Oil",
+        "category": "beard-care",
+        "tier": "mid",
+        "priceApprox": 550,
+        "skinTypes": ["all"],
+        "bestFor": "For men growing or maintaining a beard who want it to look groomed instead of dry and messy.",
+        "affiliateKey": "beardo-oil"
+      },
+      {
+        "id": "shampoo",
+        "name": "L'Oreal Hyaluron Moisture Shampoo",
+        "category": "hair-care",
+        "tier": "mid",
+        "priceApprox": 429,
+        "skinTypes": ["all"],
+        "bestFor": "A good weekly default when you want cleaner hair without the scalp feeling wrecked.",
+        "affiliateKey": "loreal-shampoo"
+      },
+      {
+        "id": "fragrance",
+        "name": "Titan Skinn Raw",
+        "category": "fragrance",
+        "tier": "mid",
+        "priceApprox": 1995,
+        "skinTypes": ["all"],
+        "bestFor": "An easy men's fragrance recommendation that feels polished without screaming for attention.",
+        "affiliateKey": "titan-skinn-raw"
+      }
+    ]
+  },
+  "style": {
+    "capsule": [
+      {
+        "id": "white-oxford-shirt",
+        "name": "White Oxford Shirt",
+        "category": "shirt",
+        "priceApprox": 1199,
+        "whyItMatters": "This works for office, dinner, family events, and layering without trying too hard.",
+        "affiliateKey": "white-oxford-shirt"
+      },
+      {
+        "id": "light-blue-shirt",
+        "name": "Light Blue Shirt",
+        "category": "shirt",
+        "priceApprox": 1099,
+        "whyItMatters": "An easy weekday option that feels more relaxed than white but still clean and sharp.",
+        "affiliateKey": "light-blue-shirt"
+      },
+      {
+        "id": "black-tshirt",
+        "name": "Well-Fit Black T-Shirt",
+        "category": "tshirt",
+        "priceApprox": 699,
+        "whyItMatters": "One of the easiest base layers when fit matters more than branding.",
+        "affiliateKey": "black-tshirt"
+      },
+      {
+        "id": "white-tshirt",
+        "name": "Well-Fit White T-Shirt",
+        "category": "tshirt",
+        "priceApprox": 699,
+        "whyItMatters": "The cleanest starting point for casual outfits if the fabric and fit are right.",
+        "affiliateKey": "white-tshirt"
+      },
+      {
+        "id": "dark-jeans",
+        "name": "Dark Blue Jeans",
+        "category": "bottom",
+        "priceApprox": 1599,
+        "whyItMatters": "A safer and more versatile default than distressed or overly faded denim.",
+        "affiliateKey": "dark-jeans"
+      },
+      {
+        "id": "beige-chinos",
+        "name": "Beige Chinos",
+        "category": "bottom",
+        "priceApprox": 1499,
+        "whyItMatters": "These instantly make your wardrobe feel more mature without becoming formal.",
+        "affiliateKey": "beige-chinos"
+      },
+      {
+        "id": "olive-overshirt",
+        "name": "Olive Overshirt",
+        "category": "layering",
+        "priceApprox": 1799,
+        "whyItMatters": "A simple layer that gives shape to outfits without needing a full jacket.",
+        "affiliateKey": "olive-overshirt"
+      },
+      {
+        "id": "navy-polo",
+        "name": "Navy Polo",
+        "category": "top",
+        "priceApprox": 999,
+        "whyItMatters": "Useful when you want something neater than a tee but easier than a shirt.",
+        "affiliateKey": "navy-polo"
+      },
+      {
+        "id": "white-sneakers",
+        "name": "White Sneakers",
+        "category": "shoes",
+        "priceApprox": 1999,
+        "whyItMatters": "Probably the easiest single shoe to wear across casual outfits.",
+        "affiliateKey": "white-sneakers"
+      },
+      {
+        "id": "brown-loafers",
+        "name": "Brown Loafers",
+        "category": "shoes",
+        "priceApprox": 2499,
+        "whyItMatters": "These make festive, office, and date-night outfits feel more intentional quickly.",
+        "affiliateKey": "brown-loafers"
+      },
+      {
+        "id": "clean-watch",
+        "name": "Minimal Watch",
+        "category": "accessory",
+        "priceApprox": 1899,
+        "whyItMatters": "A simple watch is still one of the easiest ways to look a bit more put together.",
+        "affiliateKey": "minimal-watch"
+      },
+      {
+        "id": "brown-belt",
+        "name": "Brown Belt",
+        "category": "accessory",
+        "priceApprox": 799,
+        "whyItMatters": "Small detail, big difference, especially once your shoes and belt start talking to each other.",
+        "affiliateKey": "brown-belt"
+      }
+    ]
+  }
+}

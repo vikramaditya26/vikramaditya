@@ -32,6 +32,8 @@ function renderHeader(currentPage) {
     { href: 'books/', label: 'Books', key: 'books' },
     { href: 'workout/', label: 'Workout', key: 'workout' },
     { href: 'kitchen/', label: 'Kitchen', key: 'kitchen' },
+    { href: 'skincare/', label: 'Skincare', key: 'skincare' },
+    { href: 'style/', label: 'Style', key: 'style' },
     { href: '100-skills/', label: '100 Skills', key: 'skills' },
     { href: 'movies/', label: 'Movies', key: 'movies' },
     { href: 'blog/', label: 'Blog', key: 'blog' },
@@ -553,6 +555,22 @@ function buildFoodMap(foodItems) {
   }, {});
 }
 
+// ===== Products Data Loader =====
+let productsDataCache = null;
+
+function loadProductsData() {
+  if (productsDataCache) {
+    return Promise.resolve(productsDataCache);
+  }
+
+  return fetch(getBasePath() + 'assets/data/products.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      productsDataCache = data;
+      return data;
+    });
+}
+
 function isFoodAllowedForDiet(food, dietType) {
   return Array.isArray(food.diet) && food.diet.indexOf(dietType) !== -1;
 }
@@ -1070,6 +1088,223 @@ function renderDietPlan(plan, answers, container) {
       </div>
     `;
   });
+})();
+
+// ===== Skincare & Style =====
+(function initSkincareAndStyle() {
+  var morningContainer = document.getElementById('skincare-routine-morning');
+  var nightContainer = document.getElementById('skincare-routine-night');
+  var skincareGroupsContainer = document.getElementById('skincare-product-groups');
+  var styleCapsuleGrid = document.getElementById('style-capsule-grid');
+  var skinTypeForm = document.getElementById('skin-type-form');
+  var skinTypeResult = document.getElementById('skin-type-result');
+
+  if (!morningContainer && !nightContainer && !skincareGroupsContainer && !styleCapsuleGrid && !skinTypeForm) {
+    return;
+  }
+
+  function titleCaseText(value) {
+    return String(value).split('-').map(function(part) {
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    }).join(' ');
+  }
+
+  function formatPrice(price) {
+    return '₹' + Number(price).toLocaleString('en-IN');
+  }
+
+  function buildProductMap(products) {
+    return (products || []).reduce(function(map, item) {
+      map[item.id] = item;
+      return map;
+    }, {});
+  }
+
+  function getRetailerLinks(key, section) {
+    if (!key) return '';
+    return `
+      <div class="buy-links">
+        <span class="buy-label">Check price:</span>
+        <a href="#" class="buy-btn amazon" data-affiliate="${section}.${key}.amazon"></a>
+        <a href="#" class="buy-btn flipkart" data-affiliate="${section}.${key}.flipkart"></a>
+      </div>
+    `;
+  }
+
+  function renderRoutineCard(product) {
+    return `
+      <article class="beauty-product-card beauty-product-card--compact">
+        <div class="beauty-product-top">
+          <div>
+            <p class="beauty-product-category">${titleCaseText(product.category)}</p>
+            <h4>${product.name}</h4>
+          </div>
+          <span class="beauty-tier-tag ${product.tier}">${titleCaseText(product.tier)}</span>
+        </div>
+        <p>${product.bestFor}</p>
+        <p class="beauty-price">${formatPrice(product.priceApprox)}</p>
+        ${getRetailerLinks(product.affiliateKey, 'skincare')}
+      </article>
+    `;
+  }
+
+  function renderSkincareProductCard(product) {
+    return `
+      <article class="beauty-product-card">
+        <div class="beauty-product-top">
+          <div>
+            <p class="beauty-product-category">${titleCaseText(product.category)}</p>
+            <h4>${product.name}</h4>
+          </div>
+          <span class="beauty-tier-tag ${product.tier}">${titleCaseText(product.tier)}</span>
+        </div>
+        <p>${product.bestFor}</p>
+        <p class="beauty-skin-types"><strong>Best for:</strong> ${product.skinTypes.map(function(type) { return titleCaseText(type); }).join(', ')}</p>
+        <p class="beauty-price">${formatPrice(product.priceApprox)}</p>
+        ${getRetailerLinks(product.affiliateKey, 'skincare')}
+      </article>
+    `;
+  }
+
+  function renderStyleCard(item) {
+    return `
+      <article class="beauty-product-card">
+        <div class="beauty-product-top">
+          <div>
+            <p class="beauty-product-category">${titleCaseText(item.category)}</p>
+            <h4>${item.name}</h4>
+          </div>
+        </div>
+        <p>${item.whyItMatters}</p>
+        <p class="beauty-price">${formatPrice(item.priceApprox)}</p>
+        ${getRetailerLinks(item.affiliateKey, 'style')}
+      </article>
+    `;
+  }
+
+  function renderSkinTypeResult(type) {
+    var config = {
+      oily: {
+        title: 'Likely oily skin',
+        advice: 'Go lighter with moisturizer, choose sunscreen carefully, and do not attack your face with harsh cleansers every few hours.',
+        picks: ['Face wash for oil control', 'Light moisturizer', 'Matte-feel sunscreen']
+      },
+      dry: {
+        title: 'Likely dry skin',
+        advice: 'Barrier support matters. Use gentler cleansers, richer moisturizers, and stop mistaking tightness for cleanliness.',
+        picks: ['Gentle cleanser', 'Hydrating moisturizer', 'Non-drying sunscreen']
+      },
+      combination: {
+        title: 'Likely combination skin',
+        advice: 'Keep the routine balanced. Your T-zone may need lighter textures while the rest of your face still wants hydration.',
+        picks: ['Balanced cleanser', 'Medium-light moisturizer', 'Flexible sunscreen']
+      },
+      normal: {
+        title: 'Likely normal skin',
+        advice: 'You still need basics. Keep things simple, protect with sunscreen, and do not ruin a stable situation by chasing every trend.',
+        picks: ['Simple cleanser', 'Light moisturizer', 'Daily sunscreen']
+      }
+    };
+
+    var result = config[type] || config.normal;
+    skinTypeResult.innerHTML = `
+      <div class="skin-type-card">
+        <h3>${result.title}</h3>
+        <p>${result.advice}</p>
+        <p><strong>Start with:</strong> ${result.picks.join(' • ')}</p>
+      </div>
+    `;
+  }
+
+  loadProductsData()
+    .then(function(payload) {
+      var skincare = payload.skincare || {};
+      var style = payload.style || {};
+      var skincareProducts = skincare.products || [];
+      var skincareMap = buildProductMap(skincareProducts);
+      var groupedSkincare = {};
+
+      skincareProducts.forEach(function(product) {
+        if (!groupedSkincare[product.category]) groupedSkincare[product.category] = [];
+        groupedSkincare[product.category].push(product);
+      });
+
+      Object.keys(groupedSkincare).forEach(function(category) {
+        groupedSkincare[category].sort(function(a, b) {
+          var order = { budget: 1, mid: 2, premium: 3 };
+          return (order[a.tier] || 10) - (order[b.tier] || 10);
+        });
+      });
+
+      if (morningContainer) {
+        morningContainer.innerHTML = (skincare.routine && skincare.routine.morning || []).map(function(id) {
+          return skincareMap[id];
+        }).filter(Boolean).map(renderRoutineCard).join('');
+        setDefaultBuyButtonLabels(morningContainer);
+        loadAffiliateLinks(morningContainer);
+      }
+
+      if (nightContainer) {
+        nightContainer.innerHTML = (skincare.routine && skincare.routine.night || []).map(function(id) {
+          return skincareMap[id];
+        }).filter(Boolean).map(renderRoutineCard).join('');
+        setDefaultBuyButtonLabels(nightContainer);
+        loadAffiliateLinks(nightContainer);
+      }
+
+      if (skincareGroupsContainer) {
+        skincareGroupsContainer.innerHTML = Object.keys(groupedSkincare).map(function(category) {
+          return `
+            <section class="beauty-category-group">
+              <div class="beauty-category-head">
+                <h3>${titleCaseText(category)}</h3>
+                <p>${titleCaseText(category)} recommendations across budget, mid, and premium ranges.</p>
+              </div>
+              <div class="beauty-product-grid">
+                ${groupedSkincare[category].map(renderSkincareProductCard).join('')}
+              </div>
+            </section>
+          `;
+        }).join('');
+        setDefaultBuyButtonLabels(skincareGroupsContainer);
+        loadAffiliateLinks(skincareGroupsContainer);
+      }
+
+      if (styleCapsuleGrid) {
+        styleCapsuleGrid.innerHTML = (style.capsule || []).map(renderStyleCard).join('');
+        setDefaultBuyButtonLabels(styleCapsuleGrid);
+        loadAffiliateLinks(styleCapsuleGrid);
+      }
+    })
+    .catch(function() {
+      if (skincareGroupsContainer) {
+        skincareGroupsContainer.innerHTML = '<p class="movies-empty">Product recommendations could not be loaded right now.</p>';
+      }
+      if (styleCapsuleGrid) {
+        styleCapsuleGrid.innerHTML = '<p class="movies-empty">Capsule wardrobe items could not be loaded right now.</p>';
+      }
+    });
+
+  if (skinTypeForm && skinTypeResult) {
+    skinTypeForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      var formData = new FormData(skinTypeForm);
+      var answers = [formData.get('oiliness'), formData.get('afterWash'), formData.get('mainConcern')];
+      var scores = { oily: 0, dry: 0, combination: 0, normal: 0 };
+
+      answers.forEach(function(answer) {
+        if (scores.hasOwnProperty(answer)) {
+          scores[answer] += 1;
+        }
+      });
+
+      var topType = Object.keys(scores).sort(function(a, b) {
+        return scores[b] - scores[a];
+      })[0];
+
+      renderSkinTypeResult(topType);
+    });
+  }
 })();
 
 // ===== Buy Button Labels (runs immediately) =====

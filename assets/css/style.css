@@ -2876,6 +2876,160 @@ li {
   border-top: none;
 }
 
+/* === Skincare & Style === */
+.skincare-hero,
+.style-hero {
+  padding: var(--space-xl) 0;
+}
+
+.beauty-eyebrow,
+.beauty-kicker,
+.beauty-product-category {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.beauty-intro-card,
+.routine-card,
+.beauty-product-card,
+.skin-type-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.beauty-intro-card,
+.routine-card,
+.skin-type-card {
+  padding: var(--space-xl);
+}
+
+.beauty-section-head,
+.beauty-category-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.beauty-section-head {
+  margin-bottom: var(--space-lg);
+}
+
+.beauty-section-copy,
+.beauty-category-head p {
+  color: var(--color-text-secondary);
+  max-width: 52ch;
+  margin-bottom: 0;
+}
+
+.routine-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+
+.beauty-product-list,
+.beauty-category-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.beauty-product-grid,
+.capsule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+}
+
+.beauty-category-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.beauty-product-card {
+  padding: var(--space-lg);
+}
+
+.beauty-product-card--compact {
+  padding: var(--space-md);
+}
+
+.beauty-product-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.beauty-product-top h4 {
+  margin-bottom: 4px;
+}
+
+.beauty-tier-tag,
+.beauty-price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.beauty-tier-tag {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.beauty-tier-tag.budget {
+  background: var(--color-skill-easy-soft);
+  color: var(--color-skill-easy);
+  border-color: transparent;
+}
+
+.beauty-tier-tag.mid {
+  background: var(--color-skill-medium-soft);
+  color: var(--color-skill-medium);
+  border-color: transparent;
+}
+
+.beauty-tier-tag.premium {
+  background: var(--color-movie-vibe-bg);
+  color: var(--color-movie-vibe);
+  border-color: transparent;
+}
+
+.beauty-skin-types {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.beauty-price {
+  margin-bottom: var(--space-sm);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.skin-quiz-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.skin-type-result {
+  min-height: 120px;
+}
+
 /* === Mobile Responsive === */
 @media (max-width: 768px) {
   .profile-box summary {
@@ -2969,6 +3123,21 @@ li {
   .tool-field-grid {
     grid-template-columns: 1fr;
   }
+
+  .beauty-section-head,
+  .beauty-category-head {
+    align-items: stretch;
+  }
+
+  .beauty-intro-card,
+  .routine-card,
+  .skin-type-card {
+    padding: var(--space-lg);
+  }
+
+  .routine-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -3034,6 +3203,15 @@ li {
 
   .recipe-top,
   .tool-meal-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .beauty-product-card {
+    padding: var(--space-md);
+  }
+
+  .beauty-product-top {
     flex-direction: column;
     align-items: flex-start;
   }
