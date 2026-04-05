@@ -147,6 +147,33 @@ injectComponents();
   });
 })();
 
+// ===== Book Category Filter =====
+(function initBookFilter() {
+  var filterBar = document.querySelector('.filter-bar');
+  if (!filterBar) return;
+
+  filterBar.addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+
+    // Update active state
+    filterBar.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+
+    var category = btn.getAttribute('data-category');
+    var cards = document.querySelectorAll('.book-card');
+
+    cards.forEach(function(card) {
+      if (category === 'all') {
+        card.style.display = '';
+      } else {
+        var cats = card.getAttribute('data-categories') || '';
+        card.style.display = cats.includes(category) ? '' : 'none';
+      }
+    });
+  });
+})();
+
 // ===== Buy Button Labels (runs immediately) =====
 document.querySelectorAll('.buy-btn').forEach(function(btn) {
   if (btn.classList.contains('amazon')) btn.textContent = 'Buy on Amazon';

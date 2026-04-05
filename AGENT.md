@@ -887,6 +887,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-04 | **Phase 0 complete** — Restructured flat HTML to folder-based URLs (`/books/`, `/finance/`, etc.). Moved all assets under `assets/` (css, js, images, data). Built shared header/footer injection via `script.js` (`renderHeader()`, `renderFooter()`, `injectComponents()`). Created `getBasePath()` for relative path resolution across folder depths. Added `.nojekyll`, `404.html`, `robots.txt`, `sitemap.xml`. Created `assets/data/books.json` (15 books) and `assets/data/affiliate-links.json` (centralized link registry). Removed old flat files. All 6 pages tested in both themes. Committed as `a5b912b`. | Phase 0 |
 | 2026-04-05 | **Phase 1 complete** — Monetization foundation. Built affiliate link loader in `script.js` (reads `affiliate-links.json`, auto-populates `[data-affiliate]` elements with URLs, adds `rel="nofollow sponsored"` and `target="_blank"`). Designed `.buy-btn` CSS component (Amazon orange, Flipkart blue). Added buy buttons (Amazon + Flipkart) to all 15 book cards. Added `.affiliate-disclosure` component. Added "Supplements I Use" section to workout page (Whey Protein, Creatine, Multivitamin cards with buy links). Added "Books That Changed How I Think About Money" cross-sell section to finance page (4 recommended books with covers and buy links). All changes tested in both themes. | Phase 1 |
 | 2026-04-05 | **Phase 2 complete** — Analytics & SEO. Added Microsoft Clarity snippet in `script.js` (placeholder ID — replace `CLARITY_PROJECT_ID` with real ID from clarity.microsoft.com). Added JSON-LD structured data injection: WebSite schema on all pages, Person schema on homepage. Added OG meta tags (title, description, type, url) to all 6 pages. Added `<link rel="canonical">` to all 6 pages. Updated `sitemap.xml` lastmod dates. | Phase 2 |
+| 2026-04-05 | **Phase 3 complete** — Books Enhancement. Added category filter bar to `books/index.html` (7 buttons: All, Philosophy, Spirituality, Fiction, Self-Help, Business, Investing). Added `data-categories` attribute to all 15 book cards for JS filtering. Added color-coded category badges (`.badge-philosophy` purple, `.badge-spirituality` pink, `.badge-fiction` blue, `.badge-self-help` green, `.badge-business` amber, `.badge-leadership` red, `.badge-investing` cyan). Added star ratings to all 15 books (★★★★★ or ★★★★☆ based on `books.json` ratings). Built filter logic in `script.js` `initBookFilter()` IIFE. All CSS added to `style.css` (filter bar, badges, ratings). | Phase 3 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -902,7 +903,15 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 4. **Canonical URLs:** `<link rel="canonical">` in each page's `<head>`. Points to `https://vikramaditya.me/{section}/`.
 5. **Sitemap:** `sitemap.xml` in root. Update `lastmod` and add new URLs when pages are created.
 
+### How the books filter & badges work (for future agents):
+1. **Filter bar:** `.filter-bar` div with `.filter-btn` buttons. Each button has `data-category` attribute matching category names.
+2. **Book cards:** Each `.book-card` has `data-categories="philosophy spirituality"` (space-separated list of categories it belongs to).
+3. **JS filter:** `initBookFilter()` in `script.js` — click handler on `.filter-bar`, reads `data-category` from clicked button, shows/hides cards by checking `data-categories.includes(category)`.
+4. **Badges:** `.book-badges` div inside each card with `.badge.badge-{category}` spans. Each category has its own color via CSS.
+5. **Ratings:** `.book-rating` span with ★/☆ characters. Ratings sourced from `books.json`.
+6. **Adding a new book:** Add card HTML with `data-categories`, badges, rating, and `data-affiliate` buy links. No JS changes needed.
+
 ---
 
 *Last updated: 2026-04-05*
-*Next priority: Phase 3 — Books Enhancement*
+*Next priority: Phase 4 — 100 Days 100 Skills Scaffold*
