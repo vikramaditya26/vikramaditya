@@ -798,6 +798,7 @@ function buildFoodMap(foodItems) {
 
 // ===== Products Data Loader =====
 let productsDataCache = null;
+let booksDataCache = null;
 
 function loadProductsData() {
   if (productsDataCache) {
@@ -812,6 +813,19 @@ function loadProductsData() {
     });
 }
 
+function loadBooksData() {
+  if (booksDataCache) {
+    return Promise.resolve(booksDataCache);
+  }
+
+  return fetch(getBasePath() + 'assets/data/books.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      booksDataCache = data;
+      return data;
+    });
+}
+
 function isFoodAllowedForDiet(food, dietType) {
   return Array.isArray(food.diet) && food.diet.indexOf(dietType) !== -1;
 }
@@ -821,8 +835,250 @@ function roundNumber(value) {
 }
 
 function formatCurrency(value) {
-  return '₹' + Math.round(value);
+  return '₹' + Math.round(value).toLocaleString('en-IN');
 }
+
+function formatNumber(value) {
+  return Math.round(value).toLocaleString('en-IN');
+}
+
+function computeBmr(stats) {
+  var weight = Number(stats.weight);
+  var height = Number(stats.height);
+  var age = Number(stats.age);
+  var isMale = stats.gender === 'male';
+  return (10 * weight) + (6.25 * height) - (5 * age) + (isMale ? 5 : -161);
+}
+
+function computeTdee(stats) {
+  return computeBmr(stats) * Number(stats.activity);
+}
+
+function getBmiCategory(bmi) {
+  if (bmi < 18.5) return 'Underweight';
+  if (bmi < 25) return 'Healthy range';
+  if (bmi < 30) return 'Overweight';
+  return 'Obese range';
+}
+
+function buildSipProjection(inputs) {
+  var monthlyInvestment = Number(inputs.monthlyInvestment);
+  var annualReturn = Number(inputs.annualReturn) / 100;
+  var years = Number(inputs.years);
+  var stepUp = Number(inputs.stepUp) / 100;
+  var startingCorpus = Number(inputs.startingCorpus) || 0;
+  var monthlyRate = annualReturn / 12;
+  var corpus = startingCorpus;
+  var invested = startingCorpus;
+  var currentSip = monthlyInvestment;
+  var milestones = [];
+
+  for (var year = 1; year <= years; year += 1) {
+    for (var month = 0; month < 12; month += 1) {
+      corpus = (corpus + currentSip) * (1 + monthlyRate);
+      invested += currentSip;
+    }
+
+    milestones.push({
+      year: year,
+      sip: currentSip,
+      invested: invested,
+      value: corpus,
+      gain: corpus - invested
+    });
+
+    currentSip = currentSip * (1 + stepUp);
+  }
+
+  return {
+    futureValue: corpus,
+    invested: invested,
+    gain: corpus - invested,
+    milestones: milestones
+  };
+}
+
+function computeEmi(inputs) {
+  var principal = Number(inputs.principal);
+  var monthlyRate = Number(inputs.annualRate) / 1200;
+  var months = Number(inputs.years) * 12;
+  var monthlyIncome = Number(inputs.monthlyIncome) || 0;
+  var emi;
+
+  if (monthlyRate === 0) {
+    emi = principal / months;
+  } else {
+    emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+  }
+
+  var totalPayment = emi * months;
+  var totalInterest = totalPayment - principal;
+  var emiShare = monthlyIncome > 0 ? (emi / monthlyIncome) * 100 : 0;
+  var comfort = 'Comfortable';
+
+  if (emiShare > 40) comfort = 'Tight';
+  else if (emiShare > 25) comfort = 'Manageable';
+
+  return {
+    emi: emi,
+    totalPayment: totalPayment,
+    totalInterest: totalInterest,
+    emiShare: emiShare,
+    comfort: comfort
+  };
+}
+
+function buildBudgetPlan(inputs) {
+  var income = Number(inputs.income);
+  var needs = Number(inputs.needs);
+  var wants = Number(inputs.wants);
+  var savings = Number(inputs.savings);
+  var totalTracked = needs + wants + savings;
+  var recommended = {
+    needs: income * 0.5,
+    wants: income * 0.3,
+    savings: income * 0.2
+  };
+
+  function status(actual, target, positiveCopy, negativeCopy) {
+    var delta = actual - target;
+    if (Math.abs(delta) < income * 0.03) return 'Almost on target';
+    return delta > 0 ? positiveCopy : negativeCopy;
+  }
+
+  return {
+    income: income,
+    totalTracked: totalTracked,
+    leftover: income - totalTracked,
+    actual: { needs: needs, wants: wants, savings: savings },
+    recommended: recommended,
+    debtShare: Number(inputs.debtShare) || 0,
+    summaries: {
+      needs: status(needs, recommended.needs, 'Needs are heavier than the classic split.', 'Needs are leaner than the classic split.'),
+      wants: status(wants, recommended.wants, 'Wants are taking more room than usual.', 'Wants are under control.'),
+      savings: status(savings, recommended.savings, 'Savings are ahead of the classic split.', 'Savings are below the classic split.')
+    }
+  };
+}
+
+const TAX_RULES_AY2026_27 = {
+  label: 'AY 2026-27 (FY 2025-26)',
+  cessRate: 0.04,
+  oldRegime: {
+    standardDeduction: 50000,
+    rebateLimit: 500000,
+    ageExemption: {
+      below60: 250000,
+      '60to80': 300000,
+      above80: 500000
+    }
+  },
+  newRegime: {
+    standardDeduction: 75000,
+    rebateLimit: 1200000,
+    slabs: [
+      { limit: 400000, rate: 0 },
+      { limit: 800000, rate: 0.05 },
+      { limit: 1200000, rate: 0.10 },
+      { limit: 1600000, rate: 0.15 },
+      { limit: 2000000, rate: 0.20 },
+      { limit: 2400000, rate: 0.25 },
+      { limit: Infinity, rate: 0.30 }
+    ]
+  }
+};
+
+function calculateOldRegimeTaxBeforeRebate(taxableIncome, ageGroup) {
+  var exemption = TAX_RULES_AY2026_27.oldRegime.ageExemption[ageGroup] || 250000;
+  var tax = 0;
+  var slabs = [
+    { limit: 500000, rate: 0.05 },
+    { limit: 1000000, rate: 0.20 },
+    { limit: Infinity, rate: 0.30 }
+  ];
+  var lower = exemption;
+
+  if (taxableIncome <= exemption) return 0;
+
+  slabs.forEach(function(slab) {
+    if (taxableIncome <= lower) return;
+    var upper = Math.min(taxableIncome, slab.limit);
+    tax += Math.max(0, upper - lower) * slab.rate;
+    lower = slab.limit;
+  });
+
+  return tax;
+}
+
+function calculateNewRegimeTaxBeforeRebate(taxableIncome) {
+  var tax = 0;
+  var lower = 0;
+
+  TAX_RULES_AY2026_27.newRegime.slabs.forEach(function(slab) {
+    if (taxableIncome <= lower) return;
+    var upper = Math.min(taxableIncome, slab.limit);
+    tax += Math.max(0, upper - lower) * slab.rate;
+    lower = slab.limit;
+  });
+
+  return tax;
+}
+
+function applyRebateWithMarginalRelief(taxBeforeRebate, taxableIncome, rebateLimit) {
+  if (taxableIncome <= rebateLimit) return 0;
+  var excessIncome = taxableIncome - rebateLimit;
+  return Math.min(taxBeforeRebate, excessIncome);
+}
+
+function calculateTaxComparison(inputs) {
+  var grossIncome = Number(inputs.salary) + Number(inputs.otherIncome || 0);
+  var oldDeductions = Number(inputs.deduction80c || 0) + Number(inputs.deduction80d || 0) + Number(inputs.deductionNps || 0) + Number(inputs.homeLoanInterest || 0);
+  var oldTaxableIncome = Math.max(0, grossIncome - TAX_RULES_AY2026_27.oldRegime.standardDeduction - oldDeductions);
+  var newTaxableIncome = Math.max(0, grossIncome - TAX_RULES_AY2026_27.newRegime.standardDeduction);
+  var oldTaxBeforeRebate = calculateOldRegimeTaxBeforeRebate(oldTaxableIncome, inputs.ageGroup);
+  var newTaxBeforeRebate = calculateNewRegimeTaxBeforeRebate(newTaxableIncome);
+  var oldTaxAfterRebate = applyRebateWithMarginalRelief(oldTaxBeforeRebate, oldTaxableIncome, TAX_RULES_AY2026_27.oldRegime.rebateLimit);
+  var newTaxAfterRebate = applyRebateWithMarginalRelief(newTaxBeforeRebate, newTaxableIncome, TAX_RULES_AY2026_27.newRegime.rebateLimit);
+  var oldCess = oldTaxAfterRebate * TAX_RULES_AY2026_27.cessRate;
+  var newCess = newTaxAfterRebate * TAX_RULES_AY2026_27.cessRate;
+  var oldTotal = oldTaxAfterRebate + oldCess;
+  var newTotal = newTaxAfterRebate + newCess;
+
+  return {
+    label: TAX_RULES_AY2026_27.label,
+    grossIncome: grossIncome,
+    oldRegime: {
+      taxableIncome: oldTaxableIncome,
+      deductions: oldDeductions + TAX_RULES_AY2026_27.oldRegime.standardDeduction,
+      tax: oldTotal
+    },
+    newRegime: {
+      taxableIncome: newTaxableIncome,
+      deductions: TAX_RULES_AY2026_27.newRegime.standardDeduction,
+      tax: newTotal
+    },
+    betterRegime: oldTotal <= newTotal ? 'Old Regime' : 'New Regime',
+    difference: Math.abs(oldTotal - newTotal)
+  };
+}
+
+const READ_NEXT_PROFILES = {
+  siddhartha: ['meaning', 'spiritual', 'philosophical', 'deep'],
+  'the-alchemist': ['meaning', 'story', 'philosophical', 'light'],
+  'book-of-five-rings': ['discipline', 'practical', 'deep', 'sharp'],
+  'jonathan-livingston-seagull': ['meaning', 'story', 'light', 'philosophical'],
+  'animal-farm': ['story', 'sharp', 'deep'],
+  'clear-thinking': ['clarity', 'practical', 'sharp', 'deep'],
+  'the-great-ceo-within': ['wealth', 'practical', 'deep'],
+  'zorba-the-buddha': ['meaning', 'spiritual', 'deep', 'philosophical'],
+  'tao-te-ching': ['meaning', 'spiritual', 'light', 'philosophical'],
+  principles: ['wealth', 'practical', 'deep'],
+  'almanack-of-naval-ravikant': ['wealth', 'clarity', 'philosophical', 'medium'],
+  'poor-charlies-almanack': ['wealth', 'sharp', 'deep'],
+  'hsin-hsin-ming': ['spiritual', 'deep'],
+  'the-prophet': ['meaning', 'philosophical', 'medium'],
+  'atomic-habits': ['discipline', 'practical', 'light']
+};
 
 function computeNutritionTargets(stats) {
   var weight = Number(stats.weight);
@@ -1328,6 +1584,401 @@ function renderDietPlan(plan, answers, container) {
         <p><strong>Practical tip:</strong> if hitting protein feels hard, solve that first. Everything else gets easier after that.</p>
       </div>
     `;
+  });
+})();
+
+// ===== SIP Calculator =====
+(function initSipCalculator() {
+  var form = document.getElementById('sip-calculator-form');
+  var result = document.getElementById('sip-calculator-result');
+  if (!form || !result) return;
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(form);
+    var projection = buildSipProjection({
+      monthlyInvestment: formData.get('monthlyInvestment'),
+      annualReturn: formData.get('annualReturn'),
+      years: formData.get('years'),
+      stepUp: formData.get('stepUp'),
+      startingCorpus: formData.get('startingCorpus')
+    });
+
+    result.innerHTML = `
+      <h2>Your Projection</h2>
+      <div class="tool-summary-grid">
+        <div class="tool-summary-card">
+          <span>Future Value</span>
+          <strong>${formatCurrency(projection.futureValue)}</strong>
+          <small>Projected corpus</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Total Invested</span>
+          <strong>${formatCurrency(projection.invested)}</strong>
+          <small>Your money in</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Wealth Gained</span>
+          <strong>${formatCurrency(projection.gain)}</strong>
+          <small>Estimated growth</small>
+        </div>
+      </div>
+
+      <div class="tool-plan-note">
+        <p><strong>What matters:</strong> The gap between invested amount and future value gets wider later, not earlier. That is the part people underestimate.</p>
+      </div>
+
+      <div class="tool-table-wrap">
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Monthly SIP</th>
+              <th>Invested</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${projection.milestones.map(function(row) {
+              return `
+                <tr>
+                  <td>${row.year}</td>
+                  <td>${formatCurrency(row.sip)}</td>
+                  <td>${formatCurrency(row.invested)}</td>
+                  <td>${formatCurrency(row.value)}</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  });
+})();
+
+// ===== EMI Calculator =====
+(function initEmiCalculator() {
+  var form = document.getElementById('emi-calculator-form');
+  var result = document.getElementById('emi-calculator-result');
+  if (!form || !result) return;
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(form);
+    var emi = computeEmi({
+      principal: formData.get('principal'),
+      annualRate: formData.get('annualRate'),
+      years: formData.get('years'),
+      monthlyIncome: formData.get('monthlyIncome')
+    });
+
+    result.innerHTML = `
+      <h2>Your EMI</h2>
+      <div class="tool-summary-grid">
+        <div class="tool-summary-card">
+          <span>Monthly EMI</span>
+          <strong>${formatCurrency(emi.emi)}</strong>
+          <small>What you pay every month</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Total Interest</span>
+          <strong>${formatCurrency(emi.totalInterest)}</strong>
+          <small>Cost of borrowing</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Total Payment</span>
+          <strong>${formatCurrency(emi.totalPayment)}</strong>
+          <small>Principal + interest</small>
+        </div>
+      </div>
+
+      <div class="tool-plan-note">
+        <p><strong>Income share:</strong> ${emi.emiShare ? emi.emiShare.toFixed(1) + '% of take-home' : 'Monthly income not provided'}</p>
+        <p><strong>Comfort check:</strong> ${emi.comfort}</p>
+      </div>
+    `;
+  });
+})();
+
+// ===== BMI + TDEE Calculator =====
+(function initBmiCalculator() {
+  var form = document.getElementById('bmi-calculator-form');
+  var result = document.getElementById('bmi-calculator-result');
+  if (!form || !result) return;
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(form);
+    var stats = {
+      age: formData.get('age'),
+      gender: formData.get('gender'),
+      height: formData.get('height'),
+      weight: formData.get('weight'),
+      activity: formData.get('activity')
+    };
+    var heightMeters = Number(stats.height) / 100;
+    var bmi = Number(stats.weight) / (heightMeters * heightMeters);
+    var bmr = computeBmr(stats);
+    var tdee = computeTdee(stats);
+    var protein = Number(stats.weight) * 1.8;
+
+    result.innerHTML = `
+      <h2>Your Targets</h2>
+      <div class="tool-summary-grid">
+        <div class="tool-summary-card">
+          <span>BMI</span>
+          <strong>${bmi.toFixed(1)}</strong>
+          <small>${getBmiCategory(bmi)}</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>BMR</span>
+          <strong>${formatNumber(bmr)}</strong>
+          <small>Calories at rest</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>TDEE</span>
+          <strong>${formatNumber(tdee)}</strong>
+          <small>Estimated maintenance</small>
+        </div>
+      </div>
+
+      <div class="tool-macro-grid">
+        <article class="tool-macro-card">
+          <h3>Cut</h3>
+          <strong>${formatNumber(tdee - 350)}</strong>
+          <p>Useful if fat loss is the main priority and training performance still matters.</p>
+        </article>
+        <article class="tool-macro-card">
+          <h3>Maintain</h3>
+          <strong>${formatNumber(tdee)}</strong>
+          <p>Good when you want stable weight and better adherence.</p>
+        </article>
+        <article class="tool-macro-card">
+          <h3>Lean Gain</h3>
+          <strong>${formatNumber(tdee + 250)}</strong>
+          <p>Better than an aggressive surplus if you want cleaner progress.</p>
+        </article>
+      </div>
+
+      <div class="tool-plan-note">
+        <p><strong>Protein target:</strong> about ${formatNumber(protein)}g per day as a practical starting point.</p>
+        <p><strong>Next step:</strong> use the Diet Planner or Macro Calculator if you want this translated into food and meals.</p>
+      </div>
+    `;
+  });
+})();
+
+// ===== Budget Planner =====
+(function initBudgetPlanner() {
+  var form = document.getElementById('budget-planner-form');
+  var result = document.getElementById('budget-planner-result');
+  if (!form || !result) return;
+
+  function renderBudgetRow(label, actual, recommended, summary) {
+    var actualPct = recommended > 0 ? (actual / recommended) * 100 : 0;
+    return `
+      <article class="tool-compare-card">
+        <div class="tool-compare-head">
+          <h3>${label}</h3>
+          <span>${formatCurrency(actual)} / ${formatCurrency(recommended)}</span>
+        </div>
+        <div class="tool-bar">
+          <span style="width:${Math.min(actualPct, 160)}%"></span>
+        </div>
+        <p>${summary}</p>
+      </article>
+    `;
+  }
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(form);
+    var plan = buildBudgetPlan({
+      income: formData.get('income'),
+      needs: formData.get('needs'),
+      wants: formData.get('wants'),
+      savings: formData.get('savings'),
+      debtShare: formData.get('debtShare')
+    });
+
+    result.innerHTML = `
+      <h2>Your Budget View</h2>
+      <div class="tool-summary-grid">
+        <div class="tool-summary-card">
+          <span>Monthly Income</span>
+          <strong>${formatCurrency(plan.income)}</strong>
+          <small>Take-home</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Tracked Spend</span>
+          <strong>${formatCurrency(plan.totalTracked)}</strong>
+          <small>Needs + wants + savings</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Leftover</span>
+          <strong>${formatCurrency(plan.leftover)}</strong>
+          <small>${plan.leftover >= 0 ? 'Unassigned cash' : 'Over budget'}</small>
+        </div>
+      </div>
+
+      <div class="tool-compare-grid">
+        ${renderBudgetRow('Needs', plan.actual.needs, plan.recommended.needs, plan.summaries.needs)}
+        ${renderBudgetRow('Wants', plan.actual.wants, plan.recommended.wants, plan.summaries.wants)}
+        ${renderBudgetRow('Savings', plan.actual.savings, plan.recommended.savings, plan.summaries.savings)}
+      </div>
+
+      <div class="tool-plan-note">
+        <p><strong>Debt inside needs:</strong> about ${formData.get('debtShare')}% of your needs bucket.</p>
+        <p><strong>Simple move:</strong> if savings are low, cut wants first. If needs are bloated, attack the biggest fixed cost before worrying about tiny expenses.</p>
+      </div>
+    `;
+  });
+})();
+
+// ===== Tax Calculator =====
+(function initTaxCalculator() {
+  var form = document.getElementById('tax-calculator-form');
+  var result = document.getElementById('tax-calculator-result');
+  if (!form || !result) return;
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(form);
+    var comparison = calculateTaxComparison({
+      salary: formData.get('salary'),
+      otherIncome: formData.get('otherIncome'),
+      ageGroup: formData.get('ageGroup'),
+      deduction80c: formData.get('deduction80c'),
+      deduction80d: formData.get('deduction80d'),
+      deductionNps: formData.get('deductionNps'),
+      homeLoanInterest: formData.get('homeLoanInterest')
+    });
+
+    result.innerHTML = `
+      <h2>Your Comparison</h2>
+      <div class="tool-summary-grid">
+        <div class="tool-summary-card">
+          <span>Better Fit</span>
+          <strong>${comparison.betterRegime}</strong>
+          <small>${comparison.label}</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Tax Saved</span>
+          <strong>${formatCurrency(comparison.difference)}</strong>
+          <small>Difference between regimes</small>
+        </div>
+        <div class="tool-summary-card">
+          <span>Gross Income</span>
+          <strong>${formatCurrency(comparison.grossIncome)}</strong>
+          <small>Salary + other income</small>
+        </div>
+      </div>
+
+      <div class="tool-compare-grid">
+        <article class="tool-compare-card">
+          <div class="tool-compare-head">
+            <h3>Old Regime</h3>
+            <span>${formatCurrency(comparison.oldRegime.tax)}</span>
+          </div>
+          <p><strong>Taxable income:</strong> ${formatCurrency(comparison.oldRegime.taxableIncome)}</p>
+          <p><strong>Deductions considered:</strong> ${formatCurrency(comparison.oldRegime.deductions)}</p>
+        </article>
+        <article class="tool-compare-card">
+          <div class="tool-compare-head">
+            <h3>New Regime</h3>
+            <span>${formatCurrency(comparison.newRegime.tax)}</span>
+          </div>
+          <p><strong>Taxable income:</strong> ${formatCurrency(comparison.newRegime.taxableIncome)}</p>
+          <p><strong>Deductions considered:</strong> ${formatCurrency(comparison.newRegime.deductions)}</p>
+        </article>
+      </div>
+
+      <div class="tool-plan-note">
+        <p><strong>Version:</strong> ${comparison.label} simplified salaried comparison.</p>
+        <p><strong>Important:</strong> Surcharge, capital gains, HRA calculation, and employer-specific cases are not included here.</p>
+      </div>
+    `;
+  });
+})();
+
+// ===== Read Next Quiz =====
+(function initReadNextQuiz() {
+  var form = document.getElementById('read-next-quiz-form');
+  var result = document.getElementById('read-next-quiz-result');
+  if (!form || !result) return;
+
+  function scoreBook(book, answers) {
+    var signals = READ_NEXT_PROFILES[book.id] || [];
+    var score = 0;
+    [answers.goal, answers.tone, answers.depth].forEach(function(answer) {
+      if (signals.indexOf(answer) !== -1) score += 3;
+    });
+    score += (book.rating || 0) * 0.5;
+    if (answers.goal === 'wealth' && book.category.indexOf('investing') !== -1) score += 2;
+    if (answers.goal === 'story' && book.category.indexOf('fiction') !== -1) score += 2;
+    if (answers.goal === 'meaning' && book.category.indexOf('spirituality') !== -1) score += 2;
+    return score;
+  }
+
+  function renderBookMatch(book, isTopPick) {
+    return `
+      <article class="tool-book-card${isTopPick ? ' is-top-pick' : ''}">
+        <img src="${book.cover}" alt="${escapeHtml(book.title)} cover" loading="lazy" />
+        <div class="tool-book-card-body">
+          <p class="tool-book-label">${isTopPick ? 'Top pick' : 'Backup pick'}</p>
+          <h3>${escapeHtml(book.title)}</h3>
+          <p class="tool-book-author">${escapeHtml(book.author)}</p>
+          <p>${escapeHtml(book.oneLineHook)}</p>
+          <div class="book-badges">
+            ${(book.category || []).map(function(category) {
+              return '<span class="badge badge-' + category + '">' + formatBlogCategory(category) + '</span>';
+            }).join('')}
+          </div>
+          <div class="tool-action-row">
+            <a href="${getBasePath()}books/" class="btn">See Review</a>
+            <a href="#" class="buy-btn amazon" data-affiliate="books.${book.affiliateKey}.amazon"></a>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(form);
+    var answers = {
+      goal: formData.get('goal'),
+      tone: formData.get('tone'),
+      depth: formData.get('depth')
+    };
+
+    result.innerHTML = '<h2>Your Recommendation</h2><p class="tool-placeholder">Finding your match...</p>';
+
+    loadBooksData()
+      .then(function(books) {
+        var ranked = books.slice().sort(function(a, b) {
+          return scoreBook(b, answers) - scoreBook(a, answers);
+        }).slice(0, 3);
+
+        result.innerHTML = `
+          <h2>Your Recommendation</h2>
+          <div class="tool-plan-note">
+            <p><strong>Best match:</strong> ${escapeHtml(ranked[0].title)}</p>
+            <p><strong>Why:</strong> based on what you want right now, the tone you prefer, and how much depth you want from the read.</p>
+          </div>
+          <div class="tool-book-grid">
+            ${ranked.map(function(book, index) {
+              return renderBookMatch(book, index === 0);
+            }).join('')}
+          </div>
+        `;
+
+        setDefaultBuyButtonLabels(result);
+        loadAffiliateLinks(result);
+      })
+      .catch(function() {
+        result.innerHTML = '<h2>Your Recommendation</h2><p class="tool-placeholder">The books database could not be loaded right now.</p>';
+      });
   });
 })();
 

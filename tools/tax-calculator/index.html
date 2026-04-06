@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tax Calculator - The Simple Guy</title>
+  <meta name="description" content="Compare old vs new tax regime estimates for a salaried individual using common deductions and standard deduction." />
+  <meta property="og:title" content="Tax Calculator - The Simple Guy" />
+  <meta property="og:description" content="A simple old-vs-new regime tax comparison for India with salary, deductions, and estimated tax outgo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/tools/tax-calculator/" />
+  <link rel="canonical" href="https://vikramaditya.me/tools/tax-calculator/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body data-page="finance">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 9 Tool</p>
+      <h1>Tax Calculator</h1>
+      <p class="subtitle">Compare old vs new regime for a salaried individual using common deductions and a simple, transparent estimate.</p>
+    </section>
+
+    <section class="tool-layout fade-in">
+      <div class="tool-panel">
+        <h2>Compare My Regimes</h2>
+        <form id="tax-calculator-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Annual Salary (₹)</span>
+              <input type="number" name="salary" min="100000" step="10000" value="1200000" required />
+            </label>
+            <label class="tool-field">
+              <span>Other Income (₹)</span>
+              <input type="number" name="otherIncome" min="0" step="10000" value="0" />
+            </label>
+            <label class="tool-field">
+              <span>Age Group (Old Regime)</span>
+              <select name="ageGroup" required>
+                <option value="below60" selected>Below 60</option>
+                <option value="60to80">60 to 80</option>
+                <option value="above80">Above 80</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>80C Deductions (₹)</span>
+              <input type="number" name="deduction80c" min="0" max="150000" step="1000" value="150000" />
+            </label>
+            <label class="tool-field">
+              <span>80D Deductions (₹)</span>
+              <input type="number" name="deduction80d" min="0" step="1000" value="25000" />
+            </label>
+            <label class="tool-field">
+              <span>80CCD(1B) NPS (₹)</span>
+              <input type="number" name="deductionNps" min="0" max="50000" step="1000" value="0" />
+            </label>
+            <label class="tool-field">
+              <span>Home Loan Interest (₹)</span>
+              <input type="number" name="homeLoanInterest" min="0" max="200000" step="1000" value="0" />
+            </label>
+          </div>
+
+          <button type="submit" class="btn">Compare Tax</button>
+        </form>
+
+        <div class="tip-box">
+          <p><strong>Important:</strong> This is a simplified comparison for salaried individuals. It excludes surcharge, capital gains, HRA computation, and employer-side exceptions, so use it as a decision aid, not filing advice.</p>
+        </div>
+      </div>
+
+      <div id="tax-calculator-result" class="tool-panel tool-result-panel">
+        <h2>Your Comparison</h2>
+        <p class="tool-placeholder">Add salary and deductions to compare estimated taxable income and tax outgo under old and new regime.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../../assets/js/script.js"></script>
+</body>
+</html>

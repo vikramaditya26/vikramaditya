@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIP Calculator - The Simple Guy</title>
+  <meta name="description" content="Estimate mutual fund SIP growth with monthly investing, expected returns, and optional annual step-up." />
+  <meta property="og:title" content="SIP Calculator - The Simple Guy" />
+  <meta property="og:description" content="A simple SIP calculator for Indian investors with future value, invested amount, wealth gained, and milestone breakdown." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/tools/sip-calculator/" />
+  <link rel="canonical" href="https://vikramaditya.me/tools/sip-calculator/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body data-page="finance">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 9 Tool</p>
+      <h1>SIP Calculator</h1>
+      <p class="subtitle">See what monthly investing can turn into over time, with optional annual step-up if your income grows.</p>
+    </section>
+
+    <section class="tool-layout fade-in">
+      <div class="tool-panel">
+        <h2>Build My SIP Projection</h2>
+        <form id="sip-calculator-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Monthly SIP (₹)</span>
+              <input type="number" name="monthlyInvestment" min="500" step="100" value="5000" required />
+            </label>
+            <label class="tool-field">
+              <span>Expected Return (%)</span>
+              <input type="number" name="annualReturn" min="1" max="30" step="0.1" value="12" required />
+            </label>
+            <label class="tool-field">
+              <span>Years</span>
+              <input type="number" name="years" min="1" max="40" value="15" required />
+            </label>
+            <label class="tool-field">
+              <span>Annual Step-Up (%)</span>
+              <input type="number" name="stepUp" min="0" max="25" step="0.5" value="5" required />
+            </label>
+            <label class="tool-field">
+              <span>Starting Lumpsum (₹)</span>
+              <input type="number" name="startingCorpus" min="0" step="1000" value="0" />
+            </label>
+          </div>
+
+          <button type="submit" class="btn">Calculate SIP Growth</button>
+        </form>
+
+        <div class="tip-box">
+          <p><strong>Simple rule:</strong> The earlier you start, the more compounding does the heavy lifting. Small monthly consistency beats waiting for a “perfect” time.</p>
+        </div>
+      </div>
+
+      <div id="sip-calculator-result" class="tool-panel tool-result-panel">
+        <h2>Your Projection</h2>
+        <p class="tool-placeholder">Enter your SIP, return expectation, and time horizon to see future value, invested amount, and yearly milestones.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../../assets/js/script.js"></script>
+</body>
+</html>

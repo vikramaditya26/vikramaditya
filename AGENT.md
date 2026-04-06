@@ -407,12 +407,16 @@ Siddhartha, The Alchemist, Book of Five Rings, Jonathan Livingston Seagull, Anim
 
 **Categories breakdown:** Philosophy/Spirituality (6), Business/Leadership (3), Self-Help (3), Fiction (2), Investing (1)
 
-**Missing:** No affiliate links, no buy buttons, no categories/filters, no ratings, no key takeaways. Book cover images are hotlinked from Amazon/external CDNs (fragile — they can break anytime).
+**Current state:** Books page has categories, badges, ratings, affiliate buttons, and now a reading quiz tool at `/tools/what-should-i-read-next/`.
+
+**Still missing:** Individual book pages and a more reliable self-hosted cover pipeline for every visible card on `/books/` (some current page cards still hotlink external images).
 
 ### Finance — 8 modules
 Understanding Money, Budgeting (50/30/20), Debt & Credit, Compounding, Investment Options India, Stock Market Basics, Tax Saving & Insurance, Building Financial Wisdom
 
-**Missing:** No calculators, no tool recommendations, no interactive elements beyond accordions.
+**Current state:** Finance page now links into the interactive tools suite: SIP, EMI, budget planner, and tax calculator.
+
+**Still missing:** A richer investing workflow (for example a proper "Can I afford this?" tool and tax-planning edge cases like surcharge/capital gains).
 
 ### Workout — 3 PPL days + diet basics
 Push (7 exercises, YouTube embeds), Pull (7 exercises), Legs (5 exercises), Nutrition section
@@ -884,6 +888,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 2. Self-contained JS within the page (or shared via script.js if reusable)
 3. Add to sitemap.xml
 4. Link from relevant section (e.g., diet planner linked from kitchen page and workout page)
+5. If the tool belongs in the suite hub, add a card to `tools/index.html`
 
 ---
 
@@ -902,6 +907,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-06 | **Phase 6 launched** — Kitchen & Diet tools. Added `assets/data/foods.json` with an initial 54-food seed database (approximate Indian serving macros, meal types, equipment support, and costs). Built `/kitchen/index.html` with equipment-aware recipe cards and starter gear placeholders. Built `/tools/diet-planner/` and `/tools/macro-calculator/`, both powered by new nutrition helpers in `script.js` (Mifflin-St Jeor BMR/TDEE, goal-based macro targets, and a meal-plan generator using foods.json + meal templates). Added `Kitchen` to the shared nav, added a homepage explore card, seeded `affiliate-links.json` with kitchen gear placeholders, and updated `sitemap.xml` with the new section + tools. | Phase 6 |
 | 2026-04-06 | **Phase 7 launched** — Skincare & Style sections. Added `assets/data/products.json` as a shared product dataset for both sections. Built `/skincare/index.html` with a current routine block, CTM basics, a simple skin-type guide form, data-driven product recommendations by category/tier, seasonal tips, and grooming basics. Built `/style/index.html` with a data-driven capsule wardrobe grid, outfit formulas, fit/color guidance, budget wardrobe notes, and seasonal style advice. Extended `script.js` to load `products.json`, render skincare/style product cards, and handle the skin-type guide interaction. Added `Skincare` and `Style` to the shared nav, added homepage explore cards, seeded `affiliate-links.json` with skincare/style placeholders, and updated `sitemap.xml` with both section URLs. | Phase 7 |
 | 2026-04-06 | **Phase 8 launched** — Blog enhancement. Added `assets/data/blog.json` as the metadata source for all 10 current posts. Rebuilt `/blog/index.html` into a card-based, filterable listing with dates, categories, and reading time rendered by `script.js` `initBlogIndex()`. Created 10 individual static post pages under `/blog/post-slug/` with unique OG/canonical metadata, social sharing buttons, Substack CTA copy, and related-post placeholders. Extended `script.js` with `loadBlogData()`, related-post rendering, share-link generation, and `BlogPosting` schema injection for article pages. Added blog listing/post styles to `style.css` and updated `sitemap.xml` with every post URL. | Phase 8 |
+| 2026-04-06 | **Phase 9 launched** — Interactive tools suite. Added `/tools/index.html` as a hub plus six new tools: `/tools/sip-calculator/`, `/tools/emi-calculator/`, `/tools/bmi-calculator/`, `/tools/budget-planner/`, `/tools/tax-calculator/`, and `/tools/what-should-i-read-next/`. Extended `script.js` with shared finance/fitness/book helpers, calculator logic, and quiz scoring using `books.json`. Added new tool UI components to `style.css`, linked the suite from homepage/finance/workout/books, and updated `sitemap.xml` with the new tool URLs. The tax tool currently targets a simplified salaried comparison for AY 2026-27 (FY 2025-26), not full filing complexity. | Phase 9 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -965,7 +971,15 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. **Related posts:** `initBlogPostPages()` reads the current page's `data-blog-slug`, resolves the `related` slugs from `blog.json`, and renders those cards into `#related-posts-grid`. If `related` is ever empty, the fallback is same-category posts.
 6. **Newsletter CTA honesty:** The current CTA copy intentionally says Substack is coming next, but links to `/contact/` for now because the public subscribe URL is not yet committed in the repo. Replace that CTA target once the Substack URL is finalized.
 
+### How the tools suite works (for future agents):
+1. **Hub route:** `/tools/index.html` is the lightweight suite landing page. It links to finance, nutrition, fitness, and books tools, including the Phase 6 tools.
+2. **Shared calculator logic:** The new Phase 9 tools all run through `script.js` using DOM-presence checks (`initSipCalculator()`, `initEmiCalculator()`, `initBmiCalculator()`, `initBudgetPlanner()`, `initTaxCalculator()`, `initReadNextQuiz()`), following the same pattern as the earlier sections.
+3. **Books quiz data source:** `/tools/what-should-i-read-next/` reuses `assets/data/books.json` through `loadBooksData()`. Quiz scoring currently combines a small hand-curated tag map (`READ_NEXT_PROFILES`) with existing category/rating data.
+4. **Tax calculator scope:** `/tools/tax-calculator/` is intentionally limited to a simplified salaried comparison. It includes standard deduction, common old-regime deductions, rebate logic, and cess, but excludes surcharge, capital gains, HRA computation, and employer-side exceptions.
+5. **Discoverability pattern:** Finance, workout, and books each now include a small tools section that links directly into the relevant calculators. Homepage also links to the tools hub.
+6. **Next clean expansion:** The obvious follow-up after Phase 9 is either improving the tax planner depth (if needed) or adding saved presets/charting, not scattering inline calculator code into section HTML.
+
 ---
 
 *Last updated: 2026-04-06*
-*Next priority: Phase 9 — Interactive Tools Suite, while continuing to enrich foods.json, products.json, and blog metadata over time*
+*Next priority: Phase 10 — Digital Products Shop, while continuing to enrich foods.json, products.json, and tool accuracy over time*

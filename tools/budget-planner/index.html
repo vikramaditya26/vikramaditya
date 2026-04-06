@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Budget Planner - The Simple Guy</title>
+  <meta name="description" content="Use the 50/30/20 budgeting rule with your real income and expenses to see where your money is going." />
+  <meta property="og:title" content="Budget Planner - The Simple Guy" />
+  <meta property="og:description" content="A practical 50/30/20 budget planner that compares your current spending against a healthy baseline." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/tools/budget-planner/" />
+  <link rel="canonical" href="https://vikramaditya.me/tools/budget-planner/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body data-page="finance">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 9 Tool</p>
+      <h1>Budget Planner</h1>
+      <p class="subtitle">Compare your current monthly split against a practical 50/30/20 target and see where the pressure is building.</p>
+    </section>
+
+    <section class="tool-layout fade-in">
+      <div class="tool-panel">
+        <h2>Plan My Monthly Budget</h2>
+        <form id="budget-planner-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Monthly Take-Home (₹)</span>
+              <input type="number" name="income" min="10000" step="1000" value="60000" required />
+            </label>
+            <label class="tool-field">
+              <span>Current Needs Spend (₹)</span>
+              <input type="number" name="needs" min="0" step="500" value="30000" required />
+            </label>
+            <label class="tool-field">
+              <span>Current Wants Spend (₹)</span>
+              <input type="number" name="wants" min="0" step="500" value="15000" required />
+            </label>
+            <label class="tool-field">
+              <span>Current Savings / Investing (₹)</span>
+              <input type="number" name="savings" min="0" step="500" value="12000" required />
+            </label>
+            <label class="tool-field">
+              <span>Debt EMI Included in Needs? (%)</span>
+              <input type="number" name="debtShare" min="0" max="100" step="1" value="20" />
+            </label>
+          </div>
+
+          <button type="submit" class="btn">Check My Split</button>
+        </form>
+
+        <div class="tip-box">
+          <p><strong>Truth first:</strong> A budget is not about making life feel smaller. It is about making each rupee answerable.</p>
+        </div>
+      </div>
+
+      <div id="budget-planner-result" class="tool-panel tool-result-panel">
+        <h2>Your Budget View</h2>
+        <p class="tool-placeholder">Add your monthly numbers to compare your actual split with the 50/30/20 framework and get a few grounded adjustments.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../../assets/js/script.js"></script>
+</body>
+</html>

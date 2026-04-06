@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EMI Calculator - The Simple Guy</title>
+  <meta name="description" content="Calculate EMI, total interest, total payment, and affordability for loans in India." />
+  <meta property="og:title" content="EMI Calculator - The Simple Guy" />
+  <meta property="og:description" content="A simple EMI calculator for home, car, education, and personal loans with monthly affordability hints." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/tools/emi-calculator/" />
+  <link rel="canonical" href="https://vikramaditya.me/tools/emi-calculator/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+<body data-page="finance">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 9 Tool</p>
+      <h1>EMI Calculator</h1>
+      <p class="subtitle">Check monthly EMI, total interest, and whether a loan is comfortably inside your monthly cash flow.</p>
+    </section>
+
+    <section class="tool-layout fade-in">
+      <div class="tool-panel">
+        <h2>Check My EMI</h2>
+        <form id="emi-calculator-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Loan Amount (₹)</span>
+              <input type="number" name="principal" min="10000" step="1000" value="1500000" required />
+            </label>
+            <label class="tool-field">
+              <span>Interest Rate (%)</span>
+              <input type="number" name="annualRate" min="1" max="30" step="0.1" value="9" required />
+            </label>
+            <label class="tool-field">
+              <span>Tenure (Years)</span>
+              <input type="number" name="years" min="1" max="30" value="5" required />
+            </label>
+            <label class="tool-field">
+              <span>Monthly Take-Home (₹)</span>
+              <input type="number" name="monthlyIncome" min="0" step="1000" value="80000" />
+            </label>
+          </div>
+
+          <button type="submit" class="btn">Calculate EMI</button>
+        </form>
+
+        <div class="tip-box">
+          <p><strong>Good sanity check:</strong> If one EMI starts eating too much of your monthly cash flow, the problem is rarely just the EMI. It is the reduced freedom it creates for everything else.</p>
+        </div>
+      </div>
+
+      <div id="emi-calculator-result" class="tool-panel tool-result-panel">
+        <h2>Your EMI</h2>
+        <p class="tool-placeholder">Add the loan amount, rate, and tenure to estimate EMI, interest burden, and the monthly pressure on your income.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../../assets/js/script.js"></script>
+</body>
+</html>

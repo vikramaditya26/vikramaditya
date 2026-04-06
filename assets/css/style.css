@@ -3150,6 +3150,155 @@ li {
   margin-bottom: var(--space-lg);
 }
 
+.tool-compare-grid,
+.tool-book-grid,
+.tool-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+.tool-compare-card,
+.tool-link-card,
+.tool-book-card,
+.tool-question {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.tool-compare-card,
+.tool-link-card,
+.tool-question {
+  padding: var(--space-md);
+}
+
+.tool-compare-head,
+.tool-link-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.tool-compare-head h3,
+.tool-link-card h3,
+.tool-book-card h3 {
+  margin-bottom: 0;
+}
+
+.tool-bar {
+  height: 10px;
+  background: var(--color-bg);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+  border: 1px solid var(--color-border);
+}
+
+.tool-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
+}
+
+.tool-table-wrap {
+  overflow-x: auto;
+}
+
+.tool-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tool-table th,
+.tool-table td {
+  text-align: left;
+  padding: 0.85rem 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.95rem;
+}
+
+.tool-table th {
+  color: var(--color-text);
+  font-weight: 700;
+  background: var(--color-accent-light);
+}
+
+.tool-question-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.tool-question legend {
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.tool-question label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.tool-question label:last-child {
+  margin-bottom: 0;
+}
+
+.tool-question input[type="radio"] {
+  margin-top: 0.3rem;
+}
+
+.tool-book-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--space-md);
+  overflow: hidden;
+}
+
+.tool-book-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tool-book-card-body {
+  padding: var(--space-md) var(--space-md) var(--space-md) 0;
+}
+
+.tool-book-card.is-top-pick {
+  border-color: var(--color-accent);
+}
+
+.tool-book-label,
+.tool-book-author,
+.tool-link-kicker {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.tool-book-author {
+  margin-bottom: var(--space-sm);
+}
+
+.tool-link-card p,
+.tool-compare-card p {
+  color: var(--color-text-secondary);
+}
+
+.tool-link-card .card-link {
+  margin-top: var(--space-sm);
+  display: inline-flex;
+}
+
 .tool-recommendation-block {
   margin-top: 0;
   padding-top: 0;
@@ -3404,6 +3553,18 @@ li {
     grid-template-columns: 1fr;
   }
 
+  .tool-book-card {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-book-card img {
+    height: 220px;
+  }
+
+  .tool-book-card-body {
+    padding: 0 var(--space-md) var(--space-md);
+  }
+
   .beauty-section-head,
   .beauty-category-head {
     align-items: stretch;
@@ -3477,12 +3638,17 @@ li {
   .equipment-card,
   .tool-summary-card,
   .tool-meal-card,
-  .tool-macro-card {
+  .tool-macro-card,
+  .tool-compare-card,
+  .tool-link-card,
+  .tool-question {
     padding: var(--space-md);
   }
 
   .recipe-top,
-  .tool-meal-top {
+  .tool-meal-top,
+  .tool-compare-head,
+  .tool-link-card-top {
     flex-direction: column;
     align-items: flex-start;
   }
