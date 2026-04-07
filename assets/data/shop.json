@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "launchNote": "Payment and delivery links are being finalized. Paid products currently use request-access CTAs so the shop can launch cleanly without fake checkout links."
+  },
+  "products": [
+    {
+      "id": "money-os-lite",
+      "title": "Money OS Lite",
+      "category": "finance",
+      "format": "Notion Template",
+      "price": 149,
+      "access": "paid",
+      "featured": true,
+      "status": "request-access",
+      "description": "A clean personal finance dashboard for monthly budgeting, sinking funds, and simple net-worth tracking.",
+      "bestFor": "Freshers and early earners who want one calm home for money decisions.",
+      "includes": [
+        "Monthly budget view",
+        "Expense bucket tracker",
+        "Savings and sinking funds",
+        "Simple yearly review prompts"
+      ],
+      "delivery": "Notion duplicate link",
+      "primaryLabel": "Request Access",
+      "primaryPath": "contact/",
+      "secondaryLabel": "See Shop",
+      "secondaryPath": "shop/"
+    },
+    {
+      "id": "book-notes-vault",
+      "title": "Book Notes Vault",
+      "category": "books",
+      "format": "Notion Template",
+      "price": 199,
+      "access": "paid",
+      "featured": true,
+      "status": "request-access",
+      "description": "A reading system for quotes, takeaways, action points, and books-to-revisit without turning note-taking into homework.",
+      "bestFor": "Readers who want better memory and retrieval from what they already finish.",
+      "includes": [
+        "Book summary template",
+        "Quote and idea capture",
+        "Theme and category tags",
+        "Revisit and action prompts"
+      ],
+      "delivery": "Notion duplicate link",
+      "primaryLabel": "Request Access",
+      "primaryPath": "contact/",
+      "secondaryLabel": "See Books",
+      "secondaryPath": "books/"
+    },
+    {
+      "id": "workout-macro-tracker",
+      "title": "Workout + Macro Tracker",
+      "category": "fitness",
+      "format": "Notion Template",
+      "price": 149,
+      "access": "paid",
+      "featured": false,
+      "status": "request-access",
+      "description": "A lightweight dashboard for workouts, body metrics, weekly wins, and the handful of habits that actually move physique progress.",
+      "bestFor": "Anyone who wants a consistent gym system without turning life into a spreadsheet.",
+      "includes": [
+        "Workout log",
+        "Bodyweight and measurement tracker",
+        "Habit and recovery check-ins",
+        "Weekly review board"
+      ],
+      "delivery": "Notion duplicate link",
+      "primaryLabel": "Request Access",
+      "primaryPath": "contact/",
+      "secondaryLabel": "See Workout",
+      "secondaryPath": "workout/"
+    },
+    {
+      "id": "finance-basics-cheatsheet",
+      "title": "Finance Basics Cheat Sheet",
+      "category": "finance",
+      "format": "Free Download",
+      "price": 0,
+      "access": "free",
+      "featured": false,
+      "status": "download",
+      "description": "A one-page style starter cheat sheet covering emergency fund, 50/30/20, debt, compounding, and beginner investing rules.",
+      "bestFor": "Anyone who wants the main money basics in one quick reference.",
+      "includes": [
+        "Money checklist",
+        "Budget rule summary",
+        "Compounding basics",
+        "Beginner investing reminders"
+      ],
+      "delivery": "TXT download",
+      "primaryLabel": "Download Free",
+      "primaryPath": "assets/downloads/cheatsheets/finance-basics-cheatsheet.txt",
+      "secondaryLabel": "Open Finance Guide",
+      "secondaryPath": "finance/"
+    },
+    {
+      "id": "high-protein-grocery-list",
+      "title": "High Protein Grocery List",
+      "category": "fitness",
+      "format": "Free Download",
+      "price": 0,
+      "access": "free",
+      "featured": false,
+      "status": "download",
+      "description": "A practical Indian grocery starter list for protein, carbs, fats, and easy backup snacks that work for busy weeks.",
+      "bestFor": "Gym-goers who want fewer excuses when planning food.",
+      "includes": [
+        "Protein staples",
+        "Cheap carb sources",
+        "Easy snack backups",
+        "A simple weekly restock rhythm"
+      ],
+      "delivery": "TXT download",
+      "primaryLabel": "Download Free",
+      "primaryPath": "assets/downloads/cheatsheets/high-protein-grocery-list.txt",
+      "secondaryLabel": "Open Kitchen",
+      "secondaryPath": "kitchen/"
+    },
+    {
+      "id": "reading-notes-framework",
+      "title": "Reading Notes Framework",
+      "category": "books",
+      "format": "Free Download",
+      "price": 0,
+      "access": "free",
+      "featured": false,
+      "status": "download",
+      "description": "A small prompt pack for extracting ideas, quotes, actions, and objections from books you want to remember.",
+      "bestFor": "Readers who underline a lot but want retention instead of just accumulation.",
+      "includes": [
+        "Chapter note prompts",
+        "Best quote tracker",
+        "Action and reflection prompts",
+        "Re-read decision checklist"
+      ],
+      "delivery": "TXT download",
+      "primaryLabel": "Download Free",
+      "primaryPath": "assets/downloads/cheatsheets/reading-notes-framework.txt",
+      "secondaryLabel": "Open Books",
+      "secondaryPath": "books/"
+    }
+  ]
+}

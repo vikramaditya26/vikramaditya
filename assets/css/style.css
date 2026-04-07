@@ -3305,6 +3305,149 @@ li {
   border-top: none;
 }
 
+/* === Shop === */
+.shop-hero {
+  padding: var(--space-xl) 0;
+}
+
+.shop-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.shop-stat-card,
+.shop-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.shop-stat-card {
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.shop-stat-card span {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.shop-stat-card small {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.shop-card {
+  padding: var(--space-lg);
+  transition: all var(--transition-base);
+}
+
+.shop-card:hover,
+.shop-card.is-featured {
+  border-color: var(--color-accent);
+  box-shadow: 0 14px 36px var(--color-shadow-hover);
+}
+
+.shop-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.shop-card-kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+
+.shop-price-tag,
+.shop-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.shop-price-tag {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+}
+
+.shop-price-tag.free {
+  background: var(--color-skill-easy-soft);
+  color: var(--color-skill-easy);
+  border-color: transparent;
+}
+
+.shop-price-tag.paid {
+  background: var(--color-movie-vibe-bg);
+  color: var(--color-movie-vibe);
+  border-color: transparent;
+}
+
+.shop-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--space-sm);
+}
+
+.shop-meta-pill {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.shop-card-copy,
+.shop-card-bestfor,
+.shop-delivery-line {
+  color: var(--color-text-secondary);
+}
+
+.shop-include-list {
+  padding-left: 1.15rem;
+  color: var(--color-text-secondary);
+  margin: var(--space-sm) 0;
+}
+
+.shop-include-list li + li {
+  margin-top: 0.35rem;
+}
+
+.shop-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-top: var(--space-md);
+}
+
+.shop-card-btn {
+  text-decoration: none;
+}
+
 /* === Skincare & Style === */
 .skincare-hero,
 .style-hero {
@@ -3553,6 +3696,11 @@ li {
     grid-template-columns: 1fr;
   }
 
+  .shop-hero-stats,
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
   .tool-book-card {
     grid-template-columns: 1fr;
   }
@@ -3648,7 +3796,8 @@ li {
   .recipe-top,
   .tool-meal-top,
   .tool-compare-head,
-  .tool-link-card-top {
+  .tool-link-card-top,
+  .shop-card-top {
     flex-direction: column;
     align-items: flex-start;
   }

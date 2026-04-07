@@ -890,6 +890,13 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 4. Link from relevant section (e.g., diet planner linked from kitchen page and workout page)
 5. If the tool belongs in the suite hub, add a card to `tools/index.html`
 
+### Adding or Updating a Shop Product
+1. Add the product entry to `assets/data/shop.json` (`id`, `title`, `category`, `format`, `access`, `price`, `description`, `bestFor`, `includes`, `delivery`, `primaryLabel`, `primaryPath`)
+2. If it is a free download, place the file under `assets/downloads/` and link to it via `primaryPath`
+3. If payment links are not finalized yet, point the product to `/contact/` with honest "Request access" copy rather than inventing checkout URLs
+4. `/shop/index.html` is just the shell; `initShopPage()` in `script.js` renders the filter bar, stats, and product cards from JSON
+5. Add section-specific CTAs only where the product is naturally relevant (finance, books, workout, etc.) and keep the tone useful, not pushy
+
 ---
 
 ## 13. Changelog <a name="changelog"></a>
@@ -908,6 +915,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-06 | **Phase 7 launched** — Skincare & Style sections. Added `assets/data/products.json` as a shared product dataset for both sections. Built `/skincare/index.html` with a current routine block, CTM basics, a simple skin-type guide form, data-driven product recommendations by category/tier, seasonal tips, and grooming basics. Built `/style/index.html` with a data-driven capsule wardrobe grid, outfit formulas, fit/color guidance, budget wardrobe notes, and seasonal style advice. Extended `script.js` to load `products.json`, render skincare/style product cards, and handle the skin-type guide interaction. Added `Skincare` and `Style` to the shared nav, added homepage explore cards, seeded `affiliate-links.json` with skincare/style placeholders, and updated `sitemap.xml` with both section URLs. | Phase 7 |
 | 2026-04-06 | **Phase 8 launched** — Blog enhancement. Added `assets/data/blog.json` as the metadata source for all 10 current posts. Rebuilt `/blog/index.html` into a card-based, filterable listing with dates, categories, and reading time rendered by `script.js` `initBlogIndex()`. Created 10 individual static post pages under `/blog/post-slug/` with unique OG/canonical metadata, social sharing buttons, Substack CTA copy, and related-post placeholders. Extended `script.js` with `loadBlogData()`, related-post rendering, share-link generation, and `BlogPosting` schema injection for article pages. Added blog listing/post styles to `style.css` and updated `sitemap.xml` with every post URL. | Phase 8 |
 | 2026-04-06 | **Phase 9 launched** — Interactive tools suite. Added `/tools/index.html` as a hub plus six new tools: `/tools/sip-calculator/`, `/tools/emi-calculator/`, `/tools/bmi-calculator/`, `/tools/budget-planner/`, `/tools/tax-calculator/`, and `/tools/what-should-i-read-next/`. Extended `script.js` with shared finance/fitness/book helpers, calculator logic, and quiz scoring using `books.json`. Added new tool UI components to `style.css`, linked the suite from homepage/finance/workout/books, and updated `sitemap.xml` with the new tool URLs. The tax tool currently targets a simplified salaried comparison for AY 2026-27 (FY 2025-26), not full filing complexity. | Phase 9 |
+| 2026-04-07 | **Phase 10 launched** — Digital products shop. Added `assets/data/shop.json` as the store source of truth plus `/shop/index.html` as a JSON-driven storefront with stats, filters, launch-note copy, and product cards rendered by `script.js` `initShopPage()`. Created three paid starter products (currently honest request-access CTAs to `/contact/` until real checkout links are finalized) and three free lead-magnet downloads under `assets/downloads/cheatsheets/`. Added `Shop` to the shared nav, a homepage explore card, and contextual shop CTAs on finance/workout/books. Updated `style.css` with shop card UI, added `/shop/` to `sitemap.xml`, and documented the shop workflow in AGENT.md. | Phase 10 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -979,7 +987,15 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. **Discoverability pattern:** Finance, workout, and books each now include a small tools section that links directly into the relevant calculators. Homepage also links to the tools hub.
 6. **Next clean expansion:** The obvious follow-up after Phase 9 is either improving the tax planner depth (if needed) or adding saved presets/charting, not scattering inline calculator code into section HTML.
 
+### How the shop works (for future agents):
+1. **Master data:** `assets/data/shop.json` is the single source of truth for the storefront. Each product stores `category`, `format`, `access`, `price`, copy, included items, delivery note, and CTA paths.
+2. **Storefront rendering:** `/shop/index.html` is mostly a shell. In `script.js`, `initShopPage()` fetches `shop.json`, renders product stats, builds filter buttons, and outputs the product grid into `#shop-grid`.
+3. **CTA pathing:** Shop links use `resolveInternalPath()` so the same JSON paths work from the root-level shop page and from deeper pages if reused later.
+4. **Soft-launch honesty:** Paid products currently point to `/contact/` with request-access copy because public Gumroad/Razorpay links are not committed yet. Do not replace this with fake or placeholder checkout flows.
+5. **Lead magnets:** Free resources live under `assets/downloads/cheatsheets/` right now as lightweight text downloads. They are intentionally simple starter assets and can later be upgraded to polished PDFs without changing the storefront pattern.
+6. **Cross-sell pattern:** Finance, workout, and books each link into the shop with one paid-system CTA and one free resource CTA. Keep future cross-sells tightly relevant to the page context.
+
 ---
 
-*Last updated: 2026-04-06*
-*Next priority: Phase 10 — Digital Products Shop, while continuing to enrich foods.json, products.json, and tool accuracy over time*
+*Last updated: 2026-04-07*
+*Next priority: Phase 11 — Community & Engagement, while continuing to enrich foods.json, products.json, and shop assets over time*

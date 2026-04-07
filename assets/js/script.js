@@ -36,6 +36,7 @@ function renderHeader(currentPage) {
     { href: 'style/', label: 'Style', key: 'style' },
     { href: '100-skills/', label: '100 Skills', key: 'skills' },
     { href: 'movies/', label: 'Movies', key: 'movies' },
+    { href: 'shop/', label: 'Shop', key: 'shop' },
     { href: 'blog/', label: 'Blog', key: 'blog' },
     { href: 'contact/', label: 'Contact', key: 'contact' }
   ];
@@ -341,6 +342,11 @@ function buildBlogPath(slug) {
   return getBasePath() + 'blog/' + slug + '/';
 }
 
+function resolveInternalPath(path) {
+  if (!path) return '#';
+  return getBasePath() + path;
+}
+
 function escapeHtml(value) {
   return String(value || '')
     .replace(/&/g, '&amp;')
@@ -544,6 +550,122 @@ function renderBlogCard(post) {
       if (relatedGrid) {
         relatedGrid.innerHTML = '<p class="movies-empty">Related posts could not be loaded right now.</p>';
       }
+    });
+})();
+
+// ===== Shop =====
+(function initShopPage() {
+  var shopGrid = document.getElementById('shop-grid');
+  if (!shopGrid) return;
+
+  var filterBar = document.getElementById('shop-filter-bar');
+  var totalProducts = document.getElementById('shop-total-products');
+  var freeProducts = document.getElementById('shop-free-products');
+  var paidProducts = document.getElementById('shop-paid-products');
+  var launchNote = document.getElementById('shop-launch-note');
+  var activeFilter = 'all';
+  var allProducts = [];
+
+  function formatShopCurrency(value) {
+    if (!value) return 'Free';
+    return '₹' + Number(value).toLocaleString('en-IN');
+  }
+
+  function buildPrimaryCta(product) {
+    var href = resolveInternalPath(product.primaryPath);
+    var downloadAttr = product.status === 'download' ? ' download' : '';
+    return '<a href="' + href + '" class="btn shop-card-btn"' + downloadAttr + '>' + escapeHtml(product.primaryLabel) + '</a>';
+  }
+
+  function buildSecondaryCta(product) {
+    if (!product.secondaryLabel || !product.secondaryPath) return '';
+    return '<a href="' + resolveInternalPath(product.secondaryPath) + '" class="card-link">' + escapeHtml(product.secondaryLabel) + '</a>';
+  }
+
+  function renderProduct(product) {
+    return `
+      <article class="shop-card${product.featured ? ' is-featured' : ''}">
+        <div class="shop-card-top">
+          <div>
+            <p class="shop-card-kicker">${escapeHtml(product.format)}</p>
+            <h3>${escapeHtml(product.title)}</h3>
+          </div>
+          <span class="shop-price-tag ${product.access}">${formatShopCurrency(product.price)}</span>
+        </div>
+        <div class="shop-meta-row">
+          <span class="shop-meta-pill">${escapeHtml(formatBlogCategory(product.category))}</span>
+          <span class="shop-meta-pill">${product.access === 'free' ? 'Free' : 'Paid'}</span>
+        </div>
+        <p class="shop-card-copy">${escapeHtml(product.description)}</p>
+        <p class="shop-card-bestfor"><strong>Best for:</strong> ${escapeHtml(product.bestFor)}</p>
+        <ul class="shop-include-list">
+          ${(product.includes || []).map(function(item) {
+            return '<li>' + escapeHtml(item) + '</li>';
+          }).join('')}
+        </ul>
+        <p class="shop-delivery-line"><strong>Delivery:</strong> ${escapeHtml(product.delivery)}</p>
+        <div class="shop-card-actions">
+          ${buildPrimaryCta(product)}
+          ${buildSecondaryCta(product)}
+        </div>
+      </article>
+    `;
+  }
+
+  function renderFilters() {
+    if (!filterBar) return;
+    var filters = [
+      { value: 'all', label: 'All' },
+      { value: 'paid', label: 'Paid' },
+      { value: 'free', label: 'Free' },
+      { value: 'finance', label: 'Finance' },
+      { value: 'books', label: 'Books' },
+      { value: 'fitness', label: 'Fitness' }
+    ];
+
+    filterBar.innerHTML = filters.map(function(filter) {
+      var activeClass = filter.value === activeFilter ? ' active' : '';
+      return '<button type="button" class="filter-btn' + activeClass + '" data-shop-filter="' + filter.value + '">' + filter.label + '</button>';
+    }).join('');
+
+    filterBar.querySelectorAll('[data-shop-filter]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        activeFilter = button.getAttribute('data-shop-filter') || 'all';
+        renderFilters();
+        renderProducts();
+      });
+    });
+  }
+
+  function renderProducts() {
+    var filtered = allProducts.filter(function(product) {
+      if (activeFilter === 'all') return true;
+      if (activeFilter === 'paid' || activeFilter === 'free') return product.access === activeFilter;
+      return product.category === activeFilter;
+    });
+
+    if (!filtered.length) {
+      shopGrid.innerHTML = '<p class="movies-empty">No shop items match this filter yet.</p>';
+      return;
+    }
+
+    shopGrid.innerHTML = filtered.map(renderProduct).join('');
+  }
+
+  loadShopData()
+    .then(function(payload) {
+      allProducts = Array.isArray(payload.products) ? payload.products : [];
+      if (launchNote && payload.meta && payload.meta.launchNote) {
+        launchNote.innerHTML = '<strong>Note:</strong> ' + escapeHtml(payload.meta.launchNote);
+      }
+      if (totalProducts) totalProducts.textContent = String(allProducts.length);
+      if (freeProducts) freeProducts.textContent = String(allProducts.filter(function(product) { return product.access === 'free'; }).length);
+      if (paidProducts) paidProducts.textContent = String(allProducts.filter(function(product) { return product.access === 'paid'; }).length);
+      renderFilters();
+      renderProducts();
+    })
+    .catch(function() {
+      shopGrid.innerHTML = '<p class="movies-empty">The shop could not be loaded right now.</p>';
     });
 })();
 
@@ -799,6 +921,7 @@ function buildFoodMap(foodItems) {
 // ===== Products Data Loader =====
 let productsDataCache = null;
 let booksDataCache = null;
+let shopDataCache = null;
 
 function loadProductsData() {
   if (productsDataCache) {
@@ -822,6 +945,19 @@ function loadBooksData() {
     .then(function(response) { return response.json(); })
     .then(function(data) {
       booksDataCache = data;
+      return data;
+    });
+}
+
+function loadShopData() {
+  if (shopDataCache) {
+    return Promise.resolve(shopDataCache);
+  }
+
+  return fetch(getBasePath() + 'assets/data/shop.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      shopDataCache = data;
       return data;
     });
 }
