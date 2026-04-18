@@ -3448,6 +3448,156 @@ li {
   text-decoration: none;
 }
 
+/* === Phase 11 Engagement === */
+.site-quote-banner,
+.site-newsletter-cta,
+.site-discussion-panel,
+.helpful-feedback {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.site-quote-banner {
+  margin-bottom: var(--space-xl);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, var(--color-accent-light) 0, transparent 45%),
+    var(--color-card-bg);
+}
+
+.site-quote-inner,
+.site-newsletter-cta,
+.site-discussion-panel {
+  padding: var(--space-xl);
+}
+
+.site-quote-kicker,
+.site-newsletter-kicker,
+.helpful-feedback-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.site-quote-text {
+  margin: var(--space-sm) 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.site-quote-meta,
+.site-newsletter-copy p,
+.site-discussion-copy p,
+.site-engagement-note,
+.helpful-feedback-note {
+  color: var(--color-text-secondary);
+}
+
+.site-newsletter-copy h2,
+.site-discussion-copy h2 {
+  margin: var(--space-xs) 0 var(--space-sm);
+}
+
+.site-newsletter-copy--compact {
+  padding: 0;
+}
+
+.site-newsletter-actions,
+.helpful-feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-top: var(--space-md);
+}
+
+.site-engagement-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.site-engagement-stat-card {
+  padding: var(--space-md);
+  background: var(--color-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.site-engagement-stat-card span {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.site-engagement-stat-card small {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.site-engagement-note {
+  margin-top: var(--space-sm);
+  font-size: 0.92rem;
+}
+
+.site-newsletter-cta,
+.site-discussion-panel {
+  max-width: 960px;
+  margin: var(--space-2xl) auto 0;
+  background:
+    linear-gradient(135deg, var(--color-accent-light) 0%, transparent 100%),
+    var(--color-card-bg);
+}
+
+.site-discussion-panel {
+  max-width: 860px;
+}
+
+.helpful-feedback {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+}
+
+.helpful-feedback-actions {
+  margin-top: var(--space-sm);
+}
+
+.helpful-feedback-btn {
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.helpful-feedback-btn:hover,
+.helpful-feedback-btn.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.helpful-feedback.is-answered .helpful-feedback-label {
+  color: var(--color-text);
+}
+
 /* === Skincare & Style === */
 .skincare-hero,
 .style-hero {
@@ -3697,7 +3847,8 @@ li {
   }
 
   .shop-hero-stats,
-  .shop-grid {
+  .shop-grid,
+  .site-engagement-stats {
     grid-template-columns: 1fr;
   }
 
@@ -3721,6 +3872,13 @@ li {
   .beauty-intro-card,
   .routine-card,
   .skin-type-card {
+    padding: var(--space-lg);
+  }
+
+  .site-quote-inner,
+  .site-newsletter-cta,
+  .site-discussion-panel,
+  .helpful-feedback {
     padding: var(--space-lg);
   }
 
@@ -3789,7 +3947,8 @@ li {
   .tool-macro-card,
   .tool-compare-card,
   .tool-link-card,
-  .tool-question {
+  .tool-question,
+  .site-engagement-stat-card {
     padding: var(--space-md);
   }
 
@@ -3797,7 +3956,9 @@ li {
   .tool-meal-top,
   .tool-compare-head,
   .tool-link-card-top,
-  .shop-card-top {
+  .shop-card-top,
+  .site-newsletter-actions,
+  .helpful-feedback-actions {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -3809,5 +3970,12 @@ li {
   .beauty-product-top {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .site-quote-inner,
+  .site-newsletter-cta,
+  .site-discussion-panel,
+  .helpful-feedback {
+    padding: var(--space-md);
   }
 }

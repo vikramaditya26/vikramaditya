@@ -347,6 +347,12 @@ function resolveInternalPath(path) {
   return getBasePath() + path;
 }
 
+function resolveLinkPath(path) {
+  if (!path) return '#';
+  if (/^(https?:|mailto:)/i.test(path)) return path;
+  return getBasePath() + path;
+}
+
 function escapeHtml(value) {
   return String(value || '')
     .replace(/&/g, '&amp;')
@@ -529,6 +535,12 @@ function renderBlogCard(post) {
 
       setupShareButtons(currentPost);
       injectBlogSchema(currentPost);
+      loadEngagementData()
+        .then(function(config) {
+          injectBlogDiscussion(config, currentPost.title);
+          refreshEngagementStats();
+        })
+        .catch(function() {});
 
       if (!relatedGrid) return;
 
@@ -922,6 +934,7 @@ function buildFoodMap(foodItems) {
 let productsDataCache = null;
 let booksDataCache = null;
 let shopDataCache = null;
+let engagementDataCache = null;
 
 function loadProductsData() {
   if (productsDataCache) {
@@ -960,6 +973,334 @@ function loadShopData() {
       shopDataCache = data;
       return data;
     });
+}
+
+function loadEngagementData() {
+  if (engagementDataCache) {
+    return Promise.resolve(engagementDataCache);
+  }
+
+  return fetch(getBasePath() + 'assets/data/engagement.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      engagementDataCache = data;
+      return data;
+    });
+}
+
+// ===== Phase 11 Engagement Layer =====
+var ENGAGEMENT_STORAGE_KEY = 'simpleGuyEngagement';
+
+function readLocalJson(key, fallback) {
+  try {
+    var raw = window.localStorage.getItem(key);
+    if (!raw) return fallback;
+    return JSON.parse(raw);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function writeLocalJson(key, value) {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    return;
+  }
+}
+
+function getEngagementState() {
+  var stored = readLocalJson(ENGAGEMENT_STORAGE_KEY, {});
+  return {
+    pageViews: Number(stored.pageViews) || 0,
+    toolRuns: Number(stored.toolRuns) || 0,
+    pages: stored.pages && typeof stored.pages === 'object' ? stored.pages : {},
+    tools: stored.tools && typeof stored.tools === 'object' ? stored.tools : {},
+    feedback: stored.feedback && typeof stored.feedback === 'object' ? stored.feedback : {}
+  };
+}
+
+function saveEngagementState(state) {
+  writeLocalJson(ENGAGEMENT_STORAGE_KEY, state);
+}
+
+function updateEngagementState(mutator) {
+  var state = getEngagementState();
+  mutator(state);
+  saveEngagementState(state);
+  return state;
+}
+
+function trackPageVisit() {
+  var path = window.location.pathname || '/';
+  return updateEngagementState(function(state) {
+    state.pageViews += 1;
+    state.pages[path] = (state.pages[path] || 0) + 1;
+  });
+}
+
+function trackToolUsage(toolKey) {
+  return updateEngagementState(function(state) {
+    state.toolRuns += 1;
+    state.tools[toolKey] = (state.tools[toolKey] || 0) + 1;
+  });
+}
+
+function saveHelpfulVote(sectionKey, vote) {
+  return updateEngagementState(function(state) {
+    state.feedback[sectionKey] = vote;
+  });
+}
+
+function getHelpfulVote(sectionKey) {
+  return getEngagementState().feedback[sectionKey] || '';
+}
+
+function getEngagementSummary() {
+  var state = getEngagementState();
+  return {
+    pageViews: state.pageViews,
+    uniquePages: Object.keys(state.pages || {}).length,
+    toolRuns: state.toolRuns,
+    helpfulVotes: Object.keys(state.feedback || {}).length
+  };
+}
+
+function formatStatValue(value) {
+  return Number(value || 0).toLocaleString('en-IN');
+}
+
+function buildEngagementStatsMarkup(note) {
+  return `
+    <div class="site-engagement-stats">
+      <article class="site-engagement-stat-card">
+        <span data-engagement-stat="uniquePages">0</span>
+        <small>pages explored</small>
+      </article>
+      <article class="site-engagement-stat-card">
+        <span data-engagement-stat="toolRuns">0</span>
+        <small>tool runs</small>
+      </article>
+      <article class="site-engagement-stat-card">
+        <span data-engagement-stat="helpfulVotes">0</span>
+        <small>feedback signals</small>
+      </article>
+    </div>
+    <p class="site-engagement-note">${escapeHtml(note || 'Saved on this browser for now.')}</p>
+  `;
+}
+
+function refreshEngagementStats() {
+  var summary = getEngagementSummary();
+  document.querySelectorAll('[data-engagement-stat]').forEach(function(node) {
+    var key = node.getAttribute('data-engagement-stat');
+    if (!key) return;
+    node.textContent = formatStatValue(summary[key] || 0);
+  });
+}
+
+function slugifyText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function buildContactPrefillUrl(subject, message) {
+  var params = new URLSearchParams();
+  if (subject) params.set('subject', subject);
+  if (message) params.set('message', message);
+  var query = params.toString();
+  return resolveInternalPath('contact/') + (query ? '?' + query : '');
+}
+
+function getQuoteForToday(quotes) {
+  if (!Array.isArray(quotes) || !quotes.length) return null;
+  var now = new Date();
+  var key = Number([
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join(''));
+  return quotes[key % quotes.length];
+}
+
+function renderQuoteBanner(payload) {
+  var main = document.getElementById('main');
+  if (!main || document.querySelector('.site-quote-banner')) return;
+
+  var quote = getQuoteForToday(payload.quotes || []);
+  if (!quote) return;
+
+  var banner = document.createElement('section');
+  banner.className = 'site-quote-banner fade-in visible';
+  banner.innerHTML = `
+    <div class="site-quote-inner">
+      <p class="site-quote-kicker">Quote of the Day</p>
+      <blockquote class="site-quote-text">"${escapeHtml(quote.text)}"</blockquote>
+      <p class="site-quote-meta">${escapeHtml(quote.author)}</p>
+    </div>
+  `;
+  main.insertBefore(banner, main.firstChild);
+}
+
+function renderSharedNewsletterMarkup(payload, compact) {
+  var newsletter = payload.newsletter || {};
+  var secondaryUrl = resolveLinkPath(newsletter.secondaryPath || 'contact/');
+  var secondaryTarget = /^(https?:|mailto:)/i.test(secondaryUrl) ? ' target="_blank" rel="noopener"' : '';
+  var compactClass = compact ? ' site-newsletter-copy--compact' : '';
+
+  return `
+    <div class="site-newsletter-copy${compactClass}">
+      <p class="site-newsletter-kicker">${escapeHtml(newsletter.eyebrow || 'Newsletter')}</p>
+      <h2>${escapeHtml(newsletter.title || 'Weekly notes, not noise')}</h2>
+      <p>${escapeHtml(newsletter.description || 'The newsletter link is not live yet, but you can still join early.')}</p>
+      <div class="site-newsletter-actions">
+        <a href="${buildContactPrefillUrl('Newsletter waitlist', 'Hi Vikram,\n\nPlease keep me posted when the Substack link goes live.\n')}" class="btn">${escapeHtml(newsletter.ctaLabel || 'Join the waitlist')}</a>
+        <a href="${secondaryUrl}" class="card-link"${secondaryTarget}>${escapeHtml(newsletter.secondaryLabel || 'Stay connected')}</a>
+      </div>
+      ${buildEngagementStatsMarkup(newsletter.statsNote)}
+    </div>
+  `;
+}
+
+function initSharedNewsletter(payload) {
+  var existingBlogCtas = document.querySelectorAll('.blog-newsletter-cta');
+
+  if (existingBlogCtas.length) {
+    existingBlogCtas.forEach(function(block) {
+      block.innerHTML = renderSharedNewsletterMarkup(payload, true);
+    });
+    refreshEngagementStats();
+    return;
+  }
+
+  if (document.querySelector('.site-newsletter-cta')) {
+    refreshEngagementStats();
+    return;
+  }
+
+  var footer = document.querySelector('footer');
+  if (!footer || !footer.parentNode) return;
+
+  var section = document.createElement('section');
+  section.className = 'site-newsletter-cta fade-in visible';
+  section.innerHTML = renderSharedNewsletterMarkup(payload, false);
+  footer.parentNode.insertBefore(section, footer);
+  refreshEngagementStats();
+}
+
+function renderDiscussionMarkup(config, postTitle) {
+  var discussion = config.discussion || {};
+  var secondaryUrl = resolveLinkPath(discussion.secondaryPath || 'contact/');
+
+  return `
+    <div class="site-discussion-copy">
+      <p class="site-newsletter-kicker">${escapeHtml(discussion.eyebrow || 'Discussion')}</p>
+      <h2>${escapeHtml(discussion.title || 'Continue the conversation')}</h2>
+      <p>${escapeHtml(discussion.description || 'If this post sparked something, send me a note.')}</p>
+      <div class="site-newsletter-actions">
+        <a href="${buildContactPrefillUrl('Response to: ' + postTitle, 'Hi Vikram,\n\nI just read \"' + postTitle + '\" and wanted to share this thought:\n\n')}" class="btn">${escapeHtml(discussion.ctaLabel || 'Send your take')}</a>
+        <a href="${secondaryUrl}" class="card-link">${escapeHtml(discussion.secondaryLabel || 'Open contact page')}</a>
+      </div>
+    </div>
+  `;
+}
+
+function injectBlogDiscussion(config, postTitle) {
+  if (document.querySelector('.site-discussion-panel')) return;
+  var relatedSection = document.querySelector('.blog-related-section');
+  var newsletterBlock = document.querySelector('.blog-newsletter-cta');
+  var anchor = newsletterBlock || relatedSection;
+  if (!anchor || !anchor.parentNode) return;
+
+  var section = document.createElement('section');
+  section.className = 'site-discussion-panel fade-in visible';
+  section.innerHTML = renderDiscussionMarkup(config, postTitle);
+  anchor.parentNode.insertBefore(section, anchor.nextSibling);
+}
+
+function initHelpfulFeedback() {
+  var page = document.body.getAttribute('data-page') || '';
+  if (page === 'about' || page === 'contact') return;
+
+  var selectors = [
+    'main > section',
+    'main > article.blog-post',
+    '.finance-card .finance-card-body',
+    '.workout-day'
+  ];
+  var seenKeys = {};
+  var targets = [];
+
+  selectors.forEach(function(selector) {
+    document.querySelectorAll(selector).forEach(function(node) {
+      if (targets.indexOf(node) === -1) targets.push(node);
+    });
+  });
+
+  targets.forEach(function(target) {
+    if (!target || target.querySelector('.helpful-feedback')) return;
+    if (target.closest('.site-newsletter-cta, .site-discussion-panel, .site-quote-banner, .blog-newsletter-cta, .blog-related-section, .contact-section')) return;
+    if ((target.textContent || '').trim().length < 140) return;
+
+    var heading = target.querySelector('h2, h3');
+    if (!heading) {
+      var financeCard = target.closest('.finance-card');
+      if (financeCard) {
+        heading = financeCard.querySelector('h3');
+      }
+    }
+    if (!heading) return;
+
+    var sectionLabel = (heading.textContent || '').trim();
+    if (!sectionLabel) return;
+
+    var sectionKey = page + ':' + slugifyText(sectionLabel);
+    if (seenKeys[sectionKey]) return;
+    seenKeys[sectionKey] = true;
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'helpful-feedback';
+    wrapper.setAttribute('data-helpful-key', sectionKey);
+    wrapper.innerHTML = `
+      <span class="helpful-feedback-label">Was this helpful?</span>
+      <div class="helpful-feedback-actions">
+        <button type="button" class="helpful-feedback-btn" data-helpful-vote="yes">Yes</button>
+        <button type="button" class="helpful-feedback-btn" data-helpful-vote="no">Not yet</button>
+      </div>
+      <p class="helpful-feedback-note">A small signal helps me understand what is actually useful.</p>
+    `;
+
+    var savedVote = getHelpfulVote(sectionKey);
+    if (savedVote) {
+      wrapper.classList.add('is-answered');
+      var activeButton = wrapper.querySelector('[data-helpful-vote="' + savedVote + '"]');
+      if (activeButton) activeButton.classList.add('is-active');
+      var note = wrapper.querySelector('.helpful-feedback-note');
+      if (note) note.textContent = 'Saved on this browser. Thanks for the signal.';
+    }
+
+    wrapper.querySelectorAll('[data-helpful-vote]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var vote = button.getAttribute('data-helpful-vote') || 'yes';
+        saveHelpfulVote(sectionKey, vote);
+        wrapper.classList.add('is-answered');
+        wrapper.querySelectorAll('[data-helpful-vote]').forEach(function(item) {
+          item.classList.toggle('is-active', item === button);
+        });
+        var note = wrapper.querySelector('.helpful-feedback-note');
+        if (note) {
+          note.textContent = vote === 'yes'
+            ? 'Saved on this browser. Glad this section helped.'
+            : 'Saved on this browser. That is useful to know too.';
+        }
+        refreshEngagementStats();
+      });
+    });
+
+    target.appendChild(wrapper);
+  });
 }
 
 function isFoodAllowedForDiet(food, dietType) {
@@ -1631,6 +1972,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('diet-planner');
+    refreshEngagementStats();
 
     var formData = new FormData(form);
     var answers = {
@@ -1666,6 +2009,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('macro-calculator');
+    refreshEngagementStats();
 
     var formData = new FormData(form);
     var targets = computeNutritionTargets({
@@ -1731,6 +2076,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('sip-calculator');
+    refreshEngagementStats();
     var formData = new FormData(form);
     var projection = buildSipProjection({
       monthlyInvestment: formData.get('monthlyInvestment'),
@@ -1800,6 +2147,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('emi-calculator');
+    refreshEngagementStats();
     var formData = new FormData(form);
     var emi = computeEmi({
       principal: formData.get('principal'),
@@ -1844,6 +2193,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('bmi-calculator');
+    refreshEngagementStats();
     var formData = new FormData(form);
     var stats = {
       age: formData.get('age'),
@@ -1928,6 +2279,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('budget-planner');
+    refreshEngagementStats();
     var formData = new FormData(form);
     var plan = buildBudgetPlan({
       income: formData.get('income'),
@@ -1979,6 +2332,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('tax-calculator');
+    refreshEngagementStats();
     var formData = new FormData(form);
     var comparison = calculateTaxComparison({
       salary: formData.get('salary'),
@@ -2081,6 +2436,8 @@ function renderDietPlan(plan, answers, container) {
 
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+    trackToolUsage('what-should-i-read-next');
+    refreshEngagementStats();
     var formData = new FormData(form);
     var answers = {
       goal: formData.get('goal'),
@@ -2349,6 +2706,7 @@ setDefaultBuyButtonLabels();
 
 // ===== Main Initialization =====
 document.addEventListener('DOMContentLoaded', function() {
+  trackPageVisit();
 
   // ===== Theme Toggle (Dark/Light Mode) =====
   const themeToggle = document.querySelector('.theme-toggle');
@@ -2544,6 +2902,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.querySelector('.contact-form form');
 
   if (contactForm) {
+    const params = new URLSearchParams(window.location.search);
+    ['name', 'email', 'subject', 'message'].forEach(function(fieldName) {
+      const field = contactForm.querySelector('[name="' + fieldName + '"]');
+      if (field && params.has(fieldName) && !field.value) {
+        field.value = params.get(fieldName);
+      }
+    });
+
     contactForm.addEventListener('submit', function() {
       const btn = this.querySelector('.btn');
       if (btn) {
@@ -2566,6 +2932,18 @@ document.addEventListener('DOMContentLoaded', function() {
     block.parentNode.style.position = 'relative';
     block.parentNode.appendChild(copyBtn);
   });
+
+  loadEngagementData()
+    .then(function(payload) {
+      renderQuoteBanner(payload);
+      initSharedNewsletter(payload);
+      initHelpfulFeedback();
+      refreshEngagementStats();
+    })
+    .catch(function() {
+      initHelpfulFeedback();
+      refreshEngagementStats();
+    });
 
   // ===== Console Easter Egg =====
   console.log('%c👋 Hello, curious developer!', 'font-size: 20px; font-weight: bold;');

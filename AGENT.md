@@ -428,7 +428,7 @@ Topics: Sam Altman on success, Pavel Durov interview, Naval's formulas, mental m
 
 **Current state:** All 10 posts now have individual URLs under `/blog/post-slug/`, dates, categories, estimated reading time, social share buttons, related-post blocks, and a newsletter CTA. The listing page is now card-based and driven by `assets/data/blog.json`.
 
-**Still missing:** Comments and a live public Substack subscribe URL (CTA currently points people to contact while the newsletter link is finalized).
+**Still missing:** A live public Substack subscribe URL and, if desired later, a fully hosted public comment platform. Phase 11 currently uses an honest waitlist CTA plus a lightweight direct-response discussion flow instead of fake embeds or unconfigured third-party widgets.
 
 ### Contact — functional
 Formspree form, LinkedIn + Instagram + Email links. Working fine.
@@ -897,6 +897,13 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 4. `/shop/index.html` is just the shell; `initShopPage()` in `script.js` renders the filter bar, stats, and product cards from JSON
 5. Add section-specific CTAs only where the product is naturally relevant (finance, books, workout, etc.) and keep the tone useful, not pushy
 
+### Updating the Engagement Layer
+1. Edit `assets/data/engagement.json` for quote-of-the-day entries, newsletter copy, or discussion CTA copy
+2. The shared quote banner and newsletter block are rendered by `script.js`, so most copy changes do not require HTML edits
+3. Blog post discussion uses a contact-page prefill flow right now; if a real Substack URL or comment platform goes live, update the engagement data and `initBlogPostPages()`/shared engagement helpers together
+4. Helpful buttons and activity counters are currently browser-local by design. Do not present them as site-wide global numbers unless real analytics-backed aggregation is added
+5. If a public Substack URL is finalized, replace the waitlist/contact CTA with the real subscribe link and update this document to remove the fallback note
+
 ---
 
 ## 13. Changelog <a name="changelog"></a>
@@ -916,6 +923,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-06 | **Phase 8 launched** — Blog enhancement. Added `assets/data/blog.json` as the metadata source for all 10 current posts. Rebuilt `/blog/index.html` into a card-based, filterable listing with dates, categories, and reading time rendered by `script.js` `initBlogIndex()`. Created 10 individual static post pages under `/blog/post-slug/` with unique OG/canonical metadata, social sharing buttons, Substack CTA copy, and related-post placeholders. Extended `script.js` with `loadBlogData()`, related-post rendering, share-link generation, and `BlogPosting` schema injection for article pages. Added blog listing/post styles to `style.css` and updated `sitemap.xml` with every post URL. | Phase 8 |
 | 2026-04-06 | **Phase 9 launched** — Interactive tools suite. Added `/tools/index.html` as a hub plus six new tools: `/tools/sip-calculator/`, `/tools/emi-calculator/`, `/tools/bmi-calculator/`, `/tools/budget-planner/`, `/tools/tax-calculator/`, and `/tools/what-should-i-read-next/`. Extended `script.js` with shared finance/fitness/book helpers, calculator logic, and quiz scoring using `books.json`. Added new tool UI components to `style.css`, linked the suite from homepage/finance/workout/books, and updated `sitemap.xml` with the new tool URLs. The tax tool currently targets a simplified salaried comparison for AY 2026-27 (FY 2025-26), not full filing complexity. | Phase 9 |
 | 2026-04-07 | **Phase 10 launched** — Digital products shop. Added `assets/data/shop.json` as the store source of truth plus `/shop/index.html` as a JSON-driven storefront with stats, filters, launch-note copy, and product cards rendered by `script.js` `initShopPage()`. Created three paid starter products (currently honest request-access CTAs to `/contact/` until real checkout links are finalized) and three free lead-magnet downloads under `assets/downloads/cheatsheets/`. Added `Shop` to the shared nav, a homepage explore card, and contextual shop CTAs on finance/workout/books. Updated `style.css` with shop card UI, added `/shop/` to `sitemap.xml`, and documented the shop workflow in AGENT.md. | Phase 10 |
+| 2026-04-19 | **Phase 11 launched** — Community & engagement foundation. Added `assets/data/engagement.json` as the new source of truth for newsletter/discussion copy and rotating quotes. Extended `script.js` with a shared quote-of-the-day banner, site-wide newsletter CTA injection, blog-post discussion prompts that prefill the contact form, browser-local helpful buttons, browser-local activity counters, contact-form query prefill, and tool-usage tracking hooks. Updated `style.css` with engagement UI components and refreshed `sitemap.xml` dates because the shared JS/CSS now affects the full site. This phase intentionally stays honest: Substack still points to a waitlist/contact flow until the public subscribe URL is committed, and the counters are clearly labeled as browser-local rather than fake global social proof. | Phase 11 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -995,7 +1003,15 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. **Lead magnets:** Free resources live under `assets/downloads/cheatsheets/` right now as lightweight text downloads. They are intentionally simple starter assets and can later be upgraded to polished PDFs without changing the storefront pattern.
 6. **Cross-sell pattern:** Finance, workout, and books each link into the shop with one paid-system CTA and one free resource CTA. Keep future cross-sells tightly relevant to the page context.
 
+### How the engagement layer works (for future agents):
+1. **Master data:** `assets/data/engagement.json` now stores quote-of-the-day entries plus the shared newsletter and discussion copy. Most copy tweaks for Phase 11 should start there, not in HTML.
+2. **Quote banner:** `renderQuoteBanner()` in `script.js` injects a shared date-based quote block near the top of `main`. The quote rotates deterministically by local date.
+3. **Newsletter CTA:** `initSharedNewsletter()` injects a shared CTA on non-blog pages and hydrates the existing `.blog-newsletter-cta` blocks on blog posts. Right now it still routes to a contact-page waitlist because the public Substack subscribe URL is not committed yet.
+4. **Discussion flow:** `injectBlogDiscussion()` adds a lightweight "Continue the conversation" block on blog post pages. Instead of a fake comment system, it uses contact-page query prefills so readers can respond directly.
+5. **Helpful buttons:** `initHelpfulFeedback()` appends simple yes/not-yet buttons to guide sections and stores one vote per section in localStorage. This is intentionally private to the browser for now.
+6. **Activity counters:** Tool runs, pages explored, and helpful votes are also browser-local and rendered inside the shared newsletter block. Treat them as an interim engagement layer, not true site-wide social proof, until a real analytics-backed aggregation system exists.
+
 ---
 
-*Last updated: 2026-04-07*
-*Next priority: Phase 11 — Community & Engagement, while continuing to enrich foods.json, products.json, and shop assets over time*
+*Last updated: 2026-04-19*
+*Next priority: Phase 12 — Future Vision, while continuing to enrich foods.json, products.json, shop assets, and the eventual Substack/public community setup over time*
