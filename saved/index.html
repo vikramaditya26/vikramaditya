@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saved & Progress - The Simple Guy</title>
+  <meta name="description" content="Your saved pages, local reading list, points, streak, and badges inside The Simple Guy." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="Saved & Progress - The Simple Guy" />
+  <meta property="og:description" content="A local dashboard for saved pages, reading list items, streaks, and badges." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/saved/" />
+  <link rel="canonical" href="https://vikramaditya.me/saved/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-page="saved">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 12</p>
+      <h1>Saved & Progress</h1>
+      <p class="subtitle">Your local reading list, saved pages, points, streak, and badges in one place.</p>
+    </section>
+
+    <section class="future-layout fade-in">
+      <div class="future-panel">
+        <div class="future-panel-head">
+          <div>
+            <p class="future-kicker">Progress</p>
+            <h2>Your momentum</h2>
+          </div>
+        </div>
+
+        <div class="future-stats-grid">
+          <article class="future-stat-card">
+            <span id="future-points-count">0</span>
+            <small>points</small>
+          </article>
+          <article class="future-stat-card">
+            <span id="future-streak-count">0</span>
+            <small>day streak</small>
+          </article>
+          <article class="future-stat-card">
+            <span id="future-saved-count">0</span>
+            <small>saved items</small>
+          </article>
+          <article class="future-stat-card">
+            <span id="future-tools-count">0</span>
+            <small>tool runs</small>
+          </article>
+        </div>
+
+        <div class="future-progress-copy">
+          <p><strong>How it works:</strong> Points and streaks live in this browser only. They reward reading, saving pages, asking questions, and using tools consistently.</p>
+        </div>
+
+        <div>
+          <h3>Your badges</h3>
+          <div id="future-badges-grid" class="future-badge-grid"></div>
+        </div>
+
+        <div id="pwa-install-slot" class="tip-box">
+          <p><strong>PWA support:</strong> If your browser supports install prompts, you will see a site install card here.</p>
+        </div>
+      </div>
+
+      <div class="future-panel">
+        <div class="future-panel-head">
+          <div>
+            <p class="future-kicker">Reading List</p>
+            <h2>Saved items</h2>
+          </div>
+          <button type="button" id="future-clear-saved" class="filter-btn">Clear all</button>
+        </div>
+
+        <p class="future-meta-copy">Save any page directly, or save books, tools, and recommendations from the Search & Ask page.</p>
+        <div id="future-saved-grid" class="future-results-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

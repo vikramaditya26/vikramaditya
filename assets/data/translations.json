@@ -1,0 +1,156 @@
+{
+  "nav": {
+    "about": "परिचय",
+    "finance": "फाइनेंस",
+    "books": "किताबें",
+    "workout": "वर्कआउट",
+    "kitchen": "किचन",
+    "skincare": "स्किनकेयर",
+    "style": "स्टाइल",
+    "skills": "100 स्किल्स",
+    "movies": "मूवीज़",
+    "shop": "शॉप",
+    "blog": "ब्लॉग",
+    "contact": "संपर्क",
+    "search": "खोज",
+    "saved": "सेव्ड"
+  },
+  "routes": {
+    "/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "नमस्ते, मैं विक्रम आदित्य हूँ 👋"
+      },
+      {
+        "selector": "main > section:nth-of-type(2) h2",
+        "text": "मेरे बारे में"
+      },
+      {
+        "selector": "main > section:nth-of-type(3) h2",
+        "text": "मेरी सोच"
+      },
+      {
+        "selector": "main > section:nth-of-type(4) h2",
+        "text": "यह वेबसाइट क्यों?"
+      },
+      {
+        "selector": "main > section:nth-of-type(5) h2",
+        "text": "एक्सप्लोर करें"
+      },
+      {
+        "selector": "main > section:nth-of-type(6) h2",
+        "text": "मुझसे जुड़ें"
+      }
+    ],
+    "/books/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "📚 किताबों की सिफारिशें"
+      },
+      {
+        "selector": "main > section.hero .subtitle",
+        "text": "वे किताबें और सीखें जिन्होंने मेरी सोच बदली"
+      },
+      {
+        "selector": ".filter-bar .filter-btn:nth-child(1)",
+        "text": "सभी"
+      },
+      {
+        "selector": ".filter-bar .filter-btn:nth-child(2)",
+        "text": "फिलॉसफी"
+      },
+      {
+        "selector": ".filter-bar .filter-btn:nth-child(3)",
+        "text": "आध्यात्म"
+      },
+      {
+        "selector": ".filter-bar .filter-btn:nth-child(4)",
+        "text": "कहानी"
+      }
+    ],
+    "/finance/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "💰 पर्सनल फाइनेंस गाइड"
+      },
+      {
+        "selector": "main > section.hero .subtitle",
+        "text": "धन और आर्थिक स्वतंत्रता बनाने के आसान सिद्धांत"
+      },
+      {
+        "selector": "main > section.recommendation-section:nth-of-type(1) h2",
+        "text": "इसे प्रैक्टिकल बनाने वाले टूल्स"
+      }
+    ],
+    "/workout/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "💪 वर्कआउट गाइड"
+      },
+      {
+        "selector": "main > section.hero .subtitle",
+        "text": "ताकत और मसल बनाने के लिए पुश-पुल-लेग्स स्प्लिट"
+      },
+      {
+        "selector": "#push .workout-day-header h3",
+        "text": "🔥 पुश डे"
+      },
+      {
+        "selector": "#pull .workout-day-header h3",
+        "text": "💪 पुल डे"
+      },
+      {
+        "selector": "#legs .workout-day-header h3",
+        "text": "🦵 लेग डे"
+      }
+    ],
+    "/tools/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "इंटरएक्टिव टूल्स"
+      },
+      {
+        "selector": "main > section.hero .subtitle",
+        "text": "फाइनेंस, फिटनेस, खाना और किताबों के लिए आसान कैलकुलेटर और प्लानर"
+      }
+    ],
+    "/contact/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "📬 संपर्क करें"
+      },
+      {
+        "selector": "main > section.hero .subtitle",
+        "text": "मुझे आपसे सुनकर खुशी होगी"
+      },
+      {
+        "selector": ".contact-section .card h3",
+        "text": "आइए जुड़ते हैं"
+      },
+      {
+        "selector": ".contact-form h3",
+        "text": "मैसेज भेजें"
+      }
+    ],
+    "/search/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "खोजें और पूछें"
+      },
+      {
+        "selector": "main > section.hero .subtitle",
+        "text": "पूरी साइट में खोजें या लोकल साइट असिस्टेंट से सही पेज, टूल या सिफारिश पूछें"
+      }
+    ],
+    "/saved/": [
+      {
+        "selector": "main > section.hero h1",
+        "text": "सेव्ड और प्रोग्रेस"
+      },
+      {
+        "selector": "main > section.hero .subtitle",
+        "text": "आपके सेव्ड पेज, लोकल रीडिंग लिस्ट, पॉइंट्स, स्ट्रीक और बैज एक ही जगह"
+      }
+    ]
+  }
+}

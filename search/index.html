@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search & Ask - The Simple Guy</title>
+  <meta name="description" content="Search the full site and ask a local assistant trained on Vikram's books, guides, tools, blog posts, and recommendations." />
+  <meta property="og:title" content="Search & Ask - The Simple Guy" />
+  <meta property="og:description" content="Search across books, tools, blog posts, movies, shop items, and site guides, or ask the local site assistant what to read or use next." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikramaditya.me/search/" />
+  <link rel="canonical" href="https://vikramaditya.me/search/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/common/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/common/favicon-32x32.png" />
+  <link rel="icon" href="../assets/images/common/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/common/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-page="search">
+  <div id="site-header"></div>
+
+  <main id="main" class="wide">
+    <section class="hero tool-hero">
+      <p class="tool-eyebrow">Phase 12</p>
+      <h1>Search & Ask</h1>
+      <p class="subtitle">Search the full site, then ask the local site assistant what to read, watch, use, or try next.</p>
+    </section>
+
+    <section class="future-layout fade-in">
+      <div class="future-panel">
+        <div class="future-panel-head">
+          <div>
+            <p class="future-kicker">Site Search</p>
+            <h2>Find anything fast</h2>
+          </div>
+        </div>
+
+        <form id="site-search-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Search query</span>
+              <input type="search" id="site-search-input" name="query" placeholder="Try: books for discipline, SIP tool, skincare basics..." autocomplete="off" />
+            </label>
+          </div>
+          <button type="submit" class="btn">Search the site</button>
+        </form>
+
+        <div id="site-search-filter-bar" class="filter-bar" aria-label="Search filters"></div>
+        <p id="site-search-meta" class="future-meta-copy">Search across pages, blog posts, books, tools, shop items, movies, and the live parts of the 100 Skills challenge.</p>
+        <div id="site-search-results" class="future-results-grid"></div>
+      </div>
+
+      <div class="future-panel">
+        <div class="future-panel-head">
+          <div>
+            <p class="future-kicker">Ask The Simple Guy</p>
+            <h2>Local site assistant</h2>
+          </div>
+        </div>
+
+        <p class="future-meta-copy">This assistant is powered by the site content index. It is best at routing you to the right page, tool, book, or recommendation inside this website.</p>
+
+        <form id="site-assistant-form" class="tool-form">
+          <div class="tool-field-grid">
+            <label class="tool-field">
+              <span>Your question</span>
+              <textarea id="site-assistant-input" name="question" rows="4" placeholder="What should I start with if I want to fix my money habits?"></textarea>
+            </label>
+          </div>
+          <button type="submit" class="btn">Ask the site assistant</button>
+        </form>
+
+        <div class="future-prompt-row">
+          <button type="button" class="filter-btn" data-assistant-prompt="I want to build better money habits. Where should I start?">Money basics</button>
+          <button type="button" class="filter-btn" data-assistant-prompt="Recommend a good book if I want more discipline and clarity.">Book pick</button>
+          <button type="button" class="filter-btn" data-assistant-prompt="I want to gain muscle but keep the system simple. What pages should I open first?">Workout plan</button>
+        </div>
+
+        <div id="site-assistant-response" class="future-assistant-card">
+          <p class="future-assistant-placeholder">Ask anything about the content already inside this site, and I will route you to the closest pages and tools.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

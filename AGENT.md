@@ -904,6 +904,14 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 4. Helpful buttons and activity counters are currently browser-local by design. Do not present them as site-wide global numbers unless real analytics-backed aggregation is added
 5. If a public Substack URL is finalized, replace the waitlist/contact CTA with the real subscribe link and update this document to remove the fallback note
 
+### Updating Search, Saved, or Hindi Beta
+1. Add or update static discoverability entries in `assets/data/pages.json`
+2. Search also ingests `books.json`, `blog.json`, `movies.json`, `skills.json`, and `shop.json`, so keep those source files accurate before touching search logic
+3. If a new search result should deep-link to a specific card, give that card a stable `id` in HTML or in the page renderer
+4. Hindi beta copy for key pages lives in `assets/data/translations.json`; keep it scoped and honest instead of pretending the entire site is translated
+5. `/saved/` is intentionally localStorage-driven and user-specific, so it should stay out of the sitemap and out of search-engine indexing
+6. Cloudflare is still an external account-side step; update `CLOUDFLARE_SETUP.md` if the final zone or caching plan changes
+
 ---
 
 ## 13. Changelog <a name="changelog"></a>
@@ -924,6 +932,7 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 | 2026-04-06 | **Phase 9 launched** — Interactive tools suite. Added `/tools/index.html` as a hub plus six new tools: `/tools/sip-calculator/`, `/tools/emi-calculator/`, `/tools/bmi-calculator/`, `/tools/budget-planner/`, `/tools/tax-calculator/`, and `/tools/what-should-i-read-next/`. Extended `script.js` with shared finance/fitness/book helpers, calculator logic, and quiz scoring using `books.json`. Added new tool UI components to `style.css`, linked the suite from homepage/finance/workout/books, and updated `sitemap.xml` with the new tool URLs. The tax tool currently targets a simplified salaried comparison for AY 2026-27 (FY 2025-26), not full filing complexity. | Phase 9 |
 | 2026-04-07 | **Phase 10 launched** — Digital products shop. Added `assets/data/shop.json` as the store source of truth plus `/shop/index.html` as a JSON-driven storefront with stats, filters, launch-note copy, and product cards rendered by `script.js` `initShopPage()`. Created three paid starter products (currently honest request-access CTAs to `/contact/` until real checkout links are finalized) and three free lead-magnet downloads under `assets/downloads/cheatsheets/`. Added `Shop` to the shared nav, a homepage explore card, and contextual shop CTAs on finance/workout/books. Updated `style.css` with shop card UI, added `/shop/` to `sitemap.xml`, and documented the shop workflow in AGENT.md. | Phase 10 |
 | 2026-04-19 | **Phase 11 launched** — Community & engagement foundation. Added `assets/data/engagement.json` as the new source of truth for newsletter/discussion copy and rotating quotes. Extended `script.js` with a shared quote-of-the-day banner, site-wide newsletter CTA injection, blog-post discussion prompts that prefill the contact form, browser-local helpful buttons, browser-local activity counters, contact-form query prefill, and tool-usage tracking hooks. Updated `style.css` with engagement UI components and refreshed `sitemap.xml` dates because the shared JS/CSS now affects the full site. This phase intentionally stays honest: Substack still points to a waitlist/contact flow until the public subscribe URL is committed, and the counters are clearly labeled as browser-local rather than fake global social proof. | Phase 11 |
+| 2026-04-19 | **Phase 12 launched** — Future vision layer. Added `/search/index.html` as a site-wide search plus local "Ask The Simple Guy" assistant surface, and `/saved/index.html` as a local reading-list/progress dashboard. Added `assets/data/pages.json` and `assets/data/translations.json`, extended `script.js` with a site index builder, bookmark/save-for-later flow, points/streaks/badges, PWA manifest injection, service-worker registration, install-prompt handling, a Hindi beta toggle for key pages, and current-page save buttons. Added `manifest.webmanifest`, `service-worker.js`, `offline.html`, homepage discovery cards, and `CLOUDFLARE_SETUP.md` as the external infra handoff. This phase is complete on the repo side; actual Cloudflare activation still happens in the Cloudflare account, not in git. | Phase 12 |
 
 ### How the affiliate system works (for future agents):
 1. **Data source:** `assets/data/affiliate-links.json` — all affiliate URLs live here. Currently all `"#"` (placeholder). When Vikram gets Amazon Associates tag, update this ONE file.
@@ -1011,7 +1020,16 @@ Style: Small, clean buttons below content. NEVER pop-ups, NEVER interrupting rea
 5. **Helpful buttons:** `initHelpfulFeedback()` appends simple yes/not-yet buttons to guide sections and stores one vote per section in localStorage. This is intentionally private to the browser for now.
 6. **Activity counters:** Tool runs, pages explored, and helpful votes are also browser-local and rendered inside the shared newsletter block. Treat them as an interim engagement layer, not true site-wide social proof, until a real analytics-backed aggregation system exists.
 
+### How the future vision layer works (for future agents):
+1. **Search index:** `/search/` does not rely on one giant hardcoded blob. `buildSiteIndex()` in `script.js` merges `assets/data/pages.json` with existing content JSON files (`books.json`, `blog.json`, `movies.json`, `skills.json`, `shop.json`).
+2. **Search + assistant:** The search form and the local assistant live on `/search/index.html`. The assistant is intentionally retrieval-style: it routes people to the closest pages, tools, books, and recommendations already inside the site rather than pretending to be a general AI model.
+3. **Saved & progress:** `/saved/index.html` is powered entirely by localStorage through the `simpleGuyFutureVision` key. Saved items, points, streaks, tool runs, and badges are browser-local by design.
+4. **Current-page save flow:** Most pages now get an injected "Save this page" button automatically. Search result cards can also save more granular items like books, tools, movies, or shop products.
+5. **PWA support:** `manifest.webmanifest`, `service-worker.js`, and `offline.html` now exist in the repo. `script.js` injects the manifest link/theme-color if missing, registers the service worker, and shows an install prompt when supported.
+6. **Hindi beta:** The language toggle is intentionally scoped. Navigation labels plus key hero/heading copy for the main routes are driven by `assets/data/translations.json`. Long-form body copy is still primarily English unless explicitly translated later.
+7. **Cloudflare handoff:** `CLOUDFLARE_SETUP.md` captures the repo-side readiness and the recommended account-side setup. Do not claim Cloudflare is "live" unless the actual DNS/proxy step has been completed outside the repo.
+
 ---
 
 *Last updated: 2026-04-19*
-*Next priority: Phase 12 — Future Vision, while continuing to enrich foods.json, products.json, shop assets, and the eventual Substack/public community setup over time*
+*Next priority: Roadmap complete. Continue with content expansion, real Substack launch, Cloudflare activation, and higher-fidelity Hindi/chatbot depth as follow-up improvements.*

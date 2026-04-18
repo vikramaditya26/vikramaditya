@@ -1,0 +1,211 @@
+{
+  "pages": [
+    {
+      "id": "about-home",
+      "title": "About Vikram Aditya",
+      "type": "page",
+      "section": "about",
+      "url": "/",
+      "description": "The homepage introduction to Vikram Aditya, his philosophy, values, and why The Simple Guy exists.",
+      "tags": ["about", "vikram", "philosophy", "iit bombay", "founders office", "self improvement"]
+    },
+    {
+      "id": "finance-guide",
+      "title": "Personal Finance Guide",
+      "type": "page",
+      "section": "finance",
+      "url": "/finance/",
+      "description": "Beginner-friendly finance basics covering money, budgeting, debt, compounding, investing, tax saving, and insurance.",
+      "tags": ["finance", "money", "budgeting", "investing", "tax", "insurance", "wealth", "india"]
+    },
+    {
+      "id": "books-guide",
+      "title": "Book Reviews",
+      "type": "page",
+      "section": "books",
+      "url": "/books/",
+      "description": "Curated book reviews and lessons from philosophy, spirituality, fiction, investing, business, and self-help.",
+      "tags": ["books", "reading", "reviews", "philosophy", "fiction", "business", "spirituality", "self-help"]
+    },
+    {
+      "id": "workout-guide",
+      "title": "Workout Guide",
+      "type": "page",
+      "section": "workout",
+      "url": "/workout/",
+      "description": "Push-pull-legs training notes, nutrition basics, supplements, and practical fitness tools.",
+      "tags": ["workout", "fitness", "gym", "push pull legs", "muscle gain", "nutrition"]
+    },
+    {
+      "id": "kitchen-guide",
+      "title": "Bachelor's Kitchen",
+      "type": "page",
+      "section": "kitchen",
+      "url": "/kitchen/",
+      "description": "Simple Indian meals, bachelor cooking systems, recipe ideas, and low-friction food setups.",
+      "tags": ["kitchen", "cooking", "recipes", "bachelor food", "indian meals", "diet"]
+    },
+    {
+      "id": "skincare-guide",
+      "title": "Skincare Guide",
+      "type": "page",
+      "section": "skincare",
+      "url": "/skincare/",
+      "description": "Men's skincare basics with routines, product picks, and a simple skin-type helper.",
+      "tags": ["skincare", "grooming", "men", "routine", "face wash", "sunscreen"]
+    },
+    {
+      "id": "style-guide",
+      "title": "Style Guide",
+      "type": "page",
+      "section": "style",
+      "url": "/style/",
+      "description": "Capsule wardrobe essentials, outfit formulas, fit advice, and budget style notes for Indian men.",
+      "tags": ["style", "fashion", "wardrobe", "menswear", "outfits", "capsule wardrobe"]
+    },
+    {
+      "id": "skills-hub",
+      "title": "100 Skills Challenge",
+      "type": "page",
+      "section": "skills",
+      "url": "/100-skills/",
+      "description": "The hub for Vikram's 100 Skills challenge with scaffolded skill days and roadmap tracking.",
+      "tags": ["100 skills", "challenge", "learning", "creative", "physical", "mental"]
+    },
+    {
+      "id": "movies-guide",
+      "title": "Movies & Series",
+      "type": "page",
+      "section": "movies",
+      "url": "/movies/",
+      "description": "A curated watchlist with ratings, mood tags, platforms, and featured picks.",
+      "tags": ["movies", "series", "watchlist", "recommendations", "platforms", "shows"]
+    },
+    {
+      "id": "shop-home",
+      "title": "Digital Products Shop",
+      "type": "page",
+      "section": "shop",
+      "url": "/shop/",
+      "description": "Templates, cheat sheets, and starter systems for finance, reading, and fitness.",
+      "tags": ["shop", "templates", "notion", "downloads", "cheat sheets", "digital products"]
+    },
+    {
+      "id": "blog-home",
+      "title": "Blog",
+      "type": "page",
+      "section": "blog",
+      "url": "/blog/",
+      "description": "Essays and notes on wisdom, startups, psychology, science, and life.",
+      "tags": ["blog", "essays", "wisdom", "psychology", "science", "startups", "life"]
+    },
+    {
+      "id": "tools-home",
+      "title": "Interactive Tools",
+      "type": "page",
+      "section": "tools",
+      "url": "/tools/",
+      "description": "The full tools hub with calculators and planners for finance, fitness, nutrition, and books.",
+      "tags": ["tools", "calculators", "planners", "finance tools", "fitness tools", "books quiz"]
+    },
+    {
+      "id": "contact-home",
+      "title": "Contact",
+      "type": "page",
+      "section": "contact",
+      "url": "/contact/",
+      "description": "Contact Vikram via LinkedIn, Instagram, email, or the message form.",
+      "tags": ["contact", "email", "linkedin", "instagram", "connect"]
+    },
+    {
+      "id": "search-home",
+      "title": "Search & Ask",
+      "type": "page",
+      "section": "future",
+      "url": "/search/",
+      "description": "Search across the site and ask the local site assistant for the best next page, tool, or recommendation.",
+      "tags": ["search", "ask", "assistant", "find", "discover", "site search"]
+    },
+    {
+      "id": "saved-home",
+      "title": "Saved & Progress",
+      "type": "page",
+      "section": "future",
+      "url": "/saved/",
+      "description": "A local reading list and progress dashboard for saved pages, points, streaks, and badges.",
+      "tags": ["saved", "bookmarks", "progress", "streak", "badges", "reading list"]
+    },
+    {
+      "id": "tool-sip",
+      "title": "SIP Calculator",
+      "type": "tool",
+      "section": "finance",
+      "url": "/tools/sip-calculator/",
+      "description": "Estimate what monthly mutual fund investing can become over time with optional step-up.",
+      "tags": ["sip", "mutual funds", "investment", "calculator", "compounding"]
+    },
+    {
+      "id": "tool-emi",
+      "title": "EMI Calculator",
+      "type": "tool",
+      "section": "finance",
+      "url": "/tools/emi-calculator/",
+      "description": "Estimate loan EMI, interest cost, and monthly affordability.",
+      "tags": ["emi", "loan", "interest", "calculator", "debt"]
+    },
+    {
+      "id": "tool-bmi",
+      "title": "BMI + TDEE Calculator",
+      "type": "tool",
+      "section": "workout",
+      "url": "/tools/bmi-calculator/",
+      "description": "Check BMI, BMR, maintenance calories, and cut or lean-gain targets.",
+      "tags": ["bmi", "tdee", "fitness", "calories", "calculator"]
+    },
+    {
+      "id": "tool-budget",
+      "title": "Budget Planner",
+      "type": "tool",
+      "section": "finance",
+      "url": "/tools/budget-planner/",
+      "description": "Compare monthly spending against the 50/30/20 framework.",
+      "tags": ["budget", "expenses", "money", "planner", "50/30/20"]
+    },
+    {
+      "id": "tool-tax",
+      "title": "Tax Calculator",
+      "type": "tool",
+      "section": "finance",
+      "url": "/tools/tax-calculator/",
+      "description": "Compare a simplified old versus new tax regime estimate for a salaried person.",
+      "tags": ["tax", "old regime", "new regime", "salary", "calculator"]
+    },
+    {
+      "id": "tool-diet",
+      "title": "Diet Planner",
+      "type": "tool",
+      "section": "kitchen",
+      "url": "/tools/diet-planner/",
+      "description": "Generate a practical Indian meal plan based on stats, goal, budget, and kitchen setup.",
+      "tags": ["diet", "meal plan", "nutrition", "indian food", "planner"]
+    },
+    {
+      "id": "tool-macro",
+      "title": "Macro Calculator",
+      "type": "tool",
+      "section": "kitchen",
+      "url": "/tools/macro-calculator/",
+      "description": "Get a simple protein, carbs, and fats split based on your goal and stats.",
+      "tags": ["macros", "protein", "carbs", "fat", "nutrition"]
+    },
+    {
+      "id": "tool-read-next",
+      "title": "What Should I Read Next?",
+      "type": "tool",
+      "section": "books",
+      "url": "/tools/what-should-i-read-next/",
+      "description": "A quiz that suggests your next book from Vikram's current shelf.",
+      "tags": ["books quiz", "reading", "recommendation", "next book"]
+    }
+  ]
+}

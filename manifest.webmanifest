@@ -1,0 +1,27 @@
+{
+  "name": "The Simple Guy",
+  "short_name": "Simple Guy",
+  "description": "Books, finance, fitness, tools, and thoughtful notes by Vikram Aditya.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf9f7",
+  "theme_color": "#387ed1",
+  "icons": [
+    {
+      "src": "/assets/images/common/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/common/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/common/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

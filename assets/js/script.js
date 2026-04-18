@@ -43,7 +43,18 @@ function renderHeader(currentPage) {
 
   const navLinks = navItems.map(item => {
     const aria = item.key === currentPage ? ' aria-current="page"' : '';
-    return `<a href="${base}${item.href}"${aria}>${item.label}</a>`;
+    return `<a href="${base}${item.href}" data-nav-key="${item.key}"${aria}>${item.label}</a>`;
+  }).join('\n        ');
+
+  const actionItems = [
+    { href: 'search/', label: 'Search', key: 'search' },
+    { href: 'saved/', label: 'Saved', key: 'saved' }
+  ];
+
+  const actionLinks = actionItems.map(item => {
+    const activeClass = item.key === currentPage ? ' is-active' : '';
+    const aria = item.key === currentPage ? ' aria-current="page"' : '';
+    return `<a href="${base}${item.href}" class="header-action-btn${activeClass}" data-nav-key="${item.key}"${aria}>${item.label}</a>`;
   }).join('\n        ');
 
   return `
@@ -52,26 +63,30 @@ function renderHeader(currentPage) {
   <header>
     <div class="header-inner">
       <a href="${base}index.html" class="site-title">The Simple <span>Guy</span></a>
-      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <nav>
         ${navLinks}
       </nav>
-      <button class="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
+      <div class="header-actions">
+        ${actionLinks}
+        <button class="lang-toggle" type="button" aria-label="Toggle Hindi language">हिं</button>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </header>`;
 }
@@ -103,6 +118,7 @@ function injectComponents() {
 
 // Inject components immediately
 injectComponents();
+injectPwaMetadata();
 
 // ===== Microsoft Clarity Analytics =====
 // To activate: replace 'CLARITY_PROJECT_ID' with your actual Clarity project ID
@@ -349,6 +365,7 @@ function resolveInternalPath(path) {
 
 function resolveLinkPath(path) {
   if (!path) return '#';
+  if (path.charAt(0) === '/') return path;
   if (/^(https?:|mailto:)/i.test(path)) return path;
   return getBasePath() + path;
 }
@@ -596,7 +613,7 @@ function renderBlogCard(post) {
 
   function renderProduct(product) {
     return `
-      <article class="shop-card${product.featured ? ' is-featured' : ''}">
+      <article class="shop-card${product.featured ? ' is-featured' : ''}" id="shop-${product.id}">
         <div class="shop-card-top">
           <div>
             <p class="shop-card-kicker">${escapeHtml(product.format)}</p>
@@ -662,6 +679,7 @@ function renderBlogCard(post) {
     }
 
     shopGrid.innerHTML = filtered.map(renderProduct).join('');
+    scrollToCurrentHashTarget();
   }
 
   loadShopData()
@@ -729,7 +747,7 @@ function renderBlogCard(post) {
     ` : '';
 
     return `
-      <article class="movie-card">
+      <article class="movie-card" id="movie-${item.id}">
         <div class="movie-poster movie-poster--${item.posterTone}">
           <span class="movie-type-label">${item.type === 'series' ? 'Series' : 'Movie'}</span>
           <strong>${item.title}</strong>
@@ -810,6 +828,7 @@ function renderBlogCard(post) {
     moviesGrid.innerHTML = filtered.map(renderMovieCard).join('');
     setDefaultBuyButtonLabels(moviesGrid);
     loadAffiliateLinks(moviesGrid);
+    scrollToCurrentHashTarget();
   }
 
   function handleGenreChange(items, nextGenre) {
@@ -935,6 +954,8 @@ let productsDataCache = null;
 let booksDataCache = null;
 let shopDataCache = null;
 let engagementDataCache = null;
+let pagesDataCache = null;
+let translationsDataCache = null;
 
 function loadProductsData() {
   if (productsDataCache) {
@@ -984,6 +1005,32 @@ function loadEngagementData() {
     .then(function(response) { return response.json(); })
     .then(function(data) {
       engagementDataCache = data;
+      return data;
+    });
+}
+
+function loadPagesData() {
+  if (pagesDataCache) {
+    return Promise.resolve(pagesDataCache);
+  }
+
+  return fetch(getBasePath() + 'assets/data/pages.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      pagesDataCache = data;
+      return data;
+    });
+}
+
+function loadTranslationsData() {
+  if (translationsDataCache) {
+    return Promise.resolve(translationsDataCache);
+  }
+
+  return fetch(getBasePath() + 'assets/data/translations.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      translationsDataCache = data;
       return data;
     });
 }
@@ -1040,6 +1087,7 @@ function trackPageVisit() {
 }
 
 function trackToolUsage(toolKey) {
+  trackFutureVisionTool(toolKey);
   return updateEngagementState(function(state) {
     state.toolRuns += 1;
     state.tools[toolKey] = (state.tools[toolKey] || 0) + 1;
@@ -1301,6 +1349,767 @@ function initHelpfulFeedback() {
 
     target.appendChild(wrapper);
   });
+}
+
+// ===== Phase 12 Future Vision =====
+var FUTURE_VISION_STORAGE_KEY = 'simpleGuyFutureVision';
+var deferredInstallPrompt = null;
+var siteIndexCache = null;
+
+function normalizeRoute(path) {
+  if (!path || path === '/index.html') return '/';
+  var normalized = path.replace(/index\.html$/, '');
+  if (!normalized.startsWith('/')) normalized = '/' + normalized;
+  if (!normalized.endsWith('/')) normalized += '/';
+  return normalized.replace(/\/{2,}/g, '/');
+}
+
+function getTodayKey() {
+  var now = new Date();
+  return [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join('-');
+}
+
+function getYesterdayKey() {
+  var now = new Date();
+  now.setDate(now.getDate() - 1);
+  return [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join('-');
+}
+
+function getFutureVisionState() {
+  var stored = readLocalJson(FUTURE_VISION_STORAGE_KEY, {});
+  return {
+    points: Number(stored.points) || 0,
+    streak: Number(stored.streak) || 0,
+    lastActiveDate: stored.lastActiveDate || '',
+    pageVisits: Number(stored.pageVisits) || 0,
+    toolRuns: Number(stored.toolRuns) || 0,
+    assistantQuestions: Number(stored.assistantQuestions) || 0,
+    savedItems: Array.isArray(stored.savedItems) ? stored.savedItems : []
+  };
+}
+
+function saveFutureVisionState(state) {
+  writeLocalJson(FUTURE_VISION_STORAGE_KEY, state);
+}
+
+function updateFutureVisionState(mutator) {
+  var state = getFutureVisionState();
+  mutator(state);
+  saveFutureVisionState(state);
+  return state;
+}
+
+function trackFutureVisionVisit() {
+  return updateFutureVisionState(function(state) {
+    var today = getTodayKey();
+    var yesterday = getYesterdayKey();
+    state.pageVisits += 1;
+    state.points += 1;
+
+    if (state.lastActiveDate !== today) {
+      state.streak = state.lastActiveDate === yesterday ? state.streak + 1 : 1;
+      state.lastActiveDate = today;
+      state.points += 2;
+    }
+  });
+}
+
+function trackFutureVisionTool() {
+  return updateFutureVisionState(function(state) {
+    state.toolRuns += 1;
+    state.points += 5;
+  });
+}
+
+function trackFutureVisionAssistantQuestion() {
+  return updateFutureVisionState(function(state) {
+    state.assistantQuestions += 1;
+    state.points += 3;
+  });
+}
+
+function buildSavedItemKey(item) {
+  return item.id || slugifyText([item.type, item.title, item.url].join('-'));
+}
+
+function isItemSaved(item) {
+  var itemKey = buildSavedItemKey(item);
+  return getFutureVisionState().savedItems.some(function(savedItem) {
+    return buildSavedItemKey(savedItem) === itemKey;
+  });
+}
+
+function toggleSavedItem(item) {
+  return updateFutureVisionState(function(state) {
+    var itemKey = buildSavedItemKey(item);
+    var existingIndex = state.savedItems.findIndex(function(savedItem) {
+      return buildSavedItemKey(savedItem) === itemKey;
+    });
+
+    if (existingIndex >= 0) {
+      state.savedItems.splice(existingIndex, 1);
+      return;
+    }
+
+    state.savedItems.unshift({
+      id: item.id || itemKey,
+      title: item.title,
+      url: item.url,
+      type: item.type || 'page',
+      section: item.section || 'site',
+      description: item.description || '',
+      savedAt: new Date().toISOString()
+    });
+    state.points += 4;
+  });
+}
+
+function clearSavedItems() {
+  return updateFutureVisionState(function(state) {
+    state.savedItems = [];
+  });
+}
+
+function buildFutureVisionBadges(state) {
+  var badges = [];
+  if (state.pageVisits >= 10) badges.push({ id: 'explorer', label: 'Explorer', note: 'Opened 10+ pages' });
+  if (state.toolRuns >= 5) badges.push({ id: 'builder', label: 'Builder', note: 'Used 5+ tools' });
+  if (state.savedItems.length >= 5) badges.push({ id: 'curator', label: 'Curator', note: 'Saved 5+ items' });
+  if (state.assistantQuestions >= 3) badges.push({ id: 'seeker', label: 'Seeker', note: 'Asked 3+ site questions' });
+  if (state.streak >= 3) badges.push({ id: 'streak-3', label: '3-Day Streak', note: 'Returned 3 days in a row' });
+  if (state.streak >= 7) badges.push({ id: 'streak-7', label: '7-Day Streak', note: 'Held a 7-day streak' });
+  return badges;
+}
+
+function serializeSaveItem(item) {
+  return encodeURIComponent(JSON.stringify(item));
+}
+
+function deserializeSaveItem(value) {
+  try {
+    return JSON.parse(decodeURIComponent(value));
+  } catch (error) {
+    return null;
+  }
+}
+
+function buildSaveButtonMarkup(item, label) {
+  var buttonLabel = label || (isItemSaved(item) ? 'Saved' : 'Save');
+  return '<button type="button" class="future-save-btn" data-save-item="' + serializeSaveItem(item) + '">' + escapeHtml(buttonLabel) + '</button>';
+}
+
+function syncSaveButtons(scope) {
+  var root = scope || document;
+  root.querySelectorAll('[data-save-item]').forEach(function(button) {
+    var item = deserializeSaveItem(button.getAttribute('data-save-item'));
+    if (!item) return;
+    var saved = isItemSaved(item);
+    button.classList.toggle('is-saved', saved);
+    button.textContent = saved ? 'Saved' : (button.getAttribute('data-save-label') || 'Save');
+  });
+}
+
+function bindSaveButtons(scope) {
+  var root = scope || document;
+  root.querySelectorAll('[data-save-item]').forEach(function(button) {
+    if (button.dataset.saveBound === 'true') return;
+    button.dataset.saveBound = 'true';
+
+    button.addEventListener('click', function() {
+      var item = deserializeSaveItem(button.getAttribute('data-save-item'));
+      if (!item) return;
+      toggleSavedItem(item);
+      syncSaveButtons(document);
+
+      var savedGrid = document.getElementById('future-saved-grid');
+      if (savedGrid) {
+        renderSavedPage();
+      }
+    });
+  });
+}
+
+function buildCurrentPageSaveItem() {
+  var route = normalizeRoute(window.location.pathname);
+  if (route === '/saved/' || route === '/offline/' || route === '/offline.html/' || route === '/search/') {
+    return null;
+  }
+
+  var titleNode = document.querySelector('main h1');
+  var descriptionNode = document.querySelector('meta[name="description"]');
+  return {
+    id: 'page-' + slugifyText(route),
+    title: titleNode ? titleNode.textContent.trim() : document.title.replace(/\s*-\s*The Simple Guy$/, ''),
+    url: route,
+    type: 'page',
+    section: document.body.getAttribute('data-page') || 'site',
+    description: descriptionNode ? descriptionNode.getAttribute('content') : ''
+  };
+}
+
+function injectCurrentPageSaveButton() {
+  var item = buildCurrentPageSaveItem();
+  if (!item) return;
+
+  var target = document.querySelector('.blog-post-hero') || document.querySelector('main > section.hero');
+  if (!target || target.querySelector('.page-save-row')) return;
+
+  var row = document.createElement('div');
+  row.className = 'page-save-row';
+  row.innerHTML = buildSaveButtonMarkup(item, 'Save this page');
+  var button = row.querySelector('[data-save-item]');
+  if (button) button.setAttribute('data-save-label', 'Save this page');
+  target.appendChild(row);
+  bindSaveButtons(row);
+  syncSaveButtons(row);
+}
+
+function annotateBookCards() {
+  document.querySelectorAll('.book-card').forEach(function(card) {
+    var title = card.querySelector('h3');
+    if (!title) return;
+    card.id = 'book-' + slugifyText(title.textContent.trim());
+  });
+}
+
+function tokenizeQuery(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]+/g, ' ')
+    .split(/\s+/)
+    .filter(function(token) { return token.length > 1; });
+}
+
+function scoreSiteIndexItem(item, tokens, filter) {
+  if (filter && filter !== 'all' && item.type !== filter && item.section !== filter) {
+    return 0;
+  }
+
+  var haystack = [
+    item.title,
+    item.description,
+    (item.tags || []).join(' '),
+    item.type,
+    item.section
+  ].join(' ').toLowerCase();
+  var title = String(item.title || '').toLowerCase();
+  var score = 0;
+
+  tokens.forEach(function(token) {
+    if (title.indexOf(token) !== -1) score += 5;
+    if (haystack.indexOf(token) !== -1) score += 2;
+    if ((item.tags || []).some(function(tag) { return String(tag).toLowerCase().indexOf(token) !== -1; })) score += 3;
+    if (String(item.section || '').toLowerCase() === token) score += 4;
+    if (String(item.type || '').toLowerCase() === token) score += 3;
+  });
+
+  return score;
+}
+
+function buildSiteIndex() {
+  if (siteIndexCache) {
+    return Promise.resolve(siteIndexCache);
+  }
+
+  return Promise.all([
+    loadPagesData(),
+    loadBooksData(),
+    loadBlogData(),
+    fetch(getBasePath() + 'assets/data/movies.json').then(function(response) { return response.json(); }),
+    fetch(getBasePath() + 'assets/data/skills.json').then(function(response) { return response.json(); }),
+    loadShopData()
+  ]).then(function(payload) {
+    var pagesPayload = payload[0] || {};
+    var books = payload[1] || [];
+    var blogPayload = payload[2] || {};
+    var moviesPayload = payload[3] || {};
+    var skillsPayload = payload[4] || {};
+    var shopPayload = payload[5] || {};
+    var items = [];
+
+    (pagesPayload.pages || []).forEach(function(page) {
+      items.push(page);
+    });
+
+    books.forEach(function(book) {
+      items.push({
+        id: 'book-' + book.id,
+        title: book.title,
+        type: 'book',
+        section: 'books',
+        url: '/books/#book-' + slugifyText(book.title),
+        description: book.oneLineHook + ' By ' + book.author + '.',
+        tags: (book.category || []).concat([book.author, 'book'])
+      });
+    });
+
+    (blogPayload.posts || []).forEach(function(post) {
+      items.push({
+        id: 'blog-' + post.slug,
+        title: post.title,
+        type: 'blog',
+        section: 'blog',
+        url: '/blog/' + post.slug + '/',
+        description: post.excerpt || post.description,
+        tags: [post.category, 'blog', 'essay', String(post.readingMinutes) + ' min']
+      });
+    });
+
+    (moviesPayload.items || []).forEach(function(item) {
+      items.push({
+        id: 'movie-' + item.id,
+        title: item.title,
+        type: item.type === 'series' ? 'series' : 'movie',
+        section: 'movies',
+        url: '/movies/#movie-' + item.id,
+        description: item.whyRecommend,
+        tags: (item.genres || []).concat(item.moodTags || [])
+      });
+    });
+
+    (skillsPayload.skills || []).filter(function(skill) {
+      return skill.status === 'scaffolded';
+    }).forEach(function(skill) {
+      items.push({
+        id: 'skill-' + skill.day,
+        title: 'Day ' + String(skill.day).padStart(3, '0') + ' — ' + skill.title,
+        type: 'skill',
+        section: 'skills',
+        url: '/100-skills/' + skill.path,
+        description: skill.summary,
+        tags: [skill.category, skill.difficulty, '100 skills']
+      });
+    });
+
+    (shopPayload.products || []).forEach(function(product) {
+      items.push({
+        id: 'shop-' + product.id,
+        title: product.title,
+        type: product.access === 'free' ? 'download' : 'product',
+        section: 'shop',
+        url: '/shop/#shop-' + product.id,
+        description: product.description,
+        tags: [product.category, product.format, product.access]
+      });
+    });
+
+    siteIndexCache = items;
+    return items;
+  });
+}
+
+function renderFutureResultCard(item) {
+  return `
+    <article class="future-result-card">
+      <div class="future-result-top">
+        <div>
+          <p class="future-kicker">${escapeHtml(formatBlogCategory(item.section || item.type))}</p>
+          <h3>${escapeHtml(item.title)}</h3>
+        </div>
+        <span class="future-result-pill">${escapeHtml(formatBlogCategory(item.type))}</span>
+      </div>
+      <p>${escapeHtml(item.description || '')}</p>
+      <p class="future-result-tags">${escapeHtml((item.tags || []).slice(0, 5).join(' • '))}</p>
+      <div class="future-result-actions">
+        <a href="${resolveLinkPath(item.url)}" class="btn">Open</a>
+        ${buildSaveButtonMarkup(item, 'Save')}
+      </div>
+    </article>
+  `;
+}
+
+function searchSiteIndex(query, items, filter) {
+  var tokens = tokenizeQuery(query);
+  if (!tokens.length) {
+    return items.filter(function(item) {
+      return filter === 'all' || item.type === filter || item.section === filter;
+    }).slice(0, 12);
+  }
+
+  return items
+    .map(function(item) {
+      return {
+        item: item,
+        score: scoreSiteIndexItem(item, tokens, filter)
+      };
+    })
+    .filter(function(result) { return result.score > 0; })
+    .sort(function(a, b) { return b.score - a.score; })
+    .map(function(result) { return result.item; })
+    .slice(0, 12);
+}
+
+function renderSearchResults(results, container) {
+  if (!container) return;
+  if (!results.length) {
+    container.innerHTML = '<p class="movies-empty">No results yet. Try a broader query or switch sections.</p>';
+    return;
+  }
+
+  container.innerHTML = results.map(renderFutureResultCard).join('');
+  bindSaveButtons(container);
+  syncSaveButtons(container);
+}
+
+function buildAssistantLead(query, results) {
+  var q = String(query || '').toLowerCase();
+  if (q.indexOf('money') !== -1 || q.indexOf('finance') !== -1 || q.indexOf('sip') !== -1 || q.indexOf('tax') !== -1) {
+    return 'If money is the focus, start with the finance guide for principles, then use the budget, SIP, or tax tools for your own numbers.';
+  }
+  if (q.indexOf('book') !== -1 || q.indexOf('read') !== -1 || q.indexOf('discipline') !== -1 || q.indexOf('philosophy') !== -1) {
+    return 'If reading is the goal, begin with the books section, then use the quiz or one of the highlighted titles below to narrow the next step.';
+  }
+  if (q.indexOf('workout') !== -1 || q.indexOf('muscle') !== -1 || q.indexOf('protein') !== -1 || q.indexOf('diet') !== -1 || q.indexOf('fitness') !== -1) {
+    return 'If fitness is the focus, open the workout guide first, then move into BMI, macros, or the diet planner depending on whether you need training, targets, or food structure.';
+  }
+  if (q.indexOf('skin') !== -1 || q.indexOf('style') !== -1 || q.indexOf('groom') !== -1) {
+    return 'If your goal is looking sharper, the skincare and style guides are the cleanest starting point, with products and outfit systems layered in afterwards.';
+  }
+  if (q.indexOf('movie') !== -1 || q.indexOf('watch') !== -1 || q.indexOf('series') !== -1) {
+    return 'If you want something to watch, the movie section is already filtered by mood and platform, so start there and then save the titles that fit your current mood.';
+  }
+  if (q.indexOf('start') !== -1 || q.indexOf('begin') !== -1) {
+    return 'If you are not sure where to begin, start with one clear area instead of ten. Pick the closest page below, spend 15 focused minutes there, and only then branch out.';
+  }
+  if (results.length) {
+    return 'These are the closest matches I found inside the current site content. Open the strongest one first, then branch to the backups if needed.';
+  }
+  return 'I could not find a strong exact match, so I would start with the closest relevant section and then refine from there.';
+}
+
+function renderAssistantAnswer(query, results, container) {
+  if (!container) return;
+
+  if (!results.length) {
+    container.innerHTML = '<p class="future-assistant-placeholder">I could not find a strong match yet. Try a clearer topic like finance basics, best books for discipline, skincare routine, or muscle gain.</p>';
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="future-assistant-answer">
+      <p class="future-kicker">Answer</p>
+      <p class="future-assistant-lead">${escapeHtml(buildAssistantLead(query, results))}</p>
+      <div class="future-assistant-list">
+        ${results.slice(0, 3).map(function(item) {
+          return `
+            <article class="future-assistant-match">
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.description || '')}</p>
+              <div class="future-result-actions">
+                <a href="${resolveLinkPath(item.url)}" class="btn">Open this</a>
+                ${buildSaveButtonMarkup(item, 'Save')}
+              </div>
+            </article>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `;
+
+  bindSaveButtons(container);
+  syncSaveButtons(container);
+}
+
+function initSearchPage() {
+  var searchResults = document.getElementById('site-search-results');
+  if (!searchResults) return;
+
+  var searchForm = document.getElementById('site-search-form');
+  var searchInput = document.getElementById('site-search-input');
+  var filterBar = document.getElementById('site-search-filter-bar');
+  var meta = document.getElementById('site-search-meta');
+  var assistantForm = document.getElementById('site-assistant-form');
+  var assistantInput = document.getElementById('site-assistant-input');
+  var assistantResponse = document.getElementById('site-assistant-response');
+  var activeFilter = 'all';
+  var indexItems = [];
+
+  function renderFilters() {
+    var filters = [
+      { value: 'all', label: 'All' },
+      { value: 'page', label: 'Pages' },
+      { value: 'tool', label: 'Tools' },
+      { value: 'blog', label: 'Blog' },
+      { value: 'books', label: 'Books' },
+      { value: 'movies', label: 'Movies' },
+      { value: 'shop', label: 'Shop' },
+      { value: 'skills', label: 'Skills' }
+    ];
+
+    filterBar.innerHTML = filters.map(function(filter) {
+      var activeClass = filter.value === activeFilter ? ' active' : '';
+      return '<button type="button" class="filter-btn' + activeClass + '" data-search-filter="' + filter.value + '">' + filter.label + '</button>';
+    }).join('');
+
+    filterBar.querySelectorAll('[data-search-filter]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        activeFilter = button.getAttribute('data-search-filter') || 'all';
+        runSearch();
+      });
+    });
+  }
+
+  function runSearch() {
+    var query = searchInput ? searchInput.value.trim() : '';
+    var results = searchSiteIndex(query, indexItems, activeFilter);
+    if (meta) {
+      meta.textContent = results.length
+        ? results.length + ' result' + (results.length === 1 ? '' : 's') + ' for ' + (query ? '"' + query + '"' : 'the current filter')
+        : 'No strong matches yet. Try another keyword like budgeting, discipline, skincare, or movies for motivation.';
+    }
+    renderFilters();
+    renderSearchResults(results, searchResults);
+
+    if (query) {
+      var nextUrl = new URL(window.location.href);
+      nextUrl.searchParams.set('q', query);
+      window.history.replaceState({}, '', nextUrl.toString());
+    } else {
+      var cleanUrl = new URL(window.location.href);
+      cleanUrl.searchParams.delete('q');
+      window.history.replaceState({}, '', cleanUrl.toString());
+    }
+  }
+
+  buildSiteIndex().then(function(items) {
+    indexItems = items;
+    var params = new URLSearchParams(window.location.search);
+    if (searchInput && params.get('q')) {
+      searchInput.value = params.get('q');
+    }
+    renderFilters();
+    runSearch();
+  });
+
+  if (searchForm) {
+    searchForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      runSearch();
+    });
+  }
+
+  document.querySelectorAll('[data-assistant-prompt]').forEach(function(button) {
+    button.addEventListener('click', function() {
+      if (assistantInput) assistantInput.value = button.getAttribute('data-assistant-prompt') || '';
+      if (assistantForm) assistantForm.requestSubmit();
+    });
+  });
+
+  if (assistantForm) {
+    assistantForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      var query = assistantInput ? assistantInput.value.trim() : '';
+      if (!query) return;
+
+      buildSiteIndex().then(function(items) {
+        trackFutureVisionAssistantQuestion();
+        var ranked = searchSiteIndex(query, items, 'all');
+        renderAssistantAnswer(query, ranked, assistantResponse);
+        syncSaveButtons(document);
+      });
+    });
+  }
+}
+
+function renderSavedPage() {
+  var savedGrid = document.getElementById('future-saved-grid');
+  if (!savedGrid) return;
+
+  var state = getFutureVisionState();
+  var badges = buildFutureVisionBadges(state);
+
+  var pointsEl = document.getElementById('future-points-count');
+  var streakEl = document.getElementById('future-streak-count');
+  var savedCountEl = document.getElementById('future-saved-count');
+  var toolsCountEl = document.getElementById('future-tools-count');
+  var badgeGrid = document.getElementById('future-badges-grid');
+  var clearButton = document.getElementById('future-clear-saved');
+
+  if (pointsEl) pointsEl.textContent = formatStatValue(state.points);
+  if (streakEl) streakEl.textContent = formatStatValue(state.streak);
+  if (savedCountEl) savedCountEl.textContent = formatStatValue(state.savedItems.length);
+  if (toolsCountEl) toolsCountEl.textContent = formatStatValue(state.toolRuns);
+
+  if (badgeGrid) {
+    badgeGrid.innerHTML = badges.length ? badges.map(function(badge) {
+      return `
+        <article class="future-badge-card">
+          <strong>${escapeHtml(badge.label)}</strong>
+          <small>${escapeHtml(badge.note)}</small>
+        </article>
+      `;
+    }).join('') : '<p class="future-meta-copy">No badges yet. Read, save, search, and use tools to unlock them.</p>';
+  }
+
+  if (!state.savedItems.length) {
+    savedGrid.innerHTML = '<p class="movies-empty">Nothing saved yet. Use "Save this page" or save individual results from Search & Ask.</p>';
+  } else {
+    savedGrid.innerHTML = state.savedItems.map(renderFutureResultCard).join('');
+    bindSaveButtons(savedGrid);
+    syncSaveButtons(savedGrid);
+  }
+
+  if (clearButton && clearButton.dataset.clearBound !== 'true') {
+    clearButton.dataset.clearBound = 'true';
+    clearButton.addEventListener('click', function() {
+      clearSavedItems();
+      renderSavedPage();
+      syncSaveButtons(document);
+    });
+  }
+}
+
+function injectPwaMetadata() {
+  if (!document.querySelector('link[rel="manifest"]')) {
+    var manifest = document.createElement('link');
+    manifest.rel = 'manifest';
+    manifest.href = resolveLinkPath('/manifest.webmanifest');
+    document.head.appendChild(manifest);
+  }
+
+  if (!document.querySelector('meta[name="theme-color"]')) {
+    var meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    meta.content = '#387ed1';
+    document.head.appendChild(meta);
+  }
+}
+
+function syncInstallPromptUi() {
+  var savedSlot = document.getElementById('pwa-install-slot');
+  var banner = document.querySelector('.pwa-install-banner');
+
+  if (!deferredInstallPrompt && !savedSlot) return;
+
+  var markup = deferredInstallPrompt ? `
+    <div class="pwa-install-copy">
+      <p class="future-kicker">Install</p>
+      <h3>Install The Simple Guy</h3>
+      <p>Save the site to your home screen for quicker access, offline support, and a more app-like flow.</p>
+      <div class="future-result-actions">
+        <button type="button" class="btn" id="pwa-install-btn">Install now</button>
+        <button type="button" class="future-save-btn" id="pwa-dismiss-btn">Maybe later</button>
+      </div>
+    </div>
+  ` : '<p><strong>PWA support:</strong> Your browser is not offering an install prompt right now, but offline caching is still available once the service worker is active.</p>';
+
+  if (savedSlot) {
+    savedSlot.innerHTML = markup;
+  } else if (!banner && deferredInstallPrompt) {
+    var footer = document.querySelector('footer');
+    if (footer && footer.parentNode) {
+      banner = document.createElement('section');
+      banner.className = 'pwa-install-banner fade-in visible';
+      banner.innerHTML = markup;
+      footer.parentNode.insertBefore(banner, footer);
+    }
+  }
+
+  document.querySelectorAll('#pwa-install-btn').forEach(function(button) {
+    if (button.dataset.installBound === 'true') return;
+    button.dataset.installBound = 'true';
+    button.addEventListener('click', function() {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.finally(function() {
+        deferredInstallPrompt = null;
+        syncInstallPromptUi();
+      });
+    });
+  });
+
+  document.querySelectorAll('#pwa-dismiss-btn').forEach(function(button) {
+    if (button.dataset.dismissBound === 'true') return;
+    button.dataset.dismissBound = 'true';
+    button.addEventListener('click', function() {
+      deferredInstallPrompt = null;
+      syncInstallPromptUi();
+    });
+  });
+}
+
+function initPwaSupport() {
+  injectPwaMetadata();
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch(function() {});
+  }
+
+  window.addEventListener('beforeinstallprompt', function(event) {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    syncInstallPromptUi();
+  });
+
+  window.addEventListener('appinstalled', function() {
+    deferredInstallPrompt = null;
+    syncInstallPromptUi();
+  });
+
+  syncInstallPromptUi();
+}
+
+function applyRouteTranslations(entries, language) {
+  (entries || []).forEach(function(entry) {
+    var node = document.querySelector(entry.selector);
+    if (!node) return;
+
+    if (!node.dataset.originalText) {
+      node.dataset.originalText = node.textContent;
+    }
+
+    node.textContent = language === 'hi' ? entry.text : node.dataset.originalText;
+  });
+}
+
+function applyLanguage(language) {
+  loadTranslationsData()
+    .then(function(payload) {
+      document.documentElement.lang = language === 'hi' ? 'hi' : 'en';
+      var route = normalizeRoute(window.location.pathname);
+      var navLabels = payload.nav || {};
+
+      document.querySelectorAll('[data-nav-key]').forEach(function(node) {
+        var key = node.getAttribute('data-nav-key');
+        if (!node.dataset.originalText) {
+          node.dataset.originalText = node.textContent;
+        }
+        if (language === 'hi' && navLabels[key]) {
+          node.textContent = navLabels[key];
+        } else {
+          node.textContent = node.dataset.originalText;
+        }
+      });
+
+      applyRouteTranslations(payload.routes[route] || [], language);
+
+      var langToggle = document.querySelector('.lang-toggle');
+      if (langToggle) {
+        langToggle.textContent = language === 'hi' ? 'EN' : 'हिं';
+      }
+    })
+    .catch(function() {});
+}
+
+function getStoredLanguage() {
+  return window.localStorage.getItem('siteLanguage') || 'en';
+}
+
+function scrollToCurrentHashTarget() {
+  if (!window.location.hash) return;
+  var target = document.querySelector(window.location.hash);
+  if (!target) return;
+  window.setTimeout(function() {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
 }
 
 function isFoodAllowedForDiet(food, dietType) {
@@ -2707,9 +3516,11 @@ setDefaultBuyButtonLabels();
 // ===== Main Initialization =====
 document.addEventListener('DOMContentLoaded', function() {
   trackPageVisit();
+  trackFutureVisionVisit();
 
   // ===== Theme Toggle (Dark/Light Mode) =====
   const themeToggle = document.querySelector('.theme-toggle');
+  const langToggle = document.querySelector('.lang-toggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   function getThemePreference() {
@@ -2724,6 +3535,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   setTheme(getThemePreference());
+  applyLanguage(getStoredLanguage());
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
@@ -2738,6 +3550,14 @@ document.addEventListener('DOMContentLoaded', function() {
       setTheme(e.matches ? 'dark' : 'light');
     }
   });
+
+  if (langToggle) {
+    langToggle.addEventListener('click', () => {
+      const next = getStoredLanguage() === 'hi' ? 'en' : 'hi';
+      localStorage.setItem('siteLanguage', next);
+      applyLanguage(next);
+    });
+  }
 
   // ===== Mobile Menu Toggle =====
   const menuToggle = document.querySelector('.menu-toggle');
@@ -2891,6 +3711,14 @@ document.addEventListener('DOMContentLoaded', function() {
       nav.classList.remove('open');
       document.body.style.overflow = '';
     }
+
+    if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+        e.preventDefault();
+        window.location.href = resolveLinkPath('/search/');
+      }
+    }
   });
 
   // ===== Auto lazy-load images =====
@@ -2932,6 +3760,14 @@ document.addEventListener('DOMContentLoaded', function() {
     block.parentNode.style.position = 'relative';
     block.parentNode.appendChild(copyBtn);
   });
+
+  annotateBookCards();
+  injectCurrentPageSaveButton();
+  bindSaveButtons(document);
+  syncSaveButtons(document);
+  initSearchPage();
+  renderSavedPage();
+  initPwaSupport();
 
   loadEngagementData()
     .then(function(payload) {
