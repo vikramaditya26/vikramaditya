@@ -29,11 +29,15 @@
 <body data-page="about">
   <div id="site-header"></div>
 
-  <!-- Ambient Background -->
-  <div class="ambient-bg" aria-hidden="true">
-    <div class="ambient-orb ambient-orb--1"></div>
-    <div class="ambient-orb ambient-orb--2"></div>
-    <div class="ambient-orb ambient-orb--3"></div>
+  <!-- Dynamic Sky Background -->
+  <div class="sky-bg" id="sky-bg" aria-hidden="true">
+    <div class="sky-stars" id="sky-stars"></div>
+    <div class="sky-clouds" id="sky-clouds">
+      <div class="cloud cloud--1"></div>
+      <div class="cloud cloud--2"></div>
+      <div class="cloud cloud--3"></div>
+    </div>
+    <div class="sky-sun-moon" id="sky-celestial"></div>
   </div>
   <div class="noise-overlay" aria-hidden="true"></div>
 
@@ -42,11 +46,6 @@
     <section class="hero">
       <p class="tagline">"What we think, we become." — Buddha</p>
       <h1 class="hero-title">Hello, I'm Vikram Aditya</h1>
-      <p class="subtitle">IIT Bombay graduate, building at Teachmint's Founder's Office. I write about books, fitness, finance, and getting 1% better every day.</p>
-      <div class="hero-cta-row">
-        <a href="blog/" class="btn">Read the blog</a>
-        <a href="contact/" class="btn btn--ghost">Get in touch</a>
-      </div>
     </section>
 
     <!-- About — compact -->
@@ -61,7 +60,7 @@
 
     <div class="section-divider"></div>
 
-    <!-- Featured Sections (the best 6) -->
+    <!-- Featured Sections -->
     <section class="fade-in">
       <h2>Explore</h2>
       <div class="grid-2">
@@ -81,19 +80,9 @@
           <a href="finance/" class="card-link">Learn finance basics</a>
         </div>
         <div class="card reveal">
-          <h3><span class="icon">🍳</span> Kitchen</h3>
-          <p>Easy Indian meals, practical bachelor cooking ideas, and simple nutrition tools.</p>
-          <a href="kitchen/" class="card-link">Open bachelor's kitchen</a>
-        </div>
-        <div class="card reveal">
           <h3><span class="icon">✏️</span> Blog</h3>
           <p>Thoughts, insights, and lessons from books, podcasts, and life experiences.</p>
           <a href="blog/" class="card-link">Read the blog</a>
-        </div>
-        <div class="card reveal">
-          <h3><span class="icon">🧮</span> Tools</h3>
-          <p>Interactive calculators and planners for SIPs, EMIs, budgets, taxes, macros, and diet.</p>
-          <a href="tools/" class="card-link">Explore the tools</a>
         </div>
       </div>
     </section>
@@ -102,13 +91,14 @@
     <section class="fade-in">
       <h2>More</h2>
       <div class="more-links-grid">
+        <a href="kitchen/" class="more-link-card reveal"><span class="icon">🍳</span> Kitchen</a>
         <a href="skincare/" class="more-link-card reveal"><span class="icon">🧴</span> Skincare</a>
         <a href="style/" class="more-link-card reveal"><span class="icon">👔</span> Style</a>
         <a href="movies/" class="more-link-card reveal"><span class="icon">🎬</span> Movies</a>
         <a href="100-skills/" class="more-link-card reveal"><span class="icon">🛠️</span> 100 Skills</a>
         <a href="shop/" class="more-link-card reveal"><span class="icon">🛍️</span> Shop</a>
+        <a href="tools/" class="more-link-card reveal"><span class="icon">🧮</span> Tools</a>
         <a href="search/" class="more-link-card reveal"><span class="icon">🔎</span> Search</a>
-        <a href="saved/" class="more-link-card reveal"><span class="icon">⭐</span> Saved</a>
       </div>
     </section>
 

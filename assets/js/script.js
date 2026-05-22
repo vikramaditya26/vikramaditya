@@ -31,12 +31,6 @@ function renderHeader(currentPage) {
     { href: 'finance/', label: 'Finance', key: 'finance' },
     { href: 'books/', label: 'Books', key: 'books' },
     { href: 'workout/', label: 'Workout', key: 'workout' },
-    { href: 'kitchen/', label: 'Kitchen', key: 'kitchen' },
-    { href: 'skincare/', label: 'Skincare', key: 'skincare' },
-    { href: 'style/', label: 'Style', key: 'style' },
-    { href: '100-skills/', label: '100 Skills', key: 'skills' },
-    { href: 'movies/', label: 'Movies', key: 'movies' },
-    { href: 'shop/', label: 'Shop', key: 'shop' },
     { href: 'blog/', label: 'Blog', key: 'blog' },
     { href: 'contact/', label: 'Contact', key: 'contact' }
   ];
@@ -46,16 +40,7 @@ function renderHeader(currentPage) {
     return `<a href="${base}${item.href}" data-nav-key="${item.key}"${aria}>${item.label}</a>`;
   }).join('\n        ');
 
-  const actionItems = [
-    { href: 'search/', label: 'Search', key: 'search' },
-    { href: 'saved/', label: 'Saved', key: 'saved' }
-  ];
-
-  const actionLinks = actionItems.map(item => {
-    const activeClass = item.key === currentPage ? ' is-active' : '';
-    const aria = item.key === currentPage ? ' aria-current="page"' : '';
-    return `<a href="${base}${item.href}" class="header-action-btn${activeClass}" data-nav-key="${item.key}"${aria}>${item.label}</a>`;
-  }).join('\n        ');
+  const actionLinks = '';
 
   return `
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -3577,7 +3562,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   annotateBookCards();
-  injectCurrentPageSaveButton();
   bindSaveButtons(document);
   syncSaveButtons(document);
   initSearchPage();
@@ -3592,6 +3576,75 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function() {
       refreshEngagementStats();
     });
+
+  // ===== Dynamic Sky Background =====
+  (function initDynamicSky() {
+    var skyEl = document.getElementById('sky-bg');
+    if (!skyEl) return;
+
+    var starsEl = document.getElementById('sky-stars');
+    var celestialEl = document.getElementById('sky-celestial');
+
+    // Generate stars
+    if (starsEl) {
+      for (var i = 0; i < 80; i++) {
+        var star = document.createElement('div');
+        star.className = 'star' + (Math.random() > 0.85 ? ' star--bright' : '');
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 70 + '%';
+        star.style.setProperty('--twinkle-duration', (2 + Math.random() * 4) + 's');
+        star.style.setProperty('--twinkle-delay', (Math.random() * 5) + 's');
+        starsEl.appendChild(star);
+      }
+    }
+
+    function updateSky() {
+      var hour = new Date().getHours();
+      var skyClass = '';
+      var gradient = '';
+      var celestialHtml = '';
+
+      if (hour >= 6 && hour < 8) {
+        // Sunrise
+        skyClass = 'is-day is-sunrise';
+        gradient = 'linear-gradient(180deg, #87CEEB 0%, #FDB99B 40%, #FF6B6B 70%, #C94C4C 100%)';
+        celestialHtml = '<div class="sky-celestial-body is-sun" style="top:55%;right:20%;opacity:0.9;box-shadow:0 0 60px 25px rgba(255,140,0,0.5)"></div>';
+      } else if (hour >= 8 && hour < 16) {
+        // Daytime
+        skyClass = 'is-day';
+        gradient = 'linear-gradient(180deg, #4A90D9 0%, #87CEEB 40%, #B8DCF0 70%, #E8F4FD 100%)';
+        celestialHtml = '<div class="sky-celestial-body is-sun"></div>';
+      } else if (hour >= 16 && hour < 18) {
+        // Late afternoon
+        skyClass = 'is-day is-sunset';
+        gradient = 'linear-gradient(180deg, #5B86C5 0%, #D4896A 35%, #E8956E 55%, #F5C87A 80%, #FCE4A8 100%)';
+        celestialHtml = '<div class="sky-celestial-body is-sun" style="top:45%;right:10%;background:radial-gradient(circle,#fff5c0 0%,#ff8c00 80%);box-shadow:0 0 50px 20px rgba(255,140,0,0.4)"></div>';
+      } else if (hour >= 18 && hour < 20) {
+        // Sunset / dusk
+        skyClass = 'is-sunset';
+        gradient = 'linear-gradient(180deg, #1a1a3e 0%, #4a2c6e 25%, #c94c4c 55%, #ff7e5f 75%, #feb47b 100%)';
+        celestialHtml = '<div class="sky-celestial-body is-sun" style="top:65%;right:15%;width:50px;height:50px;opacity:0.7;background:radial-gradient(circle,#ffb347,#ff4500);box-shadow:0 0 40px 15px rgba(255,69,0,0.4)"></div>';
+      } else if (hour >= 20 && hour < 22) {
+        // Early night
+        skyClass = 'is-night';
+        gradient = 'linear-gradient(180deg, #0a0a1a 0%, #1a1a3e 40%, #2d1b69 70%, #16213e 100%)';
+        celestialHtml = '<div class="sky-celestial-body is-moon"></div>';
+      } else {
+        // Deep night (22-6)
+        skyClass = 'is-night';
+        gradient = 'linear-gradient(180deg, #020111 0%, #0a0a1a 30%, #141428 60%, #1a1a2e 100%)';
+        celestialHtml = '<div class="sky-celestial-body is-moon" style="top:8%;right:18%"></div>';
+      }
+
+      skyEl.className = 'sky-bg ' + skyClass;
+      skyEl.style.background = gradient;
+      if (celestialEl) celestialEl.innerHTML = celestialHtml;
+    }
+
+    updateSky();
+    // Update every 5 minutes
+    setInterval(updateSky, 5 * 60 * 1000);
+  })();
 
   // ===== Scroll Reveal Observer =====
   (function initScrollReveal() {

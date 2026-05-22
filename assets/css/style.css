@@ -159,68 +159,154 @@ body {
   overflow-x: hidden;
 }
 
-/* === Ambient Background === */
-.ambient-bg {
+/* === Dynamic Sky Background === */
+.sky-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  transition: background 2s ease;
 }
 
-.ambient-orb {
+/* Stars layer */
+.sky-stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.sky-bg.is-night .sky-stars { opacity: 1; }
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle var(--twinkle-duration, 3s) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0s);
+}
+
+.star--bright {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 6px 1px rgba(255,255,255,0.4);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Clouds layer */
+.sky-clouds {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.sky-bg.is-day .sky-clouds { opacity: 1; }
+.sky-bg.is-sunset .sky-clouds { opacity: 0.7; }
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  filter: blur(1px);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud--1 {
+  width: 180px;
+  height: 50px;
+  top: 12%;
+  animation: cloudDrift 45s linear infinite;
+}
+.cloud--1::before {
+  width: 70px; height: 70px;
+  top: -35px; left: 30px;
+}
+.cloud--1::after {
+  width: 90px; height: 55px;
+  top: -25px; left: 70px;
+}
+
+.cloud--2 {
+  width: 140px;
+  height: 40px;
+  top: 22%;
+  opacity: 0.6;
+  animation: cloudDrift 60s linear 8s infinite;
+}
+.cloud--2::before {
+  width: 55px; height: 55px;
+  top: -28px; left: 25px;
+}
+.cloud--2::after {
+  width: 70px; height: 45px;
+  top: -20px; left: 55px;
+}
+
+.cloud--3 {
+  width: 200px;
+  height: 45px;
+  top: 8%;
+  opacity: 0.4;
+  animation: cloudDrift 70s linear 20s infinite;
+}
+.cloud--3::before {
+  width: 80px; height: 65px;
+  top: -30px; left: 40px;
+}
+.cloud--3::after {
+  width: 100px; height: 50px;
+  top: -22px; left: 85px;
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateX(-250px); }
+  100% { transform: translateX(calc(100vw + 250px)); }
+}
+
+/* Sun / Moon celestial body */
+.sky-celestial-body {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  will-change: transform;
+  transition: all 2s ease;
 }
 
-.ambient-orb--1 {
-  width: 500px;
-  height: 500px;
-  background: var(--color-accent);
-  top: -10%;
-  right: -8%;
-  animation: orbFloat1 18s ease-in-out infinite;
+.sky-celestial-body.is-sun {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #fff5c0 0%, #ffb347 60%, #ff8c00 100%);
+  box-shadow: 0 0 40px 15px rgba(255,179,71,0.4), 0 0 80px 30px rgba(255,140,0,0.15);
+  top: 15%;
+  right: 12%;
 }
 
-.ambient-orb--2 {
-  width: 400px;
-  height: 400px;
-  background: #a78bfa;
-  bottom: 10%;
-  left: -10%;
-  animation: orbFloat2 22s ease-in-out infinite;
+.sky-celestial-body.is-moon {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at 35% 35%, #f0f0f0 0%, #d4d4d4 50%, #b8b8b8 100%);
+  box-shadow: 0 0 30px 8px rgba(200,200,220,0.3), 0 0 60px 20px rgba(150,150,200,0.1);
+  top: 10%;
+  right: 15%;
 }
 
-.ambient-orb--3 {
-  width: 300px;
-  height: 300px;
-  background: #34d399;
-  top: 50%;
-  left: 50%;
-  animation: orbFloat3 16s ease-in-out infinite;
-}
-
-[data-theme="dark"] .ambient-orb { opacity: 0.12; }
-
-@keyframes orbFloat1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-60px, 80px) scale(1.1); }
-  66% { transform: translate(40px, -40px) scale(0.95); }
-}
-
-@keyframes orbFloat2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(70px, -50px) scale(1.05); }
-  66% { transform: translate(-30px, 60px) scale(0.9); }
-}
-
-@keyframes orbFloat3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-80px, -60px) scale(1.15); }
-}
+/* Dark mode override — always show night */
+[data-theme="dark"] .sky-bg { background: linear-gradient(180deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%) !important; }
+[data-theme="dark"] .sky-stars { opacity: 1 !important; }
+[data-theme="dark"] .sky-clouds { opacity: 0 !important; }
 
 /* === Noise Texture Overlay === */
 .noise-overlay {
@@ -594,15 +680,19 @@ section {
   50% { background-position: 0% 50%; }
 }
 
-.hero .subtitle {
-  font-size: 1.2rem;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-lg);
-  animation: slideUp 0.8s ease 0.1s forwards;
-  opacity: 0;
-  max-width: 540px;
-  margin-left: auto;
-  margin-right: auto;
+/* Sky-aware text readability */
+.sky-bg ~ main h2,
+.sky-bg ~ main .tagline,
+.sky-bg ~ main .hero-title,
+.sky-bg ~ main > section > p {
+  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+}
+
+.sky-bg.is-night ~ main h2,
+.sky-bg.is-night ~ main .tagline,
+.sky-bg.is-night ~ main .hero-title,
+.sky-bg.is-night ~ main > section > p {
+  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
 }
 
 .hero .tagline {
@@ -614,31 +704,7 @@ section {
   opacity: 0;
 }
 
-.hero .hero-cta-row {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-sm);
-  margin-top: var(--space-lg);
-  animation: slideUp 0.8s ease 0.35s forwards;
-  opacity: 0;
-}
-
-.hero .hero-cta-row .btn {
-  padding: 12px 28px;
-  font-size: 1rem;
-}
-
-.hero .hero-cta-row .btn--ghost {
-  background: transparent;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-secondary);
-}
-
-.hero .hero-cta-row .btn--ghost:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background: var(--color-accent-light);
-}
+/* hero CTA row removed */
 
 @keyframes slideUp {
   from {
@@ -686,15 +752,7 @@ section {
   opacity: 0.6;
 }
 
-.page-save-row {
-  margin-top: var(--space-md);
-  display: flex;
-  justify-content: center;
-}
-
-.page-save-row .future-save-btn {
-  min-width: 180px;
-}
+/* page-save-row removed */
 
 /* === More Links Grid === */
 .more-links-grid {
