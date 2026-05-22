@@ -151,11 +151,10 @@ body {
   font-size: 1.125rem;
   line-height: 1.8;
   color: var(--color-text);
-  background: var(--color-bg);
+  background: transparent;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color var(--transition-slow), color var(--transition-slow);
   overflow-x: hidden;
 }
 
@@ -461,7 +460,6 @@ header.scrolled {
   max-width: var(--max-width-wide);
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: var(--space-md);
 }
@@ -487,6 +485,8 @@ header.scrolled {
 /* === Navigation === */
 nav {
   display: flex;
+  flex: 1;
+  justify-content: center;
   align-items: center;
   gap: var(--space-xs);
 }
@@ -741,7 +741,7 @@ section {
   color: #b0b0c0;
 }
 
-/* Cards, boxes, and sections */
+/* Cards, boxes, and sections — dark transparent style */
 .sky-bg.is-night ~ main .card,
 .sky-bg.is-night ~ main .finance-card,
 .sky-bg.is-night ~ main .workout-day,
@@ -749,7 +749,6 @@ section {
 .sky-bg.is-night ~ main .recommendation-card,
 .sky-bg.is-night ~ main .tool-link-card,
 .sky-bg.is-night ~ main .blog-box,
-.sky-bg.is-night ~ main .blog-post-shell,
 .sky-bg.is-night ~ main .blog-stat-card,
 .sky-bg.is-night ~ main .core-box,
 .sky-bg.is-night ~ main .exercise-box,
@@ -757,6 +756,66 @@ section {
   background: rgba(255,255,255,0.06);
   border-color: rgba(255,255,255,0.1);
   color: #c8c8d8;
+}
+
+/* White cards — keep white bg with solid black text in night mode */
+.sky-bg.is-night ~ main .blog-post-shell,
+.sky-bg.is-night ~ main .book-card,
+.sky-bg.is-night ~ main .site-discussion-panel {
+  background: #fff;
+  border-color: rgba(255,255,255,0.2);
+  color: #1a1a1a;
+}
+
+.sky-bg.is-night ~ main .blog-post-shell h1,
+.sky-bg.is-night ~ main .blog-post-shell h2,
+.sky-bg.is-night ~ main .blog-post-shell h3,
+.sky-bg.is-night ~ main .blog-post-shell h4,
+.sky-bg.is-night ~ main .blog-post-shell p,
+.sky-bg.is-night ~ main .blog-post-shell li,
+.sky-bg.is-night ~ main .blog-post-shell strong,
+.sky-bg.is-night ~ main .blog-post-shell b,
+.sky-bg.is-night ~ main .blog-post-shell span,
+.sky-bg.is-night ~ main .blog-post-shell blockquote,
+.sky-bg.is-night ~ main .blog-post-shell .blog-post-dek,
+.sky-bg.is-night ~ main .blog-post-shell .blog-post-hero h1,
+.sky-bg.is-night ~ main .book-card h3,
+.sky-bg.is-night ~ main .book-card h4,
+.sky-bg.is-night ~ main .book-card p,
+.sky-bg.is-night ~ main .book-card strong,
+.sky-bg.is-night ~ main .book-card b,
+.sky-bg.is-night ~ main .book-card span,
+.sky-bg.is-night ~ main .book-card li,
+.sky-bg.is-night ~ main .book-card .book-review,
+.sky-bg.is-night ~ main .book-card .book-quote,
+.sky-bg.is-night ~ main .site-discussion-panel h2,
+.sky-bg.is-night ~ main .site-discussion-panel p {
+  color: #1a1a1a;
+  text-shadow: none;
+}
+
+.sky-bg.is-night ~ main .blog-post-shell a,
+.sky-bg.is-night ~ main .book-card a {
+  color: var(--color-accent);
+}
+
+.sky-bg.is-night ~ main .blog-post-shell .blog-meta,
+.sky-bg.is-night ~ main .blog-post-shell .blog-category-tag,
+.sky-bg.is-night ~ main .blog-post-shell small {
+  color: #666;
+}
+
+/* Blog related section cards — also keep white */
+.sky-bg.is-night ~ main .blog-related-section .blog-box {
+  background: #fff;
+  color: #1a1a1a;
+}
+
+.sky-bg.is-night ~ main .blog-related-section .blog-box h4,
+.sky-bg.is-night ~ main .blog-related-section .blog-box p,
+.sky-bg.is-night ~ main .blog-related-section .blog-box span {
+  color: #1a1a1a;
+  text-shadow: none;
 }
 
 .sky-bg.is-night ~ main .card h3,
@@ -880,11 +939,21 @@ section {
   color: #c8c8d8;
 }
 
+/* Sky header — transparent base */
+.sky-bg ~ header {
+  background: transparent !important;
+}
+
+.sky-bg ~ header.scrolled {
+  background: rgba(5,5,20,0.3) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: none;
+}
+
 /* Night header */
 .sky-bg.is-night ~ header {
-  background: rgba(5,5,20,0.8) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255,255,255,0.06) !important;
 }
 
 .sky-bg.is-night ~ header .site-title,
@@ -903,8 +972,13 @@ section {
 
 /* Night footer */
 .sky-bg.is-night ~ footer {
-  background: rgba(5,5,20,0.6);
-  color: #888;
+  background: transparent;
+  border-top-color: rgba(255,255,255,0.08);
+  color: #999;
+}
+
+.sky-bg.is-night ~ footer p {
+  color: #999;
 }
 
 /* === Sky-aware text colors — SUNSET === */
@@ -955,12 +1029,38 @@ section {
 .sky-bg.is-sunset ~ main .recommendation-card,
 .sky-bg.is-sunset ~ main .tool-link-card,
 .sky-bg.is-sunset ~ main .blog-box,
-.sky-bg.is-sunset ~ main .blog-post-shell,
 .sky-bg.is-sunset ~ main .blog-stat-card,
 .sky-bg.is-sunset ~ main .tip-box {
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.15);
   color: #e8ddd0;
+}
+
+/* White cards — keep white with black text in sunset too */
+.sky-bg.is-sunset ~ main .blog-post-shell,
+.sky-bg.is-sunset ~ main .book-card,
+.sky-bg.is-sunset ~ main .site-discussion-panel {
+  background: #fff;
+  color: #1a1a1a;
+}
+
+.sky-bg.is-sunset ~ main .blog-post-shell h1,
+.sky-bg.is-sunset ~ main .blog-post-shell h2,
+.sky-bg.is-sunset ~ main .blog-post-shell h3,
+.sky-bg.is-sunset ~ main .blog-post-shell p,
+.sky-bg.is-sunset ~ main .blog-post-shell li,
+.sky-bg.is-sunset ~ main .blog-post-shell strong,
+.sky-bg.is-sunset ~ main .blog-post-shell blockquote,
+.sky-bg.is-sunset ~ main .blog-post-shell .blog-post-dek,
+.sky-bg.is-sunset ~ main .book-card h3,
+.sky-bg.is-sunset ~ main .book-card h4,
+.sky-bg.is-sunset ~ main .book-card p,
+.sky-bg.is-sunset ~ main .book-card strong,
+.sky-bg.is-sunset ~ main .book-card span,
+.sky-bg.is-sunset ~ main .site-discussion-panel h2,
+.sky-bg.is-sunset ~ main .site-discussion-panel p {
+  color: #1a1a1a;
+  text-shadow: none;
 }
 
 .sky-bg.is-sunset ~ main .more-link-card {
@@ -980,9 +1080,10 @@ section {
 
 /* Sunset header */
 .sky-bg.is-sunset ~ header {
-  background: rgba(30,20,40,0.7) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(30,20,40,0.3) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: rgba(255,255,255,0.08) !important;
 }
 
 .sky-bg.is-sunset ~ header .site-title,
@@ -993,8 +1094,9 @@ section {
 }
 
 .sky-bg.is-sunset ~ footer {
-  background: rgba(30,20,40,0.5);
-  color: #a09080;
+  background: transparent;
+  border-top-color: rgba(255,255,255,0.1);
+  color: #b0a090;
 }
 
 .sky-bg.is-sunset ~ #site-header .site-title,
@@ -2241,8 +2343,9 @@ footer {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--space-xl) var(--space-md);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(255,255,255,0.1);
   text-align: center;
+  background: transparent;
 }
 
 footer p {

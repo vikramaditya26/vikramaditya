@@ -3613,6 +3613,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       skyEl.className = 'sky-bg ' + skyClass;
       skyEl.style.background = gradient;
+      // Sync html canvas so the sky color extends behind the full viewport
+      document.documentElement.style.background = gradient;
+      document.body.style.background = 'transparent';
       if (celestialEl) celestialEl.innerHTML = celestialHtml;
     }
 
