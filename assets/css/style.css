@@ -665,8 +665,16 @@ section {
   animation: slideUp 0.8s ease forwards;
 }
 
-/* Animated gradient on hero title */
+/* Hero title base — ensure text is visible by default */
 .hero-title {
+  -webkit-text-fill-color: currentColor;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+/* Animated gradient on hero title — only for day sky */
+.sky-bg.is-day ~ main .hero-title {
   background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text) 40%, var(--color-accent) 55%, #a78bfa 70%, var(--color-text) 85%, var(--color-text) 100%);
   background-size: 300% 100%;
   -webkit-background-clip: text;
@@ -680,19 +688,133 @@ section {
   50% { background-position: 0% 50%; }
 }
 
-/* Sky-aware text readability */
-.sky-bg ~ main h2,
-.sky-bg ~ main .tagline,
-.sky-bg ~ main .hero-title,
-.sky-bg ~ main > section > p {
-  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+/* === Sky-aware text colors === */
+/* Night sky: flip all exposed text to light */
+.sky-bg.is-night ~ main .hero .tagline,
+.sky-bg.is-night ~ main .hero-title {
+  color: #f0f0f5;
+  -webkit-text-fill-color: #f0f0f5;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
 }
 
-.sky-bg.is-night ~ main h2,
-.sky-bg.is-night ~ main .tagline,
-.sky-bg.is-night ~ main .hero-title,
-.sky-bg.is-night ~ main > section > p {
-  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+.sky-bg.is-night ~ main h2 {
+  color: #e8e8f0;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+}
+
+.sky-bg.is-night ~ main h2::after {
+  background: #7ab5f7;
+}
+
+.sky-bg.is-night ~ main > section > p,
+.sky-bg.is-night ~ main > section > p a {
+  color: #c8c8d8;
+}
+
+.sky-bg.is-night ~ main .social-link {
+  color: #c8c8d8;
+  border-color: rgba(255,255,255,0.15);
+}
+
+.sky-bg.is-night ~ main .social-link:hover {
+  color: #7ab5f7;
+  border-color: #7ab5f7;
+  background: rgba(92,163,245,0.1);
+}
+
+.sky-bg.is-night ~ main .more-link-card {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.12);
+  color: #d0d0e0;
+}
+
+.sky-bg.is-night ~ main .more-link-card:hover {
+  background: rgba(92,163,245,0.15);
+  border-color: #7ab5f7;
+  color: #7ab5f7;
+}
+
+.sky-bg.is-night ~ main .section-divider {
+  background: linear-gradient(90deg, #7ab5f7, #a78bfa);
+  opacity: 0.4;
+}
+
+/* Night header */
+.sky-bg.is-night ~ #site-header header,
+.sky-bg.is-night ~ header {
+  background: rgba(5,5,20,0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.sky-bg.is-night ~ #site-header .site-title,
+.sky-bg.is-night ~ #site-header nav a,
+.sky-bg.is-night ~ #site-header .lang-toggle {
+  color: #d0d0e0;
+}
+
+.sky-bg.is-night ~ #site-header nav a:hover,
+.sky-bg.is-night ~ #site-header nav a[aria-current="page"] {
+  color: #7ab5f7;
+  background: rgba(92,163,245,0.12);
+}
+
+/* Night footer */
+.sky-bg.is-night ~ #site-footer footer {
+  color: #888;
+}
+
+/* Sunset/dusk: slightly lighter text */
+.sky-bg.is-sunset ~ main .hero .tagline,
+.sky-bg.is-sunset ~ main .hero-title {
+  color: #fff5e6;
+  -webkit-text-fill-color: #fff5e6;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.sky-bg.is-sunset ~ main h2 {
+  color: #f5f0e8;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+}
+
+.sky-bg.is-sunset ~ main > section > p {
+  color: #e8ddd0;
+}
+
+.sky-bg.is-sunset ~ main .more-link-card {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.2);
+  color: #f0e8d8;
+}
+
+.sky-bg.is-sunset ~ main .social-link {
+  color: #f0e8d8;
+  border-color: rgba(255,255,255,0.2);
+}
+
+.sky-bg.is-sunset ~ main .more-link-card {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.2);
+  color: #f0e8d8;
+}
+
+/* Sunset header */
+.sky-bg.is-sunset ~ #site-header header {
+  background: rgba(30,20,40,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.sky-bg.is-sunset ~ #site-header .site-title,
+.sky-bg.is-sunset ~ #site-header nav a,
+.sky-bg.is-sunset ~ #site-header .lang-toggle {
+  color: #f0e8d8;
+}
+
+/* Daytime: dark text is fine, just add subtle shadow */
+.sky-bg.is-day ~ main .hero .tagline,
+.sky-bg.is-day ~ main .hero-title {
+  text-shadow: 0 1px 6px rgba(255,255,255,0.5);
 }
 
 .hero .tagline {
