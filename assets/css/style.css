@@ -688,8 +688,12 @@ section {
   50% { background-position: 0% 50%; }
 }
 
-/* === Sky-aware text colors === */
-/* Night sky: flip all exposed text to light */
+/* === Sky-aware text colors — NIGHT === */
+/* Global text flip: every element inside main gets light text */
+.sky-bg.is-night ~ main {
+  color: #c8c8d8;
+}
+
 .sky-bg.is-night ~ main .hero .tagline,
 .sky-bg.is-night ~ main .hero-title {
   color: #f0f0f5;
@@ -697,20 +701,154 @@ section {
   text-shadow: 0 2px 16px rgba(0,0,0,0.5);
 }
 
+.sky-bg.is-night ~ main h1,
 .sky-bg.is-night ~ main h2 {
   color: #e8e8f0;
   text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+}
+
+.sky-bg.is-night ~ main h3,
+.sky-bg.is-night ~ main h4 {
+  color: #dddde8;
 }
 
 .sky-bg.is-night ~ main h2::after {
   background: #7ab5f7;
 }
 
-.sky-bg.is-night ~ main > section > p,
-.sky-bg.is-night ~ main > section > p a {
+.sky-bg.is-night ~ main p,
+.sky-bg.is-night ~ main li,
+.sky-bg.is-night ~ main span,
+.sky-bg.is-night ~ main small,
+.sky-bg.is-night ~ main label {
   color: #c8c8d8;
 }
 
+.sky-bg.is-night ~ main strong,
+.sky-bg.is-night ~ main b {
+  color: #e0e0ec;
+}
+
+.sky-bg.is-night ~ main a {
+  color: #7ab5f7;
+}
+
+.sky-bg.is-night ~ main a:hover {
+  color: #a0ccff;
+}
+
+.sky-bg.is-night ~ main .subtitle {
+  color: #b0b0c0;
+}
+
+/* Cards, boxes, and sections */
+.sky-bg.is-night ~ main .card,
+.sky-bg.is-night ~ main .finance-card,
+.sky-bg.is-night ~ main .workout-day,
+.sky-bg.is-night ~ main .supplement-card,
+.sky-bg.is-night ~ main .recommendation-card,
+.sky-bg.is-night ~ main .tool-link-card,
+.sky-bg.is-night ~ main .blog-box,
+.sky-bg.is-night ~ main .blog-post-shell,
+.sky-bg.is-night ~ main .blog-stat-card,
+.sky-bg.is-night ~ main .core-box,
+.sky-bg.is-night ~ main .exercise-box,
+.sky-bg.is-night ~ main .tip-box {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+  color: #c8c8d8;
+}
+
+.sky-bg.is-night ~ main .card h3,
+.sky-bg.is-night ~ main .finance-card h3,
+.sky-bg.is-night ~ main .workout-day h3,
+.sky-bg.is-night ~ main .tool-link-card h3,
+.sky-bg.is-night ~ main .supplement-card h4,
+.sky-bg.is-night ~ main .recommendation-card h4 {
+  color: #e0e0ec;
+}
+
+.sky-bg.is-night ~ main .card p,
+.sky-bg.is-night ~ main .finance-card p,
+.sky-bg.is-night ~ main .tool-link-card p {
+  color: #b8b8c8;
+}
+
+.sky-bg.is-night ~ main .card-link {
+  color: #7ab5f7;
+}
+
+.sky-bg.is-night ~ main .card-link:hover {
+  color: #a0ccff;
+}
+
+/* Finance card header toggle */
+.sky-bg.is-night ~ main .finance-card-header {
+  color: #dddde8;
+}
+
+.sky-bg.is-night ~ main .toggle-icon {
+  color: #888;
+}
+
+/* Workout details */
+.sky-bg.is-night ~ main .exercise-box summary {
+  color: #d0d0e0;
+}
+
+.sky-bg.is-night ~ main .workout-notes {
+  color: #b0b0c0;
+}
+
+.sky-bg.is-night ~ main .workout-day-header p {
+  color: #a0a0b8;
+}
+
+/* Blog listing */
+.sky-bg.is-night ~ main .blog-eyebrow,
+.sky-bg.is-night ~ main .blog-stat-card span,
+.sky-bg.is-night ~ main .blog-stat-card small {
+  color: #a0a0b8;
+}
+
+.sky-bg.is-night ~ main .blog-stat-card strong {
+  color: #e0e0ec;
+}
+
+.sky-bg.is-night ~ main .filter-bar button {
+  color: #b0b0c0;
+  border-color: rgba(255,255,255,0.12);
+}
+
+.sky-bg.is-night ~ main .filter-bar button.active,
+.sky-bg.is-night ~ main .filter-bar button:hover {
+  color: #7ab5f7;
+  border-color: #7ab5f7;
+  background: rgba(92,163,245,0.1);
+}
+
+/* Supplement and recommendation cards */
+.sky-bg.is-night ~ main .supplement-type,
+.sky-bg.is-night ~ main .tool-link-kicker {
+  color: #7ab5f7;
+}
+
+.sky-bg.is-night ~ main .buy-btn {
+  border-color: rgba(255,255,255,0.15);
+  color: #c8c8d8;
+}
+
+.sky-bg.is-night ~ main .affiliate-disclosure {
+  color: #888;
+}
+
+/* Tip box */
+.sky-bg.is-night ~ main .tip-box {
+  background: rgba(92,163,245,0.08);
+  border-color: rgba(92,163,245,0.2);
+}
+
+/* Social and more-link cards */
 .sky-bg.is-night ~ main .social-link {
   color: #c8c8d8;
   border-color: rgba(255,255,255,0.15);
@@ -739,32 +877,44 @@ section {
   opacity: 0.4;
 }
 
+/* Recommendation section headings */
+.sky-bg.is-night ~ main .recommendation-section h2,
+.sky-bg.is-night ~ main .recommendation-section p {
+  color: #c8c8d8;
+}
+
 /* Night header */
-.sky-bg.is-night ~ #site-header header,
 .sky-bg.is-night ~ header {
-  background: rgba(5,5,20,0.8);
+  background: rgba(5,5,20,0.8) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
-.sky-bg.is-night ~ #site-header .site-title,
-.sky-bg.is-night ~ #site-header nav a,
-.sky-bg.is-night ~ #site-header .lang-toggle {
-  color: #d0d0e0;
+.sky-bg.is-night ~ header .site-title,
+.sky-bg.is-night ~ header nav a,
+.sky-bg.is-night ~ header .lang-toggle,
+.sky-bg.is-night ~ header .menu-toggle span,
+.sky-bg.is-night ~ header .theme-toggle {
+  color: #d0d0e0 !important;
 }
 
-.sky-bg.is-night ~ #site-header nav a:hover,
-.sky-bg.is-night ~ #site-header nav a[aria-current="page"] {
-  color: #7ab5f7;
+.sky-bg.is-night ~ header nav a:hover,
+.sky-bg.is-night ~ header nav a[aria-current="page"] {
+  color: #7ab5f7 !important;
   background: rgba(92,163,245,0.12);
 }
 
 /* Night footer */
-.sky-bg.is-night ~ #site-footer footer {
+.sky-bg.is-night ~ footer {
+  background: rgba(5,5,20,0.6);
   color: #888;
 }
 
-/* Sunset/dusk: slightly lighter text */
+/* === Sky-aware text colors — SUNSET === */
+.sky-bg.is-sunset ~ main {
+  color: #e8ddd0;
+}
+
 .sky-bg.is-sunset ~ main .hero .tagline,
 .sky-bg.is-sunset ~ main .hero-title {
   color: #fff5e6;
@@ -772,12 +922,47 @@ section {
   text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
+.sky-bg.is-sunset ~ main h1,
 .sky-bg.is-sunset ~ main h2 {
   color: #f5f0e8;
   text-shadow: 0 1px 10px rgba(0,0,0,0.3);
 }
 
-.sky-bg.is-sunset ~ main > section > p {
+.sky-bg.is-sunset ~ main h3,
+.sky-bg.is-sunset ~ main h4 {
+  color: #f0ead8;
+}
+
+.sky-bg.is-sunset ~ main p,
+.sky-bg.is-sunset ~ main li {
+  color: #e8ddd0;
+}
+
+.sky-bg.is-sunset ~ main strong,
+.sky-bg.is-sunset ~ main b {
+  color: #f5efe5;
+}
+
+.sky-bg.is-sunset ~ main a {
+  color: #ffb86c;
+}
+
+.sky-bg.is-sunset ~ main .subtitle {
+  color: #d8cfc0;
+}
+
+.sky-bg.is-sunset ~ main .card,
+.sky-bg.is-sunset ~ main .finance-card,
+.sky-bg.is-sunset ~ main .workout-day,
+.sky-bg.is-sunset ~ main .supplement-card,
+.sky-bg.is-sunset ~ main .recommendation-card,
+.sky-bg.is-sunset ~ main .tool-link-card,
+.sky-bg.is-sunset ~ main .blog-box,
+.sky-bg.is-sunset ~ main .blog-post-shell,
+.sky-bg.is-sunset ~ main .blog-stat-card,
+.sky-bg.is-sunset ~ main .tip-box {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.15);
   color: #e8ddd0;
 }
 
@@ -792,17 +977,27 @@ section {
   border-color: rgba(255,255,255,0.2);
 }
 
-.sky-bg.is-sunset ~ main .more-link-card {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.2);
-  color: #f0e8d8;
+.sky-bg.is-sunset ~ main .card-link {
+  color: #ffb86c;
 }
 
 /* Sunset header */
-.sky-bg.is-sunset ~ #site-header header {
-  background: rgba(30,20,40,0.7);
+.sky-bg.is-sunset ~ header {
+  background: rgba(30,20,40,0.7) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+.sky-bg.is-sunset ~ header .site-title,
+.sky-bg.is-sunset ~ header nav a,
+.sky-bg.is-sunset ~ header .lang-toggle,
+.sky-bg.is-sunset ~ header .theme-toggle {
+  color: #f0e8d8 !important;
+}
+
+.sky-bg.is-sunset ~ footer {
+  background: rgba(30,20,40,0.5);
+  color: #a09080;
 }
 
 .sky-bg.is-sunset ~ #site-header .site-title,
@@ -1386,21 +1581,9 @@ section {
   font-style: italic;
 }
 
-.blog-newsletter-cta,
 .blog-related-section {
   max-width: 860px;
   margin: var(--space-xl) auto 0;
-}
-
-.blog-newsletter-cta {
-  background: linear-gradient(135deg, var(--color-accent-light) 0%, transparent 100%);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  padding: var(--space-xl);
-}
-
-.blog-newsletter-cta h2 {
-  margin-bottom: var(--space-sm);
 }
 
 .blog-section-head {
@@ -2246,8 +2429,7 @@ li {
     grid-template-columns: 1fr;
   }
 
-  .blog-post-shell,
-  .blog-newsletter-cta {
+  .blog-post-shell {
     padding: var(--space-lg);
     border-radius: var(--border-radius);
   }
@@ -2343,7 +2525,7 @@ li {
     padding-top: 0;
   }
   
-  .card, .book-card, .blog-box, .core-box, .blog-post-shell, .blog-newsletter-cta {
+  .card, .book-card, .blog-box, .core-box, .blog-post-shell {
     break-inside: avoid;
     border: 1px solid #ccc;
     box-shadow: none;
@@ -4046,99 +4228,24 @@ li {
   margin-bottom: 6px;
 }
 
-/* === Phase 11 Engagement (cleaned) === */
-.site-newsletter-cta,
+/* Newsletter section removed */
+
 .site-discussion-panel {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-lg);
   box-shadow: 0 8px 24px var(--color-shadow);
-}
-
-.site-newsletter-cta,
-.site-discussion-panel {
   padding: var(--space-xl);
+  max-width: 860px;
+  margin: var(--space-2xl) auto 0;
 }
 
-.site-newsletter-kicker {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-}
-
-.site-newsletter-copy p,
-.site-discussion-copy p,
-.site-engagement-note {
+.site-discussion-copy p {
   color: var(--color-text-secondary);
 }
 
-.site-newsletter-copy h2,
 .site-discussion-copy h2 {
   margin: var(--space-xs) 0 var(--space-sm);
-}
-
-.site-newsletter-copy--compact {
-  padding: 0;
-}
-
-.site-newsletter-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  align-items: center;
-  margin-top: var(--space-md);
-}
-
-.site-engagement-stats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-}
-
-.site-engagement-stat-card {
-  padding: var(--space-md);
-  background: var(--color-bg);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--color-border);
-  text-align: center;
-}
-
-.site-engagement-stat-card span {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  line-height: 1.1;
-  color: var(--color-text);
-}
-
-.site-engagement-stat-card small {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-muted);
-}
-
-.site-engagement-note {
-  margin-top: var(--space-sm);
-  font-size: 0.92rem;
-}
-
-.site-newsletter-cta,
-.site-discussion-panel {
-  max-width: 960px;
-  margin: var(--space-2xl) auto 0;
-  background:
-    linear-gradient(135deg, var(--color-accent-light) 0%, transparent 100%),
-    var(--color-card-bg);
-}
-
-.site-discussion-panel {
-  max-width: 860px;
 }
 
 /* === Skincare & Style === */
@@ -4420,7 +4527,6 @@ li {
     padding: var(--space-lg);
   }
 
-  .site-newsletter-cta,
   .site-discussion-panel,
   .future-panel {
     padding: var(--space-lg);
@@ -4502,8 +4608,7 @@ li {
   .tool-link-card-top,
   .shop-card-top,
   .future-panel-head,
-  .future-result-top,
-  .site-newsletter-actions {
+  .future-result-top {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -4517,7 +4622,6 @@ li {
     align-items: flex-start;
   }
 
-  .site-newsletter-cta,
   .site-discussion-panel,
   .future-panel,
   .future-result-card,

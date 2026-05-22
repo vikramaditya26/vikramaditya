@@ -99,6 +99,26 @@ function injectComponents() {
   if (footerEl) {
     footerEl.outerHTML = renderFooter();
   }
+
+  // Inject dynamic sky background on every page (if not already present)
+  if (!document.getElementById('sky-bg')) {
+    var skyWrapper = document.createElement('div');
+    skyWrapper.innerHTML = '<div class="sky-bg" id="sky-bg" aria-hidden="true">'
+      + '<div class="sky-stars" id="sky-stars"></div>'
+      + '<div class="sky-clouds" id="sky-clouds">'
+      + '<div class="cloud cloud--1"></div>'
+      + '<div class="cloud cloud--2"></div>'
+      + '<div class="cloud cloud--3"></div>'
+      + '</div>'
+      + '<div class="sky-sun-moon" id="sky-celestial"></div>'
+      + '</div>'
+      + '<div class="noise-overlay" aria-hidden="true"></div>';
+    // Insert as first children of body so ~ sibling selectors reach header, main, footer
+    var firstChild = document.body.firstChild;
+    while (skyWrapper.firstChild) {
+      document.body.insertBefore(skyWrapper.firstChild, firstChild);
+    }
+  }
 }
 
 // Inject components immediately
@@ -1137,51 +1157,7 @@ function buildContactPrefillUrl(subject, message) {
 
 // Quote of the Day removed
 
-function renderSharedNewsletterMarkup(payload, compact) {
-  var newsletter = payload.newsletter || {};
-  var secondaryUrl = resolveLinkPath(newsletter.secondaryPath || 'contact/');
-  var secondaryTarget = /^(https?:|mailto:)/i.test(secondaryUrl) ? ' target="_blank" rel="noopener"' : '';
-  var compactClass = compact ? ' site-newsletter-copy--compact' : '';
-
-  return `
-    <div class="site-newsletter-copy${compactClass}">
-      <p class="site-newsletter-kicker">${escapeHtml(newsletter.eyebrow || 'Newsletter')}</p>
-      <h2>${escapeHtml(newsletter.title || 'Weekly notes, not noise')}</h2>
-      <p>${escapeHtml(newsletter.description || 'The newsletter link is not live yet, but you can still join early.')}</p>
-      <div class="site-newsletter-actions">
-        <a href="${buildContactPrefillUrl('Newsletter waitlist', 'Hi Vikram,\n\nPlease keep me posted when the Substack link goes live.\n')}" class="btn">${escapeHtml(newsletter.ctaLabel || 'Join the waitlist')}</a>
-        <a href="${secondaryUrl}" class="card-link"${secondaryTarget}>${escapeHtml(newsletter.secondaryLabel || 'Stay connected')}</a>
-      </div>
-      ${buildEngagementStatsMarkup(newsletter.statsNote)}
-    </div>
-  `;
-}
-
-function initSharedNewsletter(payload) {
-  var existingBlogCtas = document.querySelectorAll('.blog-newsletter-cta');
-
-  if (existingBlogCtas.length) {
-    existingBlogCtas.forEach(function(block) {
-      block.innerHTML = renderSharedNewsletterMarkup(payload, true);
-    });
-    refreshEngagementStats();
-    return;
-  }
-
-  if (document.querySelector('.site-newsletter-cta')) {
-    refreshEngagementStats();
-    return;
-  }
-
-  var footer = document.querySelector('footer');
-  if (!footer || !footer.parentNode) return;
-
-  var section = document.createElement('section');
-  section.className = 'site-newsletter-cta fade-in visible';
-  section.innerHTML = renderSharedNewsletterMarkup(payload, false);
-  footer.parentNode.insertBefore(section, footer);
-  refreshEngagementStats();
-}
+// Newsletter section removed
 
 function renderDiscussionMarkup(config, postTitle) {
   var discussion = config.discussion || {};
@@ -3570,7 +3546,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   loadEngagementData()
     .then(function(payload) {
-      initSharedNewsletter(payload);
       refreshEngagementStats();
     })
     .catch(function() {
