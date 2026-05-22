@@ -1063,7 +1063,7 @@ function getEngagementState() {
     toolRuns: Number(stored.toolRuns) || 0,
     pages: stored.pages && typeof stored.pages === 'object' ? stored.pages : {},
     tools: stored.tools && typeof stored.tools === 'object' ? stored.tools : {},
-    feedback: stored.feedback && typeof stored.feedback === 'object' ? stored.feedback : {}
+    feedback: {}
   };
 }
 
@@ -1094,15 +1094,7 @@ function trackToolUsage(toolKey) {
   });
 }
 
-function saveHelpfulVote(sectionKey, vote) {
-  return updateEngagementState(function(state) {
-    state.feedback[sectionKey] = vote;
-  });
-}
-
-function getHelpfulVote(sectionKey) {
-  return getEngagementState().feedback[sectionKey] || '';
-}
+// Helpful feedback removed
 
 function getEngagementSummary() {
   var state = getEngagementState();
@@ -1128,10 +1120,6 @@ function buildEngagementStatsMarkup(note) {
       <article class="site-engagement-stat-card">
         <span data-engagement-stat="toolRuns">0</span>
         <small>tool runs</small>
-      </article>
-      <article class="site-engagement-stat-card">
-        <span data-engagement-stat="helpfulVotes">0</span>
-        <small>feedback signals</small>
       </article>
     </div>
     <p class="site-engagement-note">${escapeHtml(note || 'Saved on this browser for now.')}</p>
@@ -1162,35 +1150,7 @@ function buildContactPrefillUrl(subject, message) {
   return resolveInternalPath('contact/') + (query ? '?' + query : '');
 }
 
-function getQuoteForToday(quotes) {
-  if (!Array.isArray(quotes) || !quotes.length) return null;
-  var now = new Date();
-  var key = Number([
-    now.getFullYear(),
-    String(now.getMonth() + 1).padStart(2, '0'),
-    String(now.getDate()).padStart(2, '0')
-  ].join(''));
-  return quotes[key % quotes.length];
-}
-
-function renderQuoteBanner(payload) {
-  var main = document.getElementById('main');
-  if (!main || document.querySelector('.site-quote-banner')) return;
-
-  var quote = getQuoteForToday(payload.quotes || []);
-  if (!quote) return;
-
-  var banner = document.createElement('section');
-  banner.className = 'site-quote-banner fade-in visible';
-  banner.innerHTML = `
-    <div class="site-quote-inner">
-      <p class="site-quote-kicker">Quote of the Day</p>
-      <blockquote class="site-quote-text">"${escapeHtml(quote.text)}"</blockquote>
-      <p class="site-quote-meta">${escapeHtml(quote.author)}</p>
-    </div>
-  `;
-  main.insertBefore(banner, main.firstChild);
-}
+// Quote of the Day removed
 
 function renderSharedNewsletterMarkup(payload, compact) {
   var newsletter = payload.newsletter || {};
@@ -1268,88 +1228,7 @@ function injectBlogDiscussion(config, postTitle) {
   anchor.parentNode.insertBefore(section, anchor.nextSibling);
 }
 
-function initHelpfulFeedback() {
-  var page = document.body.getAttribute('data-page') || '';
-  if (page === 'about' || page === 'contact') return;
-
-  var selectors = [
-    'main > section',
-    'main > article.blog-post',
-    '.finance-card .finance-card-body',
-    '.workout-day'
-  ];
-  var seenKeys = {};
-  var targets = [];
-
-  selectors.forEach(function(selector) {
-    document.querySelectorAll(selector).forEach(function(node) {
-      if (targets.indexOf(node) === -1) targets.push(node);
-    });
-  });
-
-  targets.forEach(function(target) {
-    if (!target || target.querySelector('.helpful-feedback')) return;
-    if (target.closest('.site-newsletter-cta, .site-discussion-panel, .site-quote-banner, .blog-newsletter-cta, .blog-related-section, .contact-section')) return;
-    if ((target.textContent || '').trim().length < 140) return;
-
-    var heading = target.querySelector('h2, h3');
-    if (!heading) {
-      var financeCard = target.closest('.finance-card');
-      if (financeCard) {
-        heading = financeCard.querySelector('h3');
-      }
-    }
-    if (!heading) return;
-
-    var sectionLabel = (heading.textContent || '').trim();
-    if (!sectionLabel) return;
-
-    var sectionKey = page + ':' + slugifyText(sectionLabel);
-    if (seenKeys[sectionKey]) return;
-    seenKeys[sectionKey] = true;
-
-    var wrapper = document.createElement('div');
-    wrapper.className = 'helpful-feedback';
-    wrapper.setAttribute('data-helpful-key', sectionKey);
-    wrapper.innerHTML = `
-      <span class="helpful-feedback-label">Was this helpful?</span>
-      <div class="helpful-feedback-actions">
-        <button type="button" class="helpful-feedback-btn" data-helpful-vote="yes">Yes</button>
-        <button type="button" class="helpful-feedback-btn" data-helpful-vote="no">Not yet</button>
-      </div>
-      <p class="helpful-feedback-note">A small signal helps me understand what is actually useful.</p>
-    `;
-
-    var savedVote = getHelpfulVote(sectionKey);
-    if (savedVote) {
-      wrapper.classList.add('is-answered');
-      var activeButton = wrapper.querySelector('[data-helpful-vote="' + savedVote + '"]');
-      if (activeButton) activeButton.classList.add('is-active');
-      var note = wrapper.querySelector('.helpful-feedback-note');
-      if (note) note.textContent = 'Saved on this browser. Thanks for the signal.';
-    }
-
-    wrapper.querySelectorAll('[data-helpful-vote]').forEach(function(button) {
-      button.addEventListener('click', function() {
-        var vote = button.getAttribute('data-helpful-vote') || 'yes';
-        saveHelpfulVote(sectionKey, vote);
-        wrapper.classList.add('is-answered');
-        wrapper.querySelectorAll('[data-helpful-vote]').forEach(function(item) {
-          item.classList.toggle('is-active', item === button);
-        });
-        var note = wrapper.querySelector('.helpful-feedback-note');
-        if (note) {
-          note.textContent = vote === 'yes'
-            ? 'Saved on this browser. Glad this section helped.'
-            : 'Saved on this browser. That is useful to know too.';
-        }
-        refreshEngagementStats();
-      });
-    });
-
-    target.appendChild(wrapper);
-  });
-}
+// "Was this helpful?" feedback removed
 
 // ===== Phase 12 Future Vision =====
 var FUTURE_VISION_STORAGE_KEY = 'simpleGuyFutureVision';
@@ -1559,7 +1438,8 @@ function injectCurrentPageSaveButton() {
   var item = buildCurrentPageSaveItem();
   if (!item) return;
 
-  var target = document.querySelector('.blog-post-hero') || document.querySelector('main > section.hero');
+  var page = document.body.getAttribute('data-page') || '';
+  var target = document.querySelector('.blog-post-hero') || (page !== 'about' ? document.querySelector('main > section.hero') : null);
   if (!target || target.querySelector('.page-save-row')) return;
 
   var row = document.createElement('div');
@@ -1983,78 +1863,13 @@ function injectPwaMetadata() {
   }
 }
 
-function syncInstallPromptUi() {
-  var savedSlot = document.getElementById('pwa-install-slot');
-  var banner = document.querySelector('.pwa-install-banner');
-
-  if (!deferredInstallPrompt && !savedSlot) return;
-
-  var markup = deferredInstallPrompt ? `
-    <div class="pwa-install-copy">
-      <p class="future-kicker">Install</p>
-      <h3>Install The Simple Guy</h3>
-      <p>Save the site to your home screen for quicker access, offline support, and a more app-like flow.</p>
-      <div class="future-result-actions">
-        <button type="button" class="btn" id="pwa-install-btn">Install now</button>
-        <button type="button" class="future-save-btn" id="pwa-dismiss-btn">Maybe later</button>
-      </div>
-    </div>
-  ` : '<p><strong>PWA support:</strong> Your browser is not offering an install prompt right now, but offline caching is still available once the service worker is active.</p>';
-
-  if (savedSlot) {
-    savedSlot.innerHTML = markup;
-  } else if (!banner && deferredInstallPrompt) {
-    var footer = document.querySelector('footer');
-    if (footer && footer.parentNode) {
-      banner = document.createElement('section');
-      banner.className = 'pwa-install-banner fade-in visible';
-      banner.innerHTML = markup;
-      footer.parentNode.insertBefore(banner, footer);
-    }
-  }
-
-  document.querySelectorAll('#pwa-install-btn').forEach(function(button) {
-    if (button.dataset.installBound === 'true') return;
-    button.dataset.installBound = 'true';
-    button.addEventListener('click', function() {
-      if (!deferredInstallPrompt) return;
-      deferredInstallPrompt.prompt();
-      deferredInstallPrompt.userChoice.finally(function() {
-        deferredInstallPrompt = null;
-        syncInstallPromptUi();
-      });
-    });
-  });
-
-  document.querySelectorAll('#pwa-dismiss-btn').forEach(function(button) {
-    if (button.dataset.dismissBound === 'true') return;
-    button.dataset.dismissBound = 'true';
-    button.addEventListener('click', function() {
-      deferredInstallPrompt = null;
-      syncInstallPromptUi();
-    });
-  });
-}
-
+// PWA install UI removed — service worker still registered
 function initPwaSupport() {
   injectPwaMetadata();
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js').catch(function() {});
   }
-
-  window.addEventListener('beforeinstallprompt', function(event) {
-    event.preventDefault();
-    deferredInstallPrompt = event;
-    syncInstallPromptUi();
-  });
-
-  window.addEventListener('appinstalled', function() {
-    deferredInstallPrompt = null;
-    syncInstallPromptUi();
-  });
-
-  syncInstallPromptUi();
 }
 
 function applyRouteTranslations(entries, language) {
@@ -3771,15 +3586,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
   loadEngagementData()
     .then(function(payload) {
-      renderQuoteBanner(payload);
       initSharedNewsletter(payload);
-      initHelpfulFeedback();
       refreshEngagementStats();
     })
     .catch(function() {
-      initHelpfulFeedback();
       refreshEngagementStats();
     });
+
+  // ===== Scroll Reveal Observer =====
+  (function initScrollReveal() {
+    var reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el) { observer.observe(el); });
+  })();
 
   // ===== Console Easter Egg =====
   console.log('%c👋 Hello, curious developer!', 'font-size: 20px; font-weight: bold;');

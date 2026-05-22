@@ -29,151 +29,92 @@
 <body data-page="about">
   <div id="site-header"></div>
 
+  <!-- Ambient Background -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-orb ambient-orb--1"></div>
+    <div class="ambient-orb ambient-orb--2"></div>
+    <div class="ambient-orb ambient-orb--3"></div>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
   <main id="main">
     <!-- Hero Section -->
     <section class="hero">
       <p class="tagline">"What we think, we become." — Buddha</p>
-      <h1>Hello, I'm Vikram Aditya 👋</h1>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="fade-in">
-      <h2>About Me</h2>
-      <p>
-        I'm <strong>Vikram Aditya</strong> (<a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener">Aditya Kumar</a> ; 王阳明 - Wang Yangming).
-        A Engineering graduate from <strong>IIT Bombay</strong> (Class of 2024), currently working in the <strong>Founder's Office at Teachmint</strong> in Bengaluru.
-      </p>
-    </section>
-
-    <!-- Philosophy Section -->
-    <section class="fade-in">
-      <h2>My Philosophy</h2>
-      <p>
-        My life is guided by a single core value inspired by the Buddha's wisdom:
-        <em>"What we think, we become."</em>
-      </p>
-      <p>Building upon this wisdom, I have defined five core values that guide my actions and decisions:</p>
-      <div class="core-values">
-        <details class="core-box">
-          <summary><b>1. Ethics is Fundamental</b></summary>
-          <div class="content">
-            <p>Integrity is non-negotiable in how we live and work. This is practiced by respecting everything equally — treating people, work, and nature with the same level of respect.</p>
-          </div>
-        </details>
-        <details class="core-box">
-          <summary><b>2. Be Present</b></summary>
-          <div class="content">
-            <p>This means focusing on one thing at a time and giving it full attention. It helps value each moment, avoid wasting time, and turn small actions into big accomplishments.</p>
-          </div>
-        </details>
-        <details class="core-box">
-          <summary><b>3. Love and Respect Yourself</b></summary>
-          <div class="content">
-            <p>Self-care and self-respect form the foundation for everything else. Avoid complaints, accept circumstances, and take action. Stay humble, hungry for knowledge, and grounded.</p>
-          </div>
-        </details>
-        <details class="core-box">
-          <summary><b>4. Contribute Proactively</b></summary>
-          <div class="content">
-            <p>Focus on what can be given rather than received. Create value, commit to continuous learning, take bold action, and pursue simple ideas with deep focus.</p>
-          </div>
-        </details>
-        <details class="core-box">
-          <summary><b>5. Courage, Discipline, and Consistency</b></summary>
-          <div class="content">
-            <p>Begin with courage to start and discipline to continue. Small daily actions accumulate into significant results. Focus on process, not perfection — progress matters most.</p>
-          </div>
-        </details>
+      <h1 class="hero-title">Hello, I'm Vikram Aditya</h1>
+      <p class="subtitle">IIT Bombay graduate, building at Teachmint's Founder's Office. I write about books, fitness, finance, and getting 1% better every day.</p>
+      <div class="hero-cta-row">
+        <a href="blog/" class="btn">Read the blog</a>
+        <a href="contact/" class="btn btn--ghost">Get in touch</a>
       </div>
     </section>
 
-    <!-- Why This Website -->
-    <section class="fade-in">
-      <h2>Why This Website?</h2>
+    <!-- About — compact -->
+    <section id="about" class="fade-in">
+      <h2>About Me</h2>
       <p>
-        This website is part of my <strong><a href="100-skills/">100-day challenge</a></strong>, a small experiment where I aim to get <em>1% better every day</em>.
-        Here, I share my personal experiences, thoughts, and learnings across finance, books, workouts, and life in general.
-      </p>
-      <p>
-        If you notice some sections incomplete, that simply means I'm still building and improving.
+        I'm <strong>Vikram Aditya</strong> (<a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener">Aditya Kumar</a>).
+        This site is part of my <strong><a href="100-skills/">100-day challenge</a></strong> — a personal experiment to learn, build, and share openly.
+        My philosophy is simple: ethics first, stay present, create more than you consume.
       </p>
     </section>
 
-    <!-- Quick Links Section -->
+    <div class="section-divider"></div>
+
+    <!-- Featured Sections (the best 6) -->
     <section class="fade-in">
       <h2>Explore</h2>
       <div class="grid-2">
-        <div class="card">
+        <div class="card reveal">
           <h3><span class="icon">📚</span> Books</h3>
           <p>Curated book reviews and lessons from timeless reads that shaped my thinking.</p>
           <a href="books/" class="card-link">See all book reviews</a>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3><span class="icon">💪</span> Workout</h3>
           <p>My fitness journey, workout routines, and exercise guides with videos.</p>
           <a href="workout/" class="card-link">View workout notes</a>
         </div>
-        <div class="card">
-          <h3><span class="icon">🍳</span> Kitchen</h3>
-          <p>Easy Indian meals, practical bachelor cooking ideas, and simple nutrition tools that fit real schedules.</p>
-          <a href="kitchen/" class="card-link">Open bachelor's kitchen</a>
-        </div>
-        <div class="card">
-          <h3><span class="icon">🧴</span> Skincare</h3>
-          <p>A simple men's skincare and grooming guide with a routine, skin-type helper, and practical product picks.</p>
-          <a href="skincare/" class="card-link">Open skincare guide</a>
-        </div>
-        <div class="card">
-          <h3><span class="icon">👔</span> Style</h3>
-          <p>A simple style guide for Indian men with wardrobe essentials, outfit formulas, and budget dressing advice.</p>
-          <a href="style/" class="card-link">Open style guide</a>
-        </div>
-        <div class="card">
+        <div class="card reveal">
           <h3><span class="icon">💰</span> Finance</h3>
           <p>Personal finance basics — budgeting, investing, and building wealth.</p>
           <a href="finance/" class="card-link">Learn finance basics</a>
         </div>
-        <div class="card">
-          <h3><span class="icon">🛠️</span> 100 Skills</h3>
-          <p>The challenge hub for 100 planned skill days across creative, physical, mental, cooking, music, and life.</p>
-          <a href="100-skills/" class="card-link">Browse the challenge</a>
+        <div class="card reveal">
+          <h3><span class="icon">🍳</span> Kitchen</h3>
+          <p>Easy Indian meals, practical bachelor cooking ideas, and simple nutrition tools.</p>
+          <a href="kitchen/" class="card-link">Open bachelor's kitchen</a>
         </div>
-        <div class="card">
-          <h3><span class="icon">🎬</span> Movies & Series</h3>
-          <p>A curated watchlist with mood tags, platform filters, and the films or shows I would recommend first.</p>
-          <a href="movies/" class="card-link">Open the watchlist</a>
-        </div>
-        <div class="card">
-          <h3><span class="icon">🧮</span> Tools</h3>
-          <p>Interactive calculators and planners for SIPs, EMIs, budgets, taxes, macros, diet, and book picks.</p>
-          <a href="tools/" class="card-link">Explore the tools</a>
-        </div>
-        <div class="card">
-          <h3><span class="icon">🔎</span> Search & Ask</h3>
-          <p>Search the full site or ask the local site assistant where to start for money, books, fitness, style, or tools.</p>
-          <a href="search/" class="card-link">Open search and assistant</a>
-        </div>
-        <div class="card">
-          <h3><span class="icon">⭐</span> Saved & Progress</h3>
-          <p>Keep a local reading list, save pages for later, and track points, streaks, and badges on this device.</p>
-          <a href="saved/" class="card-link">See saved items</a>
-        </div>
-        <div class="card">
-          <h3><span class="icon">🛍️</span> Shop</h3>
-          <p>Digital templates and free cheat sheets for money, reading, and fitness systems that make the site more practical.</p>
-          <a href="shop/" class="card-link">Visit the shop</a>
-        </div>
-        <div class="card">
+        <div class="card reveal">
           <h3><span class="icon">✏️</span> Blog</h3>
           <p>Thoughts, insights, and lessons from books, podcasts, and life experiences.</p>
           <a href="blog/" class="card-link">Read the blog</a>
         </div>
+        <div class="card reveal">
+          <h3><span class="icon">🧮</span> Tools</h3>
+          <p>Interactive calculators and planners for SIPs, EMIs, budgets, taxes, macros, and diet.</p>
+          <a href="tools/" class="card-link">Explore the tools</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- More Sections — compact row -->
+    <section class="fade-in">
+      <h2>More</h2>
+      <div class="more-links-grid">
+        <a href="skincare/" class="more-link-card reveal"><span class="icon">🧴</span> Skincare</a>
+        <a href="style/" class="more-link-card reveal"><span class="icon">👔</span> Style</a>
+        <a href="movies/" class="more-link-card reveal"><span class="icon">🎬</span> Movies</a>
+        <a href="100-skills/" class="more-link-card reveal"><span class="icon">🛠️</span> 100 Skills</a>
+        <a href="shop/" class="more-link-card reveal"><span class="icon">🛍️</span> Shop</a>
+        <a href="search/" class="more-link-card reveal"><span class="icon">🔎</span> Search</a>
+        <a href="saved/" class="more-link-card reveal"><span class="icon">⭐</span> Saved</a>
       </div>
     </section>
 
     <!-- Connect Section -->
     <section class="fade-in">
-      <h2>Connect With Me</h2>
+      <h2>Connect</h2>
       <div class="social-links">
         <a href="https://www.linkedin.com/in/adityakumar2608/" target="_blank" rel="noopener" class="social-link">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
