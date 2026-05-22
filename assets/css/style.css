@@ -838,9 +838,6 @@ section {
   color: #c8c8d8;
 }
 
-.sky-bg.is-night ~ main .affiliate-disclosure {
-  color: #888;
-}
 
 /* Tip box */
 .sky-bg.is-night ~ main .tip-box {
@@ -1778,22 +1775,6 @@ section {
   box-shadow: 0 4px 12px rgba(40, 116, 240, 0.3);
 }
 
-/* === Affiliate Disclosure === */
-.affiliate-disclosure {
-  background: var(--color-card-bg);
-  border-left: 3px solid var(--color-accent);
-  padding: var(--space-md) var(--space-lg);
-  margin: var(--space-xl) auto;
-  max-width: 900px;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-}
-
-.affiliate-disclosure p {
-  margin: 0;
-}
 
 /* === Recommendation Section (Cross-sell) === */
 .recommendation-section {
