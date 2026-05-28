@@ -520,8 +520,7 @@ nav a[aria-current="page"] {
   margin-left: auto;
 }
 
-.header-action-btn,
-.lang-toggle {
+.header-action-btn {
   min-height: 40px;
   border: 1px solid var(--color-border);
   background: transparent;
@@ -538,8 +537,7 @@ nav a[aria-current="page"] {
 }
 
 .header-action-btn:hover,
-.header-action-btn.is-active,
-.lang-toggle:hover {
+.header-action-btn.is-active {
   color: var(--color-accent);
   border-color: var(--color-accent);
   background: var(--color-accent-light);
@@ -581,6 +579,167 @@ nav a[aria-current="page"] {
 
 [data-theme="dark"] .theme-toggle .sun-icon { display: block; }
 [data-theme="dark"] .theme-toggle .moon-icon { display: none; }
+
+/* Voyager Golden Record — Floating Disc Button */
+.voyager-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 900;
+  width: 60px;
+  height: 60px;
+  border: none;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 2px rgba(201,168,76,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.voyager-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.voyager-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.4), 0 0 0 2px rgba(201,168,76,0.5);
+}
+
+.voyager-btn.is-playing img {
+  animation: spin-disc 4s linear infinite;
+}
+
+@keyframes spin-disc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Voyager Mini Player */
+.voyager-player {
+  position: fixed;
+  bottom: -80px;
+  left: 24px;
+  z-index: 9998;
+  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.voyager-player.is-visible {
+  bottom: 96px;
+  pointer-events: auto;
+}
+
+.voyager-player-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(20, 18, 10, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 50px;
+  padding: 8px 16px 8px 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.1);
+  min-width: 320px;
+  max-width: 440px;
+}
+
+.voyager-disc-anim {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voyager-disc-anim.spinning svg {
+  animation: spin-disc 3s linear infinite;
+}
+
+.voyager-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.voyager-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #c9a84c;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.voyager-track-name {
+  font-size: 0.82rem;
+  color: #e8e0d0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-body);
+  line-height: 1.3;
+}
+
+.voyager-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.voyager-ctrl {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #d0c8b0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.voyager-ctrl:hover {
+  background: rgba(201, 168, 76, 0.2);
+  color: #c9a84c;
+}
+
+.voyager-play {
+  width: 36px;
+  height: 36px;
+  background: rgba(201, 168, 76, 0.2);
+}
+
+.voyager-play:hover {
+  background: rgba(201, 168, 76, 0.35);
+}
+
+.v-pause-icon { display: none; }
+
+.voyager-close {
+  width: 26px;
+  height: 26px;
+  opacity: 0.5;
+  margin-left: 2px;
+}
+
+.voyager-close:hover {
+  opacity: 1;
+  background: rgba(255,80,80,0.2);
+  color: #ff6b6b;
+}
 
 /* Mobile Menu Button */
 .menu-toggle {
@@ -958,7 +1117,6 @@ section {
 
 .sky-bg.is-night ~ header .site-title,
 .sky-bg.is-night ~ header nav a,
-.sky-bg.is-night ~ header .lang-toggle,
 .sky-bg.is-night ~ header .menu-toggle span,
 .sky-bg.is-night ~ header .theme-toggle {
   color: #d0d0e0 !important;
@@ -1088,7 +1246,6 @@ section {
 
 .sky-bg.is-sunset ~ header .site-title,
 .sky-bg.is-sunset ~ header nav a,
-.sky-bg.is-sunset ~ header .lang-toggle,
 .sky-bg.is-sunset ~ header .theme-toggle {
   color: #f0e8d8 !important;
 }
@@ -1100,8 +1257,7 @@ section {
 }
 
 .sky-bg.is-sunset ~ #site-header .site-title,
-.sky-bg.is-sunset ~ #site-header nav a,
-.sky-bg.is-sunset ~ #site-header .lang-toggle {
+.sky-bg.is-sunset ~ #site-header nav a {
   color: #f0e8d8;
 }
 
@@ -2485,8 +2641,7 @@ li {
     gap: 6px;
   }
 
-  .header-action-btn,
-  .lang-toggle {
+  .header-action-btn {
     min-height: 36px;
     padding: 0 12px;
     font-size: 0.82rem;
@@ -2496,6 +2651,28 @@ li {
     margin-left: 0;
     width: 40px;
     height: 40px;
+  }
+
+  .voyager-btn {
+    width: 50px;
+    height: 50px;
+    bottom: 16px;
+    left: 16px;
+  }
+
+  .voyager-player-inner {
+    min-width: 280px;
+    max-width: calc(100vw - 32px);
+    padding: 6px 12px 6px 8px;
+    gap: 8px;
+  }
+
+  .voyager-track-name {
+    font-size: 0.75rem;
+  }
+
+  .voyager-player.is-visible {
+    bottom: 80px;
   }
   
   .grid-2, .grid-3 {
@@ -2596,7 +2773,7 @@ li {
 
 /* === Print Styles === */
 @media print {
-  header, footer, .theme-toggle, .back-to-top, .progress-bar, .blog-share-row {
+  header, footer, .theme-toggle, .back-to-top, .progress-bar, .blog-share-row, .voyager-player, .voyager-btn {
     display: none !important;
   }
   

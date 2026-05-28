@@ -53,7 +53,6 @@ function renderHeader(currentPage) {
       </nav>
       <div class="header-actions">
         ${actionLinks}
-        <button class="lang-toggle" type="button" aria-label="Toggle Hindi language">हिं</button>
         <button class="theme-toggle" aria-label="Toggle dark mode">
           <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
@@ -77,10 +76,14 @@ function renderHeader(currentPage) {
 }
 
 function renderFooter() {
+  const base = getBasePath();
   return `
   <footer>
     <p>&copy; 2025 Vikram Aditya — Made with ❤️</p>
   </footer>
+  <button class="voyager-btn" type="button" aria-label="Play Voyager Golden Record — Music from Earth" title="Voyager Golden Record — Music sent to the stars">
+    <img src="${base}assets/images/common/voyager-golden-record.jpg" alt="Voyager Golden Record" width="60" height="60" />
+  </button>
   <button class="back-to-top" aria-label="Back to top">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="18 15 12 9 6 15"></polyline>
@@ -1866,11 +1869,6 @@ function applyLanguage(language) {
       });
 
       applyRouteTranslations(payload.routes[route] || [], language);
-
-      var langToggle = document.querySelector('.lang-toggle');
-      if (langToggle) {
-        langToggle.textContent = language === 'hi' ? 'EN' : 'हिं';
-      }
     })
     .catch(function() {});
 }
@@ -3296,7 +3294,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Theme Toggle (Dark/Light Mode) =====
   const themeToggle = document.querySelector('.theme-toggle');
-  const langToggle = document.querySelector('.lang-toggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   function getThemePreference() {
@@ -3326,14 +3323,6 @@ document.addEventListener('DOMContentLoaded', function() {
       setTheme(e.matches ? 'dark' : 'light');
     }
   });
-
-  if (langToggle) {
-    langToggle.addEventListener('click', () => {
-      const next = getStoredLanguage() === 'hi' ? 'en' : 'hi';
-      localStorage.setItem('siteLanguage', next);
-      applyLanguage(next);
-    });
-  }
 
   // ===== Mobile Menu Toggle =====
   const menuToggle = document.querySelector('.menu-toggle');
@@ -3692,6 +3681,207 @@ function loadAffiliateLinks(scope) {
 }
 
 loadAffiliateLinks();
+
+// ===== Voyager Golden Record Player =====
+(function initVoyagerPlayer() {
+  var VOYAGER_CDN = 'https://cdn.jsdelivr.net/gh/Cawhee/Voyager-Golden-Record@master/';
+  var VOYAGER_TRACKS = [
+    { title: 'Brandenburg Concerto No. 2 — Bach', file: 'Brandenburg Concerto No. 2 in F, First Movement.mp3' },
+    { title: 'Fifth Symphony — Beethoven', file: 'Fifth Symphony, First Movement.mp3' },
+    { title: 'The Magic Flute — Mozart', file: 'The Magic Flute, Queen of the Night aria, no. 14.mp3' },
+    { title: 'The Well Tempered Clavier — Bach', file: 'The Well Tempered Clavier.mp3' },
+    { title: 'Gavotte en Rondeaux — Bach', file: 'Gavotte en Rondeaux Partita No. 3 in E Major.mp3' },
+    { title: 'Rite of Spring — Stravinsky', file: 'Rite of Spring.mp3' },
+    { title: 'String Quartet No. 13 — Beethoven', file: 'String Quartet No. 13 in B Flat.mp3' },
+    { title: 'Dark Was the Night', file: 'Dark Was the Night.mp3' },
+    { title: 'Johnny B. Goode', file: 'Johnny B. Goode.mp3' },
+    { title: 'Melancholy Blues', file: 'Melancholy Blues.mp3' },
+    { title: 'El Cascabel — Mexico', file: 'El Cascabel.mp3' },
+    { title: 'Tchakrulo — Georgia', file: 'Tchakrulo.mp3' },
+    { title: 'Flowing Streams — China', file: 'Flowing Streams.mp3' },
+    { title: 'Jaat Kahan Ho — India', file: 'Jaat Kahan Ho.mp3' },
+    { title: 'Kinds of Flowers — Java', file: 'Kinds of Flowers.mp3' },
+    { title: 'Panpipes — Peru', file: 'Panpipes.mp3' },
+    { title: 'Panpipes & Drum — Peru', file: 'Panpipes & Drum.mp3' },
+    { title: 'Percussion — Senegal', file: 'Percussion.mp3' },
+    { title: 'Pygmy Girls\' Initiation Song', file: "Pygmy Girls' Initiation Song.mp3" },
+    { title: 'Bagpipes — Azerbaijan', file: 'Bagpipes.mp3' },
+    { title: 'Night Chant — Navajo', file: 'Night Chant.mp3' },
+    { title: 'Men\'s House Song — New Guinea', file: "Men's House Song.mp3" },
+    { title: 'Morning Star, Devil Bird', file: 'Morning Star, Devil Bird.mp3' },
+    { title: 'The Fairie Round', file: 'The Fairie Round.mp3' },
+    { title: 'Wedding Song — Peru', file: 'Wedding Song.mp3' },
+    { title: 'Izlel je Delyo Hagdutin — Bulgaria', file: 'Izlel je Delyo Hagdutin.mp3' },
+    { title: 'Whales — Sounds of Earth', file: 'Whales.mp3' },
+    { title: 'Wind, Rain, Surf — Sounds of Earth', file: 'Wind, Rain, Surf.mp3' },
+    { title: 'Volcanoes, Earthquake, Thunder', file: 'Volcanoes, Earthquake, Thunder.mp3' }
+  ];
+
+  var audio = null;
+  var currentIdx = -1;
+  var isPlaying = false;
+  var playerEl = null;
+  var shuffled = [];
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function getTrackUrl(track) {
+    return VOYAGER_CDN + encodeURIComponent(track.file);
+  }
+
+  function createPlayer() {
+    if (playerEl) return;
+    var el = document.createElement('div');
+    el.className = 'voyager-player';
+    el.innerHTML =
+      '<div class="voyager-player-inner">' +
+        '<div class="voyager-disc-anim">' +
+          '<svg viewBox="0 0 40 40" width="36" height="36"><circle cx="20" cy="20" r="19" fill="#c9a84c" stroke="#a07c28" stroke-width="0.6"/><circle cx="20" cy="20" r="13" fill="none" stroke="#a07c28" stroke-width="0.3" opacity="0.5"/><circle cx="20" cy="20" r="9" fill="none" stroke="#a07c28" stroke-width="0.3" opacity="0.4"/><circle cx="20" cy="20" r="5" fill="none" stroke="#a07c28" stroke-width="0.3" opacity="0.3"/><circle cx="20" cy="20" r="3" fill="#b8942e"/><circle cx="20" cy="20" r="1.2" fill="#8b6914"/></svg>' +
+        '</div>' +
+        '<div class="voyager-info">' +
+          '<span class="voyager-label">Voyager Golden Record</span>' +
+          '<span class="voyager-track-name"></span>' +
+        '</div>' +
+        '<div class="voyager-controls">' +
+          '<button class="voyager-ctrl voyager-prev" aria-label="Previous track" title="Previous"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>' +
+          '<button class="voyager-ctrl voyager-play" aria-label="Play/Pause" title="Play/Pause"><svg class="v-play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><svg class="v-pause-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>' +
+          '<button class="voyager-ctrl voyager-next" aria-label="Next track" title="Next"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>' +
+          '<button class="voyager-ctrl voyager-close" aria-label="Close player" title="Close"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(el);
+    playerEl = el;
+
+    el.querySelector('.voyager-play').addEventListener('click', togglePlay);
+    el.querySelector('.voyager-next').addEventListener('click', playNext);
+    el.querySelector('.voyager-prev').addEventListener('click', playPrev);
+    el.querySelector('.voyager-close').addEventListener('click', closePlayer);
+  }
+
+  function showPlayer() {
+    createPlayer();
+    setTimeout(function() { playerEl.classList.add('is-visible'); }, 10);
+  }
+
+  function updateUI() {
+    if (!playerEl) return;
+    var track = shuffled[currentIdx];
+    playerEl.querySelector('.voyager-track-name').textContent = track ? track.title : '';
+    var disc = playerEl.querySelector('.voyager-disc-anim');
+    if (isPlaying) {
+      disc.classList.add('spinning');
+      playerEl.querySelector('.v-play-icon').style.display = 'none';
+      playerEl.querySelector('.v-pause-icon').style.display = 'block';
+    } else {
+      disc.classList.remove('spinning');
+      playerEl.querySelector('.v-play-icon').style.display = 'block';
+      playerEl.querySelector('.v-pause-icon').style.display = 'none';
+    }
+    // Also spin the header button
+    var headerBtn = document.querySelector('.voyager-btn');
+    if (headerBtn) {
+      if (isPlaying) headerBtn.classList.add('is-playing');
+      else headerBtn.classList.remove('is-playing');
+    }
+  }
+
+  function playTrack(idx) {
+    if (!audio) {
+      audio = new Audio();
+      audio.addEventListener('ended', playNext);
+      audio.addEventListener('error', function() {
+        // Skip to next on load error
+        setTimeout(playNext, 500);
+      });
+    }
+    currentIdx = idx;
+    var track = shuffled[currentIdx];
+    audio.src = getTrackUrl(track);
+    audio.play().then(function() {
+      isPlaying = true;
+      updateUI();
+    }).catch(function() {
+      isPlaying = false;
+      updateUI();
+    });
+    isPlaying = true;
+    updateUI();
+  }
+
+  function togglePlay() {
+    if (!audio || currentIdx < 0) {
+      startRandom();
+      return;
+    }
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+    } else {
+      audio.play();
+      isPlaying = true;
+    }
+    updateUI();
+  }
+
+  function playNext() {
+    if (shuffled.length === 0) return;
+    var next = (currentIdx + 1) % shuffled.length;
+    if (next === 0) shuffled = shuffle(VOYAGER_TRACKS);
+    playTrack(next);
+  }
+
+  function playPrev() {
+    if (shuffled.length === 0) return;
+    var prev = currentIdx <= 0 ? shuffled.length - 1 : currentIdx - 1;
+    playTrack(prev);
+  }
+
+  function closePlayer() {
+    if (audio) { audio.pause(); audio.src = ''; }
+    isPlaying = false;
+    currentIdx = -1;
+    if (playerEl) playerEl.classList.remove('is-visible');
+    updateUI();
+  }
+
+  function startRandom() {
+    shuffled = shuffle(VOYAGER_TRACKS);
+    currentIdx = 0;
+    showPlayer();
+    playTrack(0);
+  }
+
+  // Bind the floating disc button
+  function bindVoyagerButton() {
+    var btn = document.querySelector('.voyager-btn');
+    if (!btn) {
+      // Retry — footer may not be injected yet
+      setTimeout(bindVoyagerButton, 300);
+      return;
+    }
+    btn.addEventListener('click', function() {
+      if (!playerEl || !playerEl.classList.contains('is-visible')) {
+        startRandom();
+      } else {
+        togglePlay();
+      }
+    });
+  }
+
+  // Wait for footer to be injected (it creates the voyager-btn)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(bindVoyagerButton, 200); });
+  } else {
+    setTimeout(bindVoyagerButton, 200);
+  }
+})();
 
 // ===== Performance: Debounce =====
 function debounce(func, wait) {
