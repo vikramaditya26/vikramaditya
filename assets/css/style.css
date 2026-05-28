@@ -591,11 +591,18 @@ nav a[aria-current="page"] {
   border: none;
   background: none;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: grab;
   padding: 0;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 2px rgba(201,168,76,0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.voyager-btn:active {
+  cursor: grabbing;
 }
 
 .voyager-btn img {
@@ -623,15 +630,18 @@ nav a[aria-current="page"] {
 /* Voyager Mini Player */
 .voyager-player {
   position: fixed;
-  bottom: -80px;
+  bottom: 96px;
   left: 24px;
   z-index: 9998;
-  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 }
 
 .voyager-player.is-visible {
-  bottom: 96px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
   pointer-events: auto;
 }
 
@@ -2672,7 +2682,7 @@ li {
   }
 
   .voyager-player.is-visible {
-    bottom: 80px;
+    bottom: auto;
   }
   
   .grid-2, .grid-3 {

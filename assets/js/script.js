@@ -3736,6 +3736,37 @@ loadAffiliateLinks();
     return VOYAGER_CDN + encodeURIComponent(track.file);
   }
 
+  var hideTimer = null;
+  var HIDE_DELAY = 3500; // auto-hide panel after 3.5s
+
+  function resetHideTimer() {
+    clearTimeout(hideTimer);
+    if (playerEl && playerEl.classList.contains('is-visible')) {
+      hideTimer = setTimeout(hidePanel, HIDE_DELAY);
+    }
+  }
+
+  function hidePanel() {
+    if (playerEl) playerEl.classList.remove('is-visible');
+  }
+
+  function showPanel() {
+    if (!playerEl) return;
+    playerEl.classList.add('is-visible');
+    // Position panel near the disc button
+    positionPlayerNearDisc();
+    resetHideTimer();
+  }
+
+  function positionPlayerNearDisc() {
+    if (!playerEl) return;
+    var btn = document.querySelector('.voyager-btn');
+    if (!btn) return;
+    var r = btn.getBoundingClientRect();
+    playerEl.style.left = r.left + 'px';
+    playerEl.style.bottom = (window.innerHeight - r.top + 8) + 'px';
+  }
+
   function createPlayer() {
     if (playerEl) return;
     var el = document.createElement('div');
@@ -3759,15 +3790,14 @@ loadAffiliateLinks();
     document.body.appendChild(el);
     playerEl = el;
 
-    el.querySelector('.voyager-play').addEventListener('click', togglePlay);
-    el.querySelector('.voyager-next').addEventListener('click', playNext);
-    el.querySelector('.voyager-prev').addEventListener('click', playPrev);
+    el.querySelector('.voyager-play').addEventListener('click', function() { togglePlay(); resetHideTimer(); });
+    el.querySelector('.voyager-next').addEventListener('click', function() { playNext(); resetHideTimer(); });
+    el.querySelector('.voyager-prev').addEventListener('click', function() { playPrev(); resetHideTimer(); });
     el.querySelector('.voyager-close').addEventListener('click', closePlayer);
-  }
-
-  function showPlayer() {
-    createPlayer();
-    setTimeout(function() { playerEl.classList.add('is-visible'); }, 10);
+    // Reset timer on any hover/touch over the panel
+    el.addEventListener('mouseenter', function() { clearTimeout(hideTimer); });
+    el.addEventListener('mouseleave', function() { resetHideTimer(); });
+    el.addEventListener('touchstart', function() { clearTimeout(hideTimer); }, {passive: true});
   }
 
   function updateUI() {
@@ -3784,7 +3814,6 @@ loadAffiliateLinks();
       playerEl.querySelector('.v-play-icon').style.display = 'block';
       playerEl.querySelector('.v-pause-icon').style.display = 'none';
     }
-    // Also spin the header button
     var headerBtn = document.querySelector('.voyager-btn');
     if (headerBtn) {
       if (isPlaying) headerBtn.classList.add('is-playing');
@@ -3797,7 +3826,6 @@ loadAffiliateLinks();
       audio = new Audio();
       audio.addEventListener('ended', playNext);
       audio.addEventListener('error', function() {
-        // Skip to next on load error
         setTimeout(playNext, 500);
       });
     }
@@ -3847,6 +3875,7 @@ loadAffiliateLinks();
     if (audio) { audio.pause(); audio.src = ''; }
     isPlaying = false;
     currentIdx = -1;
+    clearTimeout(hideTimer);
     if (playerEl) playerEl.classList.remove('is-visible');
     updateUI();
   }
@@ -3854,23 +3883,96 @@ loadAffiliateLinks();
   function startRandom() {
     shuffled = shuffle(VOYAGER_TRACKS);
     currentIdx = 0;
-    showPlayer();
+    createPlayer();
+    showPanel();
     playTrack(0);
+  }
+
+  // === Draggable disc ===
+  function makeDraggable(btn) {
+    var isDragging = false;
+    var wasDragged = false;
+    var startX, startY, origLeft, origTop;
+
+    function onStart(e) {
+      var touch = e.touches ? e.touches[0] : e;
+      startX = touch.clientX;
+      startY = touch.clientY;
+      var r = btn.getBoundingClientRect();
+      origLeft = r.left;
+      origTop = r.top;
+      isDragging = false;
+      wasDragged = false;
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onEnd);
+      document.addEventListener('touchmove', onMove, {passive: false});
+      document.addEventListener('touchend', onEnd);
+    }
+
+    function onMove(e) {
+      var touch = e.touches ? e.touches[0] : e;
+      var dx = touch.clientX - startX;
+      var dy = touch.clientY - startY;
+      if (!isDragging && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+        isDragging = true;
+        wasDragged = true;
+        btn.style.transition = 'none';
+      }
+      if (isDragging) {
+        if (e.cancelable) e.preventDefault();
+        var newLeft = Math.max(0, Math.min(window.innerWidth - btn.offsetWidth, origLeft + dx));
+        var newTop = Math.max(0, Math.min(window.innerHeight - btn.offsetHeight, origTop + dy));
+        btn.style.left = newLeft + 'px';
+        btn.style.top = newTop + 'px';
+        btn.style.bottom = 'auto';
+        btn.style.right = 'auto';
+      }
+    }
+
+    function onEnd() {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onEnd);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onEnd);
+      btn.style.transition = '';
+      isDragging = false;
+    }
+
+    btn.addEventListener('mousedown', onStart);
+    btn.addEventListener('touchstart', onStart, {passive: true});
+
+    // Prevent click from firing after drag
+    btn.addEventListener('click', function(e) {
+      if (wasDragged) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        wasDragged = false;
+      }
+    }, true);
   }
 
   // Bind the floating disc button
   function bindVoyagerButton() {
     var btn = document.querySelector('.voyager-btn');
     if (!btn) {
-      // Retry — footer may not be injected yet
       setTimeout(bindVoyagerButton, 300);
       return;
     }
+    // Make disc draggable
+    makeDraggable(btn);
+    // Click toggles player panel
     btn.addEventListener('click', function() {
       if (!playerEl || !playerEl.classList.contains('is-visible')) {
-        startRandom();
+        if (audio && currentIdx >= 0) {
+          // Already has a track loaded — just show panel
+          showPanel();
+          if (!isPlaying) { audio.play(); isPlaying = true; updateUI(); }
+        } else {
+          startRandom();
+        }
       } else {
         togglePlay();
+        resetHideTimer();
       }
     });
   }
