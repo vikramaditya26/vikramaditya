@@ -3562,6 +3562,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    // Dark-mode moon element (always present, shown/hidden via CSS)
+    var darkMoonHtml = '<div class="sky-celestial-body is-moon dark-mode-moon" style="display:none;top:10%;right:15%"></div>';
+
     function updateSky() {
       var hour = new Date().getHours();
       var skyClass = '';
@@ -3600,16 +3603,17 @@ document.addEventListener('DOMContentLoaded', function() {
         celestialHtml = '<div class="sky-celestial-body is-moon" style="top:8%;right:18%"></div>';
       }
 
+      // Always append a hidden dark-mode moon (CSS reveals it when [data-theme="dark"])
+      celestialHtml += darkMoonHtml;
+
       skyEl.className = 'sky-bg ' + skyClass;
       skyEl.style.background = gradient;
-      // Sync html canvas so the sky color extends behind the full viewport
       document.documentElement.style.background = gradient;
       document.body.style.background = 'transparent';
       if (celestialEl) celestialEl.innerHTML = celestialHtml;
     }
 
     updateSky();
-    // Update every 5 minutes
     setInterval(updateSky, 5 * 60 * 1000);
   })();
 
@@ -3722,6 +3726,7 @@ loadAffiliateLinks();
   var isPlaying = false;
   var playerEl = null;
   var shuffled = [];
+  var STORAGE_KEY = 'voyager_player';
 
   function shuffle(arr) {
     var a = arr.slice();
@@ -3730,6 +3735,42 @@ loadAffiliateLinks();
       var t = a[i]; a[i] = a[j]; a[j] = t;
     }
     return a;
+  }
+
+  // === Persist state across page navigations ===
+  function saveState() {
+    try {
+      var state = {
+        shuffledFiles: shuffled.map(function(t) { return t.file; }),
+        currentIdx: currentIdx,
+        isPlaying: isPlaying,
+        timestamp: Date.now()
+      };
+      if (audio && audio.currentTime) state.currentTime = audio.currentTime;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch(e) {}
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var state = JSON.parse(raw);
+      // Expire after 2 hours of inactivity
+      if (Date.now() - state.timestamp > 2 * 60 * 60 * 1000) {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+      return state;
+    } catch(e) { return null; }
+  }
+
+  function rebuildShuffledFromFiles(files) {
+    var trackMap = {};
+    VOYAGER_TRACKS.forEach(function(t) { trackMap[t.file] = t; });
+    var result = [];
+    files.forEach(function(f) { if (trackMap[f]) result.push(trackMap[f]); });
+    return result.length > 0 ? result : null;
   }
 
   function getTrackUrl(track) {
@@ -3821,20 +3862,35 @@ loadAffiliateLinks();
     }
   }
 
-  function playTrack(idx) {
+  function ensureAudio() {
     if (!audio) {
       audio = new Audio();
       audio.addEventListener('ended', playNext);
       audio.addEventListener('error', function() {
         setTimeout(playNext, 500);
       });
+      // Save state periodically while playing
+      audio.addEventListener('timeupdate', function() {
+        if (audio.currentTime && Math.floor(audio.currentTime) % 5 === 0) saveState();
+      });
     }
+  }
+
+  function playTrack(idx, seekTo) {
+    ensureAudio();
     currentIdx = idx;
     var track = shuffled[currentIdx];
     audio.src = getTrackUrl(track);
+    if (seekTo) {
+      audio.addEventListener('loadedmetadata', function onLoad() {
+        audio.currentTime = seekTo;
+        audio.removeEventListener('loadedmetadata', onLoad);
+      });
+    }
     audio.play().then(function() {
       isPlaying = true;
       updateUI();
+      saveState();
     }).catch(function() {
       isPlaying = false;
       updateUI();
@@ -3856,6 +3912,7 @@ loadAffiliateLinks();
       isPlaying = true;
     }
     updateUI();
+    saveState();
   }
 
   function playNext() {
@@ -3878,6 +3935,7 @@ loadAffiliateLinks();
     clearTimeout(hideTimer);
     if (playerEl) playerEl.classList.remove('is-visible');
     updateUI();
+    localStorage.removeItem(STORAGE_KEY);
   }
 
   function startRandom() {
@@ -3951,6 +4009,23 @@ loadAffiliateLinks();
     }, true);
   }
 
+  // === Auto-resume from previous page ===
+  function tryAutoResume() {
+    var state = loadState();
+    if (!state || !state.isPlaying || !state.shuffledFiles) return;
+    var rebuilt = rebuildShuffledFromFiles(state.shuffledFiles);
+    if (!rebuilt) return;
+    shuffled = rebuilt;
+    createPlayer();
+    playTrack(state.currentIdx || 0, state.currentTime || 0);
+    // Don't show panel on auto-resume — disc spins to indicate music is playing
+  }
+
+  // Save state before user navigates away
+  window.addEventListener('beforeunload', function() {
+    if (isPlaying && currentIdx >= 0) saveState();
+  });
+
   // Bind the floating disc button
   function bindVoyagerButton() {
     var btn = document.querySelector('.voyager-btn');
@@ -3964,9 +4039,8 @@ loadAffiliateLinks();
     btn.addEventListener('click', function() {
       if (!playerEl || !playerEl.classList.contains('is-visible')) {
         if (audio && currentIdx >= 0) {
-          // Already has a track loaded — just show panel
           showPanel();
-          if (!isPlaying) { audio.play(); isPlaying = true; updateUI(); }
+          if (!isPlaying) { audio.play(); isPlaying = true; updateUI(); saveState(); }
         } else {
           startRandom();
         }
@@ -3975,6 +4049,9 @@ loadAffiliateLinks();
         resetHideTimer();
       }
     });
+
+    // Auto-resume if music was playing on previous page
+    tryAutoResume();
   }
 
   // Wait for footer to be injected (it creates the voyager-btn)

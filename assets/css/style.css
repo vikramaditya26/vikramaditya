@@ -302,10 +302,12 @@ body {
   right: 15%;
 }
 
-/* Dark mode override — always show night */
+/* Dark mode override — always show night sky + moon */
 [data-theme="dark"] .sky-bg { background: linear-gradient(180deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%) !important; }
 [data-theme="dark"] .sky-stars { opacity: 1 !important; }
 [data-theme="dark"] .sky-clouds { opacity: 0 !important; }
+[data-theme="dark"] .sky-celestial-body.is-sun { display: none !important; }
+[data-theme="dark"] .sky-sun-moon .dark-mode-moon { display: block !important; }
 
 /* === Noise Texture Overlay === */
 .noise-overlay {
