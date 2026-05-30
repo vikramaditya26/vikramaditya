@@ -922,6 +922,9 @@ section {
 .sky-bg.is-night ~ main .blog-box,
 .sky-bg.is-night ~ main .blog-stat-card,
 .sky-bg.is-night ~ main .core-box,
+.sky-bg.is-night ~ main .career-content,
+.sky-bg.is-night ~ main .about-highlight-card,
+.sky-bg.is-night ~ main .about-achievement-item,
 .sky-bg.is-night ~ main .exercise-box,
 .sky-bg.is-night ~ main .tip-box {
   background: rgba(255,255,255,0.06);
@@ -1200,6 +1203,9 @@ section {
 .sky-bg.is-sunset ~ main .tool-link-card,
 .sky-bg.is-sunset ~ main .blog-box,
 .sky-bg.is-sunset ~ main .blog-stat-card,
+.sky-bg.is-sunset ~ main .career-content,
+.sky-bg.is-sunset ~ main .about-highlight-card,
+.sky-bg.is-sunset ~ main .about-achievement-item,
 .sky-bg.is-sunset ~ main .tip-box {
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.15);
@@ -1532,6 +1538,253 @@ section {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* === About Page — Profile Section === */
+.about-profile {
+  margin-bottom: var(--space-lg);
+}
+
+.about-profile-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+.about-profile-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.08);
+  border: 4px solid var(--color-accent);
+  box-shadow: 0 8px 30px var(--color-shadow);
+  flex-shrink: 0;
+}
+
+.about-profile-text h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.about-profile-text h2::after {
+  display: none;
+}
+
+/* === About Page — Highlight Card (Crushky) === */
+.about-highlight-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  position: relative;
+  box-shadow: 0 4px 20px var(--color-shadow);
+}
+
+.about-highlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, transparent 60%);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+}
+
+.about-highlight-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: var(--space-sm);
+  position: relative;
+}
+
+.about-highlight-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: var(--space-sm);
+  position: relative;
+}
+
+.about-highlight-card .card-link {
+  position: relative;
+}
+
+/* === About Page — Career Timeline === */
+.career-timeline {
+  position: relative;
+  padding-left: 32px;
+}
+
+.career-timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.career-item {
+  position: relative;
+  margin-bottom: var(--space-xl);
+}
+
+.career-item:last-child {
+  margin-bottom: 0;
+}
+
+.career-marker {
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid var(--color-accent);
+  z-index: 1;
+  transition: all var(--transition-base);
+}
+
+.career-item:hover .career-marker {
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-light);
+}
+
+.career-content {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  transition: all var(--transition-base);
+}
+
+.career-content:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 30px var(--color-shadow-hover);
+}
+
+.career-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.career-header h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+.career-meta {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.career-role {
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+}
+
+.career-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--space-sm);
+}
+
+.career-highlights span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* === About Page — Achievements === */
+.about-achievements {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.about-achievement-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.about-achievement-item:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+
+.about-achievement-item .icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.about-achievement-item strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.about-achievement-item p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+/* === About Page — Skills & Interests === */
+.about-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.about-skills-group h4 {
+  margin-bottom: var(--space-sm);
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about-tags span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--color-card-bg);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: all var(--transition-base);
+}
+
+.about-tags span:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-light);
 }
 
 /* === Blog Boxes === */
@@ -2736,7 +2989,45 @@ li {
   .card, .core-box, .blog-box, .finance-card {
     border-radius: var(--border-radius-sm);
   }
-  
+
+  /* About page mobile */
+  .about-profile-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-lg);
+  }
+
+  .about-profile-photo {
+    width: 130px;
+    height: 130px;
+  }
+
+  .about-profile-text h2::after {
+    display: none;
+  }
+
+  .about-achievements {
+    grid-template-columns: 1fr;
+  }
+
+  .about-skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .career-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .career-content {
+    padding: var(--space-md);
+  }
+
+  .career-timeline {
+    padding-left: 28px;
+  }
+
   .social-links {
     flex-direction: column;
     align-items: center;

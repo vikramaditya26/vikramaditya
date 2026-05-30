@@ -28,6 +28,7 @@ function renderHeader(currentPage) {
   const base = getBasePath();
   const navItems = [
     { href: 'index.html', label: 'About', key: 'about' },
+    { href: 'career/', label: 'Career', key: 'career' },
     { href: 'finance/', label: 'Finance', key: 'finance' },
     { href: 'books/', label: 'Books', key: 'books' },
     { href: 'workout/', label: 'Workout', key: 'workout' },
