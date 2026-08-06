@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Private Tracker</title>
+  <!-- Keep this page out of search engines -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <meta name="theme-color" content="#387ed1" />
+  <link rel="icon" href="../assets/images/common/favicon.ico" />
+  <style>
+    /* ============ THEME TOKENS ============ */
+    :root {
+      --bg: #f4f5f7;
+      --bg-2: #ffffff;
+      --panel: #ffffff;
+      --text: #1a1d21;
+      --text-2: #5b6470;
+      --muted: #9aa3af;
+      --accent: #387ed1;
+      --accent-2: #2968b8;
+      --accent-soft: rgba(56,126,209,.10);
+      --border: #e4e7eb;
+      --shadow: rgba(20,30,50,.06);
+      --green: #2d9a5f;
+      --green-soft: rgba(45,154,95,.12);
+      --amber: #d98324;
+      --amber-soft: rgba(217,131,36,.12);
+      --red: #d84a3a;
+      --red-soft: rgba(216,74,58,.12);
+      --purple: #7c5cd6;
+      --grid: rgba(120,130,145,.16);
+      --radius: 14px;
+      --radius-sm: 9px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0f1216;
+      --bg-2: #161b22;
+      --panel: #161b22;
+      --text: #e8ecf1;
+      --text-2: #9aa4b2;
+      --muted: #6b7480;
+      --accent: #4a92e0;
+      --accent-2: #6aa8ec;
+      --accent-soft: rgba(74,146,224,.14);
+      --border: #262d38;
+      --shadow: rgba(0,0,0,.4);
+      --green: #43c47e;
+      --green-soft: rgba(67,196,126,.14);
+      --amber: #e0a23c;
+      --amber-soft: rgba(224,162,60,.14);
+      --red: #f0715f;
+      --red-soft: rgba(240,113,95,.14);
+      --purple: #a084ee;
+      --grid: rgba(150,160,175,.14);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      transition: background .25s, color .25s;
+    }
+    a { color: var(--accent); }
+    button { font-family: inherit; cursor: pointer; }
+    input, select, textarea { font-family: inherit; }
+
+    /* ============ AUTH GATE ============ */
+    .gate {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg); padding: 20px;
+    }
+    .gate-card {
+      width: 100%; max-width: 380px; background: var(--panel);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 34px 28px; box-shadow: 0 12px 40px var(--shadow); text-align: center;
+    }
+    .gate-lock { font-size: 40px; margin-bottom: 6px; }
+    .gate-card h1 { font-size: 21px; margin-bottom: 4px; }
+    .gate-card p { color: var(--text-2); font-size: 14px; margin-bottom: 22px; }
+    .gate input {
+      width: 100%; padding: 13px 15px; font-size: 15px; margin-bottom: 12px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--bg-2); color: var(--text);
+    }
+    .gate input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+    .gate button.primary {
+      width: 100%; padding: 13px; font-size: 15px; font-weight: 600;
+      background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm);
+    }
+    .gate button.primary:hover { background: var(--accent-2); }
+    .gate-err { color: var(--red); font-size: 13px; min-height: 18px; margin-top: 10px; }
+    .gate-note { color: var(--muted); font-size: 12px; margin-top: 18px; line-height: 1.5; }
+
+    /* ============ APP SHELL ============ */
+    .app { max-width: 1080px; margin: 0 auto; padding: 0 16px 80px; }
+    header.topbar {
+      position: sticky; top: 0; z-index: 30; background: var(--bg);
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 18px;
+    }
+    .brand { font-weight: 700; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+    .brand .dot { color: var(--accent); }
+    .topbar .spacer { flex: 1; }
+    .icon-btn {
+      background: var(--panel); border: 1px solid var(--border); color: var(--text-2);
+      width: 38px; height: 38px; border-radius: 10px; font-size: 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .icon-btn:hover { color: var(--text); border-color: var(--accent); }
+
+    /* Tabs */
+    nav.tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 20px; scrollbar-width: none; }
+    nav.tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex: 0 0 auto; padding: 9px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;
+      background: var(--panel); border: 1px solid var(--border); color: var(--text-2); white-space: nowrap;
+    }
+    .tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tab:hover:not(.active) { color: var(--text); border-color: var(--accent); }
+
+    /* Panels */
+    .view { display: none; animation: fade .3s ease; }
+    .view.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    .card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px; box-shadow: 0 1px 3px var(--shadow);
+    }
+    .card + .card, .grid + .card, .card + .grid { margin-top: 16px; }
+    .card h2 { font-size: 16px; margin-bottom: 4px; }
+    .card h3 { font-size: 14px; color: var(--text-2); font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    .card .sub { color: var(--text-2); font-size: 13px; margin-bottom: 14px; }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 720px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* Stat tiles */
+    .stat { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+    .stat .label { font-size: 12px; color: var(--text-2); text-transform: uppercase; letter-spacing: .04em; }
+    .stat .value { font-size: 26px; font-weight: 700; margin-top: 6px; letter-spacing: -.02em; }
+    .stat .value small { font-size: 14px; font-weight: 500; color: var(--muted); }
+    .stat .delta { font-size: 12px; margin-top: 4px; }
+    .delta.up { color: var(--green); } .delta.down { color: var(--red); } .delta.flat { color: var(--muted); }
+
+    /* Date bar */
+    .datebar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .datebar input[type=date] {
+      padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--panel); color: var(--text); font-size: 14px;
+    }
+    .datebar .nav { background: var(--panel); border: 1px solid var(--border); color: var(--text); width: 38px; height: 38px; border-radius: 10px; font-size: 16px; }
+    .datebar .today-btn { padding: 9px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--panel); color: var(--text-2); font-size: 13px; }
+    .datebar .dow { color: var(--text-2); font-size: 13px; margin-left: 4px; }
+
+    /* Forms */
+    label.fld { display: block; font-size: 12px; color: var(--text-2); margin-bottom: 5px; font-weight: 500; }
+    .input, textarea.input, select.input {
+      width: 100%; padding: 10px 12px; font-size: 14px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); background: var(--bg-2); color: var(--text);
+    }
+    .input:focus, textarea.input:focus, select.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    textarea.input { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+    .row > div { flex: 1; min-width: 90px; }
+    .btn {
+      padding: 10px 16px; font-size: 14px; font-weight: 600; border-radius: var(--radius-sm);
+      background: var(--accent); color: #fff; border: none;
+    }
+    .btn:hover { background: var(--accent-2); }
+    .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+    .btn.ghost:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .btn.sm { padding: 7px 12px; font-size: 13px; }
+    .btn.danger { background: transparent; color: var(--red); border: 1px solid var(--border); }
+    .btn.danger:hover { border-color: var(--red); background: var(--red-soft); }
+
+    /* Lists */
+    .item {
+      display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border);
+    }
+    .item:last-child { border-bottom: none; }
+    .item .grow { flex: 1; min-width: 0; }
+    .item .t { font-weight: 600; font-size: 14px; }
+    .item .m { font-size: 12px; color: var(--text-2); }
+    .item .x { background: none; border: none; color: var(--muted); font-size: 18px; line-height: 1; padding: 4px; }
+    .item .x:hover { color: var(--red); }
+    .empty { color: var(--muted); font-size: 13px; text-align: center; padding: 20px 0; }
+    .pill { font-size: 11px; padding: 3px 9px; border-radius: 999px; font-weight: 600; }
+    .pill.green { background: var(--green-soft); color: var(--green); }
+    .pill.amber { background: var(--amber-soft); color: var(--amber); }
+    .pill.accent { background: var(--accent-soft); color: var(--accent); }
+    .pill.muted { background: var(--grid); color: var(--text-2); }
+
+    /* Progress */
+    .bar { height: 8px; background: var(--grid); border-radius: 999px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .4s; }
+    .bar.green > span { background: var(--green); }
+    .bar.amber > span { background: var(--amber); }
+
+    /* Habits / ticks */
+    .ticks { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tick {
+      display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--bg-2); color: var(--text-2); font-size: 13px; font-weight: 500;
+    }
+    .tick.on { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+    .tick .box { width: 15px; height: 15px; border-radius: 5px; border: 1.5px solid currentColor; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; }
+    .tick.on .box { background: var(--green); border-color: var(--green); color: #fff; }
+
+    /* Mood */
+    .moods { display: flex; gap: 8px; }
+    .mood { font-size: 24px; width: 46px; height: 46px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-2); filter: grayscale(.7) opacity(.55); transition: .15s; }
+    .mood.on { filter: none; border-color: var(--accent); background: var(--accent-soft); transform: scale(1.05); }
+
+    /* Chart */
+    .chart-wrap { position: relative; width: 100%; }
+    canvas { display: block; width: 100%; }
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--text-2); margin-top: 10px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+    /* Journal entries */
+    .jentry { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .jentry:last-child { border-bottom: none; }
+    .jentry .jhead { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2); margin-bottom: 6px; }
+    .jentry .jtext { font-size: 14px; white-space: pre-wrap; color: var(--text); }
+
+    /* Segmented */
+    .seg { display: inline-flex; background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; padding: 3px; gap: 3px; flex-wrap: wrap; }
+    .seg button { padding: 8px 14px; border: none; background: transparent; color: var(--text-2); border-radius: 7px; font-size: 13px; font-weight: 600; }
+    .seg button.on { background: var(--accent); color: #fff; }
+
+    .toast {
+      position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--text); color: var(--bg); padding: 11px 20px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      opacity: 0; pointer-events: none; transition: .25s; z-index: 200; box-shadow: 0 8px 24px var(--shadow);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 150; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-bg.show { display: flex; }
+    .modal { background: var(--panel); border-radius: var(--radius); padding: 24px; max-width: 420px; width: 100%; border: 1px solid var(--border); }
+    .modal h3 { margin-bottom: 8px; text-transform: none; letter-spacing: 0; font-size: 17px; color: var(--text); }
+    .modal p { color: var(--text-2); font-size: 14px; margin-bottom: 16px; }
+    .modal .actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+
+    .section-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .section-title h1 { font-size: 22px; letter-spacing: -.02em; }
+    .section-title .hint { font-size: 13px; color: var(--muted); }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== AUTH GATE ===== -->
+  <div class="gate" id="gate">
+    <div class="gate-card">
+      <div class="gate-lock">🔒</div>
+      <h1 id="gateTitle">Unlock your tracker</h1>
+      <p id="gateSub">Enter your password to decrypt your data.</p>
+      <form id="gateForm" autocomplete="off">
+        <input type="password" id="pw1" placeholder="Password" autocomplete="current-password" />
+        <input type="password" id="pw2" placeholder="Confirm password" style="display:none" autocomplete="new-password" />
+        <button type="submit" class="primary" id="gateBtn">Unlock</button>
+      </form>
+      <div class="gate-err" id="gateErr"></div>
+      <div class="gate-note" id="gateNote">
+        Your data is encrypted and stored only on this device. No password recovery — if you forget it, the data can't be read.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== APP ===== -->
+  <div class="app" id="app" style="display:none">
+    <header class="topbar">
+      <div class="brand"><span class="dot">●</span> Private Tracker</div>
+      <div class="spacer"></div>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme">🌙</button>
+      <button class="icon-btn" id="menuBtn" title="Data &amp; settings">⚙️</button>
+      <button class="icon-btn" id="lockBtn" title="Lock">🔒</button>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-view="dashboard">📊 Dashboard</button>
+      <button class="tab" data-view="diet">🥗 Diet</button>
+      <button class="tab" data-view="exercise">💪 Exercise</button>
+      <button class="tab" data-view="journal">📔 Journal</button>
+      <button class="tab" data-view="books">📚 Books</button>
+    </nav>
+
+    <!-- Views injected/managed by JS -->
+    <section class="view active" id="view-dashboard"></section>
+    <section class="view" id="view-diet"></section>
+    <section class="view" id="view-exercise"></section>
+    <section class="view" id="view-journal"></section>
+    <section class="view" id="view-books"></section>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Settings modal -->
+  <div class="modal-bg" id="settingsModal">
+    <div class="modal">
+      <h3>⚙️ Data &amp; Settings</h3>
+      <p>Your data lives only in this browser. Back it up regularly.</p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button class="btn ghost" id="exportBtn">⬇️ Export backup (.json)</button>
+        <button class="btn ghost" id="importBtn">⬆️ Import backup</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none" />
+        <div class="divider"></div>
+        <div>
+          <label class="fld">Daily calorie goal (kcal)</label>
+          <input class="input" type="number" id="setKcal" />
+        </div>
+        <div>
+          <label class="fld">Daily protein goal (g)</label>
+          <input class="input" type="number" id="setProtein" />
+        </div>
+        <div>
+          <label class="fld">Goal weight (kg)</label>
+          <input class="input" type="number" id="setGoalW" step="0.1" />
+        </div>
+        <button class="btn sm" id="saveSettings">Save goals</button>
+        <div class="divider"></div>
+        <button class="btn ghost" id="changePwBtn">🔑 Change password</button>
+        <button class="btn danger" id="wipeBtn">🗑️ Erase all data</button>
+      </div>
+      <div class="actions"><button class="btn ghost" id="closeSettings">Close</button></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
